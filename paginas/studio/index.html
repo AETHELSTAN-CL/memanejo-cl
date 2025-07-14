@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ÆROO Studio.</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- Video de fondo -->
+  <section class="video-section">
+    <video class="video-desktop" autoplay muted loop playsinline>
+      <source src="videos/aerooportada.mov" type="video/mp4" />
+      Tu navegador no soporta video HTML5.
+    </video>
+    <video class="video-mobile" autoplay muted loop playsinline>
+      <source src="videos/aeroomovil.mov" type="video/mp4" />
+      Tu navegador no soporta video HTML5.
+    </video>
+  </section>
+
+  <!-- Navegación -->
+  <nav class="nav-tabs">
+    <a href="#encabezado-invertido">HORARIOS</a>
+    <a href="#skills">RAVER ID</a>
+    <a href="#portafolio">CONTACTO</a>
+  </nav>
+<section class="seccion-con-fondo">
+  <img src="img/aerooPW.jpg" alt="logo aeroo">
+</section>
+  <!-- Sección de horarios -->
+  <section id="encabezado-invertido">
+    <div class="contenedor">
+      <h3 data-aos="fade-right">LIVE SET</h3>
+      <ul>
+        <li data-aos="flip-right" data-aos-delay="100" data-aos-duration="1300">WARM UP | DRINKS & BEERS</li>
+        <li data-aos="flip-right" data-aos-delay="400" data-aos-duration="1300">HAGĀDO | 20:00UHR</li>
+        <li data-aos="flip-right" data-aos-delay="800" data-aos-duration="1300">ÆTHELSTAN | 21:00UHR</li>
+      </ul>
+    </div>
+    <button class="boton cuatro" id="abrirModal1"><span>RAVER ID</span></button>
+  </section>
+
+  <!-- Modal Código -->
+  <div id="modal1" class="modal">
+    <div class="modal-contenido">
+      <span class="cerrar" onclick="cerrarModal('modal1')">&times;</span>
+      <h3>Ingresa tu código:</h3>
+      <input type="text" id="codigoInput" placeholder="Escribe tu código aquí">
+      <button onclick="validarCodigo()">Validar</button>
+    </div>
+  </div>
+
+  <!-- Modal Exitoso -->
+  <div id="modal2" class="modal">
+    <div class="modal-contenido">
+      <span class="cerrar" onclick="cerrarModal('modal2')">&times;</span>
+      <h3>¡Código válido!</h3>
+      <p>Codigo BLACK RAVER | 2 Invitaciones + 2 DRINKS</p>
+    </div>
+  </div>
+
+  <!-- Sección de contacto -->
+  <section class="contact-section" id="portafolio">
+    <div class="contact-container">
+
+      <!-- Información -->
+      <div class="contact-info">
+        <h2>Contáctame</h2>
+        <p>Disponible para colaboraciones y consultas.</p>
+
+        <div class="info-group">
+          <i class="fas fa-envelope" aria-hidden="true"></i>
+          <h3>admin@memanejo.cl</h3>
+        </div>
+
+        <div class="info-group">
+          <i class="fas fa-phone" aria-hidden="true"></i>
+          <h3>+56 9 46914558</h3>
+        </div>
+
+        <div class="social-links">
+          <a href="#"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+          <a href="#"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <!-- Formulario -->
+<div class="contact-form">
+  <form onsubmit="enviarFormulario(event)">
+    <div class="form-group floating">
+      <input type="text" id="nombre" name="nombre" required placeholder=" " />
+      <label for="nombre">Nombre</label>
+    </div>
+
+    <div class="form-group">
+      <input type="email" id="correo" name="correo" required placeholder=" " />
+      <label for="correo">Correo</label>
+    </div>
+
+    <div class="form-group">
+      <textarea id="mensaje" name="mensaje" required placeholder=" "></textarea>
+      <label for="mensaje">Mensaje</label>
+    </div>
+
+    <button class="contact-btn" type="submit">Enviar</button>
+  </form>
+</div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p> ÆROO Studio | ÆTHELSTAN &copy;</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+
+    document.getElementById("abrirModal1").addEventListener("click", () => {
+      document.getElementById("modal1").classList.add("mostrar");
+    });
+
+    function cerrarModal(id) {
+      document.getElementById(id).classList.remove("mostrar");
+    }
+
+    function validarCodigo() {
+      const codigo = document.getElementById("codigoInput").value.trim();
+      if (codigo === "1234") {
+        cerrarModal("modal1");
+        document.getElementById("modal2").classList.add("mostrar");
+      } else {
+        alert("Código incorrecto. Intenta nuevamente.");
+      }
+    }
+
+    window.onclick = function (e) {
+      if (e.target.classList.contains("modal")) {
+        e.target.classList.remove("mostrar");
+      }
+    };
+  </script>
+
+</body>
+</html>

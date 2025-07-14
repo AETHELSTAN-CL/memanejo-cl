@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Conducción Chile</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="quiz-container">
+    <h2 id="question">Pregunta aparecerá aquí</h2>
+    <div id="progress">Pregunta 1 de 20</div>
+    <div id="answer-buttons" class="btn-container"></div>
+    <button id="next-btn" class="btn">Siguiente</button>
+    <div id="result" class="hide">
+      <h3 id="scoreText"></h3>
+     <button id="btn-reintentar" class="btn">Reintentar</button>
+      <a id="shareBtn" class="btn" target="_blank">Compartir Resultado</a>
+    </div>
+  </div>
+<div id="modal-memanejo" class="modal-memanejo oculto">
+  <div class="contenido-modal" id="captura">
+    <img src="logo-memanejo.png" alt="Logo Me Manejo" class="logo-modal">
+    <h2 class="titulo-modal">🎉 Resultado del Quiz</h2>
+    <p id="texto-puntaje" class="texto-puntaje-modal"></p>
+    <p class="mensaje-pantallazo">Toma pantallazo o descarga la imagen para compartir en redes</p>
+    <button id="btn-descargar-img" class="btn">📷 Descargar Imagen</button>
+    <button id="cerrar-modal-memanejo" class="btn">❌ Cerrar</button>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="quiz.js"></script>
+</body>
+</html>

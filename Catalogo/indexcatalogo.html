@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catálogo de Repuestos</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="catalogo.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+  <div class="container mt-5">
+    <h2 class="text-center text-white p-3">Catálogo de Repuestos</h2>
+    <input type="text" id="filtroInput" class="form-control mb-3" placeholder="Buscar Producto o Marca" />
+    <div class="row" id="catalogo"></div>
+  </div>
+
+  <!-- Modal Producto -->
+  <div id="modal" class="modal-custom">
+    <div class="modal-content-custom">
+      <span id="cerrarModalBtn" class="cerrar">&times;</span>
+      <h3 id="titulo"></h3>
+      <p id="modelo"></p>
+      <p id="precio"></p>
+      <img id="imagen-principal" src="" alt="Imagen Principal" class="img-fluid" />
+      <div class="miniaturas mt-3" id="miniaturas"></div>
+      <div class="acordeon">
+        <button class="acordeon-titulo">Detalles del producto</button>
+        <div class="acordeon-contenido">
+          <p id="detalles"></p>
+        </div>
+      </div>
+      <p id="codigo-oem"></p>
+      <button class="btn btn-success mt-3" onclick="solicitarRepuesto()">Comprar</button>
+    </div>
+  </div>
+
+  <!-- Carrito de Compras -->
+  <div id="carrito" class="carrito">
+    <button id="verCarritoBtn"
+      class="btn btn-primary rounded-circle shadow d-flex justify-content-center align-items-center"
+      style="position: fixed; bottom: 150px; right: 20px; z-index: 1050; width: 52px; height: 52px; padding: 6px;"
+      data-bs-toggle="modal" data-bs-target="#carritoModal" title="Ver Carrito">
+      <i class="fa-solid fa-cart-shopping fa-lg text-white"></i>
+    </button>
+    <div id="carritoContenido" class="carrito-contenido" style="display: none;">
+      <h4>Resumen del Carrito</h4>
+      <ul id="listaCarrito"></ul>
+      <div id="resumenCarrito"></div>
+    </div>
+  </div>
+
+  <!-- Modal del carrito -->
+  <div id="carritoModal" class="modal-custom">
+    <div class="modal-content-custom">
+      <span class="cerrar" id="cerrarCarritoModal">&times;</span>
+      <h4>Resumen de tu Pedido</h4>
+      <ul id="listaCarritoModal"></ul>
+      <hr />
+      <div id="resumenCarritoModal"></div>
+      <hr />
+      <!-- Dentro de <div class="modal-content-custom"> en carritoModal -->
+      <h5>Código de Descuento</h5>
+      <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+        <input type="text" id="codigoDescuentoInput" placeholder="Ingresar código aquí" class="form-control" />
+        <button id="aplicarDescuentoBtn" class="btn btn-primary">Aplicar</button>
+      </div>
+      <div id="mensajeDescuento" style="color: green; font-weight: bold;"></div>
+
+      <h5>Forma de Pago</h5>
+      <p>Transferencia bancaria a:</p>
+      <ul>
+        <li><strong>Nombre:</strong> Leonardo Aguirre Suazo</li>
+        <li><strong>Banco:</strong> BCI</li>
+        <li><strong>Cuenta Corriente:</strong> 777917424056</li>
+        <li><strong>RUT:</strong> 17.424.056-6</li>
+        <li><strong>Correo:</strong> leonardo.azo@memanejo.cl</li>
+      </ul>
+ <p>
+  <em>
+    Calcula el total de tu pedido y realiza el pago directo por transferencia bancaria.
+<button id="copiarTransferenciaBtn" class="btn btn-outline-light">Copiar datos de transferencia</button>
+    <br></em>
+    Luego, coordina con nuestro asesor de ventas vía WhatsApp<i class="fa-brands fa-whatsapp" style="color:#25D366; margin-left:5px;"> </i> 
+    para confirmar envío o retiro y resolver cualquier duda.<br>
+    También puedes pagar en efectivo al momento del retiro.
+  
+</p>
+
+      <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-top: 10px;">
+        
+        <button onclick="vaciarCarrito()" class="btn btn-danger">Vaciar Carrito</button>
+        <button id="solicitarRepuestosBtn" class="btn btn-primary">
+          <i class="fa-brands fa-whatsapp"> </i>  Asesor de Ventas
+        </button>
+
+      </div>
+    </div>
+  </div>
+  
+
+<div class="contenedor-autocompletado">
+  <div class="autocomplete-wrapper">
+    <input type="text" id="inputRepuesto" class="input-repuesto" autocomplete="off" placeholder="¿Necesitas un repuesto? Escríbelo aquí">
+    <input type="text" id="ghostRepuesto" class="ghost-repuesto" disabled>
+  </div>
+  <div id="mensajeRepuesto" class="mensaje-repuesto"></div>
+</div>
+
+<a href="https://www.memanejo.cl" class="apple-button">← Volver a Pagina Principal</a>
+  <script src="catalogo.js"></script>
+  <div style="margin-top: 40px;">
+    <button class="accordion">© Copyright & Licencia</button>
+    <div class="panel">
+      <p>Los logotipos, nombres de marcas y fotografías utilizadas en este sitio son solo referenciales. No se afirma
+        propiedad sobre ellas, ni existe vínculo comercial alguno con las marcas mencionadas. El uso es ilustrativo y
+        con fines informativos para facilitar la identificación de los productos automotrices disponibles. Todos los
+        derechos pertenecen a sus respectivos propietarios.</p>
+    </div>
+  </div>
+
+
+  <script>
+    document.querySelector('.accordion').addEventListener('click', function () {
+      this.classList.toggle('active');
+    });
+  </script>
+</body>
+
+</html>

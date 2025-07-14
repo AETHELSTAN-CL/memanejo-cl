@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Test Modal Avanzado</title>
+  <link rel="stylesheet" href="catalogo.avanzado.css" />
+</head>
+<body>
+  <div class="card" data-product-id="123">
+    <img src="img/sample.jpg" alt="Repuesto">
+    <h3>Filtro de aceite</h3>
+    <button class="open-modal">Ver detalles</button>
+  </div>
+
+  <div class="modal-overlay hidden">
+    <div class="modal-content">
+      <button class="close-modal">✖</button>
+      <div class="modal-gallery">
+        <img id="main-image" src="img/sample.jpg" alt="Principal">
+        <div class="thumbnails">
+          <img src="img/sample.jpg" alt="Thumb1">
+          <img src="img/sample2.jpg" alt="Thumb2">
+        </div>
+      </div>
+      <div class="modal-details">
+        <h2>Filtro de aceite</h2>
+        <p>Marca: Mann</p>
+        <p>Código: M123</p>
+        <div class="accordion">
+          <button class="accordion-toggle">Compatibilidades</button>
+          <div class="accordion-content">
+            <ul>
+              <li>Hyundai Tucson 2.0</li>
+              <li>Kia Sportage 2.0</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="catalogo.avanzado.js" defer></script>
+</body>
+</html>

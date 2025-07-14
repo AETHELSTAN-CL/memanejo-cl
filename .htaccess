@@ -1,0 +1,4 @@
+<FilesMatch "^(config|secret|nodata|db).*\.php$">
+  Order allow,deny
+  Deny from all
+</FilesMatch>

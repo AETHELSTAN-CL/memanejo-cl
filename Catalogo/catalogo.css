@@ -1,0 +1,271 @@
+body {
+  background-color: #121212;
+  color: white;
+}
+
+.catalogo {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  /* Esto es para escritorio */
+  gap: 10px;
+}
+
+.card {
+  background-color: #1e1e1e;
+  border: none;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+  margin-bottom: 20px;
+  padding: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.card:hover {
+  transform: scale(1.02);
+}
+
+.modal-custom {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1050;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.modal-content-custom {
+  position: relative;
+  background-color: #2c2c2c;
+  padding: 2rem;
+  border-radius: 12px;
+  z-index: 1060;
+  width: 90%;
+  max-width: 900px;
+  color: #fff;
+  width: 90%;
+  /* Responsive */
+  margin: auto;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  overflow-y: auto;
+  max-height: 90vh;
+}
+
+.acordeon {
+  margin-top: 15px;
+}
+
+.acordeon-titulo {
+  width: 100%;
+  text-align: left;
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.acordeon-contenido {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  background: #f5f5f5;
+  padding: 0 10px;
+  color: #121212;
+}
+
+.acordeon-activo .acordeon-contenido {
+  max-height: 500px;
+  /* Puedes ajustar esto según contenido */
+  padding: 10px;
+}
+
+.cerrar {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 2rem;
+  color: white;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.miniaturas img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  margin-right: 5px;
+}
+
+.miniaturas img:hover {
+  border-color: #007bff;
+}
+
+.carrito {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1100;
+}
+
+.carrito-boton {
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carrito-contenido {
+  background-color: #1e1e1e;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.apple-button {
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #fff;
+  background: linear-gradient(to right, #333, #000);
+  border: none;
+  border-radius: 12px;
+  text-decoration: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease-in-out;
+}
+
+.apple-button:hover {
+  background: linear-gradient(to right, #000, #333);
+  transform: scale(1.03);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4);
+}
+
+.accordion {
+  background-color: #333;
+  color: white;
+  cursor: pointer;
+  padding: 10px;
+  width: 100%;
+  border: none;
+  text-align: center;
+  font-size: 10px;
+  transition: 0.4s;
+}
+
+.accordion:after {
+  content: '+';
+  float: right;
+}
+
+.accordion.active:after {
+  content: '-';
+}
+
+.panel {
+  padding: 0 12px;
+  display: none;
+  background-color: #222;
+  color: #ccc;
+  font-size: 12px;
+}
+
+.accordion.active+.panel {
+  display: block;
+}
+
+.card.filtrada {
+  opacity: 0;
+  transform: scale(0.95);
+  pointer-events: none;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.card.visible {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+
+@media (max-width: 767px) {
+  .card-col {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 768px) {
+  .card-col {
+    flex: 0 0 33.333%;
+    max-width: 33.333%;
+  }
+}
+
+@media (max-width: 240px) {
+  .catalogo {
+    grid-template-columns: repeat(2, 1fr);
+    /* 2x2 en móvil */
+  }
+}
+
+.contenedor-autocompletado {
+  max-width: 400px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.autocomplete-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.input-repuesto,
+.ghost-repuesto {
+  width: 100%;
+  padding: 12px;
+  font-weight: bold;
+  font-size: 1rem;
+  border-radius: 8px;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.input-repuesto {
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  z-index: 2;
+}
+
+.ghost-repuesto {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #aaa;
+  background: transparent;
+  border: 1px solid transparent;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.mensaje-repuesto {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  text-align: center;
+}

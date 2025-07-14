@@ -1,0 +1,14 @@
+[
+  {
+    "nombre": "Repuesto A",
+    "precio": "$10.000",
+    "imagen": "img/repuestos/repuesto1.jpg",
+    "detalles": "Compatibilidad A"
+  },
+  {
+    "nombre": "Repuesto B",
+    "precio": "$12.000",
+    "imagen": "img/repuestos/H",
+    "detalles": "Compatibilidad B"
+  }
+]
