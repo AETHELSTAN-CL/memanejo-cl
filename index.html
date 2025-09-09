@@ -2,43 +2,87 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <!-- SEO META -->
-<title>memanejo.cl | Conducción, Repuestos y Servicios Automotrices</title>
-<meta name="description" content="En memanejo.cl encuentras clases de conducción, venta de repuestos, servicios técnicos y alianzas con talleres mecánicos. ¡Confianza y respaldo en todo Chile!">
-<meta name="keywords" content="conducción, repuestos, clases de manejo, mecánica automotriz, talleres, memanejo, instructor vial, servicios automotrices, repuestos Chile">
-<meta name="author" content="Leonardo Aguirre Suazo">
-<meta name="robots" content="index, follow">
-<meta property="og:title" content="memanejo.cl | Servicios Automotrices y Conducción">
-<meta property="og:description" content="Clases de conducción, venta de repuestos, alianzas con talleres y atención personalizada. Todo en un solo sitio: memanejo.cl.">
-<meta property="og:image" content="https://www.memanejo.cl/img/photo-output_1.jpeg"> <!-- Asegúrate de tener esta imagen en tu carpeta -->
-<meta property="og:url" content="https://www.memanejo.cl">
-<meta property="og:type" content="website">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="css/all.css">
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- 🔑 SEO Básico -->
+  <title>Servicios Automotrices, Repuestos y Formación Vial - memanejo.cl</title>
+  <meta name="description"
+    content="En memanejo.cl encuentras clases de conducción, venta de repuestos, servicios técnicos y alianzas con talleres mecánicos. ¡Confianza y respaldo en todo Chile!">
+  <meta name="author" content="Leonardo Azo" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.memanejo.cl/" />
+
+  <!-- 📱 Favicons -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/logopng.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <!-- 🌐 Open Graph -->
+  <meta property="og:title" content="memanejo.cl | Servicios Automotrices, Repuestos y Formación Vial" />
+  <meta property="og:description"
+    content="Clases de conducción, venta de repuestos, alianzas con talleres y atención personalizada. Todo en un solo sitio: memanejo.cl." />
+  <meta property="og:image" content="https://www.memanejo.cl/img/photo-output_1.jpeg" />
+  <meta property="og:url" content="https://www.memanejo.cl/" />
+  <meta property="og:type" content="website" />
+
+  <!-- 🐦 Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="memanejo.cl | Servicios Automotrices y Formación Vial" />
+  <meta name="twitter:description"
+    content="Servicios automotrices, clases de conducción y repuestos con respaldo profesional en Chile." />
+  <meta name="twitter:image" content="https://www.memanejo.cl/img/photo-output_1.jpeg" />
+
+  <!-- 📊 Schema Markup -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "memanejo.cl",
+    "url": "https://www.memanejo.cl",
+    "logo": "https://www.memanejo.cl/img/logopngicon.png",
+    "sameAs": ["https://www.memanejo.cl"],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "customer service",
+      "availableLanguage": "Spanish"
+    }
+  }
+  </script>
+
+  <!-- 🎨 Estilos -->
+  <link rel="stylesheet" href="style.css" /> <!-- Tus estilos personalizados -->
+
   <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- animate on scroll > -->
-  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    integrity="sha512-Tbd5cEML9sM+5y8a8K2Yz0FJdIBVktR9R0bCbb3s7ZrxD7XXODeRmHnS1l/c2R1MbGyV5fT4f3vHgCgU0l9I0w=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <!-- Bootstrap Bundle JS (incluye Popper) -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- AOS (animaciones al hacer scroll) -->
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+
+  <!-- Font Awesome (iconos) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- 📈 Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-07XB2NNQ0J"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-07XB2NNQ0J');
+  </script>
 </head>
 
 <body>
 
   <!-- 🔳 SLIDE GRANDE SOLO MÓVIL -->
   <div class="slide-movil d-md-none">
-    <div id="carouselMobileOnly" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000"
+    <div id="carouselMobileOnly" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2500"
       data-bs-touch="true">
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <a href="#services">
+          <a href="#Catalogo/indexcatalogo.html">
             <img src="img/publi1.jpeg" class="d-block w-100 slide-img" alt="Oferta destacada">
           </a>
         </div>
@@ -53,7 +97,7 @@
           </a>
         </div>
         <div class="carousel-item">
-          <a href="#services">
+          <a href="#contenidos">
             <img src="img/landscapemazda.JPG" class="d-block w-100 slide-img" alt="Cursos de conducción">
           </a>
         </div>
@@ -66,8 +110,8 @@
   </div>
 
   <!-- 🎞️ SLIDE SIMPLE SOLO EN ESCRITORIO -->
-  <div class="d-none d-md-block">
-    <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000"
+  <div class="d-none d-md-block" data-bg="dark">
+    <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2500"
       data-bs-touch="false">
       <div class="carousel-inner">
         <div class="carousel-item active">
@@ -92,14 +136,14 @@
     </div>
   </div>
   <!-- NAV SOLO ESCRITORIO (después del slide grande) -->
-  <section class="nav-fullscreen d-none d-md-flex">
-    <a href="Catalogo/indexcatalogo.html" class="nav-link-fx">Repuestos</a>
-    <a href="#services" class="nav-link-fx">Formación Vial</a>
-    <a href="#sobre-mi" class="nav-link-fx">Asesor Técnico-Comercial</a>
+  <section class="nav-fullscreen d-none d-md-flex" data-bg="dark">
+    <a href="Catalogo/indexcatalogo.html" class="nav-link-fx"><i class="fa-solid fa-car-battery"></i>   Repuestos Automotrices</a>
+    <a href="#contenidos" class="nav-link-fx"><i class="fa-solid fa-user-graduate"></i>   Formación Vial</a>
+    <a href="#sobre-mi" class="nav-link-fx"><i class="fa-solid fa-user-tie"></i>   Asesor Técnico-Comercial</a>
   </section>
 
   <!-- 🔁 SLIDE MODERNO AHORA TAMBIÉN EN MÓVIL -->
-  <section class="modern-slider-section">
+  <section class="modern-slider-section" data-bg="dark">
     <div class="slider-container">
       <div class="slider-track">
 
@@ -110,8 +154,9 @@
             <img src="img/tera.vw.jpeg" class="slide-img" alt="Imagen 2">
           </div>
           <div class="card-body">
-            <p>¡Conoce tu Próximo Auto!</p>
-            <a href="#" target="_blank" class="btn-slide">PRÓXIMAMENTE</a>
+            <p>¡Conoce tu Próximo Auto! <br>Tasa preferencial a 1,36%</p>
+            <a href="https://wa.me/56946914558?text=Hola,%20quiero%20conocer%20mas%20sobre%20crédito%20automotriz%20con%20tasa%20preferencial"
+              target="_blank" class="btn-slide">Conocer más</a>
           </div>
         </div>
 
@@ -119,7 +164,7 @@
         <div class="slider-card">
           <img src="img/hyundaiN.jpg" alt="Marca 1">
           <div class="card-body">
-            <p>Ofertas Destacadas</p>
+            <p>Repuestos Automotrices</p>
             <a href="Catalogo/indexcatalogo.html" target="_blank" class="btn-slide">Ver Ofertas</a>
           </div>
         </div>
@@ -151,7 +196,7 @@
       </div>
     </div>
   </section>
-  <!-- Modal -->
+  <!-- Modal Visita Ruta-->
   <div class="modal fade" id="modalVisitaRuta" tabindex="-1" aria-labelledby="modalVisitaRutaLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -161,7 +206,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
         </div>
 
-        <div class="modal-body">
+        <div class="modal-body" style="padding: 1.5rem;">
           <li><strong>Incluye:</strong> Visita a domicilio, prueba de ruta, revisión externa del vehículo, orientación
             técnica.</li>
           <li><strong>Valor especial:</strong> CLP $30.000</li>
@@ -240,9 +285,9 @@
   <!---Start Espacio Publicitario section----->
   <!-- Botón que despliega el espacio publicitario -->
   <div class="text-center my-3">
-    <button class="btn btn-outline-info btn-sm" type="button" data-bs-toggle="collapse"
+    <button id="publicidadBtn" class="btn btn-info rounded-pill btn-sm mb-3" type="button"
       data-bs-target="#publicidadCollapse" data-aos="fade-down" data-aos-duration="1200" data-aos-delay="300">
-      Espacio Publicitario
+      Abrir Espacio Publicitario
     </button>
   </div>
 
@@ -306,25 +351,25 @@
       </div>
     </div>
 
-<div class="accordion-item">
-  <h2 class="accordion-header">
-    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-      data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-      Envíos y Forma de Pago
-    </button>
-  </h2>
-  <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-    <div class="accordion-body small-text">
-      Envíos por zona<br>
-      <strong>Zona A</strong> | $3.900<br>
-      Santiago, Providencia, Ñuñoa, Macul, La Florida, Puente Alto.<br>
-      <strong>Zona B</strong> | $4.900<br>
-      Lo Prado, Maipú, Las Condes, La Dehesa.<br>
-      <em>Otras comunas: Envío por pagar carrier de preferencia.</em><br><br>
-      ✅ <strong>Instalación Básica GRATIS</strong> (Filtro Aire - Filtro Polen (Cabina))
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+          data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+          Envíos y Forma de Pago
+        </button>
+      </h2>
+      <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+        <div class="accordion-body small-text">
+          Envíos por zona<br>
+          <strong>Zona A</strong> | $3.900<br>
+          Santiago, Providencia, Ñuñoa, Macul, La Florida, Puente Alto.<br>
+          <strong>Zona B</strong> | $4.900<br>
+          Lo Prado, Maipú, Las Condes, La Dehesa.<br>
+          <em>Otras comunas: Envío por pagar carrier de preferencia.</em><br><br>
+          ✅ <strong>Instalación Básica GRATIS</strong> (Filtro Aire - Filtro Polen (Cabina))
+        </div>
+      </div>
     </div>
-  </div>
-</div>
 
     <div class="accordion-item">
       <h2 class="accordion-header">
@@ -337,361 +382,420 @@
         <div class="accordion-body small-text">
           Sí. Todos nuestros cursos están diseñados conforme a los contenidos exigidos por la Ley de Tránsito Chilena
           N° 18.290. Te permiten prepararte para el examen práctico con confianza y respaldo técnico.
+
+          <div class="text-left mt-3">
+            <a class="btn btn-primary btn-sm" href="archivos/Formacion Vial.pdf" target="_blank">
+              Ver Ley N° 18.290. Articulos 17° y 18°.
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!----QA section End ----->
+
+    <!-- BOTÓN FLOTANTE CON LOGO -->
+    <button id="menuButton" class="rounded-circle shadow glass-btn" type="button" data-bs-toggle="offcanvas"
+      data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" title="Abrir menú">
+      <img src="img/logopng.png" alt="Abrir menú principal">
+    </button>
+
+    <!-- OFFCANVAS MENU -->
+    <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
+      aria-labelledby="offcanvasWithBothOptionsLabel">
+
+      <div class="offcanvas-header d-none"></div>
+
+      <div class="offcanvas-body d-flex flex-column justify-content-between">
+
+        <!-- Título -->
+        <div class="text-center mt-4">
+          <h5 id="offcanvasWithBothOptionsLabel" class="mb-3">Menú</h5>
+        </div>
+
+        <!-- Botones Centrales -->
+        <div class="d-grid gap-2 mb-3 mx-auto" style="width: 85%;">
+          <a href="Catalogo/indexcatalogo.html" class="btn btn-primary btn-sm">Repuestos</a>
+          <a href="#sobre-mi" class="btn btn-primary btn-sm">Asesor de Servicios</a>
+          <a href="#contenidos" class="btn btn-primary btn-sm">Formación Vial</a>
+        </div>
+
+        <!-- Botones Inferiores a la Derecha -->
+        <div class="d-flex flex-column align-items-end mb-3">
+          <div style="width: 130px; margin-right: 0.5rem;">
+            <a href="#" class="btn btn-outline-light btn-sm w-100 mb-2">Inicio</a>
+            <a href="#contact" class="btn btn-outline-light btn-sm w-100">Contacto</a>
+            <button type="button" class="btn btn-outline-danger btn-sm w-100"
+              data-bs-dismiss="offcanvas">Cerrar</button>
+          </div>
         </div>
       </div>
     </div>
 
-  </div>
-  <!----QA section End ----->
+    <!-- 🔽 Modal Precios Curso -->
+    <div class="modal fade" id="modalPrecioCurso" tabindex="-1" aria-labelledby="modalPrecioCursoLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
 
-  <!-- BOTÓN FLOTANTE CON LOGO -->
-  <button id="menuButton" class="btn btn-light rounded-circle shadow"
-    style="position: fixed; bottom: 80px; right: 20px; z-index: 1050; width: 52px; height: 52px; padding: 6px;"
-    type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions"
-    aria-controls="offcanvasWithBothOptions" title="Abrir menú">
-    <img src="img/logopng.png" alt="Menú" style="width: 80%; height: 80%; object-fit: contain;">
-  </button>
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalPrecioCursoLabel">Precios y Niveles de Curso</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
 
-  <!-- OFFCANVAS MENU -->
-  <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
-    aria-labelledby="offcanvasWithBothOptionsLabel">
-    <div class="offcanvas-header d-none"></div>
+          <div class="modal-body">
 
-    <div class="offcanvas-body d-flex flex-column justify-content-between">
+            <!-- Precio principal -->
+            <div class="mb-4">
+              <h4 class="text-primary">$11.900 por hora</h4>
+              <p class="mb-0">Clases prácticas de conducción en auto propio o del instructor según condiciones.</p>
+            </div>
 
-      <!-- Título -->
-      <div class="text-center mt-4">
-        <h5 class="mb-3">Menú</h5>
-      </div>
+            <!-- Niveles del alumno -->
+            <div class="mb-4">
+              <h5 class="mb-3">Nivel del Alumno</h5>
+              <div class="accordion" id="accordionNivelAlumno">
 
-      <!-- Botones Centrales -->
-      <div class="d-grid gap-2 mb-3 mx-auto" style="width: 85%;">
-        <a href="Catalogo/indexcatalogo.html" class="btn btn-primary btn-sm">Repuestos</a>
-        <a href="#sobre-mi" class="btn btn-primary btn-sm">Asesor de Servicios</a>
-        <a href="#services" class="btn btn-primary btn-sm">Formación Vial</a>
-      </div>
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="nivel1">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#collapseNivel1">
+                      Principiante / 0km
+                    </button>
+                  </h2>
+                  <div id="collapseNivel1" class="accordion-collapse collapse" data-bs-parent="#accordionNivelAlumno">
+                    <div class="accordion-body">
+                      <strong>Pack 0km:</strong> Capítulos 1 al 4 + clase de prueba práctica (evaluación municipal).<br>
+                      <strong>Precio:</strong> CLP$14.900<br>
+                      <a href="https://wa.me/56946914558?text=Quiero%20comenzar%20pack%20principiante%200km"
+                        target="_blank" class="btn btn-primary btn-sm mt-2">Agendar este
+                        pack</a>
+                    </div>
+                  </div>
+                </div>
 
-      <!-- Botones Inferiores a la Derecha -->
-      <div class="d-flex flex-column align-items-end mb-3">
-        <div style="width: 130px; margin-right: 0.5rem;"> <!-- controla el ancho y alinea a la derecha -->
-          <a href="#" class="btn btn-outline-light btn-sm w-100 mb-2">Inicio</a>
-          <a href="#contact" class="btn btn-outline-light btn-sm w-100">Contacto</a>
-          <button type="button" class="btn btn-outline-danger btn-sm w-100" data-bs-dismiss="offcanvas">Cerrar</button>
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="nivel2">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#collapseNivel2">
+                      Practicante / 100km
+                    </button>
+                  </h2>
+                  <div id="collapseNivel2" class="accordion-collapse collapse" data-bs-parent="#accordionNivelAlumno">
+                    <div class="accordion-body">
+                      Reforzamiento de técnicas, confianza y dominio en calle.<br>
+                      <strong>Precio clase práctica:</strong> CLP$11.900<br>
+                      Incluye posibilidad de usar tu auto según condiciones generales.<br>
+                      <a href="https://wa.me/56946914558?text=Quiero%20agendar%20clase%20práctica%20100km"
+                        target="_blank" class="btn btn-primary btn-sm mt-2">Agendar Clase</a>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Condiciones generales -->
+            <div class="mb-2">
+              <h5 class="mb-3">Condiciones</h5>
+              <div class="accordion" id="accordionCondiciones">
+
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="cond1">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#collapseCond1">
+                      Generales
+                    </button>
+                  </h2>
+                  <div id="collapseCond1" class="accordion-collapse collapse" data-bs-parent="#accordionCondiciones">
+                    <div class="accordion-body">
+                      - Agenda tu clase hasta 36 horas antes.<br>
+                      - Se utiliza el vehículo particular de confianza del alumno o del instructor.<br>
+                      - El auto debe contar con seguro vigente contra daños y terceros.<br>
+                      - Reagendamiento con al menos 24h de anticipación.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="cond2">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#collapseCond2">
+                      Clase de Prueba
+                    </button>
+                  </h2>
+                  <div id="collapseCond2" class="accordion-collapse collapse" data-bs-parent="#accordionCondiciones">
+                    <div class="accordion-body">
+                      - Evaluación municipal estática: postura, cinturón, espejos, luces y controles básicos.<br>
+                      - Valor clase de prueba: CLP$9.900
+                    </div>
+                  </div>
+                </div>
+
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="cond3">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#collapseCond3">
+                      Auto de Práctica
+                    </button>
+                  </h2>
+                  <div id="collapseCond3" class="accordion-collapse collapse" data-bs-parent="#accordionCondiciones">
+                    <div class="accordion-body">
+                      - Solo disponible previa coordinación.<br>
+                      - Se pueden usar autos de alumnos con licencia parcial, según condiciones generales.<br>
+                      - Costo adicional: CLP$69.900 (2 clases, hasta 2h).
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          </div>
+
         </div>
       </div>
     </div>
-  </div>
-
-
-  <!-- SCRIPT PARA ESCONDER BOTÓN AL ABRIR MENU -->
-  <script>
-    const menuButton = document.getElementById('menuButton');
-    const offcanvasEl = document.getElementById('offcanvasWithBothOptions');
-
-    offcanvasEl.addEventListener('show.bs.offcanvas', () => {
-      menuButton.style.display = 'none';
-    });
-
-    offcanvasEl.addEventListener('hidden.bs.offcanvas', () => {
-      menuButton.style.display = 'block';
-    });
-  </script>
-  <!-----End menu section----->
-  <!-- ======= Título de sección ======= -->
-
-
-  <!-- ======= PLAN DE ESTUDIO 2024 ======= -->
-  <div id="services">
-    <div class="container">
-      <div class="curso-header">
-        <h3 class="stacked-title">
-          <span data-aos="fade-right" data-aos-delay="200">CURSOS</span><br>
-          <span data-aos="fade-right" data-aos-delay="300">de</span><br>
-          <span data-aos="fade-right" data-aos-delay="600">CONDUCCIÓN</span><br>
-          <span data-aos="fade-right" data-aos-delay="800">PARTICULAR</span>
-        </h3>
-        <h1 class="sub-title" data-aos="fade-up" data-aos-delay="2000">¡COMIENZA HOY!</h1>
-      </div>
-      <!-- 🔘 BOTONES MODERNOS ADICIONALES -->
-      <div class="extra-buttons">
-
-        <!-- Iconos individuales con animaciones separadas -->
-        <div class="iconos-aos">
-          <i class="fa-solid fa-user-graduate" data-aos="zoom-out" data-aos-delay="500" data-aos-offset="200"
-            data-aos-duration="800"></i>
-
-          <i class="fa-regular fa-address-card" data-aos="zoom-out" data-aos-delay="700" data-aos-offset="200"
-            data-aos-duration="800"></i>
-
-          <i class="fa-solid fa-road" data-aos="zoom-out" data-aos-delay="900" data-aos-offset="200"
-            data-aos-duration="800"></i>
-
-          <i class="fa-solid fa-car-side" data-aos="zoom-out" data-aos-delay="1100" data-aos-offset="200"
-            data-aos-duration="800"></i>
+    <!-----End Plan de Estudio section ----->
+    <section id="contenidos" class="py-5 bg-light">
+      <div class="container-fluid">
+        <div class="titulo-divisor mb-4 p-3 rounded d-flex align-items-center gap-3" data-bg="dark">
+          <img src="img/logopngwhite.png" alt="Logo" class="logo-divisor">
+          <p class="mb-0 fw-bold">
+            <span id="rotadorCursos" data-frases="Formación Vial,Cursos de Conducción Particular"></span>
+          </p>
         </div>
 
         <!-- Botones modernos con AOS grupal -->
-        <div class="button-grid" data-aos="fade-up" data-aos-delay="1000">
-          <a href="#" class="btn-modern" id="abrirAgenda">Agendar Clase</a>
-          <a href="https://www.memanejomanejando.cl" target="_blank" class="btn-modern">Ingresar Portal Alumno</a>
+        <div class="button-grid" data-aos="fade-up" data-aos-delay="600">
+          <a href="#" class="btn-modern" id="abrirAgenda">Agendar Clase Práctica</a>
+          <a href="https://www.memanejomanejando.cl" target="_blank" class="btn-modern">Ver contenidos Aula Virtual</a>
           <a href="archivos/Libro para la conduccion en Chile Clase B.pdf" target="_blank" rel="noopener noreferrer"
-            class="btn-modern">Libro para la Conducción</i>
-          </a>
-          <a href="#pagoClases" class="btn-modern pay">Pagar Clases</a>
+            class="btn-modern">Libro para la Conducción</a>
+          <a class="btn-modern pay" data-bs-toggle="modal" data-bs-target="#modalPagoClases">Pagar Clases</a>
         </div>
-
-      </div>
-
-
-      <div class="services-list">
-        <!-- Tarjeta 1 -->
-        <div data-aos="fade-right" data-aos-delay="500">
-          <img src="img/test1.jpeg" alt="Tutoría de Conducción">
-          <h2>Tutoría de Conducción</h2>
-          <p>Curso Particular<br>Enfocado en Alumnos con poca experiencia y pocos kilómetros recorridos.</p>
-          <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalPrecioCurso">Precios</a>
-        </div>
-
-        <!-- Tarjeta 2 -->
-        <div data-aos="fade-right" data-aos-delay="400">
-          <img src="img/test.jpeg" alt="Examen de Nivelación">
-          <h2>Examen de Nivelación</h2>
-          <p>Curso desde Cero<br>Examen con evaluación personalizada GRATIS<br>Debes aprobar teoría para acceder a
-            cursos prácticos</p>
-          <a href="https://forms.gle/nbehyLff7PuJkJvY8" class="btn btn-primary">Medir Conocimientos</a>
-        </div>
-
-        <!-- Tarjeta 3 -->
-        <div data-aos="fade-right" data-aos-delay="300">
-          <img src="img/test3.jpeg" alt="Juego de Preguntas">
-          <h2>¡Prueba tus Conocimientos!</h2>
-          <p>Accede a un DESAFIANTE Juego de Preguntas</p>
-          <a href="paginas/quiz/index.html" class="btn btn-primary">Juega Aquí</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 🔽 Modal Precios Curso Reestructurado -->
-  <div class="modal fade" id="modalPrecioCurso" tabindex="-1" aria-labelledby="modalPrecioCursoLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-      <div class="modal-content">
-
-        <div class="modal-header">
-          <h5 class="modal-title" id="modalPrecioCursoLabel">Precios y Niveles de Curso</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-        </div>
-
-        <div class="modal-body">
-
-          <!-- Precio principal -->
-          <div class="mb-4">
-            <h4 class="text-primary">CLP$12.000 por hora</h4>
-            <p class="mb-0">Clases prácticas de conducción.</p>
-          </div>
-
-          <!-- Niveles del alumno -->
-          <div class="mb-4">
-            <h5 class="mb-3">Nivel del Alumno</h5>
-            <div class="accordion" id="accordionNivelAlumno">
-
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="nivel1">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#collapseNivel1">Principiante
-                </h2>
-                <div id="collapseNivel1" class="accordion-collapse collapse" data-bs-parent="#accordionNivelAlumno">
-                  <div class="accordion-body">
-                    Curso incluye nivelación inicial<br>
-                    Objetivo: 4 clases (1 hora c/u). <br>
-
-                  </div>
-                </div>
+        <!-- Modal de pago -->
+        <div class="modal fade" id="modalPagoClases" tabindex="-1">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Pago de Clases</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
               </div>
-
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="nivel2">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#collapseNivel2">
-                    Practicante / Intermedio
-                  </button>
-                </h2>
-                <div id="collapseNivel2" class="accordion-collapse collapse" data-bs-parent="#accordionNivelAlumno">
-                  <div class="accordion-body">
-                    Reforzamiento de técnicas, confianza y dominio en calle. <br>
-                    Objetivo: 2 clases.
-                  </div>
-                </div>
+              <div class="modal-body">
+                Actualmente aceptamos pagos mediante transferencia bancaria o contacto directo.
+                Por favor, contáctanos para coordinar tu clase y asegurar tu cupo.
               </div>
-
-            </div>
-          </div>
-
-          <!-- Condiciones generales -->
-          <div class="mb-2">
-            <h5 class="mb-3">Condiciones</h5>
-            <div class="accordion" id="accordionCondiciones">
-
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="cond1">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#collapseCond1">
-                    Generales
-                  </button>
-                </h2>
-                <div id="collapseCond1" class="accordion-collapse collapse" data-bs-parent="#accordionCondiciones">
-                  <div class="accordion-body">
-                    - Agenda tu clase hasta 36 horas antes.<br>
-                    - Se utiliza el vehículo particular de confianza del alumno.<br>
-                    - El auto debe contar con seguro vigente contra daños y terceros.<br>
-                    - Reagendamiento con al menos 24h de anticipación.
-                  </div>
-                </div>
+              <div class="modal-footer">
+                <a href="https://wa.me/56946914558" class="btn btn-success">Contactar por WhatsApp</a>
               </div>
-
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="cond2">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#collapseCond2">
-                    Clase de Prueba
-                  </button>
-                </h2>
-                <div id="collapseCond2" class="accordion-collapse collapse" data-bs-parent="#accordionCondiciones">
-                  <div class="accordion-body">
-                    - Valor clase de prueba: CLP$12.000.<br>
-                    - Enfocada en evaluar y preparar para el examen municipal.
-                  </div>
-                </div>
-              </div>
-
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="cond3">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#collapseCond3">
-                    Auto de Práctica
-                  </button>
-                </h2>
-                <div id="collapseCond3" class="accordion-collapse collapse" data-bs-parent="#accordionCondiciones">
-                  <div class="accordion-body">
-                    - Costo adicional: CLP$69.900 (2 clases, hasta 2h).<br>
-                    - Solo disponible en casos especiales y previa coordinación.<br>
-                    - Debe confirmarse con antelación.
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-        </div>
-
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-  <!-----End Plan de Estudio section----->
-  <!---Start Espacio Publicitario section----->
-
-  <!-- 🔧 Tarjeta Taller Asociado con fondo blur y ancho controlado -->
-  <div class="mm-fondo-blur mx-auto my-4" style="max-width: 600px;">
-    <div class="card mm-tarjeta shadow-lg border-0 overflow-hidden position-relative rounded-4" data-aos="fade-up">
-
-      <div class="position-relative">
-        <img src="img/mecanicorg.jpg" class="card-img-top object-fit-cover" alt="promolubricentrorg"
-          style="height: 400px;">
-
-        <!-- Botones flotantes sobre imagen -->
-        <div class="mm-btn-container position-absolute bottom-0 start-50 translate-middle-x mb-3 d-flex gap-2">
-          <a class="btn btn-light btn-sm rounded-pill px-3 shadow" href="https://lubricentrorg.com" target="_blank">🌐
-            Visitar Web</a>
-          <a class="btn btn-warning btn-sm rounded-pill px-3 shadow" data-bs-toggle="modal"
-            data-bs-target="#mm-modal-publicidad">🔥 Promoción</a>
-        </div>
-      </div>
-
-      <div class="mm-cuerpo text-center bg-white px-3 py-4">
-        <h5 class="fw-bold text-dark mb-1">Lubricentro</h5>
-        <p class="text-muted small mb-0">Taller Asociado</p>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- 🔳 Modal Publicidad -->
-  <!-- 🔳 Modal Publicidad -->
-  <div class="modal fade" id="mm-modal-publicidad" tabindex="-1" aria-labelledby="mm-modal-label" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" style="max-width: 900px;">
-      <div class="modal-content p-0 rounded-4 overflow-hidden">
-
-        <div class="row g-0 align-items-center">
-          <!-- Imagen -->
-          <div class="col-12 col-md-7">
-            <img src="img/promolubricentrorg.jpg" class="w-100 h-100 object-fit-cover" alt="Promo Lubricentro RG">
-          </div>
-
-          <!-- Burbuja -->
-          <div class="col-12 col-md-5 d-flex align-items-center justify-content-center">
-            <div class="modal-bubble text-center text-md-start" data-aos="fade-up" data-aos-duration="1200">
-              <h5 class="modal-title fw-bold mb-3" id="mm-modal-label">
-                Desde <strong>memanejo.cl</strong><br>te invitamos a realizar tu <span class="text-warning">mantención
-                  preventiva</span> con un taller de confianza.
-              </h5>
-              <button type="button" class="btn btn-warning btn-sm px-4 rounded-pill" data-bs-dismiss="modal">
-                Cerrar
-              </button>
             </div>
           </div>
         </div>
+        <!-- Título con guion azul -->
+        <h3 class="text-center mb-4" data-aos="fade-up">Contenidos del Curso</h3>
 
+        <div class="row g-4">
+
+          <!-- Card 1 -->
+          <div class="col-md-4">
+            <div class="card card-gris">
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title"><i class="fas fa-road me-2"></i>Teoría del Conductor</h5>
+                <p class="card-text">
+                  <strong>Nivel 0km</strong><br>
+                  Normas, señalética, comportamiento vial y todo lo necesario para aprobar tu prueba teórica.
+                </p>
+
+                <div class="d-flex gap-2 flex-wrap mt-auto">
+                  <a class="btn btn-primary btn-sg w-100" href="https://forms.gle/nbehyLff7PuJkJvY8" target="_blank">Ir
+                    a
+                    Examen de Nivelación</a>
+                  <button class="btn btn-dark btn-sg w-100 precios-toggle" type="button">Precios <i
+                      class="fas fa-chevron-down ms-1"></i></button>
+                </div>
+
+                <!-- Burbuja de precios -->
+                <div class="collapse precios-burbuja mt-2">
+                  <div class="card card-body shadow-sm text-dark">
+                    <span class="d-block text-success fw-bold fs-6">$9.900</span>
+                    <strong>Pack Conocimiento Inicial 📘</strong><br>
+                    Capítulos 1 y 2: Normas básicas + Señales de tránsito + Elementos de seguridad.<br>
+                    <small>Objetivo: Dar a conocer los primeros conceptos teóricos del tránsito.</small><br>
+                    <a href="https://wa.me/56946914558?text=Quiero%20comenzar%20Pack%20Conocimiento%20Inicial"
+                      target="_blank" class="btn btn-primary btn-sm mt-2">Agendar este pack</a>
+                    <hr>
+
+                    <span class="d-block text-success fw-bold fs-6">$9.900</span>
+                    <strong>Pack Antes de Manejar 🚦</strong><br>
+                    Capítulos 3 y 4: Conducción segura, equilibrio emocional, riesgos, alcohol/drogas.<br>
+                    <small>Objetivo: Completar la teoría esencial y preparar mental y emocionalmente para la
+                      práctica.</small><br>
+                    <a href="https://wa.me/56946914558?text=Quiero%20comenzar%20Pack%20Antes%20de%20Manejar"
+                      target="_blank" class="btn btn-primary btn-sm mt-2">Agendar este pack</a>
+                    <hr>
+
+                    <span class="d-block text-success fw-bold fs-6">$19.900</span><strong>Pack Full Teórico
+                      🎯</strong><br>
+                    Incluye todos los capítulos del libro para la conducción Clase B según CONASET.<br>
+                    <small>Objetivo: Preparación completa para la práctica en terreno y simulación de examen
+                      municipal.</small><br>
+                    <a href="https://wa.me/56946914558?text=Quiero%20comenzar%20Pack%20Full%20Teorico" target="_blank"
+                      class="btn btn-primary btn-sm mt-2">Agendar este pack</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 con scroll -->
+          <div class="col-md-4">
+            <div class="card card-gris">
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title"><i class="fas fa-car me-2"></i>Práctica de manejo en terreno</h5>
+                <p class="card-text"><strong>Nivel 100km</strong> <br> Técnicas, maniobras, tips y simulaciones para una
+                  conducción segura y consciente.</p>
+
+                <div class="d-flex gap-2 flex-wrap mt-auto">
+                  <a class="btn btn-primary btn-sg w-100" href="paginas/quiz/index.html" target="_blank">Ir a Examen
+                    Teórico</a>
+                  <button class="btn btn-dark btn-sg w-100 precios-toggle" type="button">Precios <i
+                      class="fas fa-chevron-down ms-1"></i></button>
+                </div>
+
+                <div class="precios-burbuja mt-2">
+                  <div class="card card-body shadow-sm text-dark" style="max-height:750px; overflow-y:auto;">
+                    <div class="mb-3">
+                      <span class="d-block text-success fw-bold fs-6">$11.900</span>
+                      <p>Clase práctica de conducción en auto propio o del instructor según condiciones.</p>
+                    </div>
+
+                    <h6 style="color:#2261ff; font-weight:600;">Nivel del Alumno:</h6>
+
+                    <strong>Principiante / 0km:</strong> Capítulos 1 al 4 + clase práctica estática<br>
+                    <small>
+                      Objetivo: Para quienes parten de cero, combinando teoría esencial y práctica inicial para adquirir
+                      confianza y familiarizarse con controles básicos del vehículo (postura, asiento, volante, luces y
+                      nociones de mecánica básica).
+                    </small>
+                    <a href="https://wa.me/56946914558?text=Quiero%20comenzar%20pack%20principiante%200km"
+                      target="_blank" class="btn btn-primary btn-sm mt-2 w-100">Agendar Clase</a>
+                    <hr>
+
+                    <strong>Practicante / 100km:</strong> Reforzamiento de técnicas, confianza y dominio en calle<br>
+                    <small>
+                      Objetivo: Mejorar habilidades de conducción de quienes superan el Examen de Nivelación o licencia
+                      de
+                      conducir al día, reforzando control, maniobras, seguridad y desempeño en ruta mediante práctica
+                      supervisada.
+                    </small>
+                    <a href="https://wa.me/56946914558?text=Quiero%20agendar%20clase%20práctica%20100km" target="_blank"
+                      class="btn btn-primary btn-sm mt-2 w-100">Agendar Clase</a>
+                    <hr>
+
+                    <h6 style="color:#2261ff; font-weight:600; cursor:pointer;" data-bs-toggle="collapse"
+                      data-bs-target="#condicionesGeneralCard2">
+                      Condiciones Generales <i class="fas fa-chevron-down ms-1"></i>
+                    </h6>
+                    <div class="collapse" id="condicionesGeneralCard2">
+                      <ul style="font-size:0.85rem; padding-left:1rem; color:#555;">
+                        <li>Agenda tu clase hasta 36 horas antes.</li>
+                        <li>Se utiliza vehículo particular de confianza del alumno o del instructor según
+                          disponibilidad.</li>
+                        <li>El auto debe contar con seguro vigente contra daños y terceros.</li>
+                        <li>Reagendamiento con al menos 24h de anticipación.</li>
+                        <li>Clase de prueba: Evaluación municipal estática: Postura de conducción, ajuste de: cinturón,
+                          espejos y luces. Uso correcto de pedales. Incluye enseñanza de mecánica básica para alumnos
+                          nuevos.</li>
+                        <li><strong>Costo clase de prueba: CLP$9.900.</strong></li>
+                        <li>Clases prácticas reforzadas incluyen simulaciones en calle y técnicas de seguridad vial.
+                        </li>
+                        <li>Se recomienda llegar con ropa y calzado cómodo para práctica en terreno.</li>
+                        <li>Auto de práctica: Solo disponible previa coordinación. <strong>CLP$69.900 (2 clases, hasta
+                            2h).</strong></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="col-md-4">
+            <div class="card card-gris">
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title"><i class="fas fa-tools me-2"></i>Mecánica Básica</h5>
+                <p class="card-text"><strong>Nivel 1.000km</strong> <br> Conoce tu vehículo: niveles, luces, neumáticos,
+                  cómo reaccionar ante fallas comunes y más.</p>
+
+                <div class="d-flex gap-2 flex-wrap mt-auto">
+                  <a class="btn btn-primary btn-sg w-100" href="https://www.memanejomanejando.cl"
+                    target="_blank">Acceder a Perfil</a>
+                  <button class="btn btn-dark btn-sg w-100 precios-toggle" type="button">Precios <i
+                      class="fas fa-chevron-down ms-1"></i></button>
+                </div>
+
+                <div class="collapse precios-burbuja mt-2">
+                  <div class="card card-body shadow-sm text-dark">
+                    <span class="d-block text-success fw-bold fs-6">$29.900</span>
+                    <strong>Módulo Mecánica Básica</strong><br>
+                    Conceptos teóricos y prácticos sobre tu vehículo.<br>
+                    <small>Incluye niveles de líquidos, luces, neumáticos y fallas comunes.</small><br>
+                    <a href="https://wa.me/56946914558?text=Quiero%20comenzar%20Modulo%20Mecanica%20Basica"
+                      target="_blank" class="btn btn-primary btn-sm mt-2">Agendar este módulo</a>
+                    <hr>
+
+                    <span class="d-block text-success fw-bold fs-6">$29.900</span>
+                    <strong>Módulo Normativa Vial</strong><br>
+                    Revisión de normas de tránsito aplicadas y señalética.<br>
+                    <small>Profundización en comportamiento vial y seguridad.</small><br>
+                    <a href="https://wa.me/56946914558?text=Quiero%20comenzar%20Modulo%20Normativa%20Vial"
+                      target="_blank" class="btn btn-primary btn-sm mt-2">Agendar este módulo</a>
+                    <hr>
+
+                    <span class="d-block text-success fw-bold fs-6">$29.900</span>
+                    <strong>Módulo Mecánica en Vivo</strong><br>
+                    Práctica con auto de escuela, aprendizaje en terreno.<br>
+                    <small>Aplicación de conceptos básicos de mecánica en un vehículo real.</small><br>
+                    <a href="https://wa.me/56946914558?text=Quiero%20comenzar%20Modulo%20Mecanica%20en%20Vivo"
+                      target="_blank" class="btn btn-primary btn-sm mt-2">Agendar este módulo</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
   </div>
+  </section>
 
-<!-- 📱 Cabecera móvil -->
-<div class="mm-header d-md-none fixed-top px-3 py-2 shadow-lg"
-  style="backdrop-filter: blur(10px); background: rgba(0, 0, 0, 0.2); border-radius: 0 0 16px 16px;">
-  <div class="d-flex justify-content-between align-items-center">
-    <span class="fw-bold text-black mm-logo-text">MEMANEJO</span>
-    <button class="btn btn-light btn-sm rounded-pill px-3" type="button" data-bs-toggle="offcanvas"
-      data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
-      Menú
-    </button>
-  </div>
-</div>
-
-
-  <!-- Sección Sobre Mí -->
   <!-- 🟨 Espacio Publicitario Moderno Vertical -->
   <section id="mm-espacio-publicidad" class="my-5 text-center">
-    <div class="mm-publicidad-wrapper mx-auto" data-aos="fade-right">
+    <div class="mm-publicidad-wrapper mx-auto" data-aos="fade-down">
 
       <!-- Botón -->
-      <button class="btn btn-outline-warning btn-sm rounded-pill mb-3" type="button" data-bs-toggle="collapse"
+      <button class="btn btn-warning btn-sm rounded-pill mb-3" type="button" data-bs-toggle="collapse"
         data-bs-target="#contenidoPublicidad" aria-expanded="false" aria-controls="contenidoPublicidad">
-        Espacio Publicitario
+        Abrir Espacio Publicitario
       </button>
 
       <!-- Contenido desplegable -->
       <div class="collapse" id="contenidoPublicidad">
         <div class="mm-publicidad-contenido p-3 rounded-4">
 
-          <!-- Video vertical -->
+          <!-- Imagen vertical -->
           <div class="video-container mb-3">
-            <video autoplay muted loop playsinline class="video-vertical shadow rounded-3">
-              <source src="img/promolubricentrorg.mp4" type="video/mp4">
-              Tu navegador no soporta el video.
-            </video>
+            <img src="img/mecanicorg.jpg" alt="Mecánicos" class="video-vertical shadow rounded-3">
           </div>
 
           <!-- Tarjeta Promoción -->
-          <div class="promo-banner bg-warning bg-opacity-25 backdrop-blur p-3 rounded-3 shadow-sm">
+          <div class="promo-banner bg-light bg-opacity-25  p-3 rounded-3 shadow-sm">
             <p class="promo-text mb-2">
-              🔧 Realiza tu <strong>mantención preventiva</strong> con un taller asociado.
+              Realiza tu <strong>mantención preventiva</strong><br>con un taller asociado.
             </p>
             <a href="#contacto" class="btn btn-warning btn-sm rounded-pill px-4">Reservar</a>
           </div>
@@ -700,7 +804,71 @@
       </div>
     </div>
   </section>
-  <section class="sobre-mi-section" id="sobre-mi">
+  <!-- seccion lubricentros asociados -->
+  <section id="lubricentros" class="py-5 bg-warning">
+    <div class="container">
+
+      <div class="mm-fondo-blur mx-auto my-4">
+        <div class="card mm-tarjeta shadow-lg border-0 overflow-hidden rounded-4" data-aos="fade-up">
+
+          <!-- Imagen con botones sobre ella -->
+          <div class="position-relative" data-bg="dark">
+            <img src="img/automaniaracing.png" class="card-img-top object-fit-cover" alt="promolubricentro"
+              style="height:450px; width:100%;">
+
+            <!-- Botones con blur sobre la imagen -->
+            <div
+              class="mm-btn-container position-absolute bottom-10 start-10 translate-middle-x d-flex gap-3 p-1 rounded-3"
+              style="backdrop-filter: blur(5px); background-color: rgba(255, 255, 255, 0.204);">
+              <a class="btn btn-light btn-sm rounded-pill px-3 shadow"
+                href="https://www.instagram.com/auto.maniaracing/" target="_blank">Visitar Instagram</a>
+              <a class="btn btn-warning btn-sm rounded-pill px-3 shadow" data-bs-toggle="modal"
+                data-bs-target="#mm-modal-publicidad">🔥 Promoción</a>
+            </div>
+          </div>
+
+          <!-- Card body blanco con texto -->
+          <div class="mm-cuerpo text-center bg-white px-3 py-4">
+            <h5 class="fw-bold text-dark mb-1">Lubricentro</h5>
+            <p class="text-muted small mb-0">Taller Asociado</p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Modal Publicidad Actualizado -->
+  <div class="modal fade" id="mm-modal-publicidad" tabindex="-1" aria-labelledby="mm-modal-label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content p-0 rounded-4 overflow-hidden position-relative">
+
+        <!-- Imagen con overlay -->
+        <div class="position-relative">
+          <img src="img/publicidadtransporte.jpeg" class="w-100 img-fluid modal-image" alt="Promo Transporte">
+
+          <!-- Overlay texto y botones centrados -->
+          <div class="modal-overlay-text d-flex flex-column justify-content-end align-items-center text-center p-3">
+            <p class="text-info mb-3">¡Accede a nuestra promoción especial de transporte! <br>Consulta por las condiciones de este servicio al realizar tu mantención preventiva</p>
+            <div class="d-flex gap-2 flex-wrap justify-content-center">
+              <a href="#contact" class="btn btn-warning btn-sm rounded-pill px-3 shadow">
+                Solicitar Servicio
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- Botón cerrar al lado derecho -->
+        <button type="button" class="btn btn-warning btn-sm rounded-pill close-modal-btn" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+
+      </div>
+    </div>
+  </div>
+
+  <!---Start Sobre mi section----->
+  <section class="sobre-mi-section" data-bg="dark" id="sobre-mi">
     <div class="titulo-rotativo-box text-center mb-4">
       <h2 id="titulo-rotativo"></h2>
     </div>
@@ -713,7 +881,7 @@
           </div>
           <div class="perfil-descripcion">
             <h2>Leonardo Azo</h2>
-            <p>Ingeniero en Maquinaria Pesada y
+            <p>Ingeniero en Maquinaria y
               <br>Vehículos Automotrices
               <br> con mención en Sistemas Electrónicos.
             </p>
@@ -723,11 +891,11 @@
         <!-- Columna derecha: Botones verticales -->
         <div class="col-md-4 tab-buttons d-flex flex-column align-items-end mt-4 mt-md-0">
           <button class="tab-btn active" data-tab="experiencia" data-aos="fade-left" data-aos-delay="100"
-            data-aos-duration="800">Experiencia</button>
-          <button class="tab-btn" data-tab="skills" data-aos="fade-left" data-aos-delay="800"
-            data-aos-duration="800">Skills</button>
-          <button class="tab-btn" data-tab="portfolio" data-aos="fade-left" data-aos-delay="1600"
-            data-aos-duration="800">Portafolio</button>
+            data-aos-duration="400">Experiencia -</button>
+          <button class="tab-btn" data-tab="skills" data-aos="fade-left" data-aos-delay="500"
+            data-aos-duration="800">Skills -</button>
+          <button class="tab-btn" data-tab="portfolio" data-aos="fade-left" data-aos-delay="600"
+            data-aos-duration="800">Portafolio -</button>
         </div>
 
         <!-- Contenido de pestañas -->
@@ -737,20 +905,20 @@
             <div id="tab-experiencia" class="tab-panel active text-justify">
               <ul class="experiencia-lista">
                 <li data-aos="fade-right" data-aos-delay="0">
-                  <strong>|&nbsp;KAM (Key Account Manager)</strong><br>
-                  <span class="empresa">Centro Logístico Integral de Repuestos y Servicios Automotrices</span>
+                  <strong>Desarrollador y Representante de Ventas</strong><br>
+                  <span class="empresa">|&nbsp;memanejo.cl | memanejomanejando.cl</span>
                 </li>
                 <li data-aos="fade-right" data-aos-delay="100">
-                  <strong>|&nbsp;Asesor de Servicios Postventa y Repuestos</strong> <br>
-                  <span class="empresa">Hernández Motores</span>
+                  <strong>Asesor de Servicios Postventa y Repuestos</strong> <br>
+                  <span class="empresa">|&nbsp;Hernández Motores</span>
                 </li>
                 <li data-aos="fade-right" data-aos-delay="200">
-                  <strong>|&nbsp;Representante de Ventas</strong><br>
-                  <span class="empresa">Automotores Gildemeister</span>
+                  <strong>Representante de Ventas</strong><br>
+                  <span class="empresa">|&nbsp;Automotores Gildemeister</span>
                 </li>
                 <li data-aos="fade-right" data-aos-delay="300">
-                  <strong>|&nbsp;Asesor Especialista</strong><br>
-                  <span class="empresa">Derco</span>
+                  <strong>Asesor Especialista</strong><br>
+                  <span class="empresa">|&nbsp;Derco</span>
                 </li>
               </ul>
             </div>
@@ -895,8 +1063,8 @@
     });
   </script>
 
-  <!-- portfolio section -->
-  <div id="portfolio">
+  <!-- mis marcas section -->
+  <div id="mis-marcas">
     <div class="container">
       <h1 class="sub-title">MIS MARCAS</h1>
 
@@ -908,7 +1076,7 @@
             <div class="overlay">
               <div class="marca-nombre">PREMIUM QUALITY GOODS</div>
               <a href="https://instagram.com/airoo.cl" target="_blank" class="btn-instagram">
-                <i class="fa-brands fa-instagram"> efyiu.cl</i>
+                <i class="fa-brands fa-instagram"></i>&nbsp; efyiu.cl
               </a>
             </div>
           </div>
@@ -920,7 +1088,7 @@
             <div class="overlay">
               <div class="marca-nombre">LOCAL PERFORMÆRS</div>
               <a href="https://instagram.com/aeroo.studio" target="_blank" class="btn-instagram">
-                <i class="fa-brands fa-instagram"> aeroo.studio</i>
+                <i class="fa-brands fa-instagram"></i>&nbsp; aeroo.studio
               </a>
             </div>
           </div>
@@ -932,7 +1100,7 @@
             <div class="overlay">
               <div class="marca-nombre">TUTORIA DE CONDUCCIÓN</div>
               <a href="https://instagram.com/memanejomanejando.cl" target="_blank" class="btn-instagram">
-                <i class="fa-brands fa-instagram"> memanejo.cl</i>
+                <i class="fa-brands fa-instagram"></i>&nbsp; memanejo.cl
               </a>
             </div>
           </div>
@@ -943,10 +1111,10 @@
   </div>
   <!-- Contact Section Start -->
   <section id="contact">
-    <div class="contact-container">
+    <div class="contact-container" data-bg="dark">
       <div class="contact-left">
         <h1 class="sub-title">JUNTOS PODEMOS MÁS</h1>
-        <p><i class="fa-solid fa-envelope"></i><a href="mailto:leonardo.azo@memanejo.cl">contacto@memanejo.cl</a></p>
+        <p><i class="fa-solid fa-envelope"></i><a href="mailto:contacto@memanejo.cl">contacto@memanejo.cl</a></p>
         <p>
           <i class="fa-brands fa-whatsapp"></i>
           <a href="https://wa.me/56946914558?text=Hola%2C%20me%20gustar%C3%ADa%20ponerme%20en%20contacto%20contigo.%20Mi%20nombre%20es%3A%20________.%20Motivo%3A%20________"
@@ -965,13 +1133,15 @@
             <i class="fa-brands fa-whatsapp"></i></a>
         </div>
 
-        <a href="archivos/CV KAM 2025.pdf" class="btn-download"> <i class="fa-solid fa-file-pdf"> | Ver CV</i>
+        <a href="archivos/CV KAM 2025.pdf" class="btn-download"> <i class="fa-solid fa-file-lines"></i>&nbsp; Ver CV
         </a> <br>
-        <a href="archivos/Formacion Vial.pdf" class="btn-download"> <i class="fa-solid fa-file-lines"> | Ver Programa de Formación</i>
+        <a href="archivos/Formacion Vial.pdf" class="btn-download"> <i class="fa-solid fa-file-lines"></i>&nbsp; Ver
+          Programa de
+          Formación
         </a>
       </div>
 
-      <div class="contact-right">
+      <div class="contact-right" data-bg="dark">
 
         <form id="formAgenda">
           <h1>CONTÁCTANOS</h1>
@@ -982,7 +1152,9 @@
 
           <textarea class="message" data-animar="true" placeholder="" required></textarea>
 
-          <button class="fa-brands fa-whatsapp" type="button" onclick="sendwhatsapp();"> | Enviar Mensaje</button>
+          <button type="button" onclick="sendwhatsapp();">
+            <i class="fa-brands fa-whatsapp"></i>&nbsp; Enviar Mensaje
+          </button>
         </form>
 
 
@@ -1017,13 +1189,6 @@
     });
   </script>
 
-  <script>
-    document.querySelectorAll('.accordion-copyright').forEach(button => {
-      button.addEventListener('click', () => {
-        button.classList.toggle('active');
-      });
-    });
-  </script>
   <script>
     window.addEventListener('load', () => {
       AOS.refresh(); // fuerza el inicio correcto
@@ -1067,12 +1232,15 @@
   </div>
   </div>
   <footer>
-    <div class="footer">
-      <p><i class="fa-brands fa-codepen"></i> Desarrollado con <i class="fa-solid fa-heart"> </i> ÆTHELSTAN</p>
+    <div class="footer" data-bg="dark">
+      <p>
+        <i class="fa-brands fa-codepen" data-bg="dark"></i> Desarrollado con
+        <i class="fa-solid fa-heart"></i> ÆTHELSTAN
+      </p>
     </div>
   </footer>
   <!-- Footer Accordion Copyright -->
-  <div class="custom-accordion-footer">
+  <div class="custom-accordion-footer" data-bg="dark">
     <button class="accordion-copyright">
       Copyright & Licencia
     </button>
@@ -1085,14 +1253,16 @@
         de uso justo.</p>
     </div>
   </div>
-  <!-- Incluye tu archivo pop.js -->
+  <!-- Bootstrap JS (bundle incluye Popper y funcionalidades) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Tu JS -->
   <script src="pop.js"></script>
+
   <!-- AOS -->
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
   <script>
     AOS.init();
   </script>
-
-</body>
 
 </html>

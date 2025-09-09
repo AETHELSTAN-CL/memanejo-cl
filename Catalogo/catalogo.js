@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       id: 1,
       nombre: "Filtro de Aire",
-      modelo: "Kia Morning 1.0L | 1.2L",
+      modelo: "Kia Morning <br> Motor: 1.0L | 1.2L",
       precio: "$11.990",
       imagen: "imagenes/repuestos/kia/kiamorning1.0-1.22.jpg.webp",
       miniaturas: [
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       id: 2,
       nombre: "Filtro de Aceite",
-      modelo: "Hyundai i10 | Kia Morning",
+      modelo: "Hyundai i10 <br> Kia Morning",
       precio: "$9.990",
       imagen: "imagenes/repuestos/kia/photo-output.jpeg",
       miniaturas: [
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       id: 6,
       nombre: "Kit Mantención",
-      modelo: "Chevrolet Sail 1.5L | Año: 2024-2025",
+      modelo: "Chevrolet Sail 1.5L <br> Año: 2024-2025",
       precio: "$79.990",
       imagen: "imagenes/repuestos/chevrolet/photo-output_3.jpeg",
       miniaturas: [
@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     {
       id: 7,
-      nombre: "Kit Filtros | Volkswagen Nivus",
+      nombre: "Kit Mantención <br> | Volkswagen Nivus",
       modelo: "Año: 2024-2025 | Genuine Parts MAHLE",
       precio: "$64.990",
       imagen: "imagenes/repuestos/volkswagen/kit-fil-air-oil-pol-mahle-nivus.jpeg",
@@ -104,8 +104,8 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     {
       id: 8,
-      nombre: "Filtro de Aire | Volkswagen Nivus",
-      modelo: "Año: 2024-2025 | Genuine Parts MAHLE",
+      nombre: "Filtro de Aire <br> | Volkswagen Nivus",
+      modelo: "Año: 2024-2025 <br> Genuine Parts MAHLE",
       precio: "$26.990",
       imagen: "imagenes/repuestos/volkswagen/fil.air-mahle-nivus.jpeg",
       miniaturas: [
@@ -117,8 +117,8 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     {
       id: 9,
-      nombre: "Filtro de Aceite | Volkswagen Nivus",
-      modelo: "Año: 2024-2025 | Genuine Parts MAHLE",
+      nombre: "Filtro de Aceite <br> | Volkswagen Nivus",
+      modelo: "Año: 2024-2025 <br> Genuine Parts MAHLE",
       precio: "$18.990",
       imagen: "imagenes/repuestos/volkswagen/fil-oil-mahle-nivus.jpeg",
       miniaturas: [
@@ -130,8 +130,8 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     {
       id: 10,
-      nombre: "Filtro de Polen | Volkswagen Nivus",
-      modelo: "Año: 2024-2025 | Genuine Parts MAHLE",
+      nombre: "Filtro de Polen <br> | Volkswagen Nivus",
+      modelo: "Año: 2024-2025  Genuine Parts MAHLE",
       precio: "$27.990",
       imagen: "imagenes/repuestos/volkswagen/fil-la816-3-mahle-nivus.jpeg",
       miniaturas: [
@@ -141,6 +141,56 @@ document.addEventListener('DOMContentLoaded', () => {
       ],
       detalles: "Compatibilidad: LA 816/3 | Virtus | T- Cross | Polo",
       codigoOEM: "MAHLE Genuine Parts"
+    },
+    {
+      id: 11,
+      nombre: "Filtro de Aire <br> | Chery Tiggo 2",
+      modelo: "Año: 2017-2025 | Original",
+      precio: "$15.900",
+      imagen: "imagenes/repuestos/chery/chery-tiggo2-fil-air.jpeg",
+      miniaturas: [
+        "imagenes/repuestos/chery/chery-tiggo2-fil-air.jpeg"
+      ],
+      detalles: "Compatibilidad: Chery Tiggo 2 | Motor: 1.5L",
+      codigoOEM: "Genuine Parts"
+    },
+    {
+      id: 12,
+      nombre: "Filtro de Polen <br> | Chery Tiggo 2",
+      modelo: "Año: 2017-2025 | Original",
+      precio: "$9.900",
+      imagen: "imagenes/repuestos/chery/chery-tiggo2-fil.pol.jpeg",
+      miniaturas: [
+        "imagenes/repuestos/chery/chery-tiggo2-kit.jpeg"
+      ],
+      detalles: "Compatibilidad: Chery Tiggo 2 | Motor: 1.5L",
+      codigoOEM: "Genuine Parts"
+    },
+    {
+      id: 13,
+      nombre: "Kit Mantención <br> | Chery Tiggo 2",
+      modelo: "Año: 2017-2025 | Original",
+      precio: "$33.900",
+      imagen: "imagenes/repuestos/chery/chery-tiggo2-kit.jpeg",
+      miniaturas: [
+        "imagenes/repuestos/chery/chery-tiggo2-fil-air.jpeg",
+        "imagenes/repuestos/chery/chery-tiggo2-fil.pol.jpeg",
+        "imagenes/repuestos/chery/chery-tiggo2-fil.oil.jpeg"
+      ],
+      detalles: "Kit Mantención: Filtro de Aceite - Filtro de Polen - Filtro de Aire | Compatibilidad: Chery Tiggo 2 | Motor: 1.5L",
+      codigoOEM: "Genuine Parts"
+    },
+    {
+      id: 14,
+      nombre: "Filtro de Aceite <br> | Chery Tiggo 2",
+      modelo: "Año: 2017-2025 | Original",
+      precio: "$9.900",
+      imagen: "imagenes/repuestos/chery/chery-tiggo2-fil.oil.jpeg",
+      miniaturas: [
+        "imagenes/repuestos/chery/chery-tiggo2-kit.jpeg"
+      ],
+      detalles: "Compatibilidad: Chery Tiggo 2 | Motor: 1.5L",
+      codigoOEM: "Genuine Parts"
     }
 
   ];
@@ -186,7 +236,7 @@ productosFiltrados.forEach(producto => {
     <div class="card">
       <img src="${producto.imagen}" class="card-img-top" alt="${producto.nombre}">
       <div class="card-body">
-        <h5 class="card-title mb-1">${producto.nombre}</h5>
+        <h5 class="card-title mb-1" style="font-size: 1.1rem">${producto.nombre}</h5>
         <p class="text-muted" style="font-size: 0.9rem; margin-bottom: 0.5rem;">${producto.modelo}</p>
         <p class="card-text">${producto.precio}</p>
         <button class="btn btn-primary"
