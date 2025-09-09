@@ -1013,35 +1013,63 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     bottom: 15px;
   }
 }
+/* modal didi blur */
+/* Centrar modal correctamente */
+.modal-dialog.modal-custom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0 auto;
+}
+
+/* Card blur */
 .modal-bubble {
-    background: transparent;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border-radius: 1.5rem;
     padding: 1rem;
-    margin: 5%;
+    width: 320px;        /* ancho móvil */
+    max-width: 600px;    /* ancho escritorio */
+    min-width: 280px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    margin: 0 auto;
+}
+
+/* Imagen vertical */
+.modal-image {
     max-width: 90%;
-    color: #000000;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.574);
+    height: auto;
+    border-radius: 0.75rem;
+    display: block;
+    margin: 0 auto 1rem auto;
 }
 
-.modal-bubble .modal-title {
-    font-size: 1rem;
-    font-weight: 600;
-    line-height: 1.4;
-    text-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
+/* X simple blanca */
+.close-x {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+    display: block;
+    margin: 0.5rem auto;
 }
 
+/* Botón */
+.modal-bubble .btn {
+    display: block;
+    margin: 0.5rem auto 0 auto;
+}
+
+/* Escritorio */
 @media (min-width: 768px) {
     .modal-bubble {
-        max-width: 300px;
-    }
-
-    .modal-bubble .modal-title {
-        font-size: 1.1rem;
+        width: 500px;
+        max-width: 900px;
     }
 }
-
 /*start sobre mi section*/
 .titulo-rotativo-box {
     text-align: center;
