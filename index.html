@@ -137,9 +137,9 @@
   </div>
   <!-- NAV SOLO ESCRITORIO (después del slide grande) -->
   <section class="nav-fullscreen d-none d-md-flex" data-bg="dark">
-    <a href="Catalogo/indexcatalogo.html" class="nav-link-fx"><i class="fa-solid fa-car-battery"></i>   Repuestos Automotrices</a>
-    <a href="#contenidos" class="nav-link-fx"><i class="fa-solid fa-user-graduate"></i>   Formación Vial</a>
-    <a href="#sobre-mi" class="nav-link-fx"><i class="fa-solid fa-user-tie"></i>   Asesor Técnico-Comercial</a>
+    <a href="Catalogo/indexcatalogo.html" class="nav-link-fx"><i class="fa-solid fa-car-battery me-2"></i> Repuestos Automotrices</a>
+    <a href="#contenidos" class="nav-link-fx"><i class="fa-solid fa-user-graduate me-2"></i> Formación Vial</a>
+    <a href="#sobre-mi" class="nav-link-fx"><i class="fa-solid fa-user-tie me-2"></i> Asesor Técnico-Comercial</a>
   </section>
 
   <!-- 🔁 SLIDE MODERNO AHORA TAMBIÉN EN MÓVIL -->
@@ -393,43 +393,60 @@
     </div>
     <!----QA section End ----->
 
-    <!-- BOTÓN FLOTANTE CON LOGO -->
-    <button id="menuButton" class="rounded-circle shadow glass-btn" type="button" data-bs-toggle="offcanvas"
-      data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" title="Abrir menú">
-      <img src="img/logopng.png" alt="Abrir menú principal">
-    </button>
+<!-- BOTÓN FLOTANTE CON LOGO -->
+<button id="menuButton" class="rounded-circle shadow glass-btn" type="button" 
+        data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasWithBothOptions"
+        aria-controls="offcanvasWithBothOptions">
+  <img src="img/logopng.png" alt="Abrir menú principal">
+  <span id="tooltipText" class="tooltip-bubble">Inicia aquí</span>
+</button>
 
-    <!-- OFFCANVAS MENU -->
-    <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
-      aria-labelledby="offcanvasWithBothOptionsLabel">
+<!-- OFFCANVAS MENU -->
+<div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
+  aria-labelledby="offcanvasWithBothOptionsLabel">
 
-      <div class="offcanvas-header d-none"></div>
+  <div class="offcanvas-header d-none"></div>
 
-      <div class="offcanvas-body d-flex flex-column justify-content-between">
+  <div class="offcanvas-body d-flex flex-column justify-content-between">
 
-        <!-- Título -->
-        <div class="text-center mt-4">
-          <h5 id="offcanvasWithBothOptionsLabel" class="mb-3">Menú</h5>
-        </div>
-
-        <!-- Botones Centrales -->
-        <div class="d-grid gap-2 mb-3 mx-auto" style="width: 85%;">
-          <a href="Catalogo/indexcatalogo.html" class="btn btn-primary btn-sm">Repuestos</a>
-          <a href="#sobre-mi" class="btn btn-primary btn-sm">Asesor de Servicios</a>
-          <a href="#contenidos" class="btn btn-primary btn-sm">Formación Vial</a>
-        </div>
-
-        <!-- Botones Inferiores a la Derecha -->
-        <div class="d-flex flex-column align-items-end mb-3">
-          <div style="width: 130px; margin-right: 0.5rem;">
-            <a href="#" class="btn btn-outline-light btn-sm w-100 mb-2">Inicio</a>
-            <a href="#contact" class="btn btn-outline-light btn-sm w-100">Contacto</a>
-            <button type="button" class="btn btn-outline-danger btn-sm w-100"
-              data-bs-dismiss="offcanvas">Cerrar</button>
-          </div>
-        </div>
-      </div>
+    <!-- Título -->
+    <div class="text-center mt-4">
+      <h5 id="offcanvasWithBothOptionsLabel" class="mb-3">Menú</h5>
     </div>
+
+    <!-- Botones Centrales -->
+    <div class="d-grid gap-2 mb-3 mx-auto" style="width: 85%;">
+      <a href="Catalogo/indexcatalogo.html" class="menu-btn">
+        <span class="menu-text">Repuestos</span>
+        <span class="menu-icon"><i class="fa-solid fa-car-battery"></i></span>
+      </a>
+      <a href="#sobre-mi" class="menu-btn">
+        <span class="menu-text">Asesor de Servicios</span>
+        <span class="menu-icon"><i class="fa-solid fa-user-tie"></i></span>
+      </a>
+      <a href="#contenidos" class="menu-btn">
+        <span class="menu-text">Formación Vial</span>
+        <span class="menu-icon"><i class="fa-solid fa-user-graduate"></i></span>
+      </a>
+    </div>
+
+    <!-- Botones Inferiores -->
+<div class="d-flex flex-column align-items-end mb-3 me-3" style="gap: 8px;">
+  <a href="#" class="btn btn-light btn-sm rounded-pill px-3 shadow w-auto btn-bottom">
+    <i class="fa-solid fa-house me-2"></i> Inicio
+  </a>
+  <a href="#contact" class="btn btn-dark btn-sm rounded-pill px-3 shadow w-auto btn-bottom">
+    <i class="fa-solid fa-headset me-2"></i> Contacto
+  </a>
+  <button type="button" class="btn btn-danger btn-sm rounded-pill px-3 shadow w-auto btn-bottom"
+    data-bs-dismiss="offcanvas">
+    <i class="fa-solid fa-xmark me-2"></i> Cerrar
+  </button>
+</div>
+
+  </div>
+</div>
 
     <!-- 🔽 Modal Precios Curso -->
     <div class="modal fade" id="modalPrecioCurso" tabindex="-1" aria-labelledby="modalPrecioCursoLabel"
@@ -772,93 +789,94 @@
       </div>
   </div>
   </section>
+<!-- 🟨 Espacio Publicitario Moderno Vertical -->
+<section id="mm-espacio-publicidad" class="my-5 text-center">
+  <div class="mm-publicidad-wrapper mx-auto" data-aos="fade-down">
 
-  <!-- 🟨 Espacio Publicitario Moderno Vertical -->
-  <section id="mm-espacio-publicidad" class="my-5 text-center">
-    <div class="mm-publicidad-wrapper mx-auto" data-aos="fade-down">
+    <!-- Botón -->
+    <button class="btn btn-warning btn-sm rounded-pill mb-3" type="button" data-bs-toggle="collapse"
+      data-bs-target="#contenidoPublicidad" aria-expanded="false" aria-controls="contenidoPublicidad">
+      Abrir Espacio Publicitario
+    </button>
 
-      <!-- Botón -->
-      <button class="btn btn-warning btn-sm rounded-pill mb-3" type="button" data-bs-toggle="collapse"
-        data-bs-target="#contenidoPublicidad" aria-expanded="false" aria-controls="contenidoPublicidad">
-        Abrir Espacio Publicitario
-      </button>
+    <!-- Contenido desplegable -->
+    <div class="collapse" id="contenidoPublicidad">
+      <div class="mm-publicidad-contenido p-3 rounded-4">
 
-      <!-- Contenido desplegable -->
-      <div class="collapse" id="contenidoPublicidad">
-        <div class="mm-publicidad-contenido p-3 rounded-4">
-
-          <!-- Imagen vertical -->
-          <div class="video-container mb-3">
-            <img src="img/mecanicorg.jpg" alt="Mecánicos" class="video-vertical shadow rounded-3">
-          </div>
-
-          <!-- Tarjeta Promoción -->
-          <div class="promo-banner bg-light bg-opacity-25  p-3 rounded-3 shadow-sm">
-            <p class="promo-text mb-2">
-              Realiza tu <strong>mantención preventiva</strong><br>con un taller asociado.
-            </p>
-            <a href="#contacto" class="btn btn-warning btn-sm rounded-pill px-4">Reservar</a>
-          </div>
-
+        <!-- Imagen vertical -->
+        <div class="video-container mb-3">
+          <img src="img/mecanicorg.jpg" alt="Mecánicos" class="video-vertical shadow rounded-3">
         </div>
+
+        <!-- Tarjeta Promoción -->
+        <div class="promo-banner bg-light bg-opacity-25 p-3 rounded-3 shadow-sm">
+          <p class="promo-text mb-2">
+            Realiza tu <strong>mantención preventiva</strong><br>con un taller asociado.
+          </p>
+          <a href="#contacto" class="btn btn-warning btn-sm rounded-pill px-4">Reservar</a>
+        </div>
+
       </div>
     </div>
-  </section>
-  <!-- seccion lubricentros asociados -->
-  <section id="lubricentros" class="py-5 bg-warning">
-    <div class="container">
+  </div>
+</section>
 
-      <div class="mm-fondo-blur mx-auto my-4">
-        <div class="card mm-tarjeta shadow-lg border-0 overflow-hidden rounded-4" data-aos="fade-up">
+<!-- seccion lubricentros asociados -->
+<section id="lubricentros" class="py-5 bg-warning">
+  <div class="container">
 
-          <!-- Imagen con botones sobre ella -->
-          <div class="position-relative" data-bg="dark">
-            <img src="img/automaniaracing.png" class="card-img-top object-fit-cover" alt="promolubricentro"
-              style="height:450px; width:100%;">
+    <div class="mm-fondo-blur mx-auto my-4">
+      <div class="card mm-tarjeta shadow-lg border-0 overflow-hidden rounded-4" data-aos="fade-up">
 
-            <!-- Botones con blur sobre la imagen -->
-            <div
-              class="mm-btn-container position-absolute bottom-10 start-10 translate-middle-x d-flex gap-3 p-1 rounded-3"
-              style="backdrop-filter: blur(5px); background-color: rgba(255, 255, 255, 0.204);">
-              <a class="btn btn-light btn-sm rounded-pill px-3 shadow"
-                href="https://www.instagram.com/auto.maniaracing/" target="_blank">Visitar Instagram</a>
-              <a class="btn btn-warning btn-sm rounded-pill px-3 shadow" data-bs-toggle="modal"
-                data-bs-target="#mm-modal-publicidad">🔥 Promoción</a>
-            </div>
+        <!-- Imagen con botones sobre ella -->
+        <div class="position-relative" data-bg="dark">
+          <img src="img/automaniaracing.png" class="card-img-top object-fit-cover" alt="promolubricentro"
+            style="height:450px; width:100%;">
+
+          <!-- Botones con blur sobre la imagen -->
+          <div class="mm-btn-container position-absolute bottom-10 start-10 translate-middle-x d-flex gap-3 p-1 rounded-3"
+            style="backdrop-filter: blur(5px); background-color: rgba(255, 255, 255, 0.204);">
+            <a class="btn btn-light btn-sm rounded-pill px-3 shadow"
+              href="https://www.instagram.com/auto.maniaracing/" target="_blank">Visitar Instagram</a>
+            <a class="btn btn-warning btn-sm rounded-pill px-3 shadow" data-bs-toggle="modal"
+              data-bs-target="#mm-modal-publicidad">🔥 Promoción</a>
           </div>
-
-          <!-- Card body blanco con texto -->
-          <div class="mm-cuerpo text-center bg-white px-3 py-4">
-            <h5 class="fw-bold text-dark mb-1">Lubricentro</h5>
-            <p class="text-muted small mb-0">Taller Asociado</p>
-          </div>
-
         </div>
-      </div>
 
+        <!-- Card body blanco con texto -->
+        <div class="mm-cuerpo text-center bg-white px-3 py-4">
+          <h5 class="fw-bold text-dark mb-1">Lubricentro</h5>
+          <p class="text-muted small mb-0">Taller Asociado</p>
+        </div>
+
+      </div>
     </div>
-  </section>
+
+  </div>
+</section>
 
 <!-- Modal Publicidad -->
 <div class="modal fade" id="mm-modal-publicidad" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-custom">
+  <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content p-0 border-0 bg-transparent">
 
       <!-- Card blur -->
-      <div class="modal-bubble">
+      <div class="modal-bubble mx-auto text-center">
 
         <!-- Imagen vertical -->
-        <img src="img/publicidadtransporte.jpeg" 
-             class="modal-image" 
-             alt="Promo Transporte">
+        <img src="img/publicidadtransporte.jpeg" class="modal-image rounded-3 my-3" alt="Promo Transporte">
 
         <!-- X simple blanca centrada -->
-        <span class="close-x" data-bs-dismiss="modal" aria-label="Cerrar">X</span>
+        <div class="mb-3">
+          <span class="close-x text-white fs-3" data-bs-dismiss="modal" aria-label="Cerrar">X</span>
+        </div>
 
-        <!-- Botón centrado -->
-        <a href="#contact" class="btn btn-warning btn-sm rounded-pill px-4 mt-2">
-          Solicitar Servicio
-        </a>
+        <!-- Botón centrado debajo de la X -->
+        <div class="text-center mb-3">
+          <a href="#contact" class="btn btn-warning btn-sm rounded-pill px-4 modal-btn">
+            Solicitar Servicio
+          </a>
+        </div>
 
       </div>
     </div>
@@ -975,7 +993,7 @@
                       <strong><span class="title-portfolio">ÆROO Studio.</span></strong><br>
                       <span class="subtitle-portfolio">Productor y DJ</span>
                     </p>
-                    <a href="paginas/studio/index.html" class="btn-crimson">Conoce más</a>
+                    <a href="paginas/studio/index.html" class="btn-crimson"><i class="fa-solid fa-music me-2"></i> Conoce más</a>
                   </div>
                 </div>
 

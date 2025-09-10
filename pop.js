@@ -242,5 +242,40 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', actualizarLogoPorSeccion);
   window.addEventListener('resize', actualizarLogoPorSeccion);
   actualizarLogoPorSeccion();
+  // --- TOOLTIP ROTATIVO (Botón flotante auto) ---
+const tooltipEl = document.getElementById("tooltipText");
+if (tooltipEl) {
+  const textosTooltip = [
+    'Presiona Aquí <i class="fa-solid fa-arrow-right"></i>',
+    'Abrir menú <i class="fa-solid fa-arrow-right"></i>',
+    'Desliza página <i class="fa-solid fa-arrow-down"></i>'
+  ];
+  let i = 0;
+  let scrollTimeout;
 
+  function mostrarTooltip() {
+    tooltipEl.innerHTML = textosTooltip[i];
+    tooltipEl.classList.add("show");
+
+    // Ocultar después de 3s
+    setTimeout(() => tooltipEl.classList.remove("show"), 3000);
+
+    i = (i + 1) % textosTooltip.length;
+  }
+
+  // Mostrar al cargar
+  mostrarTooltip();
+  let rotarInterval = setInterval(mostrarTooltip, 4000);
+
+  // --- Ocultar al hacer scroll y resetear temporizador ---
+  window.addEventListener('scroll', () => {
+    tooltipEl.classList.remove("show");
+
+    // Reiniciar temporizador
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+      mostrarTooltip();
+    }, 3000); // reaparece 3s después de dejar de hacer scroll
+  });
+}
 }); // Fin DOMContentLoaded  

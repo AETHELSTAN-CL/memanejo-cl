@@ -9,6 +9,7 @@ html {
     scroll-behavior: smooth;
     overflow-x: hidden;
 }
+/* BOTÓN FLOTANTE */
 .glass-btn {
   position: fixed;
   bottom: 80px;
@@ -19,13 +20,11 @@ html {
   padding: 6px;
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
   border-radius: 50%;
   border: 1px solid rgba(255, 255, 255, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
-
   transition: background 0.3s ease, border 0.3s ease;
 }
 
@@ -33,33 +32,84 @@ html {
   width: 80%;
   height: 80%;
   object-fit: contain;
-  transition: filter 0.3s ease;
 }
+
 .glass-btn:focus {
   outline: none;
   box-shadow: none;
 }
+
+
+/* Tooltip estilo burbuja */
+.tooltip-bubble {
+  position: absolute;
+  right: 60px; /* al costado izquierdo del botón */
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  opacity: 0; /* invisible al inicio */
+  transition: opacity 0.5s ease;
+}
+.tooltip-bubble.show {
+  opacity: 1;
+}
+
+.glass-btn:hover .tooltip-bubble {
+  opacity: 1;
+}
+
+/* OFFCANVAS */
 .offcanvas {
-    background-color: rgba(33, 37, 41, 0.541) !important;
-    /* translúcido oscuro */
-    backdrop-filter: blur(5px);
-    /* desenfoque de fondo */
-    color: white;
-    width: 220px !important;
-    /* más angosto */
-    border-right: 1px solid rgba(255, 255, 255, 0.1);
-    /* borde tenue opcional */
+  background-color: rgba(33, 37, 41, 0.65) !important;
+  backdrop-filter: blur(5px);
+  color: white;
+  width: 260px !important; /* más ancho */
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .offcanvas .offcanvas-body h5 {
-    color: white;
+  color: white;
+}
+.offcanvas .btn-bottom {
+  min-width: 140px;  /* ajusta este valor a tu diseño */
+  text-align: center;
+}
+/* Botón del menú con icono redondo a la derecha */
+.menu-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #0d6efd;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: background 0.3s ease;
+  margin-bottom: 12px;
 }
 
-.offcanvas .offcanvas-body a {
-    text-decoration: none;
-    display: block;
-    margin-bottom: 15px;
-    font-weight: 500;
+.menu-btn:hover {
+  background: #084298;
+}
+
+.menu-text {
+  flex: 1; /* ocupa espacio a la izquierda */
+}
+
+.menu-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* 🔄 MODERN HORIZONTAL SLIDER SECTION */
@@ -246,7 +296,7 @@ button.btn-slide {
 
 
 
-/* Touch scroll en móviles para fallback */
+/* Touch scroll carousel infinito */
 @media (max-width: 768px) {
     .carousel-inner {
         overflow-x: scroll;
@@ -1049,8 +1099,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 /* X simple blanca */
 .close-x {
-    font-size: 1.8rem;
-    font-weight: bold;
+    font-size: 1.5rem;
     color: #fff;
     cursor: pointer;
     display: block;
@@ -1058,9 +1107,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 /* Botón */
-.modal-bubble .btn {
-    display: block;
-    margin: 0.5rem auto 0 auto;
+.modal-btn {
+    display: inline-block;  /* evita que ocupe todo el ancho */
+    min-width: 150px;       /* opcional: ancho mínimo */
+    max-width: 250px;
+    margin-top: 20px;       
 }
 
 /* Escritorio */
