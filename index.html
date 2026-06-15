@@ -91,12 +91,14 @@
     </div>
   </div>
   <!-- Contenedor principal que unifica nav, tooltip y slider -->
-  <div class="nav-slider-wrapper"> <!-- NAV SOLO ESCRITORIO -->
+  <div class="nav-slider-wrapper">
+    <!-- NAV SOLO ESCRITORIO -->
     <section class="nav-fullscreen d-none d-md-flex" data-bg="dark"> <a href="Catalogo/index.html" target="_blank"
         class="nav-link-fx"> <i class="fa-solid fa-car-battery me-2"></i> Repuestos Automotrices </a> <a
         href="#contenidos" class="nav-link-fx"> <i class="fa-solid fa-user-graduate me-2"></i> Formación Vial </a> <a
         href="#lubricentros" class="nav-link-fx"> <i class="fa-solid fa-user-tie me-2"></i> Servicios Automotrices </a>
-    </section> <!-- SLIDER MODERNO -->
+    </section>
+    <!-- SLIDER MODERNO -->
     <section class="modern-slider-section" data-bg="dark">
       <div class="slider-container">
         <div class="slider-track"> <!-- Tarjeta 1 -->
@@ -236,8 +238,9 @@
         <p class="welcome-subtitle mb-0"><strong>Tu experiencia comienza aquí.</strong>
         </p>
         <p class="title-btn">Navega por nuestros servicios y descubre todo lo que tenemos para ti.</p>
-      </div> <!-- Botones Centrales -->
+      </div>
 
+      <!-- Botones Centrales -->
       <div class="d-grid gap-2 mb-3 mx-auto" style="width: 100%;"> <a href="Catalogo/index.html" target="_blank"
           class="menu-btn"> <span class="menu-text">Repuestos</span> <span class="menu-icon"><i
               class="fa-solid fa-car-battery"></i></span></a>
@@ -249,7 +252,7 @@
       <!-- Botones Inferiores -->
       <div class="offcanvas-bottom-buttons"> <a href="#" class="btn btn-light btn-sm rounded-pill btn-bottom"> <i
             class="fa-solid fa-house"></i> Inicio </a> <a href="#contact"
-          class="btn btn-dark btn-sm rounded-pill btn-bottom"> <i class="fa-solid fa-headset"></i> Contacto </a>
+          class="btn btn-light btn-sm rounded-pill btn-bottom"> <i class="fa-solid fa-headset"></i> Contacto </a>
         <button type="button" class="btn btn-danger btn-sm rounded-pill btn-bottom" data-bs-dismiss="offcanvas"> <i
             class="fa-solid fa-xmark"></i> Cerrar </button>
       </div>
@@ -729,43 +732,58 @@
         <p class="mb-0 fw-bold"> <span id="rotadorCursos"
             data-frases="Formación Vial,Cursos de Conducción Particular"></span> </p>
       </div>
-      <div class="button-grid"> <a href="#" class="btn-modern" id="abrirAgenda" data-aos="zoom-in"
-          data-aos-delay="100">Agendar Clase</a> <a href="https://www.memanejomanejando.cl" target="_blank"
-          class="btn-modern" data-aos="zoom-in" data-aos-delay="500">Conocer Aula Virtual</a> <a
-          href="archivos/Libro para la conduccion en Chile Clase B.pdf" target="_blank" rel="noopener noreferrer"
-          class="btn-modern" data-aos="zoom-in" data-aos-delay="900">Libro para la Conducción</a> <a
-          href="javascript:void(0)" class="btn-modern pay" data-bs-toggle="modal" data-bs-target="#modalPagoClases"
-          data-aos="zoom-in" data-aos-delay="1300">Pagar Clases</a> </div>
-      <!-- Modal de pago -->
-      <div class="modal fade" id="modalPagoClases" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
+      <div class="button-grid">
 
-            <!-- Header -->
-            <div class="modal-header">
-              <h5 class="modal-title">Pago de Clases</h5>
-              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                aria-label="Cerrar"></button>
-            </div>
+  <a href="#" class="btn-modern" id="abrirAgenda">
+    <i class="fa-solid fa-calendar-days"></i>
+    Agendar Clase
+  </a>
 
-            <!-- Body -->
-            <div class="modal-body">
-              <p>
-                Actualmente aceptamos pagos mediante transferencia bancaria o contacto directo.
-                Por favor, contáctanos para coordinar tu clase y asegurar tu cupo.
-              </p>
-            </div>
+  <a href="https://www.memanejomanejando.cl" target="_blank" class="btn-modern">
+    <i class="fa-solid fa-graduation-cap"></i>
+    Conocer Aula Virtual
+  </a>
 
-            <!-- Footer -->
-            <div class="modal-footer">
-              <a href="https://wa.me/56946914558" class="btn btn-success">
-                <i class="fa-brands fa-whatsapp me-2"></i> Contactar por WhatsApp
-              </a>
-            </div>
+  <a href="archivos/Libro para la conduccion en Chile Clase B.pdf" target="_blank" rel="noopener noreferrer" class="btn-modern">
+    <i class="fa-solid fa-book"></i>
+    Libro para la Conducción
+  </a>
 
-          </div>
-        </div>
+  <a href="javascript:void(0)" class="btn-modern pay"
+    data-bs-toggle="modal" data-bs-target="#modalPagoClases">
+    <i class="fa-solid fa-credit-card"></i>
+    Pagar Clases
+  </a>
+
+</div>
+
+<!-- Modal de pago -->
+<div class="modal fade" id="modalPagoClases" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Pago de Clases</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+          aria-label="Cerrar"></button>
       </div>
+
+      <div class="modal-body">
+        <p>
+          Actualmente aceptamos pagos mediante transferencia bancaria o contacto directo.
+          Por favor, contáctanos para coordinar tu clase y asegurar tu cupo.
+        </p>
+      </div>
+
+      <div class="modal-footer">
+        <a href="https://wa.me/56946914558" class="btn btn-success">
+          <i class="fa-brands fa-whatsapp me-2"></i> Contactar por WhatsApp
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>
       <!-- Título con guion azul -->
       <h3 class="text-center mb-4" data-aos="fade-up">Contenidos del Curso</h3>
       <div class="row g-4"> <!-- Card 1 -->

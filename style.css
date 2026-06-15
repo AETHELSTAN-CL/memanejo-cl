@@ -131,8 +131,8 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #0dd5fd;
-    color: #000;
+    background: #000;
+    color: #fff;
     padding: 16px 12px;
     /* 🔽 menos alto, 🔼 más ancho */
     border-radius: 36px;
@@ -153,7 +153,7 @@ body {
 }
 
 .d-grid .menu-btn:hover {
-    background: #084298;
+    background: #0e3abe;
     color: #fff;
     transform: translateY(-2px);
 }
@@ -1021,6 +1021,7 @@ body {
     color: #fff;
     text-decoration: none;
     padding: 8px 10px;
+    margin-top: 20px;
     font-size: clamp(14px, 1.7vw, 20px);
     line-height: 1.05;
     white-space: nowrap;
@@ -1645,8 +1646,7 @@ body {
     align-items: center;
     /* vertical */
     text-align: center;
-    /* por si se parte en 2 líneas */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
     background: linear-gradient(135deg, #007bff, #00bcd4);
     white-space: normal;
@@ -1654,7 +1654,12 @@ body {
     word-wrap: break-word;
     /* quiebra bonito si es largo */
 }
-
+.button-grid a.btn-modern {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
 /* Botón de pago */
 .button-grid a.btn-modern.pay {
     background: linear-gradient(135deg, #ff416c, #ff4b2b);
