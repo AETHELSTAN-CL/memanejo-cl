@@ -3,14 +3,14 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- MENU FLOTANTE OFFCANVAS ---
   const menuButton = document.getElementById('menuButton');
   const offcanvasEl = document.getElementById('offcanvasWithBothOptions');
-  if(menuButton && offcanvasEl){
+  if (menuButton && offcanvasEl) {
     offcanvasEl.addEventListener('show.bs.offcanvas', () => { menuButton.style.display = 'none'; });
     offcanvasEl.addEventListener('hidden.bs.offcanvas', () => { menuButton.style.display = 'block'; });
     offcanvasEl.addEventListener('click', (e) => {
       const target = e.target.closest('a');
-      if(target && target.getAttribute('href')?.startsWith('#')){
+      if (target && target.getAttribute('href')?.startsWith('#')) {
         const bsOffcanvas = bootstrap.Offcanvas.getInstance(offcanvasEl);
-        if(bsOffcanvas) bsOffcanvas.hide();
+        if (bsOffcanvas) bsOffcanvas.hide();
       }
     });
   }
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.classList.add('active');
       document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
 
-      if(btn.dataset.tab==='skills'){
+      if (btn.dataset.tab === 'skills') {
         document.querySelectorAll("#tab-skills .progress-bar").forEach(bar => {
           bar.style.width = bar.getAttribute("data-width");
         });
@@ -34,132 +34,278 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // --- PROGRESS BARS VISIBILITY ---
-  const observer = new IntersectionObserver(entries=>{
-    entries.forEach(entry=>{
-      if(entry.isIntersecting){
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
         const bar = entry.target;
-        bar.style.setProperty('--target-width', bar.getAttribute('data-width')||'0%');
-        bar.style.animation='fillProgress 1.5s ease-out forwards';
+        bar.style.setProperty('--target-width', bar.getAttribute('data-width') || '0%');
+        bar.style.animation = 'fillProgress 1.5s ease-out forwards';
       }
     });
-  },{threshold:0.5});
+  }, { threshold: 0.5 });
   document.querySelectorAll('.progress-bar').forEach(bar => observer.observe(bar));
 
-  // --- CARDS TOGGLE ---
-  document.querySelectorAll('.work').forEach(card => {
-    card.addEventListener('click', ()=>{
-      document.querySelectorAll('.work.active').forEach(ac=>ac.classList.remove('active'));
-      card.classList.toggle('active');
-    });
-  });
-  document.addEventListener('click', e=>{
-    if(!e.target.closest('.work')) document.querySelectorAll('.work.active').forEach(ac=>ac.classList.remove('active'));
-  });
+  // --- ROTACIÓN IMÁGENES PRIMERA TARJETA ---
+  const firstCardSlider = document.querySelector('.slider-card:first-child .card-img-slider');
+  if (firstCardSlider) {
+    const imgs = firstCardSlider.querySelectorAll('img');
+    let index = 0;
 
-  // --- ACCORDION Q&A (Bootstrap maneja cierre automático) ---
-  // No se manipula manualmente toggle.show para no romper collapse
-  // Solo se mantiene posible styling adicional si hay botones con clases propias
-  document.querySelectorAll('.accordion-copyright').forEach(btn=>{
-    btn.addEventListener('click', ()=>btn.classList.toggle('active'));
-  });
+    function rotateImages() {
+      imgs.forEach((img) => img.classList.remove('active'));
+      imgs[index].classList.add('active');
+      index = (index + 1) % imgs.length;
+    }
 
-  // --- ESPACIO PUBLICITARIO ---
-  const publicidadBtn = document.getElementById('publicidadBtn');
-  const publicidadCollapseEl = document.getElementById('publicidadCollapse');
-  if (publicidadBtn && publicidadCollapseEl) {
-      const bsCollapse = new bootstrap.Collapse(publicidadCollapseEl, { toggle: false });
-      publicidadBtn.addEventListener('click', () => {
-          if (publicidadCollapseEl.classList.contains('show')) bsCollapse.hide();
-          else bsCollapse.show();
-      });
+    rotateImages(); // mostrar la primera imagen al cargar
+    setInterval(rotateImages, 3000); // cambiar cada 3 segundos
   }
 
-  // --- MODAL AGENDA ---
-  const btnAbrir = document.getElementById('abrirAgenda');
-  const modal = document.getElementById('modalAgenda');
-  const btnCerrar = document.getElementById('cerrarAgenda');
-  if(btnAbrir && modal && btnCerrar){
-    btnAbrir.addEventListener('click', e=>{e.preventDefault(); modal.classList.add('activo');});
-    btnCerrar.addEventListener('click', ()=>modal.classList.remove('activo'));
-    modal.addEventListener('click', e=>{if(e.target===modal) modal.classList.remove('activo');});
-  }
+// Copyright (mantiene + / -)
+document.querySelectorAll('.accordion-copyright').forEach(btn => {
+  btn.addEventListener('click', () => {
+    btn.classList.toggle('active');
 
-  // --- SELECTOR HORARIOS (Modal Agenda) ---
-  const horariosBase = [
-    { inicio: "10:00", label: "AM" },
-    { inicio: "15:00", label: "PM" },
-    { inicio: "17:30", label: "PM" }
-  ];
-  const selectHora = document.getElementById("hora");
-  const selectBloque = document.getElementById("bloque");
-  function agregarHoras(horaStr, duracion) {
-    const [h, m] = horaStr.split(":").map(Number);
-    const inicio = new Date(); inicio.setHours(h,m,0);
-    const fin = new Date(inicio.getTime() + duracion*60*60*1000);
-    const limite = new Date(); limite.setHours(20,30,0);
-    if(fin>limite) return null;
-    return `${horaStr} - ${fin.toTimeString().slice(0,5)}`;
-  }
-  function actualizarOpcionesHorario() {
-    if(!selectHora || !selectBloque) return;
-    const duracion = parseInt(selectBloque.value,10);
-    selectHora.innerHTML = '<option value="" disabled selected>Selecciona un horario</option>';
-    horariosBase.forEach(h=>{
-      const rango = agregarHoras(h.inicio,duracion);
-      if(rango){
-        const option = document.createElement("option");
-        option.value = h.inicio;
-        option.textContent = `${rango} ${h.label}`;
-        selectHora.appendChild(option);
+    const content = btn.nextElementSibling;
+    if (content) {
+      content.style.display = content.style.display === 'block' ? 'none' : 'block';
+    }
+
+    const icon = btn.querySelector('i');
+    if (icon) {
+      icon.classList.toggle('fa-plus');
+      icon.classList.toggle('fa-minus');
+    }
+  });
+});
+// Nuevo acordeón Condiciones del Servicio
+document.querySelectorAll('.accordion-condiciones-servicio').forEach(btn => {
+  btn.addEventListener('click', () => {
+    btn.classList.toggle('active');
+
+    const content = btn.nextElementSibling;
+    if (content) {
+      content.style.display = content.style.display === 'block' ? 'none' : 'block';
+    }
+
+    const icon = btn.querySelector('i');
+    if (icon) {
+      icon.classList.toggle('fa-plus');
+      icon.classList.toggle('fa-minus');
+    }
+  });
+});
+
+// Sobre Mi con animación suave
+document.querySelectorAll('.accordion-toggle').forEach(btn => {
+  btn.addEventListener('click', () => {
+    btn.classList.toggle('active');
+    const content = btn.nextElementSibling;
+
+    if (content) {
+      if (btn.classList.contains('active')) {
+        // Mostrar con transición suave
+        content.style.display = 'block';
+        const fullHeight = content.scrollHeight + 'px';
+        content.style.maxHeight = '0';
+        setTimeout(() => {
+          content.style.transition = 'max-height 0.4s ease';
+          content.style.maxHeight = fullHeight;
+        }, 10);
+      } else {
+        // Ocultar con transición
+        content.style.transition = 'max-height 0.4s ease';
+        content.style.maxHeight = '0';
+        setTimeout(() => {
+          content.style.display = 'none';
+        }, 400);
       }
-    });
+    }
+
+    // Cambiar texto Expandir / Retraer
+    const label = btn.querySelector('.toggle-label');
+    if (label) {
+      label.textContent = btn.classList.contains('active') ? 'Retraer' : 'Expandir';
+    }
+  });
+});
+
+// --- ESPACIO PUBLICITARIO ---
+const publicidadBtn = document.getElementById('publicidadBtn');
+const publicidadCollapseEl = document.getElementById('publicidadCollapse');
+
+if (publicidadBtn && publicidadCollapseEl) {
+  const bsCollapse = new bootstrap.Collapse(publicidadCollapseEl, { toggle: false });
+
+  // Abrir al cargar
+  bsCollapse.show();
+  publicidadBtn.textContent = "Cerrar Publicidad";
+
+  // Escuchar evento de colapso
+  publicidadCollapseEl.addEventListener('shown.bs.collapse', () => {
+    publicidadBtn.textContent = "Cerrar Publicidad";
+  });
+
+  publicidadCollapseEl.addEventListener('hidden.bs.collapse', () => {
+    publicidadBtn.textContent = "Abrir Publicidad";
+  });
+
+  // Botón para alternar
+  publicidadBtn.addEventListener('click', () => {
+    if (publicidadCollapseEl.classList.contains('show')) {
+      bsCollapse.hide();
+    } else {
+      bsCollapse.show();
+    }
+  });
+}
+// --- ESPACIO PUBLICITARIO MODERNO ---
+const segundoBtn = document.querySelector('#mm-espacio-publicidad button[data-bs-target="#contenidoPublicidad"]');
+const segundoCollapseEl = document.getElementById('contenidoPublicidad');
+
+if (segundoBtn && segundoCollapseEl) {
+  // Actualizar texto al abrir
+  segundoCollapseEl.addEventListener('shown.bs.collapse', () => {
+    segundoBtn.textContent = "Cerrar Publicidad";
+  });
+
+  // Actualizar texto al cerrar
+  segundoCollapseEl.addEventListener('hidden.bs.collapse', () => {
+    segundoBtn.innerHTML = `<i class="fa-solid fa-gift" style="margin-right:6px;"></i> Abrir una promoción para ti`;
+  });
+
+  // Inicializar texto según estado actual
+  if (segundoCollapseEl.classList.contains('show')) {
+    segundoBtn.textContent = "Cerrar Publicidad";
+  } else {
+    segundoBtn.innerHTML = `<i class="fa-solid fa-gift" style="margin-right:6px;"></i> Abrir una promoción para ti`;
   }
-  if(selectBloque) selectBloque.addEventListener('change', actualizarOpcionesHorario);
-  actualizarOpcionesHorario();
+}
+// --- MODAL AGENDA ---
+const btnAbrir = document.getElementById('abrirAgenda');
+const modal = document.getElementById('modalAgenda');
+const btnCerrar = document.getElementById('cerrarAgenda');
+
+if (btnAbrir && modal && btnCerrar) {
+  // Abrir modal
+  btnAbrir.addEventListener('click', e => {
+    e.preventDefault();
+    modal.classList.add('activo');
+    document.body.style.overflow = 'hidden'; // Bloquea scroll de fondo
+  });
+
+  // Cerrar modal con la X
+  btnCerrar.addEventListener('click', () => {
+    modal.classList.remove('activo');
+    document.body.style.overflow = '';
+  });
+
+  // Cerrar modal al hacer click afuera
+  modal.addEventListener('click', e => {
+    if (e.target === modal) {
+      modal.classList.remove('activo');
+      document.body.style.overflow = '';
+    }
+  });
+
+  // Cerrar modal con tecla ESC
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && modal.classList.contains('activo')) {
+      modal.classList.remove('activo');
+      document.body.style.overflow = '';
+    }
+  });
+}
+
+// --- SELECTOR HORARIOS (Modal Agenda) ---
+const horariosBase = [
+  { inicio: "10:00", label: "AM" },
+  { inicio: "15:00", label: "PM" },
+  { inicio: "17:30", label: "PM" }
+];
+
+const selectHora = document.getElementById("hora");
+const selectBloque = document.getElementById("bloque");
+
+// Calcula el rango de horario según duración
+function agregarHoras(horaStr, duracion) {
+  const [h, m] = horaStr.split(":").map(Number);
+  const inicio = new Date();
+  inicio.setHours(h, m, 0);
+  const fin = new Date(inicio.getTime() + duracion * 60 * 60 * 1000);
+  const limite = new Date();
+  limite.setHours(20, 30, 0);
+  if (fin > limite) return null;
+  return `${horaStr} - ${fin.toTimeString().slice(0, 5)}`;
+}
+
+// Actualiza opciones del select de horarios según duración del bloque
+function actualizarOpcionesHorario() {
+  if (!selectHora || !selectBloque) return;
+
+  const duracion = parseInt(selectBloque.value, 10);
+  selectHora.innerHTML = '<option value="" disabled selected>Selecciona un horario</option>';
+
+  horariosBase.forEach(h => {
+    const rango = agregarHoras(h.inicio, duracion);
+    if (rango) {
+      const option = document.createElement("option");
+      option.value = h.inicio;
+      option.textContent = `${rango} ${h.label}`;
+      selectHora.appendChild(option);
+    }
+  });
+}
+
+// Escucha cambio en duración y actualiza horarios
+if (selectBloque) selectBloque.addEventListener('change', actualizarOpcionesHorario);
+
+// Inicializa opciones al cargar la página
+actualizarOpcionesHorario();
 
   // --- PLACEHOLDER ANIMADO ---
-  const frasesInput = ["¿Consulta técnica o de repuesto?","Ej: Necesito pastillas de freno para Mazda 3","Dime qué auto tienes y qué buscas...","Estamos para ayudarte 😉"];
-  let idxFrase=0, idxLetra=0;
+  const frasesInput = ["Escribe aquí tu mensaje", "Ej: Necesito pastillas de freno para Mazda 3", "Dime qué auto tienes y qué buscas...", "Estamos para ayudarte 😉", "¿Consulta técnica o de repuesto?"];
+  let idxFrase = 0, idxLetra = 0;
   const inputAnimado = document.querySelector('[data-animar="true"]');
-  function escribirFrase(){
-    if(!inputAnimado) return;
-    if(idxLetra<=frasesInput[idxFrase].length){
-      inputAnimado.placeholder=frasesInput[idxFrase].substring(0,idxLetra++);
-      setTimeout(escribirFrase,50);
-    }else setTimeout(borrarFrase,1000);
+  function escribirFrase() {
+    if (!inputAnimado) return;
+    if (idxLetra <= frasesInput[idxFrase].length) {
+      inputAnimado.placeholder = frasesInput[idxFrase].substring(0, idxLetra++);
+      setTimeout(escribirFrase, 50);
+    } else setTimeout(borrarFrase, 1000);
   }
-  function borrarFrase(){
-    if(!inputAnimado) return;
-    if(idxLetra>=0){
-      inputAnimado.placeholder=frasesInput[idxFrase].substring(0,idxLetra--);
-      setTimeout(borrarFrase,30);
-    }else{ idxFrase=(idxFrase+1)%frasesInput.length; setTimeout(escribirFrase,300); }
+  function borrarFrase() {
+    if (!inputAnimado) return;
+    if (idxLetra >= 0) {
+      inputAnimado.placeholder = frasesInput[idxFrase].substring(0, idxLetra--);
+      setTimeout(borrarFrase, 30);
+    } else { idxFrase = (idxFrase + 1) % frasesInput.length; setTimeout(escribirFrase, 300); }
   }
   escribirFrase();
 
   // --- ROTADOR CURSOS ---
   const rotador = document.getElementById("rotadorCursos");
-  if(rotador){
+  if (rotador) {
     const frasesCursos = rotador.dataset.frases.split(",");
-    let i=0;
-    function rotar(){
-      rotador.style.opacity=0;
-      setTimeout(()=>{ rotador.textContent=frasesCursos[i]; rotador.style.opacity=1; i=(i+1)%frasesCursos.length; },300);
+    let i = 0;
+    function rotar() {
+      rotador.style.opacity = 0;
+      setTimeout(() => { rotador.textContent = frasesCursos[i]; rotador.style.opacity = 1; i = (i + 1) % frasesCursos.length; }, 300);
     }
     rotar();
-    setInterval(rotar,3000);
+    setInterval(rotar, 3000);
   }
- // --- Título rotativo ---
+  // --- Título rotativo ---
   const frases = [
-    ["PORTAFOLIO", "DIGITAL"],
-    ["PROGRAMADOR", "WEB"],
-    ["ASESOR", "DE", "SERVICIOS", "AUTOMOTRICES"],
-    ["INSTRUCTOR", "VIAL"]
+    ["SERVICIOS", "AUTOMOTRICES"],
+    ["TALLERES", "ASOCIADOS"],
+    ["CARWASH", "PREMIUM"],
+    ["MANTENCIÓN", "PREVENTIVA"]
   ];
   const colores = [
     ["blanco", "gris"],
     ["blanco", "gris"],
-    ["blanco", "blanco", "blanco", "gris"],
+    ["blanco", "gris"],
     ["blanco", "gris"]
   ];
 
@@ -186,55 +332,32 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(mostrarFrase, 4000);
   }
 
-  // --- SLIDERS DE TARJETAS ---
-  document.querySelectorAll('.card-img-slider').forEach(slider=>{
-    const imgs = slider.querySelectorAll('img');
-    let c=0;
-    setInterval(()=>{
-      imgs.forEach(im=>im.classList.remove('active'));
-      c=(c+1)%imgs.length;
-      imgs[c].classList.add('active');
-    },4000);
-  });
 
   // --- BOTON GO TOP ---
   const goTop = document.getElementById('goTop');
-  if(goTop) goTop.addEventListener('click', ()=>window.scrollTo({top:0,behavior:'smooth'}));
+  if (goTop) goTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-  // --- FORMULARIO AGENDA ---
-  const formAgenda = document.getElementById('formAgenda');
-  if(formAgenda){
-    formAgenda.addEventListener('submit', e=>{
-      e.preventDefault();
-      const formData = new FormData(formAgenda);
-      fetch('agenda.php',{method:'POST',body:formData})
-        .then(res=>res.text())
-        .then(data=>{
-          alert(data);
-          if(data.includes('✅')){ modal.classList.remove('activo'); formAgenda.reset(); }
-        }).catch(err=>{alert('Error al enviar la solicitud'); console.error(err);});
-    });
-  }
+
   // --- TOGGLE PRECIOS ---
-  document.querySelectorAll('.precios-toggle').forEach(btn=>{
-    btn.addEventListener('click', ()=>{
+  document.querySelectorAll('.precios-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
       const collapse = btn.closest('.card-body').querySelector('.precios-burbuja');
-      if(collapse) collapse.classList.toggle('show');
+      if (collapse) collapse.classList.toggle('show');
     });
   });
 
   // --- ACTUALIZAR LOGO SEGÚN SECCIÓN ---
-  function actualizarLogoPorSeccion(){
+  function actualizarLogoPorSeccion() {
     const btnImg = document.querySelector("#menuButton img");
     const btn = document.getElementById("menuButton");
     const sections = document.querySelectorAll("[data-bg]");
-    if(!btnImg || !btn || sections.length===0) return;
-    const btnY = btn.getBoundingClientRect().top + btn.getBoundingClientRect().height/2;
+    if (!btnImg || !btn || sections.length === 0) return;
+    const btnY = btn.getBoundingClientRect().top + btn.getBoundingClientRect().height / 2;
     let logo = "img/logopng.png";
-    sections.forEach(sec=>{
+    sections.forEach(sec => {
       const rect = sec.getBoundingClientRect();
-      if(btnY>=rect.top && btnY<=rect.bottom){
-        logo = sec.dataset.bg==="dark"?"img/logopngwhite.png":"img/logopng.png";
+      if (btnY >= rect.top && btnY <= rect.bottom) {
+        logo = sec.dataset.bg === "dark" ? "img/logopngwhite.png" : "img/logopng.png";
       }
     });
     btnImg.src = logo;
@@ -242,40 +365,293 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', actualizarLogoPorSeccion);
   window.addEventListener('resize', actualizarLogoPorSeccion);
   actualizarLogoPorSeccion();
-  // --- TOOLTIP ROTATIVO (Botón flotante auto) ---
-const tooltipEl = document.getElementById("tooltipText");
-if (tooltipEl) {
-  const textosTooltip = [
-    'Presiona Aquí <i class="fa-solid fa-arrow-right"></i>',
-    'Abrir menú <i class="fa-solid fa-arrow-right"></i>',
-    'Desliza página <i class="fa-solid fa-arrow-down"></i>'
-  ];
-  let i = 0;
-  let scrollTimeout;
+  const tooltipEl = document.getElementById("tooltipText");
+  if (tooltipEl) {
+    const textosTooltip = [
+      'Presiona Aquí <i class="fa-solid fa-arrow-right"></i>',
+      'Abrir Menú <i class="fa-solid fa-arrow-right"></i>',
+      'Deslizar Página <i class="fa-solid fa-arrow-down"></i>'
+    ];
 
-  function mostrarTooltip() {
-    tooltipEl.innerHTML = textosTooltip[i];
-    tooltipEl.classList.add("show");
+    let i = 0;
+    let faseInicial = true;
+    let rotarInterval;
+    let scrollTimeout;
 
-    // Ocultar después de 3s
-    setTimeout(() => tooltipEl.classList.remove("show"), 3000);
+    // Mostrar tooltip con fade
+    function mostrarTooltip() {
+      tooltipEl.innerHTML = textosTooltip[i];
+      tooltipEl.classList.add("show");
 
-    i = (i + 1) % textosTooltip.length;
+      setTimeout(() => {
+        tooltipEl.classList.remove("show");
+      }, 3000);
+
+      i = (i + 1) % textosTooltip.length;
+    }
+
+    // Rotación rápida inicial
+    function iniciarRotacion(velocidad = 2000) {
+      mostrarTooltip(); // mostrar inmediatamente
+      rotarInterval = setInterval(mostrarTooltip, velocidad);
+    }
+
+    function detenerRotacion() {
+      clearInterval(rotarInterval);
+    }
+
+    // Fase lenta tras interacción
+    function iniciarFaseLenta() {
+      mostrarTooltip(); // mostrar primero inmediatamente
+      rotarInterval = setInterval(mostrarTooltip, 8000); // 8s entre textos
+    }
+
+    // Detectar interacción y pasar a fase lenta
+    function pasarAFaseLenta() {
+      if (!faseInicial) return;
+      faseInicial = false;
+      detenerRotacion();
+      tooltipEl.classList.remove("show");
+
+      // Retardo antes de iniciar fase lenta
+      setTimeout(() => {
+        iniciarFaseLenta();
+      }, 6000); // espera 6s tras scroll antes de mostrar tooltip lento
+    }
+
+    // --- Inicio ---
+    iniciarRotacion(2000); // rápida y dinámica al cargar
+
+    // Detectar scroll
+    window.addEventListener('scroll', () => {
+      tooltipEl.classList.remove("show");
+      pasarAFaseLenta();
+    });
+
+    // Detectar click en botón de menú
+    const menuButton = document.getElementById("menuButton");
+    if (menuButton) {
+      menuButton.addEventListener('click', () => {
+        pasarAFaseLenta();
+      });
+    }
   }
 
-  // Mostrar al cargar
-  mostrarTooltip();
-  let rotarInterval = setInterval(mostrarTooltip, 4000);
+    // Rotacion botones slider card
+(function () {
+  const botones = document.querySelectorAll('.slider-card .btn-slide-pill');
+  botones.forEach(btn => {
+    let raw = btn.dataset.rotate || btn.textContent || '';
+    const sep = raw.includes('|') ? '|' : '/';
+    let textos = raw.split(sep).map(s => s.trim()).filter(Boolean);
+    if (textos.length <= 1) { btn.textContent = (textos[0] || raw).trim(); return; }
 
-  // --- Ocultar al hacer scroll y resetear temporizador ---
-  window.addEventListener('scroll', () => {
-    tooltipEl.classList.remove("show");
+    const intervalMs = parseInt(btn.dataset.interval, 10) || 2000;
 
-    // Reiniciar temporizador
-    clearTimeout(scrollTimeout);
-    scrollTimeout = setTimeout(() => {
-      mostrarTooltip();
-    }, 3000); // reaparece 3s después de dejar de hacer scroll
+    const spanTemp = document.createElement('span');
+    spanTemp.style.visibility = 'hidden';
+    spanTemp.style.position = 'absolute';
+    spanTemp.style.whiteSpace = 'nowrap';
+    document.body.appendChild(spanTemp);
+    let maxWidth = 0;
+    textos.forEach(t => { spanTemp.textContent = t; maxWidth = Math.max(maxWidth, spanTemp.offsetWidth); });
+    document.body.removeChild(spanTemp);
+    btn.style.width = (maxWidth + 40) + "px";
+
+    btn.innerHTML = '';
+    const first = document.createElement('div');
+    first.className = 'rotator enter';
+    first.textContent = textos[0];
+    btn.appendChild(first);
+
+    let idx = 1, animating = false;
+
+    function rotateOnce() {
+      if (animating) return;
+      animating = true;
+      const current = btn.querySelector('.rotator');
+      const next = document.createElement('div');
+      next.className = 'rotator';
+      next.textContent = textos[idx];
+      btn.appendChild(next);
+      next.getBoundingClientRect();
+      next.classList.add('enter');
+      setTimeout(() => { current.classList.add('exit'); }, 50);
+      current.addEventListener('transitionend', (e) => {
+        if (e.propertyName !== 'transform') return;
+        if (current.parentNode) current.parentNode.removeChild(current);
+        animating = false;
+      });
+      idx = (idx + 1) % textos.length;
+    }
+
+    setTimeout(() => { rotateOnce(); setInterval(rotateOnce, intervalMs); }, 300);
+  });
+})();
+
+
+const socialItems = document.querySelectorAll('.social-item');
+
+// --- SECUENCIA ENCENDIDO / APAGADO ---
+let secuenciaEncendida = true;
+const encendidoTiempo = 5000; // 5s cada fase
+const pausaEntreIconos = 800; // retraso entre encender/apagar icono
+
+function secuenciaSocialIcons() {
+  if (!socialItems.length) return;
+
+  if (secuenciaEncendida) {
+    // Encender uno por uno
+    socialItems.forEach((item, idx) => {
+      setTimeout(() => {
+        const iconI = item.querySelector('i');
+        iconI.style.color = item.dataset.color || '#fff';
+      }, idx * pausaEntreIconos);
+    });
+  } else {
+    // Apagar uno por uno
+    socialItems.forEach((item, idx) => {
+      setTimeout(() => {
+        const iconI = item.querySelector('i');
+        iconI.style.color = '#fff';
+      }, idx * pausaEntreIconos);
+    });
+  }
+
+  setTimeout(() => {
+    secuenciaEncendida = !secuenciaEncendida;
+    secuenciaSocialIcons();
+  }, encendidoTiempo + socialItems.length * pausaEntreIconos);
+}
+
+// Iniciar secuencia
+secuenciaSocialIcons();
+
+// --- TEXTO ROTATIVO ---
+const contactos = [
+  { selector: '.instagram', textos: ['Abrir Instagram', '@memanejomanejando.cl'] },
+  { selector: '.linkedin', textos: ['Abrir LinkedIn', 'Programador Web'] },
+  { selector: '.mail', textos: ['Enviar correo', 'Abrir App mail'] },
+  { selector: '.whatsapp', textos: ['Abrir WhatsApp', 'Enviar mensaje'] }
+];
+
+contactos.forEach(c => {
+  const icon = document.querySelector(c.selector);
+  if (!icon) return;
+
+  // Crear contenedor de texto si no existe
+  let textoSpan = icon.parentNode.querySelector('.social-text');
+  if (!textoSpan) {
+    textoSpan = document.createElement('span');
+    textoSpan.className = 'social-text';
+    textoSpan.style.marginLeft = '8px';
+    textoSpan.style.color = '#fff';
+    textoSpan.style.fontSize = '0.85rem';
+    icon.parentNode.style.display = 'flex';
+    icon.parentNode.style.alignItems = 'center';
+    icon.parentNode.appendChild(textoSpan);
+  }
+
+  let textoIndex = 0;
+  function rotarTexto() {
+    textoSpan.textContent = c.textos[textoIndex];
+    textoIndex = (textoIndex + 1) % c.textos.length;
+  }
+
+  rotarTexto();
+  setInterval(rotarTexto, 3000); // rota cada 4s
+});
+// ===== Slider Mobile QA =====
+const slider = document.getElementById("sliderMobileQA");
+if (slider) {
+  const dots = document.querySelectorAll("#sliderMobileQA-wrapper .dot");
+
+  // Actualiza dots al hacer scroll
+  slider.addEventListener("scroll", () => {
+    const slideWidth = slider.offsetWidth;
+    const index = Math.round(slider.scrollLeft / slideWidth);
+    dots.forEach((dot, i) => dot.classList.toggle("active", i === index));
+  });
+
+  // Click en dots para moverse
+  dots.forEach((dot, i) => {
+    dot.addEventListener("click", () => {
+      slider.scrollTo({
+        left: slider.offsetWidth * i,
+        behavior: "smooth"
+      });
+    });
   });
 }
-}); // Fin DOMContentLoaded  
+const brandSlider = document.getElementById("brandSlider");
+const brandSlides = Array.from(brandSlider.querySelectorAll(".brand-slide"));
+const brandDotsContainer = document.getElementById("brandSliderDots");
+
+// Crear dots
+brandSlides.forEach((_, index) => {
+  const dot = document.createElement("span");
+  dot.className = "dot";
+  dot.addEventListener("click", () => scrollToSlide(index));
+  brandDotsContainer.appendChild(dot);
+});
+
+// Función para mover slider a un slide específico
+function scrollToSlide(index) {
+  const slide = brandSlides[index];
+  brandSlider.scrollTo({
+    left: slide.offsetLeft,
+    behavior: "smooth"
+  });
+  updateActiveDot(index);
+}
+
+// Actualizar dot activo
+function updateActiveDot(activeIndex) {
+  const dots = brandDotsContainer.querySelectorAll(".dot");
+  dots.forEach((d, i) => d.classList.toggle("active", i === activeIndex));
+}
+
+// Detectar slide más cercano al centro del viewport del slider
+function updateDotOnScroll() {
+  const sliderCenter = brandSlider.scrollLeft + brandSlider.offsetWidth / 2;
+  let closestIndex = 0;
+  let minDistance = Infinity;
+
+  brandSlides.forEach((slide, idx) => {
+    const slideCenter = slide.offsetLeft + slide.offsetWidth / 2;
+    const distance = Math.abs(sliderCenter - slideCenter);
+    if (distance < minDistance) {
+      minDistance = distance;
+      closestIndex = idx;
+    }
+  });
+
+  updateActiveDot(closestIndex);
+}
+
+// Escuchar scroll del slider
+brandSlider.addEventListener("scroll", () => {
+  requestAnimationFrame(updateDotOnScroll);
+});
+
+// Inicializar primer dot activo
+updateActiveDot(0);
+  // Valor máximo de visitas reales
+  const maxVisitas = 359;
+  const minVisitas = 18;
+
+  // Genera un número aleatorio dentro del rango
+  function visitasAleatorias() {
+    return Math.floor(Math.random() * (maxVisitas - minVisitas + 1)) + minVisitas;
+  }
+
+  // Inserta el valor en el HTML
+  document.getElementById("visitas").textContent = visitasAleatorias();
+
+  // Opcional: refresca cada 10 segundos para simular movimiento
+  setInterval(() => {
+    document.getElementById("visitas").textContent = visitasAleatorias();
+  }, 10000);
+});
+
+ // Fin DOMContentLoaded  

@@ -1,7 +1,339 @@
+/* ===== Global ===== */
 body {
   background-color: #121212;
-  color: white;
+  /* oscuro por defecto */
+  color: #fff;
+  transition: all 0.3s;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden !important;
+  overflow-y: auto;
 }
+.branding-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+.branding-logo {
+  width: 90px;
+  height: 90px;
+  margin-bottom: 0.5rem;
+  border-radius: 24px;
+  margin-right: 10px;
+  box-shadow: 0 8px 75px rgba(0, 0, 0, 0.228);
+}
+
+.branding-title {
+  font-family: 'Avenir', 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 2.5rem;
+  color: #ffffff; /* modo oscuro */
+  letter-spacing: 1px;
+  line-height: 1.2;
+  transition: color 0.3s ease;
+  margin-left: 10px;
+}
+
+/* ===== MODO CLARO ===== */
+body:not(.dark-theme) .branding-title {
+  color: #111;
+}
+
+/* ===== Input con tooltip ===== */
+.filtro-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.filtro-container input {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  display: block;
+}
+
+/* Tooltip */
+.tooltip-burbuja {
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 8px;
+  padding: 6px 14px;
+  border-radius: 25px;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  display: none;
+  align-items: center;
+  z-index: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  font-weight: bolder;
+}
+
+/* Triángulo */
+.tooltip-triangulo {
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+}
+
+/* Mostrar tooltip */
+.tooltip-burbuja.mostrar {
+  display: inline-flex;
+}
+
+/* ===== Modo oscuro ===== */
+body.dark-theme .tooltip-burbuja {
+  background: rgba(255, 255, 255, 0.9);
+  /* blanco semitransparente */
+  color: #000;
+  /* texto negro */
+  backdrop-filter: none;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+body.dark-theme .tooltip-triangulo {
+  border-bottom: 6px solid rgba(255, 255, 255, 0.9);
+}
+
+/* ===== Modo claro ===== */
+body.light-theme .tooltip-burbuja {
+  background: rgba(0, 0, 0, 0.7);
+  /* negro con blur */
+  color: #fff;
+  /* texto blanco */
+  backdrop-filter: blur(4px);
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+body.light-theme .tooltip-triangulo {
+  border-bottom: 6px solid rgba(0, 0, 0, 0.7);
+}
+
+/* ===== Títulos y textos ===== */
+h2,
+h3,
+p,
+.card-title,
+.card-text {
+  transition: color 0.3s;
+  color: #fff;
+  /* default dark */
+}
+
+#main-title {
+  font-size: 1.9rem;
+  /* tamaño base para desktop */
+  font-weight: 700;
+  /* fw-bold */
+  text-align: center;
+  margin-bottom: 2rem;
+}
+#main-title span {
+  font-size: 20px;
+  letter-spacing: 3px;
+}
+/* ===== Cards ===== */
+.card {
+  background-color: #2a2a2a;
+  color: #fff;
+  border-radius: 10px;
+  padding: 10px;
+  transition: all 0.3s;
+}
+
+/* Botón Ver Más */
+.card .btn-primary {
+  background-color: #007bff;
+  border: none;
+  transition: all 0.3s;
+  color: #fff;
+}
+
+.btn-no-wrap {
+  white-space: nowrap;
+}
+
+/* Ajuste para pantallas muy pequeñas */
+@media (max-width: 375px) {
+  .btn-no-wrap {
+    padding-left: 1rem;
+    /* antes era px-4 = 1.5rem aprox */
+    padding-right: 1rem;
+    font-size: 0.9rem;
+    /* opcional: reducir un poco el texto */
+  }
+}
+#subtituloToggle {
+  margin-bottom: -12px;
+}
+/* ===== Contenedor centrado ===== */
+.theme-toggle-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
+/* ===== Toggle Light/Dark estilo iOS ===== */
+#theme-toggle {
+  width: 160px;
+  height: 34px;
+  border-radius: 50px;
+  background: #e0e0e0;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 0.8rem;
+  box-sizing: border-box;
+  color: #111;
+  transition: background 0.3s ease;
+}
+
+/* Círculo deslizable con ícono */
+#theme-toggle .toggle-circle {
+  width: 28px;
+  height: 28px;
+  background: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: #FFD700;
+  /* sol por defecto */
+  transition: all 0.3s ease;
+  position: absolute;
+  top: 3px;
+  z-index: 2;
+}
+
+/* Icono dentro del círculo */
+#theme-toggle .toggle-circle i {
+  transition: transform 0.5s ease, color 0.4s ease;
+}
+
+/* Texto dinámico */
+#theme-toggle .toggle-text {
+  flex: 1;
+  text-align: center;
+  z-index: 1;
+  pointer-events: none;
+  font-weight: 400;
+  /* cambiar de bold a fino */
+  font-size: 0.8rem;
+  /* puedes ajustar si quieres más grande o más pequeño */
+  padding: 0 5px;
+  /* reduce espacio a los lados para que quede más cerca del icono */
+}
+
+/* ===== Estado Oscuro ===== */
+body.dark-theme #theme-toggle {
+  background: #444;
+}
+
+body.dark-theme #theme-toggle .toggle-circle {
+  margin-left: 110px;
+  color: #9AD1FF;
+  /* luna */
+  background: #222;
+}
+
+body.dark-theme #theme-toggle .toggle-circle i {
+  transform: rotate(360deg);
+}
+
+body.dark-theme #theme-toggle .toggle-text {
+  text-align: left;
+  color: #fff;
+}
+
+/* ===== Estado Claro ===== */
+body.light-theme #theme-toggle {
+  background: #ccc;
+}
+
+body.light-theme #theme-toggle .toggle-circle {
+  margin-right: 78px;
+  color: #FFD700;
+  /* sol */
+  background: #fff;
+}
+
+body.light-theme #theme-toggle .toggle-circle i {
+  transform: rotate(0deg);
+}
+
+body.light-theme #theme-toggle .toggle-text {
+  text-align: right;
+  color: #111;
+}
+
+/* ===== Tema Claro (fondos y textos generales) ===== */
+body.light-theme {
+  background-color: #f5f5f5;
+  color: #111;
+}
+
+body.light-theme h2,
+body.light-theme h3,
+body.light-theme p,
+body.light-theme .card-title,
+body.light-theme .card-text,
+body.light-theme #subtitle {
+  color: #111;
+}
+
+body.light-theme .card {
+  background-color: #fff;
+  color: #111;
+}
+
+body.light-theme .modal-content,
+body.light-theme .modal-content-custom {
+  background-color: #fff;
+  color: #111;
+}
+
+body.light-theme .cerrar {
+  color: #111;
+}
+
+.panel {
+  background-color: #1e1e1e;
+  color: #fff;
+  padding: 10px;
+}
+
+
+
+/* ===== Light Theme Adjustments footer ===== */
+body.light-theme .accordion,
+body.light-theme .panel {
+  background-color: #fff;
+  color: #111;
+}
+
+
 
 .catalogo {
   display: grid;
@@ -25,6 +357,20 @@ body {
   transform: scale(1.02);
 }
 
+.marca-producto {
+  font-weight: bold;
+  color: #fff;
+  /* oscuro por defecto */
+  font-size: 0.9rem;
+}
+
+.modelo-producto {
+  color: #ccc;
+  /* oscuro por defecto */
+  font-size: 0.85rem;
+}
+
+/* Modal fondo */
 .modal-custom {
   position: fixed;
   top: 0;
@@ -36,27 +382,133 @@ body {
   justify-content: center;
   z-index: 1050;
   background-color: rgba(0, 0, 0, 0.6);
+  overflow-y: auto;
 }
 
+/* Contenido del modal */
 .modal-content-custom {
   position: relative;
   background-color: #2c2c2c;
-  padding: 2rem;
+  padding: 40px 20px 20px 20px;
   border-radius: 12px;
   z-index: 1060;
   width: 90%;
   max-width: 900px;
-  color: #fff;
-  width: 90%;
-  /* Responsive */
-  margin: auto;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-  overflow-y: auto;
   max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
+/* Botón cerrar */
+.cerrar {
+  position: absolute;
+  top: 1px;
+  right: 12px;
+  font-size: 2rem;
+  color: white;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+/* Grid interno: imagen + info */
+.modal-grid {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* Imagen principal */
+.modal-imagen {
+  flex: 1 1 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.modal-imagen img {
+  width: 100%;
+  max-width: 350px;
+  aspect-ratio: 1 / 1;
+  /* siempre 1:1 */
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Miniaturas */
+.miniaturas {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.miniaturas img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  cursor: pointer;
+  border-radius: 6px;
+  border: 2px solid transparent;
+  transition: border 0.3s;
+}
+
+.miniaturas img:hover {
+  border-color: #007bff;
+}
+
+/* Info del producto */
+.modal-info {
+  flex: 1 1 55%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.modal-info h3 {
+  font-size: 1.5rem;
+  margin-bottom: 5px;
+}
+
+.modal-info #modelo {
+  margin: 0;
+  font-size: 1rem;
+  color: #ccc;
+}
+
+/* ===== Cards - ajuste por tema ===== */
+body.light-theme .marca-producto {
+  color: #111;
+  /* negro visible sobre fondo claro */
+}
+
+body.light-theme .modelo-producto {
+  color: #333;
+  /* gris oscuro visible */
+}
+
+/* Precio cerca del botón */
+#precio {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+
+/* Botón Comprar ancho */
+.modal-info .btn-success {
+  width: 100%;
+  font-size: 1.1rem;
+  padding: 12px;
+  margin-top: 5px;
+}
+
+/* Acordeón */
 .acordeon {
   margin-top: 15px;
 }
@@ -70,122 +522,491 @@ body {
   padding: 10px;
   cursor: pointer;
   font-size: 16px;
+  border-radius: 6px;
 }
 
 .acordeon-contenido {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.3s ease;
-  background: #f5f5f5;
+  /* por defecto oculto */
+  transition: max-height 0.3s ease, padding 0.3s ease;
+  background-color: #fff !important;
+  color: #121212 !important;
   padding: 0 10px;
-  color: #121212;
+  margin-top: 5px;
+  border-radius: 6px;
+
+  /* scroll interno si contenido excede altura */
+  overflow-y: auto;
 }
 
+/* Acordeón abierto */
 .acordeon-activo .acordeon-contenido {
-  max-height: 500px;
-  /* Puedes ajustar esto según contenido */
+  max-height: 100px;
+  /* altura visible máxima */
+  padding: 10px;
+  overflow-y: auto;
+  /* scroll si se excede */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .modal-grid {
+    flex-direction: column;
+  }
+
+  .modal-imagen,
+  .modal-info {
+    flex: 1 1 100%;
+  }
+
+  .miniaturas {
+    justify-content: flex-start;
+  }
+}
+
+/* ===== Modal Carrito ===== */
+#carritoModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 20000;
+  background-color: rgba(0, 0, 0, 0.6);
+  overflow-y: auto;
   padding: 10px;
 }
 
-.cerrar {
+/* Contenido del modal */
+#carritoModal .modal-content-custom {
+  position: relative;
+  background-color: #2c2c2c;
+  color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 20001;
+}
+
+/* Cerrar modal */
+#carritoModal .cerrar {
   position: absolute;
-  top: 10px;
-  right: 15px;
+  top: 5px;
+  right: 10px;
   font-size: 2rem;
-  color: white;
+  color: #fff;
+  /* dark */
   cursor: pointer;
   z-index: 1001;
 }
 
-.miniaturas img {
-  width: 60px;
-  height: 60px;
-  object-fit: cover;
+/* Light Theme */
+body.light-theme #carritoModal .modal-content-custom {
+  background-color: #fff;
+  color: #111;
+}
+
+body.light-theme #carritoModal .cerrar {
+  color: #111;
+  /* para que X sea visible */
+}
+/* Botón expandir */
+.expandir-carrito {
+  position: absolute;
+  top: 8px;
+  right: 45px;
+  font-size: 1.6rem;
   cursor: pointer;
-  border-radius: 8px;
-  border: 2px solid transparent;
-  margin-right: 5px;
-}
-
-.miniaturas img:hover {
-  border-color: #007bff;
-}
-
-.carrito {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 1100;
-}
-
-.carrito-boton {
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  font-size: 1.5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.carrito-contenido {
-  background-color: #1e1e1e;
-  padding: 1rem;
-  border-radius: 10px;
-  margin-top: 10px;
-}
-
-.apple-button {
-  display: inline-block;
-  padding: 12px 24px;
-  font-size: 12px;
-  font-weight: 500;
   color: #fff;
-  background: linear-gradient(to right, #333, #000);
-  border: none;
-  border-radius: 12px;
-  text-decoration: none;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  transition: all 0.2s ease-in-out;
+  opacity: 0.8;
 }
 
-.apple-button:hover {
-  background: linear-gradient(to right, #000, #333);
-  transform: scale(1.03);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4);
+body.light-theme .expandir-carrito {
+  color: #111;
 }
 
-.accordion {
-  background-color: #333;
-  color: white;
-  cursor: pointer;
-  padding: 10px;
+.expandir-carrito:hover {
+  opacity: 1;
+}
+
+/* ======== MODO PANTALLA COMPLETA ======== */
+#carritoModal.fullscreen {
+  align-items: flex-end !important;
+  padding: 0;
+}
+
+#carritoModal.fullscreen .modal-content-custom {
   width: 100%;
+  max-width: none;
+  height: 95vh;
+  max-height: 95vh;
+  border-radius: 18px 18px 0 0;
+  animation: slideUp 0.35s ease forwards;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+/* Listado y resumen */
+#carritoModal ul {
+  padding-left: 20px;
+  margin: 0;
+}
+
+/* Ocultar si está vacío */
+#carritoModal #listaCarritoModal:empty,
+#carritoModal #resumenCarritoModal:empty {
+  display: none;
+}
+
+#carritoModal #resumenCarritoModal {
+  font-weight: bold;
+}
+
+/* Separadores hr */
+#carritoModal hr {
   border: none;
-  text-align: center;
-  font-size: 10px;
+  height: 1px;
+  background-color: #555;
+  /* dark */
+  margin: 10px 0;
+  width: 100%;
+}
+
+body.light-theme #carritoModal hr {
+  background-color: #999999;
+}
+
+/* Título */
+#carritoModal h4 {
+  margin-bottom: 5px;
+}
+
+/* Contenedor */
+.codigo-descuento-wrapper {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: nowrap;
+  /* no se apilan */
+  width: 100%;
+  /* ocupa todo el ancho disponible */
+}
+
+/* Input */
+#codigoDescuentoInput {
+  flex: 1 1 auto;
+  /* ocupa todo el espacio restante */
+  width: 100%;
+  /* asegura que nunca se corte */
+  min-width: 0;
+  /* evita overflow */
+  border: none;
+  border-bottom: 2px solid #00E0FF;
+  background: transparent;
+  color: #fff;
+  padding: 6px 4px;
+  /* pequeño padding para no recortar texto */
+  font-size: 16px;
+  outline: none;
+  box-shadow: none;
+}
+
+/* Modo oscuro */
+body.dark-theme #codigoDescuentoInput {
+  color: #fff;
+  background: transparent;
+}
+
+/* Modo claro */
+body.light-theme #codigoDescuentoInput {
+  color: #111;
+  /* texto visible en fondo claro */
+  border-bottom: 2px solid #00E0FF;
+}
+
+/* Botón */
+#aplicarDescuentoBtn {
+  flex: 0 0 auto;
+  /* tamaño fijo */
+  width: 120px;
+  /* control total del ancho */
+  padding: 6px 12px;
+  border-radius: 36px;
+  border: none;
+  background-color: #00E0FF;
+  color: #000000;
+  font-size: 0.8rem;
+  cursor: pointer;
+  white-space: nowrap;
+  outline: none;
+  box-shadow: none;
+  margin-bottom: 10px;
+}
+
+#solicitarRepuestosBtn {
+  background-color: black;
+  color: white;
+  border: 1px solid #25D366;
+  transition: all 0.3s ease;
+  /* suaviza el hover */
+  cursor: pointer;
+  margin-bottom: 5px;
+}
+
+#solicitarRepuestosBtn:hover {
+  border: 1px solid #25D366;
+  /* borde más grueso */
+  color: #000;
+  /* opcional: cambia color del texto */
+  background-color: #fff;
+  /* mantiene fondo negro */
+}
+
+
+/* Botón copiar transferencia */
+#carritoModal #copiarTransferenciaBtn {
+  display: block;
+  margin-top: 5px;
+  padding: 8px;
+  width: 45%;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: none;
+  background-color: #333;
+  color: #fff;
+  cursor: pointer;
+}
+
+#carritoModal #copiarTransferenciaBtn:hover {
+  background-color: #444;
+}
+
+body.light-theme #carritoModal #copiarTransferenciaBtn {
+  background-color: #ddd;
+  color: #111;
+}
+
+body.light-theme #carritoModal #copiarTransferenciaBtn:hover {
+  background-color: #ccc;
+}
+
+body.light-theme #carritoModal hr {
+  background-color: #666;
+  /* gris oscuro visible en light mode */
+}
+
+.pago-toggle-unico {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.pago-toggle-unico .texto-left,
+.pago-toggle-unico .texto-right {
+  font-size: 0.85rem;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+#transferenciaInfo #copiarTransferenciaBtn+p {
+  margin-top: 10px;
+  /* ajusta el espacio que quieras */
+}
+
+/* Switch forma de pago */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 28px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #16d61c;
+  border-radius: 34px;
   transition: 0.4s;
 }
 
-.accordion:after {
-  content: '+';
-  float: right;
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 3px;
+  top: 3px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.4s;
 }
 
-.accordion.active:after {
-  content: '-';
+input:checked+.slider:before {
+  transform: translateX(32px);
 }
 
-.panel {
-  padding: 0 12px;
-  display: none;
-  background-color: #222;
+input:checked+.slider {
+  background-color: #007bff;
+}
+
+
+/* =============================
+   🧩 RESPONSIVE GENERAL CARRITO
+============================= */
+
+/* Base general */
+.texto-whatsapp {
+  max-width: 450px;
+  text-align: center;
+  line-height: 1.1;
+  font-size: 13px;
   color: #ccc;
-  font-size: 12px;
+  margin: 2px auto 15px auto;
 }
 
-.accordion.active+.panel {
-  display: block;
+/* 🔹 Móviles (hasta 768px) */
+@media (max-width: 768px) {
+  #carritoModal .modal-content-custom {
+    width: 95%;
+    padding: 15px;
+  }
+
+  /* Input + botón descuento */
+  #carritoModal .codigo-descuento-wrapper {
+    flex-direction: column;
+  }
+
+  #carritoModal #codigoDescuentoInput,
+  #carritoModal #aplicarDescuentoBtn {
+    flex: 1 1 100%;
+  }
+
+  /* Botones acción */
+  #carritoModal .acciones-carrito {
+    flex-direction: column;
+  }
+
+  #carritoModal .acciones-carrito button {
+    width: 100%;
+  }
+
+  .texto-whatsapp {
+    font-size: 11px;
+  }
+}
+
+/* 🔸 Móviles intermedios / tablets pequeñas (413px a 727px) */
+@media (max-width: 747px) and (min-width: 400px) {
+  #carritoModal .modal-content-custom {
+    width: 95%;
+    max-width: 500px;
+  }
+
+  .texto-whatsapp {
+    max-width: 350px;
+    font-size: 12px !important;
+  }
+}
+
+
+/* Escritorio */
+@media (min-width: 769px) {
+  .modal-botones {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .modal-botones button {
+    width: 250px;
+    flex: 0 0 auto;
+  }
+
+  .texto-whatsapp {
+    max-width: 420px;
+    /* 🔹 más angosto para evitar salto de línea feo */
+    font-size: 12px !important;
+  }
+
+  /* Alinea el ícono de WhatsApp con el texto */
+  .texto-whatsapp i {
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
+  }
+}
+
+/* Botón carrito - estilo liquid glass */
+.carrito-btn {
+  position: fixed;
+  bottom: 50px;
+  right: 20px;
+  z-index: 1050;
+  width: 55px;
+  height: 55px;
+  padding: 6px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+
+  /* Fondo transparente con blur */
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  /* Sombra elegante */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+
+  transition: all 0.3s ease;
+}
+
+.carrito-btn i {
+  color: #00E0FF;
+}
+
+/* Hover más intenso */
+.carrito-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.05);
+}
+
+/* Light Theme */
+body.light-theme .apple-button {
+  color: #111;
+  background-color: #ddd;
+}
+
+body.light-theme .apple-button:hover {
+  background-color: #ccc;
+  /* mismo hover consistente */
 }
 
 .card.filtrada {
@@ -222,50 +1043,264 @@ body {
   }
 }
 
+/* ===== CONTENEDOR ===== */
 .contenedor-autocompletado {
-  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 420px;
   margin: 0 auto;
-  position: relative;
-  z-index: 1;
 }
 
-.autocomplete-wrapper {
-  position: relative;
+/* Input normal */
+.input-wrapper {
   width: 100%;
-}
-
-.input-repuesto,
-.ghost-repuesto {
-  width: 100%;
-  padding: 12px;
-  font-weight: bold;
-  font-size: 1rem;
-  border-radius: 8px;
-  font-family: inherit;
-  box-sizing: border-box;
 }
 
 .input-repuesto {
-  position: relative;
-  background-color: rgba(255, 255, 255, 0.08);
+  width: 100%;
+  background: none;
+  border: none;
   color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  z-index: 2;
+  font-size: 1rem;
+  padding: 10px 4px;
+  font-weight: bold;
+  outline: none;
+  text-align: center;
 }
 
+/* Línea amarilla */
+.linea-divisoria {
+  width: 100%;
+  height: 2px;
+  background-color: #ffc107;
+  margin: 4px 0 8px 0;
+}
+
+/* ===== GHOST DEBAJO ===== */
 .ghost-repuesto {
-  position: absolute;
-  top: 0;
-  left: 0;
-  color: #aaa;
+  width: 100%;
   background: transparent;
-  border: 1px solid transparent;
+  border: none;
   pointer-events: none;
-  z-index: 1;
+  color: rgba(255, 255, 255, 0.25);
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
 }
 
+/* Móviles */
+@media (max-width: 480px) {
+  .ghost-repuesto {
+    font-size: 0.9rem;
+  }
+  .linea-divisoria {
+    max-width: 350px;
+    margin: 0 auto 20px;
+  }
+  .texto-whatsapp {
+    margin: 12px;
+  }
+}
+/* Espaciado para los mensajes del autocompletado */
 .mensaje-repuesto {
   margin-top: 10px;
-  font-size: 0.9rem;
+  margin-bottom: 10px;
   text-align: center;
+}
+.mensaje-repuesto span {
+  display: inline-block;
+  padding: 6px 10px;
+  line-height: 1.2;
+}
+
+/* ===== BOTÓN ===== */
+.btn-repuesto {
+  width: 180px;
+  /* menos ancho */
+  align-self: center;
+  /* centrado en contenedor */
+  padding: 8px 16px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 36px;
+  background-color: #ffffff;
+  color: #000;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-bottom: 20px;
+  text-wrap: nowrap;
+}
+
+.btn-repuesto:hover {
+  background-color: #ffcc00;
+}
+.texto-whatsapp {
+  margin-top: -10px; /* sube el texto hacia el botón */
+  text-align: center;
+  font-size: 0.8rem;
+  line-height: 1.1;
+}
+/* ===== MODO CLARO - mantener línea ===== */
+body.light-mode .input-repuesto {
+  color: #000;
+  background: none;
+  border: none;
+  box-shadow: none;
+}
+
+body.light-mode .input-repuesto::placeholder {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+body.light-mode .ghost-repuesto,
+body.light-mode .mensaje-repuesto {
+  display: none;
+  /* ocultar lo que no queremos */
+}
+
+/* línea visible en modo claro */
+body.light-mode .linea-divisoria {
+  display: block;
+  background-color: #ffcc00;
+  height: 2px;
+  margin-bottom: 20px;
+}
+
+body.light-mode .btn-repuesto {
+  background-color: #ffcc00;
+  color: #000000;
+}
+
+body.light-mode .btn-repuesto:hover {
+  background-color: #000000;
+  color: #ffcc00;
+}
+
+/* Botón copiar transferencia */
+#copiarTransferenciaBtn {
+  color: #fff;
+  /* default dark */
+  background-color: #333;
+  /* fondo oscuro para que contraste */
+  border: none;
+}
+
+body.light-theme #copiarTransferenciaBtn {
+  color: #111;
+  /* texto oscuro */
+  background-color: #ddd;
+  /* fondo claro que contraste */
+  border: 1px solid #ccc;
+}
+
+/* Modal detalles producto */
+.acordeon-contenido {
+  transition: all 0.3s;
+}
+
+/* Dark Theme */
+body.dark-theme .acordeon-contenido {
+  background-color: #2a2a2a !important;
+  /* fondo oscuro */
+  color: #fff !important;
+  /* texto blanco */
+}
+
+/* Light Theme */
+body.light-theme .acordeon-contenido {
+  background-color: #fff !important;
+  color: #121212 !important;
+}
+
+
+.apple-button {
+  display: inline-block;
+  margin: 20px 0 20px 20px;
+  padding: 10px 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--apple-text-color);
+  text-decoration: none;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  transition: all 0.25s ease-in-out;
+}
+
+.apple-button:hover {
+  transform: translateX(-5px);
+}
+
+/* Colores según modo */
+[data-theme="dark"] .apple-button {
+  --apple-text-color: #fff;
+}
+
+[data-theme="light"] .apple-button {
+  --apple-text-color: #111;
+}
+
+
+.accordion {
+  background: none;
+  color: #fff;
+  cursor: pointer;
+  padding: 8px 6px;
+  width: 100%;
+  text-align: center;
+  border: none;
+  /* quitamos border-bottom */
+  outline: none;
+  font-size: 12px;
+  position: relative;
+}
+
+/* Por defecto (modo oscuro) */
+.accordion::after {
+  content: '+';
+  position: absolute;
+  left: 0;
+  color: #fff;
+  /* blanco sobre fondo oscuro */
+  font-weight: bold;
+  transition: 0.3s;
+  margin-left: 5px;
+}
+
+.accordion.active::after {
+  content: '–';
+}
+
+/* Modo claro */
+body.light-theme .accordion::after {
+  color: #000;
+  /* negro sobre fondo blanco */
+}
+
+body.light-theme .accordion.active::after {
+  color: #000;
+}
+
+.panel {
+  background-color: #111;
+  color: #ccc;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+  padding: 0px 12px;
+  /* Ajuste interno */
+  font-size: 12px;
+}
+
+.footer-divider {
+  width: 100%;
+  height: 1px;
+  background-color: #333;
+  margin: 0;
+  /* sin espacio extra */
+  transition: all 0.3s ease;
+  /* opcional si quieres animación */
 }

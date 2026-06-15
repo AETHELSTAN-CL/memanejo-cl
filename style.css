@@ -1,124 +1,666 @@
+html,
 body {
     padding: 0;
     margin: 0;
-    overflow-x: hidden;
-    background-color: #000;
-}
-
-html {
+    background-color: #111;
     scroll-behavior: smooth;
     overflow-x: hidden;
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
 }
+
+
 /* BOTÓN FLOTANTE */
 .glass-btn {
-  position: fixed;
-  bottom: 80px;
-  right: 20px;
-  z-index: 1050;
-  width: 52px;
-  height: 52px;
-  padding: 6px;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(8px);
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.3s ease, border 0.3s ease;
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    z-index: 1050;
+    width: 52px;
+    height: 52px;
+    padding: 6px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease, border 0.3s ease;
 }
 
 .glass-btn img {
-  width: 80%;
-  height: 80%;
-  object-fit: contain;
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
 }
 
 .glass-btn:focus {
-  outline: none;
-  box-shadow: none;
+    outline: none;
+    box-shadow: none;
 }
 
 
 /* Tooltip estilo burbuja */
 .tooltip-bubble {
-  position: absolute;
-  right: 60px; /* al costado izquierdo del botón */
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.75);
-  color: #fff;
-  padding: 6px 10px;
-  border-radius: 20px;
-  font-size: 0.75rem;
-  white-space: nowrap;
-  opacity: 0; /* invisible al inicio */
-  transition: opacity 0.5s ease;
+    position: absolute;
+    right: 60px;
+    /* al costado izquierdo del botón */
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgb(0, 0, 0);
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    opacity: 0;
+    /* invisible al inicio */
+    transition: opacity 0.5s ease;
+    pointer-events: none;
 }
+
 .tooltip-bubble.show {
-  opacity: 1;
+    opacity: 1;
 }
 
 .glass-btn:hover .tooltip-bubble {
-  opacity: 1;
+    opacity: 1;
 }
 
-/* OFFCANVAS */
+
+
+/* =======================
+   OFFCANVAS MENU CLEAN
+======================= */
 .offcanvas {
-  background-color: rgba(33, 37, 41, 0.65) !important;
-  backdrop-filter: blur(5px);
-  color: white;
-  width: 260px !important; /* más ancho */
-  border-left: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: rgba(33, 37, 41, 0.65) !important;
+    backdrop-filter: blur(15px);
+    color: white;
+    width: 260px !important;
+    /* más ancho */
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .offcanvas .offcanvas-body h5 {
-  color: white;
-}
-.offcanvas .btn-bottom {
-  min-width: 140px;  /* ajusta este valor a tu diseño */
-  text-align: center;
-}
-/* Botón del menú con icono redondo a la derecha */
-.menu-btn {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #0d6efd;
-  color: white;
-  padding: 8px 14px;
-  border-radius: 25px;
-  text-decoration: none;
-  font-size: 0.9rem;
-  transition: background 0.3s ease;
-  margin-bottom: 12px;
+    color: white;
 }
 
-.menu-btn:hover {
-  background: #084298;
+/* Bienvenida */
+.welcome-title {
+    font-size: 2rem;
+    /* tamaño general del bloque */
+    font-weight: 600;
+    color: #fff;
 }
 
-.menu-text {
-  flex: 1; /* ocupa espacio a la izquierda */
+.welcome-greeting {
+    font-family: 'Avenir', sans-serif;
+    /* ejemplo más limpio */
+    font-size: 2.5rem;
+    /* más contenido */
+    font-weight: 500;
+    
+    display: block;
+    /* ocupa su propia línea */
+}
+
+.brand-highlight {
+    font-family: 'Avenir', sans-serif;
+    font-weight: 700;
+    font-size: 3rem;
+    color: #fff;
+    text-transform: uppercase;
+    line-height: 0.8;
+    /* junta las palabras ME MA NEJO .cl */
+}
+
+.welcome-subtitle {
+    font-size: 0.8rem;
+    color: #fff;
+    margin-top: 1rem;
+}
+
+.title-btn {
+    color: #bbb;
+    font-size: 0.7rem;
+}
+
+/* Botones centrales */
+.d-grid .menu-btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #0dd5fd;
+    color: #000;
+    padding: 16px 12px;
+    /* 🔽 menos alto, 🔼 más ancho */
+    border-radius: 36px;
+    /* forma alargada */
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: background 0.3s ease, transform 0.2s ease;
+    backdrop-filter: blur(8px);
+    border: 1px solid #fff;
+    width: 100%;
+    max-width: 300px;
+    /* controla el ancho máximo */
+    height: 50px;
+    /* 🔽 reduce grosor vertical */
+    white-space: nowrap;
+    margin-top: 5%;
+}
+
+.d-grid .menu-btn:hover {
+    background: #084298;
+    color: #fff;
+    transform: translateY(-2px);
 }
 
 .menu-icon {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgb(0, 0, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    margin-left: 16px;
 }
 
+.menu-text {
+    flex: 1;
+    /* ocupa espacio a la izquierda */
+    text-align: left;
+}
+
+/* Íconos dentro de los botones principales */
+.menu-icon i {
+    font-size: 1.1rem;
+    /* Cambiá este valor según necesites */
+}
+
+/* Íconos en los botones inferiores */
+.offcanvas-bottom-buttons i {
+    font-size: 1rem;
+    /* Más pequeño que los principales, opcional */
+}
+
+/* Contenedor botones inferiores */
+.offcanvas-bottom-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    /* mantiene los botones al borde derecho */
+    gap: 12px;
+}
+
+/* Botones inferiores */
+.offcanvas-bottom-buttons .btn-bottom {
+    display: flex;
+    flex-direction: row-reverse;
+    /* icono a la derecha */
+    align-items: center;
+    justify-content: flex-start;
+    /* todo el contenido alineado a la derecha */
+    gap: 12px;
+    /* separación entre texto e icono */
+    min-width: 120px;
+    /* ancho mínimo */
+    max-width: 150px;
+    /* limita que no se alarguen demasiado */
+    padding: 4px 18px;
+    /* altura y relleno */
+    font-size: 0.8rem;
+    white-space: nowrap;
+    /* evita que el texto se rompa en varias líneas */
+}
+
+/* Botón de contacto - negro puro */
+.offcanvas-bottom-buttons .btn-dark {
+    background-color: #000 !important;
+    /* negro puro */
+    border-color: #000 !important;
+    color: #fff !important;
+    padding: 5px 11px;
+}
+
+.offcanvas-bottom-buttons .btn-dark i {
+    margin-right: 8px;
+    /* aumenta este valor según lo que necesites */
+}
+
+.offcanvas-bottom-buttons .btn-dark:hover {
+    background-color: #fff !important;
+    /* blanco en hover */
+    color: #000 !important;
+    /* texto negro */
+    border-color: #000 !important;
+}
+
+/* Botón Inicio: border verde luminoso al hover */
+.offcanvas-bottom-buttons .btn-light:hover {
+    border: 1px solid #0ff700;
+    /* verde brillante */
+}
+
+/* Botón Cerrar: border rojo luminoso al hover */
+.offcanvas-bottom-buttons .btn-danger:hover {
+    border: 1px solid #ff1a1a;
+    /* rojo brillante */
+    box-shadow: 0 0 8px #ff1a1a;
+    /* efecto glow */
+}
+
+/* ============================
+   MODALES RUTA Y CURSOS
+============================ */
+
+/* Contenedor del modal (Bootstrap fade) */
+.modal-content.modal-ruta,
+.modal-content.modal-cursos {
+    background: rgba(139, 139, 139, 0.25);
+    /* transparente semi */
+    backdrop-filter: blur(12px);
+    /* efecto blur */
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 8px;
+    padding: 20px;
+    color: #fff;
+    /* texto blanco */
+}
+
+/* Eliminar borde y fondo del dialog */
+.modal-dialog {
+    margin: 0;
+    /* quitar margen predeterminado */
+    display: flex;
+    align-items: center;
+    /* centrado vertical */
+    justify-content: center;
+    /* centrado horizontal */
+    min-height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+}
+
+/* Header */
+.modal-ruta .modal-header,
+.modal-cursos .modal-header {
+    background: transparent !important;
+    border-bottom: none;
+    color: #ffffff !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    justify-content: center;
+}
+
+/* Título */
+.modal-ruta .modal-title,
+.modal-cursos .modal-title {
+    font-size: 1.25rem;
+    color: #ffffff !important;
+}
+
+/* Listas dentro del body */
+.modal-ruta .modal-body ul,
+.modal-cursos .modal-body ul {
+    padding-left: 0;
+    margin: 0 0 0.5rem 0;
+    list-style: none;
+}
+
+.modal-ruta .modal-body li,
+.modal-cursos .modal-body li {
+    position: relative;
+    padding-left: 1.3em;
+    margin-bottom: 0.4rem;
+    line-height: 1.4;
+    font-size: 0.95rem;
+    color: #ffffff;
+}
+
+.modal-ruta .modal-body li::before,
+.modal-cursos .modal-body li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #9e9e9e;
+    font-weight: bold;
+    font-size: 1em;
+}
+
+/* Párrafos dentro del body */
+.modal-ruta .modal-body p,
+.modal-cursos .modal-body p {
+    margin-top: 0.8rem;
+    font-size: 0.95rem;
+    line-height: 1.1;
+    color: #9e9e9e;
+}
+
+/* Quitar la línea divisoria por defecto del footer en modales */
+.modal-footer {
+    border-top: none !important;
+}
+
+/* Botones estilo pill */
+.modal-ruta .btn,
+.modal-cursos .btn {
+    border-radius: 36px;
+    padding: 6px 26px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* Botón secundario */
+.modal-ruta .btn-secondary,
+.modal-cursos .btn-secondary {
+    background: #ff0000;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+}
+
+.modal-ruta .btn-secondary:hover,
+.modal-cursos .btn-secondary:hover {
+    background: #ff0000;
+    color: #000000;
+    border: 1px solid #000000;
+}
+
+/* Botón WhatsApp */
+.modal-ruta .btn-success,
+.modal-cursos .btn-success {
+    background-color: #000;
+    color: #ffffff;
+    border: 1px solid #00b73a;
+}
+
+.modal-ruta .btn-success:hover,
+.modal-cursos .btn-success:hover {
+    background-color: #ffffff;
+    color: #000;
+    border: 1px solid #00ff51;
+}
+
+/* X de cerrar en modales ruta y cursos */
+.modal-ruta .btn-close,
+.modal-cursos .btn-close {
+    position: absolute;
+    top: 8px;
+    /* distancia desde el borde superior del modal */
+    right: 10px;
+    /* distancia desde el borde derecho */
+    width: 1.5rem;
+    height: 1.5rem;
+    filter: invert(1);
+    /* blanca */
+    opacity: 1;
+}
+
+/* Hover opcional */
+.modal-ruta .btn-close:hover,
+.modal-cursos .btn-close:hover {
+    filter: invert(0.8);
+}
+
+/* Responsivo móvil */
+@media (max-width: 768px) {
+
+    .modal-ruta,
+    .modal-cursos {
+        max-width: 90%;
+    }
+
+    .modal-ruta .modal-title,
+    .modal-cursos .modal-title {
+        font-size: 1.09rem;
+        font-weight: bold;
+    }
+
+    .modal-ruta .modal-body,
+    .modal-cursos .modal-body {
+        padding: 1rem;
+    }
+
+    .modal-ruta .modal-footer,
+    .modal-cursos .modal-footer {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .modal-ruta .btn,
+    .modal-cursos .btn {
+        width: 85%;
+        white-space: nowrap;
+    }
+}
+
+/* Alinear botones en el centro solo en escritorio */
+@media (min-width: 769px) {
+
+    .modal-cursos .modal-footer,
+    .modal-ruta .modal-footer {
+        display: flex;
+        justify-content: center;
+        /* centrado horizontal */
+        gap: 1rem;
+        /* espacio entre botones */
+    }
+}
+
+/* modal card promo */
+.modal-dialog.modal-custom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 100%;
+}
+
+/* Card blur */
+.modal-bubble {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 2rem;
+    width: 310px;
+    /* móvil base */
+    max-width: 450px;
+    min-width: 240px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    margin: 0 auto;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* Imagen vertical */
+.modal-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+/* X simple blanca */
+.close-x {
+    font-size: 1.5rem;
+    color: #fff;
+    cursor: pointer;
+    display: block;
+    margin: 1rem auto;
+}
+
+.modal-content-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+}
+
+.modal-btn {
+    padding: 6px 16px !important;
+    font-size: 0.9rem !important;
+    line-height: 1.2 !important;
+}
+
+.modal-conditions {
+    font-size: 0.6rem;
+    /* fuente pequeña */
+    color: #989898;
+    line-height: 1.4;
+    text-align: center;
+}
+
+/* Modal de pago - ajustes visuales */
+#modalPagoClases .modal-content {
+    background: rgba(139, 139, 139, 0.25);
+    /* gris translúcido */
+    backdrop-filter: blur(12px);
+    /* efecto blur */
+    -webkit-backdrop-filter: blur(12px);
+    /* soporte Safari */
+    color: #383838;
+    border-radius: 16px;
+    padding: 0;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* X de cerrar */
+#modalPagoClases .btn-close {
+    color: #fff;
+    /* blanco para que se vea sobre fondo oscuro */
+    font-size: 1rem;
+}
+
+/* Header */
+#modalPagoClases .modal-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1rem 1.5rem;
+    color: #fff;
+    position: relative;
+}
+
+/* Body */
+#modalPagoClases .modal-body {
+    padding: 1rem 1.5rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #ccc;
+}
+#modalPagoClases .modal-header .modal-title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 50%; /* opcional: ajusta verticalmente */
+    transform: translate(-50%, -50%);
+    color: #fff;
+    margin: 0;
+    font-size: 1.25rem; /* ajusta según tu gusto */
+}
+/* Footer */
+#modalPagoClases .modal-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: center;
+    padding: 1rem 1.5rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+/* Botón WhatsApp */
+#modalPagoClases .btn-success {
+    background-color: #000;
+    color: #fff;
+    border-radius: 36px;
+    padding: 8px 22px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    min-width: 180px;
+    max-width: 320px;
+    /* límite máximo */
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+
+}
+
+/* Hover botón */
+#modalPagoClases .btn-success:hover {
+    background-color: #000000;
+    border-color: #25D366;
+}
+
+/* Ícono dentro del botón */
+#modalPagoClases .btn-success i {
+    margin-right: 8px;
+    color: #25D366;
+}
+
+/* Ajuste responsivo: pantallas intermedias y móviles */
+@media (max-width: 1200px) {
+    #modalPagoClases .btn-success {
+        max-width: 220px;
+        width: 90%;
+    }
+}
+
+@media (max-width: 768px) {
+    #modalPagoClases .modal-content {
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    #modalPagoClases .btn-success {
+        width: 100%;
+        max-width: none;
+    }
+}
+/* ===== Botón Instagram centrado ===== */
+.btn-instagram-follow {
+  position: absolute;
+  bottom: 75px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  color: #000;
+  border: 1px solid #E1306C; /* color Instagram */
+  border-radius: 36px;
+  padding: 6px 28px;
+  font-size: 15px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+  text-decoration: none;
+}
+
+.btn-instagram-follow i {
+  color: #E1306C;
+  font-size: 18px;
+}
+
+.btn-instagram-follow:hover {
+  background: #f7f7f7;
+  transform: translateX(-50%) scale(1.05);
+}
 /* 🔄 MODERN HORIZONTAL SLIDER SECTION */
 .slide-movil {
     position: relative;
     width: 100%;
     overflow: hidden;
-    background-color: #000;
-    /* Fondo oscuro para la zona del notch */
+    background-color: #111;
 }
 
 .slide-movil .carousel-inner,
@@ -170,30 +712,25 @@ html {
     scroll-snap-align: center;
 }
 
+/* =======================
+   Slider moderno
+======================= */
 .modern-slider-section {
     background-color: #111;
-    padding: 40px 0;
+    padding: 20px 8px;
     overflow-x: auto;
-}
-
-.slide-movil .slide-img {
-    aspect-ratio: 4 / 5;
-    object-fit: cover;
-    border-radius: 0;
-    display: block;
+    padding-bottom: 30px;
 }
 
 .slider-container {
     overflow-x: auto;
-    overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
 }
 
 .slider-track {
     display: flex;
-    gap: 20px;
-    padding: 20px;
+    gap: 24px;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     width: max-content;
@@ -201,81 +738,136 @@ html {
 
 .slider-card {
     flex: 0 0 auto;
-    width: 280px;
-    border-radius: 16px;
+    width: 400px;
+    border-radius: 20px;
     overflow: hidden;
-    color: rgb(255, 255, 255);
     scroll-snap-align: start;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+    position: relative;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
 }
 
-.slider-card img {
-    width: 100%;
-    height: 240px;
-    object-fit: cover;
-}
-
+/* Contenedor de imagen y overlay */
 .card-img-slider {
     position: relative;
     width: 100%;
-    height: 240px;
+    height: 400px;
+    /* Proporción más grande que antes */
     overflow: hidden;
+    border-radius: 20px;
 }
 
+/* Imagenes normales */
 .card-img-slider img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* cubre todo el contenedor */
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.card-img-slider:hover img {
+    transform: scale(1.1);
+}
+
+/* Primera tarjeta: rotación de imágenes */
+.slider-card.first .card-img-slider img {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
     opacity: 0;
-    transition: opacity 1s ease;
+    transition: opacity 1s ease, transform 0.5s ease;
 }
 
-.card-img-slider img.active {
+.slider-card.first .card-img-slider img.active {
     opacity: 1;
 }
 
-.card-body {
-    padding: 15px;
-    margin: 5%;
+
+
+/* =======================
+   Botón inferior pill
+======================= */
+.overlay-btn {
+    position: absolute;
+    bottom: 6px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
-.card-body p {
-    font-size: 14px;
-    margin-top: 20px;
-}
-
-.btn-slide {
-    display: inline-block;
-    background-color: darkred;
-    color: white;
-    padding: 6px 26px;
+/* Todos los botones dentro del slider */
+.slider-card .btn-slide-pill {
+    background: #fff;
+    /* fondo blanco */
+    color: #000;
+    /* texto negro */
+    border: 1px solid #000;
+    /* borde negro uniforme */
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    height: 32px;
+    border-radius: 50px;
+    font-weight: 700;
     font-size: 12px;
-    border: none;
-    border-radius: 5px;
-    text-decoration: none;
-    text-align: center;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
+    text-align: center;
 }
 
-.btn-slide:hover {
-    background-color: rgb(255, 255, 255);
-    color: black;
-    transform: scale(1.1);
-    font-weight: bold;
+/* Hover */
+.slider-card .btn-slide-pill:hover {
+    background: #000;
+    color: #fff;
+    border-color: #000;
 }
 
-.btn-slide:focus {
-    outline: none;
+/* Rotador centrado y animado */
+.slider-card .btn-slide-pill .rotator {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 100%) scale(1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.9s ease, opacity 0.1s ease;
+    opacity: 0;
+    white-space: nowrap;
 }
 
-button.btn-slide {
-    appearance: none;
+.slider-card .btn-slide-pill .rotator.enter {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 1;
+}
+
+.slider-card .btn-slide-pill .rotator.exit {
+    transform: translate(-50%, -150%) scale(1);
+    opacity: 0;
+}
+
+/* =======================
+   Estilos adicionales opcionales
+======================= */
+@media (max-width: 768px) {
+    .slider-container {
+        padding: 15px;
+    }
+
+    .slider-card {
+        width: 320px;
+    }
+
+    .card-img-slider {
+        height: 320px;
+    }
+}
+
+.slider-card:hover {
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
 }
 
 /* Invisible en escritorio, visibles si pasas el mouse (opcional) */
@@ -328,7 +920,35 @@ button.btn-slide {
 .carousel-control-next.invisible-button {
     right: 0;
 }
+/* ===== CONTROL DE VISIBILIDAD SEGÚN PANTALLA ===== */
 
+/* Base: ocultar todo por defecto */
+.desktop-slide {
+    display: none;
+}
+.slide-movil {
+    display: none;
+}
+
+/* Mobile solo hasta 449px */
+@media (max-width: 449px) {
+    .slide-movil {
+        display: block !important;
+    }
+    .desktop-slide {
+        display: none !important;
+    }
+}
+
+/* Escritorio desde 450px en adelante */
+@media (min-width: 450px) {
+    .slide-movil {
+        display: none !important;
+    }
+    .desktop-slide {
+        display: block !important;
+    }
+}
 .logo-carousel-section {
     overflow: hidden;
 }
@@ -368,56 +988,396 @@ button.btn-slide {
 
 /*----------------end slides section -------------*/
 
-.nav-fullscreen {
-    display: none;
-    /* Por defecto oculto (móvil) */
+/* Contenedor principal: todo negro */
+.nav-slider-wrapper {
+    background-color: #111;
+    /* fondo negro unificado */
+    padding: 0;
+    position: relative;
+    /* importante para tooltip absoluto */
+    width: 100%;
 }
 
-@media (min-width: 768px) {
+/* NAV de escritorio */
+.nav-slider-wrapper .nav-fullscreen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(12px, 3vw, 60px);
+    padding: 0.6rem 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #111;
+    /* asegura fondo negro aunque tooltip se borre */
+    z-index: 5;
+}
+
+/* Links dentro del nav */
+.nav-slider-wrapper .nav-fullscreen .nav-link-fx {
+    flex: 1 1 0;
+    max-width: 33%;
+    text-align: center;
+    font-weight: 700;
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 10px;
+    font-size: clamp(14px, 1.7vw, 20px);
+    line-height: 1.05;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color 0.22s ease, transform 0.15s ease;
+}
+
+/* Subrayado animado en hover */
+.nav-slider-wrapper .nav-fullscreen .nav-link-fx::after {
+    content: '';
+    display: block;
+    height: 2px;
+    background: crimson;
+    width: 100%;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.25s ease;
+    margin-top: 6px;
+}
+
+.nav-slider-wrapper .nav-fullscreen .nav-link-fx:hover {
+    color: crimson;
+    transform: translateY(-2px);
+}
+
+.nav-slider-wrapper .nav-fullscreen .nav-link-fx:hover::after {
+    transform: scaleX(1);
+}
+
+
+
+/* Animación flotante */
+@keyframes floatTooltip {
+    from {
+        transform: translate(-50%, 0);
+    }
+
+    to {
+        transform: translate(-50%, -6px);
+    }
+}
+
+/* Responsive móvil */
+@media (max-width: 768px) {
+    .nav-slider-wrapper .tooltip-acceso {
+        font-size: 13px;
+        padding: 6px 16px;
+        margin-bottom: 2rem;
+    }
+
+    /* Oculta nav de escritorio en móviles */
+    .nav-slider-wrapper .nav-fullscreen {
+        display: none !important;
+        height: 0;
+        background-color: transparent !important;
+    }
+}
+
+/* cada link toma espacio flexible, pero no más de 33% (3 columnas limpias) */
+.nav-link-fx {
+    flex: 1 1 0;
+    max-width: 33%;
+    display: inline-block;
+    text-align: center;
+    font-weight: 700;
+    /* más visible */
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 10px;
+    font-size: clamp(14px, 1.7vw, 20px);
+    /* responsivo */
+    line-height: 1.05;
+    white-space: nowrap;
+    /* forzar 1 línea si hay espacio */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* evita overflow rompiendo layout */
+    transition: color .22s ease, transform .15s ease;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* subrayado animado y hover */
+.nav-link-fx::after {
+    content: '';
+    display: block;
+    height: 2px;
+    background: crimson;
+    width: 100%;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform .25s ease;
+    margin-top: 6px;
+    opacity: .95;
+}
+
+.nav-link-fx:hover {
+    color: crimson;
+    transform: translateY(-2px);
+}
+
+.nav-link-fx:hover::after {
+    transform: scaleX(1);
+}
+
+/* Ajustes para pantallas muy grandes (más separación y tamaño) */
+@media (min-width: 1200px) {
     .nav-fullscreen {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        background-color: #111;
-        padding: 3rem;
-        gap: 10rem;
-        /* Espacio amplio entre links */
+        gap: clamp(24px, 4.5vw, 120px);
     }
 
-    .nav-fullscreen a.nav-link-fx {
-        color: #fff;
-        font-size: 1.1rem;
-        text-decoration: none;
-        position: relative;
-        transition: color 0.3s ease;
-        animation: bounceText 0.8s ease forwards;
-    }
-
-    .nav-fullscreen a.nav-link-fx::after {
-        content: "";
-        position: absolute;
-        width: 100%;
-        height: 2px;
-        background-color: crimson;
-        left: 0;
-        bottom: -5px;
-        transform: scaleX(0);
-        transform-origin: center;
-        transition: transform 0.3s ease;
-    }
-
-    .nav-fullscreen a.nav-link-fx:hover {
-        color: crimson;
-        transform: scale(1.1);
-    }
-
-    .nav-fullscreen a.nav-link-fx:hover::after {
-        transform: scaleX(1);
+    .nav-link-fx {
+        font-size: clamp(16px, 1.5vw, 22px);
+        max-width: 30%;
     }
 }
 
-/* VIDEO base: responsivo y con sombra */
+/* Si alguna vez se muestra en vistas pequeñas, permitir wrapping (seguridad) */
+@media (max-width: 700px) {
+    .nav-link-fx {
+        white-space: normal;
+        /* permite que salte a 2 líneas si no cabe */
+        font-size: 13px;
+        max-width: 45%;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-fullscreen {
+        display: none !important;
+        height: 0;
+        background-color: transparent !important;
+    }
+}
+/* ============================
+   Slider Bloques A y B FIX
+============================ */
+
+/* Contenedor principal */
+.accordion-slider-section {
+    padding: 2rem 1rem;
+    box-sizing: border-box;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Desktop: bloques lado a lado */
+.desktop-qa {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.desktop-qa .col-md-6 {
+    flex: 1 1 48%;
+    box-sizing: border-box;
+}
+
+/* Títulos */
+.desktop-qa h3,
+#sliderMobileQA h3 {
+    font-size: 1.25rem;
+    color: #fff;
+    margin-bottom: 1rem;
+    text-align: center;
+    background-color: #111;
+    padding: 1rem 1rem;
+    border-radius: 36px;
+}
+
+/* ===== Acordeón moderno ===== */
+.accordion .accordion-item {
+    border: none;
+    /* elimina líneas de borde */
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+/* Botón del acordeón */
+.accordion-button {
+    background: #f5f5f5;
+    /* claro y moderno */
+    color: #222;
+    padding: 1rem 1.25rem;
+    font-size: 1rem;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    transition: background 0.3s ease, transform 0.2s ease;
+    position: relative;
+}
+
+
+/* Efecto hover */
+.accordion-button:hover {
+    background: #e0e0e0;
+}
+
+/* Cuerpo del acordeón */
+.accordion-body {
+    background: #fafafa;
+    /* color muy claro, limpio */
+    color: #555;
+    padding: 1rem 1.25rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    border-radius: 0 0 12px 12px;
+    transition: all 0.3s ease;
+}
+
+/* Transición suave al expandir/cerrar */
+.accordion-collapse {
+    transition: max-height 0.35s ease, padding 0.35s ease;
+}
+
+/* ===== Mobile adjustments ===== */
+@media (max-width: 768px) {
+    .desktop-qa {
+        display: none;
+    }
+
+    #sliderMobileQA-wrapper {
+        display: block;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    #sliderMobileQA .slider-item {
+        flex: 0 0 95%;
+        max-width: 95%;
+        margin: 0 auto;
+    }
+
+    .accordion-button {
+        font-size: 0.95rem;
+        padding: 0.85rem 1rem;
+    }
+
+    .accordion-body {
+        font-size: 0.9rem;
+        padding: 0.75rem 1rem;
+    }
+}
+
+/* ============================
+   Slider Mobile seguro
+============================ */
+#sliderMobileQA-wrapper {
+    display: none;
+    /* oculto en desktop */
+}
+
+#sliderMobileQA {
+    display: flex;
+    gap: 1rem;
+    padding: 0;
+    scroll-snap-type: x mandatory;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+#sliderMobileQA .slider-item {
+    flex: 0 0 100%;
+    max-width: 100%;
+    scroll-snap-align: start;
+    box-sizing: border-box;
+    margin: 0 auto;
+}
+
+/* Acordeón en mobile */
+#sliderMobileQA .slider-item .accordion-item {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#sliderMobileQA .slider-item .accordion-body {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
+    line-height: 1.3;
+}
+
+/* Indicadores dots */
+.slider-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+/* Dot normal */
+.slider-indicators .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #ccc;
+    cursor: pointer;
+    border: 1px solid #000;
+    transition: all 0.3s ease;
+}
+
+/* Dot activo: alargado */
+.slider-indicators .dot.active {
+    width: 24px;
+    /* más largo */
+    height: 6px;
+    /* misma altura */
+    border-radius: 3px;
+    /* bordes redondeados */
+    background-color: rgb(0, 0, 0);
+    /* color activo */
+}
+
+/* ============================
+   Responsive Mobile
+============================ */
+@media (max-width: 767.98px) {
+    .desktop-qa {
+        display: none !important;
+    }
+
+    #sliderMobileQA-wrapper {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
+        padding-left: 1rem;
+        /* espacio inicial */
+        padding-right: 1rem;
+        /* espacio final */
+    }
+
+    #sliderMobileQA {
+        display: flex;
+        gap: 1rem;
+        /* separación horizontal entre bloques */
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    #sliderMobileQA .slider-item {
+        flex: 0 0 100%;
+        /* ancho de cada bloque */
+        max-width: 100%;
+        scroll-snap-align: start;
+        box-sizing: border-box;
+    }
+}
+/* =========================
+   VIDEO base: responsivo y con sombra
+========================= */
 .promo-video {
     width: 100%;
     height: auto;
@@ -425,75 +1385,27 @@ button.btn-slide {
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
     margin-bottom: 1rem;
     display: none;
-    /* Por defecto se ocultan todos los videos */
 }
 
-/* Mostrar solo en escritorio */
-@media (min-width: 768px) {
-    .promo-video.desktop-only {
-        display: block;
-        max-width: 720px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-}
-
-/* Mostrar solo en móvil */
-@media (max-width: 767.98px) {
-    .promo-video.mobile-only {
-        display: block;
-        max-width: 89%;
-        margin-left: auto;
-        margin-right: auto;
-    }
-}
-
-/* Tarjeta flotante */
-.promo-banner {
-    background: rgba(33, 37, 41, 0.95);
-    border-radius: 12px;
-    padding: 1.5rem 2rem;
-    max-width: 500px;
-    margin: 3.5rem auto 10%;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-    text-align: center;
-    color: white;
-}
-
-/* Tarjeta en pantallas pequeñas */
-@media (max-width: 576px) {
-    .promo-banner {
-        margin: 2rem 5% 15%;
-        padding: 1.25rem;
-    }
-}
-
-/* Texto dentro de tarjeta */
+/* =========================
+   TEXTOS Y BANNERS
+========================= */
 .promo-text {
     font-size: 0.85rem;
     color: #f1f1f1;
     margin-bottom: 0.8rem;
+    text-align: center;
 }
 
 .mm-publicidad-wrapper {
     max-width: 720px;
+    margin: 0 auto;
 }
 
 .mm-publicidad-contenido {
-    background: rgb(0, 0, 0);
-    backdrop-filter: blur(6px);
-    border: 1px solid #eee;
-}
-
-.promo-video {
-    width: 100%;
-    height: auto;
-    border-radius: 12px;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
-}
-
-.mm-publicidad-wrapper {
-    max-width: 420px;
+    backdrop-filter: none;
+    border: none;
+    box-shadow: none;
 }
 
 .video-container {
@@ -504,12 +1416,140 @@ button.btn-slide {
 
 .video-vertical {
     width: 100%;
-    max-height: 680px;
+    max-width: 600px;
+    max-height: 600px;
     object-fit: cover;
-    border-radius: 1rem;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
 }
 
+.promo-banner.principal {
+    background: rgba(33, 37, 41, 0.95);
+    color: #fff;
+    text-align: center;
+    border-radius: 14px;
+    padding: 1rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    max-width: 720px;
+    margin: 1rem auto; /* centrado y separación */
+}
+
+.promo-banner.principal .btn {
+    border-radius: 36px;
+    padding: 5px 14px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.promo-banner.principal small {
+    font-size: 0.7rem;
+    color: #aaa;
+    display: block;
+    margin-top: 6px;
+    line-height: 1.1;
+}
+
+.promo-banner {
+    background: rgba(33, 37, 41, 0.95);
+    border-radius: 12px;
+    padding: 1rem 0.5rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    text-align: center;
+    color: white;
+}
+
+/* =========================
+   CONTROL DE VISIBILIDAD MOBILE / DESKTOP Y SEPARACIÓN
+========================= */
+
+/* Base: ocultar ambos videos */
+.promo-video.desktop-only,
+.promo-video.mobile-only {
+    display: none !important;
+}
+
+/* Mobile: ≤449px */
+@media (max-width: 449px) {
+    .promo-video.mobile-only {
+        display: block !important;
+        width: 85%;
+        max-width: 480px;
+        height: auto;
+        object-fit: cover;
+        margin: 0 auto 1rem;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    }
+
+    .promo-video.desktop-only {
+        display: none !important;
+    }
+
+    .mm-publicidad-wrapper {
+        max-width: 520px;
+    }
+
+    .video-vertical {
+        max-width: 520px;
+    }
+
+    .promo-banner.principal {
+        max-width: 80%;
+        font-size: 0.8rem;
+        margin: 1rem auto; /* mantiene separación */
+    }
+
+    .promo-banner.principal .btn {
+        font-size: 0.75rem;
+    }
+
+    .promo-banner.principal small {
+        font-size: 0.7rem;
+        margin-top: 4px;
+    }
+}
+
+/* Desktop: ≥450px */
+@media (min-width: 450px) {
+    .promo-video.desktop-only {
+        display: block !important;
+        width: 90%;           /* no ocupa todo el ancho */
+        max-width: 720px;
+        margin: 1rem auto;    /* centrado y separación */
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    }
+
+    .promo-video.mobile-only {
+        display: none !important;
+    }
+
+    .mm-publicidad-wrapper {
+        max-width: 720px;
+        padding: 0 10px;      /* separación lateral extra */
+    }
+
+    .video-vertical {
+        max-width: 600px;
+        max-height: 600px;
+    }
+
+    .promo-banner.principal {
+        max-width: 720px;
+        width: 90%;           /* no pega a los bordes */
+        margin: 1rem auto;    /* separación superior e inferior */
+        font-size: 0.85rem;
+    }
+
+    .promo-banner.principal .btn {
+        font-size: 0.85rem;
+    }
+
+    .promo-banner.principal small {
+        font-size: 0.7rem;
+        margin-top: 6px;
+    }
+}
 /* ------------------ CONTENIDOS DEL CURSO ------------------ */
 #contenidos {
     background: #f8f9fa;
@@ -587,7 +1627,8 @@ button.btn-slide {
 
 /* Botones generales y botón de pago */
 .button-grid a.btn-modern {
-    flex: 1 1 auto; /* más flexible */
+    flex: 1 1 auto;
+    /* más flexible */
     min-width: 180px;
     max-width: 280px;
     padding: 0.9rem 1.5rem;
@@ -597,15 +1638,21 @@ button.btn-slide {
     font-weight: 600;
     color: white !important;
     text-decoration: none !important;
-    display: flex;              /* centrado perfecto */
-    justify-content: center;    /* horizontal */
-    align-items: center;        /* vertical */
-    text-align: center;         /* por si se parte en 2 líneas */
+    display: flex;
+    /* centrado perfecto */
+    justify-content: center;
+    /* horizontal */
+    align-items: center;
+    /* vertical */
+    text-align: center;
+    /* por si se parte en 2 líneas */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
     background: linear-gradient(135deg, #007bff, #00bcd4);
-    white-space: normal;        /* deja que baje a 2 líneas */
-    word-wrap: break-word;      /* quiebra bonito si es largo */
+    white-space: normal;
+    /* deja que baje a 2 líneas */
+    word-wrap: break-word;
+    /* quiebra bonito si es largo */
 }
 
 /* Botón de pago */
@@ -631,114 +1678,20 @@ button.btn-slide {
         font-size: 1rem;
     }
 }
-/* estilos-modal-agenda.css */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-.modal-overlay.activo {
-    display: flex;
-}
-
-.modal-wrapper {
-    background: #0000005b;
-    border-radius: 8px;
-    width: 80%;
-    max-width: 400px;
-    padding: 20px;
-    position: relative;
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(8px);
-}
-
-.modal-close {
-    position: absolute;
-    top: 14px;
-    right: 10px;
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: #ffffff;
-}
-
-.form-agenda label {
-    display: block;
-    margin-top: 15px;
-    font-weight: 200;
-    color: #ffffff;
-    font-size: 12px;
-}
-
-.form-agenda input,
-.form-agenda select,
-.form-agenda button {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    background-color: #a5a5a5;
-    color: #000000;
-
-}
-
-.form-agenda button {
-    background-color: #002a56;
-    color: white;
-    border: none;
-    margin-top: 20px;
-    cursor: pointer;
-}
-
-.form-agenda button:hover {
-    background-color: #ffffff;
-    color: #002a56;
-    border: #002a56 1px solid;
-}
-
-input[type="date"] {
-    -webkit-appearance: none;
-    appearance: none;
-    background: #a5a5a5;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 20px;
-    font-size: 0.8rem;
-    color: #00152c;
-    cursor: pointer;
-}
-
-input[type="date"]::-webkit-calendar-picker-indicator {
-    filter: invert(0.5);
-}
-
-.modal-lg {
-    max-width: 420px;
-}
-
+/* Contenidos del Curso */
 #contenidos h3 {
     font-weight: 600;
     color: #111;
     margin-bottom: 5rem;
     position: relative;
     margin-top: 4rem;
+    font-size: 2rem;
 }
 
 #contenidos h3::after {
     content: "";
     display: block;
-    width: 60px;
+    width: 160px;
     height: 3px;
     background-color: #2261ff;
     /* acento azul */
@@ -755,7 +1708,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 #contenidos .card:hover {
-    transform: translateY(-10px);
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
 }
 
@@ -771,7 +1723,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     margin-bottom: 1rem;
     color: #111;
     display: flex;
-    align-items: center;
+    justify-content: center;
 }
 
 #contenidos .card-title i {
@@ -817,44 +1769,14 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     margin-bottom: 2rem;
 }
 
-/* Botones estilo btn-sg */
-.btn-sg {
-    background-color: #111;
-    color: #2261ff;
-    border-radius: 50px;
-    padding: 0.45rem 1.25rem;
-    font-weight: 500;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    transition: all 0.3s ease;
+.linea-divide {
+  width: 100%;
+  height: 2px;
+  background-color: #2261ff;
+  margin-bottom: 5px;
 }
 
-.btn-sg:hover {
-    background-color: #2261ff;
-    color: #fff;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-}
 
-/* Collapse tipo burbuja */
-.precios-burbuja {
-    display: none;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    z-index: 10;
-}
-
-.precios-burbuja.show {
-    display: block;
-}
-
-.precios-burbuja .card-body {
-    padding: 0.75rem 1rem;
-    font-size: 0.85rem;
-    border-radius: 12px;
-    background: #fff;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
-}
 
 /* Responsive tweaks */
 @media (max-width: 768px) {
@@ -862,10 +1784,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
         padding: 1.5rem 1rem;
     }
 
-    .precios-burbuja {
-        position: relative;
-        top: 0;
-    }
 }
 
 /* Pantallas intermedias tipo tablet: 1 card por fila, más ancha */
@@ -928,204 +1846,176 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     }
 }
 
-@media (min-width: 1024px) and (max-width: 1366px) {
-    #contenidos .precios-burbuja {
-        width: 90%;
-        /* más ancha que la card */
-        left: 5%;
-        /* centrada respecto a la card */
-    }
 
-    #contenidos .precios-burbuja .card-body {
-        padding-left: 1.5rem;
-        padding-right: 1.5rem;
-    }
-}
-/* ------------------ Lubricentros Asociados ------------------ */
-#lubricentros {
-  background-color: #f8de3f; /* fondo amarillo completo */
-  width: 100%;
-  padding: 3rem 0;
-}
-
-/* Contenedor que centra la tarjeta */
-.mm-fondo-blur {
-  display: flex;
+/* ===== Overlay Agenda ===== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  background: rgba(0, 0, 0, 0.5); /* fondo semitransparente */
+  backdrop-filter: blur(12px); /* efecto blur */
+  -webkit-backdrop-filter: blur(12px); /* soporte Safari */
+  display: none;
   justify-content: center;
-  width: 100%;
+  align-items: center;
+  z-index: 5000;
 }
 
-/* Tarjeta compacta alargada */
-.mm-tarjeta {
-  position: relative;
-  max-width: 600px;
-  width: 100%;
-  min-height: 550px; /* asegura que la card se alargue */
-  border-radius: 1rem;
-  overflow: hidden;
-  background: #fff;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+/* Activo */
+.modal-overlay.activo {
+  display: flex;
 }
 
-.mm-tarjeta:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
-}
-
-/* Imagen de la tarjeta */
-.mm-tarjeta .card-img-top {
-  width: 100%;
-  height: 100%; /* ocupa todo el contenedor de la imagen */
-  object-fit: cover;
-  border-top-left-radius: 1rem;
-  border-top-right-radius: 1rem;
-  transition: transform 0.4s ease;
-}
-
-.mm-tarjeta:hover .card-img-top {
-  transform: scale(1.05);
-}
-
-/* Botones flotantes sobre la imagen */
-.mm-tarjeta .mm-btn-container {
-  position: absolute;
-  bottom: 20px; /* altura sobre la imagen */
-  left: 50%;
-  transform: translateX(-50%);
+/* Wrapper translúcido estilo modalPagoClases */
+.modal-wrapper {
+  background: rgba(139, 139, 139, 0.25); /* gris translúcido */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #383838;
+  border-radius: 16px;
+  padding: 20px 25px;
+  width: 450px;
+  max-height: 100vh;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  padding: 1rem;
-  border-radius: 12px;
-  backdrop-filter: blur(5px);
-  background-color: rgba(255, 255, 255, 0.35);
-  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
-  z-index: 10;
-  width: calc(100% - 40px);
-  max-width: 280px;
-}
-
-@media (min-width: 768px) {
-  .mm-tarjeta .mm-btn-container {
-    flex-direction: row;
-    justify-content: center;
-    gap: 1rem;
-    width: auto;
-    max-width: none;
-    padding: 0.5rem 1.5rem;
-    background-color: rgba(255, 255, 255, 0.5);
-  }
-}
-
-/* Card body debajo de la imagen */
-.mm-cuerpo {
   position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
+}
+/* Centrar título dentro del modal */
+.modal-wrapper h2 {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #ffffff;
+  font-size: 1.5rem;
   text-align: center;
-  padding: 1rem 2rem;
-  font-size: 0.9rem;
-  line-height: 1.3;
-  color: #222;
-  border-top: 1px solid #eee;
-  background: rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(8px);
-  border-bottom-left-radius: 1rem;
-  border-bottom-right-radius: 1rem;
-  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.7);
-  z-index: 5;
+  margin-bottom: 20px;
+}
+/* Botón cerrar */
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #ffffff;
+  z-index: 10;
 }
 
-/* Responsive mobile */
-@media (max-width: 768px) {
-  .mm-tarjeta {
-    min-height: 450px; /* ajusta la altura de la card en móvil */
-  }
-
-  .mm-tarjeta .mm-btn-container {
-    bottom: 10px;
-    width: calc(100% - 20px);
-    max-width: 280px;
-    padding: 0.5rem;
-  }
-
-  .mm-cuerpo {
-    padding: 0.75rem 1rem;
-  }
+/* Formulario */
+.form-agenda {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
 }
 
-/* Tablets intermedias */
-@media (min-width: 769px) and (max-width: 980px) {
-  .mm-tarjeta {
-    min-height: 500px;
-  }
-
-  .mm-tarjeta .mm-btn-container {
-    bottom: 15px;
-  }
-}
-/* modal didi blur */
-/* Centrar modal correctamente */
-.modal-dialog.modal-custom {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    margin: 0 auto;
+.form-agenda label {
+  font-weight: 200;
+  color: #ffffff;
+  font-size: 14px;
+  margin-bottom: -25px;
 }
 
-/* Card blur */
-.modal-bubble {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-radius: 1.5rem;
-    padding: 1rem;
-    width: 320px;        /* ancho móvil */
-    max-width: 600px;    /* ancho escritorio */
-    min-width: 280px;
-    text-align: center;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-    margin: 0 auto;
+.form-agenda input,
+.form-agenda select {
+  width: 100%;
+  padding: 8px 10px;
+  border: none;
+  border-bottom: 1px solid #ffffff;
+  background: transparent;
+  color: #ffffff;
+  font-size: 16px;
+  box-sizing: border-box;
 }
 
-/* Imagen vertical */
-.modal-image {
-    max-width: 90%;
-    height: auto;
-    border-radius: 0.75rem;
-    display: block;
-    margin: 0 auto 1rem auto;
+.form-agenda input:focus,
+.form-agenda select:focus {
+  outline: none;
+  border-bottom: 2px solid #2261ff; 
 }
-
-/* X simple blanca */
-.close-x {
-    font-size: 1.5rem;
-    color: #fff;
+/* Select Bloque y Horario */
+.form-agenda select {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ffffff; /* borde completo */
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05); /* leve translúcido */
+    color: #ffffff;
+    font-size: 16px;
+    box-sizing: border-box;
     cursor: pointer;
-    display: block;
-    margin: 0.5rem auto;
 }
 
-/* Botón */
-.modal-btn {
-    display: inline-block;  /* evita que ocupe todo el ancho */
-    min-width: 150px;       /* opcional: ancho mínimo */
-    max-width: 250px;
-    margin-top: 20px;       
+/* Focus */
+.form-agenda select:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.1);
+}
+/* Botón enviar */
+.form-agenda button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: transparent;
+  color: #ffffff;
+  border: 1px solid #0047fc;
+  border-radius: 36px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.3s ease;
+  font-size: 14px;
 }
 
-/* Escritorio */
-@media (min-width: 768px) {
-    .modal-bubble {
-        width: 500px;
-        max-width: 900px;
-    }
+.form-agenda button:hover {
+  border: 1px solid #ffffff;
 }
-/*start sobre mi section*/
+
+/* Campo fecha estilo moderno */
+input[type="date"] {
+    -webkit-appearance: none;
+    appearance: none;
+    border: 1px solid #ffffff; /* borde completo */
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05); /* leve translúcido */
+    color: #ffffff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Focus */
+input[type="date"]:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Calendario indicador invertido en blanco */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
+}
+/* Ajuste específico para móviles: ancho 350px */
+@media (max-width: 420px) {
+  .modal-wrapper {
+    width: 350px;
+  }
+}
+
+
+/* ------------------ Lubricentros Asociados ------------------ */
+#lubricentros {
+    background-color: #f8de3f;
+    width: 100%;
+    padding: 3rem 0;
+}
+
 .titulo-rotativo-box {
     text-align: center;
     height: 4.5rem;
-    /* Espacio fijo para una o dos líneas */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1134,24 +2024,22 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 #titulo-rotativo {
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: bold;
     line-height: 1.2;
-    color: white;
     margin: 0;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
     text-align: center;
     word-break: break-word;
     white-space: normal;
-    max-width: 90vw;
+    max-width: 120vw;
 }
 
 .blanco {
-    color: white;
+    color: rgb(0, 0, 0);
 }
 
 .gris {
-    color: #616161;
+    color: #8f8e8e;
 }
 
 @keyframes slideUp {
@@ -1166,6 +2054,164 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     }
 }
 
+/* ================= SLIDER ================= */
+.mm-slider-wrapper {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    display: flex;
+    justify-content: center;
+}
+
+.mm-slider-track {
+    display: flex;
+    gap: 20px;
+    padding: 0 20px;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+}
+
+/* Contenedor de cada card */
+.mm-fondo-blur {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    flex: 0 0 90%;
+    max-width: 600px;
+    scroll-snap-align: center;
+}
+
+/* Tarjeta minimalista con altura uniforme */
+.mm-tarjeta {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-radius: 1rem;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+/* Hover ligero */
+.mm-tarjeta:hover {
+    transform: translateY(-3px);
+}
+
+/* Imagen de la card */
+.mm-tarjeta .card-img-top {
+    width: 100%;
+    height: 300px;
+    /* altura fija para uniformidad */
+    object-fit: cover;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    transition: transform 0.4s ease;
+}
+
+/* Hover zoom imagen */
+.mm-tarjeta:hover .card-img-top {
+    transform: scale(1.05);
+}
+
+/* Botones sobre la imagen */
+.mm-tarjeta .mm-btn-container {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.8rem 1rem;
+    border-radius: 12px;
+    width: calc(100% - 40px);
+    max-width: 280px;
+}
+
+/* Card body debajo de la imagen, altura consistente */
+.mm-cuerpo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.9rem;
+    line-height: 1.3;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(10px);
+    border-radius: 0 0 1rem 1rem;
+    box-shadow: none;
+}
+
+.mm-cuerpo h5 {
+    color: #fff;
+}
+
+.mm-cuerpo h5 small {
+    font-size: 0.7em;
+    color: #ccc;
+    font-weight: normal;
+}
+
+.mm-cuerpo p {
+    color: #ddd;
+}
+
+/* Desktop: botones en fila y ocupando más espacio */
+@media (min-width: 768px) {
+    .mm-tarjeta .mm-btn-container {
+        flex-direction: row;
+        /* horizontal */
+        justify-content: center;
+        gap: 1rem;
+        width: auto;
+        /* que se ajuste al contenido */
+        max-width: none;
+    }
+
+    /* Opcional: hacer que los botones tengan un ancho mínimo */
+    .mm-tarjeta .mm-btn-container .btn {
+        min-width: 200px;
+        /* asegura que no se rompa la línea */
+        text-align: center;
+    }
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+    .mm-slider-track {
+        gap: 12px;
+        padding: 0 10px;
+    }
+
+    .mm-fondo-blur {
+        flex: 0 0 90%;
+        max-width: 360px;
+    }
+
+    .mm-tarjeta {
+        flex-direction: column;
+    }
+
+    .mm-tarjeta .card-img-top {
+        height: 200px;
+        /* más chico en móvil */
+    }
+
+    .mm-btn-container {
+        flex-direction: column;
+        gap: 0.4rem;
+        padding: 0.4rem 0.8rem;
+    }
+
+    .mm-cuerpo {
+        font-size: 0.85rem;
+        padding: 0.8rem 1rem;
+    }
+}
+
+/*start sobre mi section*/
 .sobre-mi-section {
     background-color: #070303;
     padding: 10% 0 15%;
@@ -1201,7 +2247,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    gap: 15px;
+    gap: 25px;
 }
 
 .tab-btn {
@@ -1230,6 +2276,13 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     transition: width 0.3s ease, background-color 0.3s ease;
 }
 
+/* Iconos dentro de los botones de tabs */
+.tab-btn i {
+    color: crimson;
+    /* solo el icono */
+    transition: color 0.3s ease;
+}
+
 .tab-btn.active {
     color: crimson;
 }
@@ -1237,6 +2290,42 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .tab-btn.active::after {
     width: 70%;
     background-color: crimson;
+}
+
+.tab-btn.active i {
+    color: crimson;
+    /* icono activo en crimson */
+}
+
+@media (max-width: 768px) {
+    .sobre-mi-section {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .perfil-img,
+    .perfil-descripcion {
+        margin-left: 0;
+    }
+
+    .tab-buttons {
+        align-items: flex-end;
+        gap: 10px;
+        padding-right: 0;
+    }
+
+    .tab-btn {
+        width: auto;
+        padding: 8px 15px;
+        text-align: right;
+        font-size: 16px;
+    }
+
+    .tab-btn::after {
+        left: auto;
+        right: 0;
+        transform: none;
+    }
 }
 
 /* CONTENIDO TABS */
@@ -1311,7 +2400,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 /* Contenedor para darle un fondo gris sutil */
 .progress-container {
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: #000;
     border-radius: 5px;
     margin-bottom: 12px;
     height: 4px;
@@ -1336,62 +2425,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     font-weight: 400;
     font-size: 0.95rem;
 }
-/* Imagen responsive del modal */
-.modal-image {
-  width: 100%;
-  max-height: 90vh; /* escritorio */
-  object-fit: cover; /* se recorta si es necesario */
-  display: block;
-}
 
-/* Overlay texto y botones sobre imagen */
-.modal-overlay-text {
-  position: absolute;
-  bottom: 0;              /* lo mantiene pegado abajo */
-  left: 50%;              /* centrado horizontal */
-  transform: translateX(-50%);
-  width: 90%;             /* 🔑 ancho casi completo */
-  max-width: 550px;       /* límite en escritorio */
-  background: rgba(0,0,0,0.3); /* opcional: da contraste */
-  border-radius: 8px;     /* opcional */
-  padding: 1rem 1rem;
-  text-align: center;
-}
-
-/* Botón Cerrar */
-.modal-content .btn-warning {
-  font-size: 0.9rem; /* proporcional */
-  padding: 0.4rem 1.3rem;
-}
-.close-modal-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 0.9rem;
-  padding: 0.4rem 0.8rem;
-  z-index: 10;
-}
-
-/* Ajustes para móvil */
-@media (max-width: 767px) {
-  .modal-image {
-    max-height: none; /* mostrar imagen completa, alargada */
-    object-fit: contain;
-  }
-  .modal-overlay-text {
-    padding: 0.8rem 1rem;
-    bottom: 10px;
-  }
-  .modal-content .btn-warning {
-    font-size: 0.9rem;
-    padding: 0.4rem 0.8rem;
-  }
-}
-@media (min-width: 768px) {
-  .modal-overlay-text {
-    bottom: 20px; /* 🔑 sube el bloque 20px desde abajo */
-  }
-}
 /* === Portfolio Section === */
 #tab-portfolio .row {
     margin-top: 0.8rem;
@@ -1446,6 +2480,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     margin-top: 120px;
     display: flex;
     gap: 140px;
+    display: flex;
+    flex-wrap: wrap;
     justify-content: center;
 }
 
@@ -1497,7 +2533,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
         display: flex;
         gap: 50px;
         justify-content: center;
-        margin-left: 11%;
     }
 
     .iconos-aos i {
@@ -1509,54 +2544,39 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     }
 }
 
-/*----------------START MIS MARCAS section -------------*/
-#mis-marcas {
-    margin-bottom: 220px;
-    margin-top: 120px;
-
-}
-
-.work-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 25px;
-    margin-top: 120px;
-}
-
-.sub-title {
-    text-align: center;
-    font-size: 30px;
-    margin-top: 40px;
-    margin-bottom: 60px;
-    font-weight: bold;
-}
-
-.work {
-    background: #111;
-    border-radius: 15px;
-    padding: 10px;
-    transition: transform 0.3s ease;
+/* ===== SLIDER MARCAS - SECCIÓN Y CONTENEDOR ===== */
+.brand-slider-section {
+    padding: 30px 0;
     position: relative;
+    overflow: hidden;
 }
 
-.work:focus,
-.work:hover {
-    transform: scale(0.92);
+/* Contenedor horizontal del slider */
+.brand-slider-container {
+    display: flex;
+    scroll-snap-type: x mandatory;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    gap: 30px;
+    padding: 10px 20px;
+    scroll-behavior: smooth;
 }
 
-.marca-nombre {
-    color: white;
-    font-size: 18px;
-    font-weight: bold;
-    margin: 0;
-    text-align: center;
+/* Cada slide */
+.brand-slide {
+    flex: 0 0 90%;
+    max-width: 400px;
+    scroll-snap-align: center;
+    position: relative;
+    transition: transform 0.9s ease;
 }
 
+
+/* Imagen del slide */
 .img-wrapper {
     position: relative;
-    border-radius: 12px;
+    border-radius: 16px;
     overflow: hidden;
-    background: #000;
 }
 
 .work-img {
@@ -1564,10 +2584,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     aspect-ratio: 1 / 1;
     object-fit: cover;
     display: block;
-    border-radius: 12px;
+    border-radius: 24px;
     transition: transform 0.6s ease;
 }
 
+/* Overlay oculto inicialmente */
 .overlay {
     position: absolute;
     inset: 0;
@@ -1576,43 +2597,106 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 10px;
+    padding: 40px 10px;
     opacity: 0;
     transition: opacity 0.6s ease;
     text-align: center;
 }
 
-.work:hover .overlay,
-.work:focus .overlay {
+/* Aparece overlay al hover/focus */
+.brand-slide:hover .overlay,
+.brand-slide:focus .overlay {
     opacity: 1;
 }
 
-.work:hover .work-img,
-.work:focus .work-img {
+
+/* Accesibilidad: foco visible con teclado */
+.work:focus-visible,
+.brand-slide:focus-visible {
+    outline: 2px solid crimson;
+    /* solo si navegas con teclado */
+}
+
+/* Imagen se retrae al hover/focus */
+.brand-slide:hover .work-img,
+.brand-slide:focus .work-img {
     transform: scale(0.5);
 }
 
-.btn-instagram {
-    background-color: crimson;
+/* Nombre de marca */
+.marca-nombre {
     color: white;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Botón Instagram */
+.btn-instagram {
+    background-color: whitesmoke;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
     padding: 8px 25px;
-    border-radius: 5px;
+    border-radius: 36px;
     text-decoration: none;
     font-size: 14px;
     display: inline-flex;
     align-items: center;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .btn-instagram:hover {
-    background-color: whitesmoke;
+    background-color: crimson;
     color: black;
     font-weight: bold;
 }
 
-/*----------------end MIS MARCAS section -------------*/
+/* ===== INDICADORES DOTS ===== */
+.brand-slider-dots {
+    text-align: center;
+    margin-top: 25px;
+    position: relative;
+    z-index: 10;
+}
 
+.brand-slider-dots .dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: #ccc;
+    border-radius: 50%;
+    margin: 0 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    /* anima color y tamaño */
+}
 
+/* Dot activo: alargado tipo píldora */
+.brand-slider-dots .dot.active {
+    width: 20px;
+    /* más largo */
+    height: 6px;
+    /* misma altura */
+    border-radius: 3px;
+    /* bordes redondeados */
+    background: crimson;
+    /* color activo */
+}
+/* Ajuste para mobile */
+@media (max-width: 768px) {
+  .marca-nombre {
+    white-space: nowrap;
+  }
+
+  .brand-slide .work-img {
+    margin-bottom: 20px; /* separa la imagen del botón */
+  }
+
+  .btn-instagram {
+    margin-top: 15px; /* opcional: más espacio arriba del botón */
+  }
+
+}
 /*---------------- Start Contact section -------------*/
 #contact {
     background: #111;
@@ -1621,132 +2705,235 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     font-family: 'Segoe UI', sans-serif;
 }
 
+/* Contenedor principal */
 .contact-container {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: 50px;
-    justify-content: space-between;
+    justify-content: center;
+    /* centra el formulario horizontalmente */
 }
 
-.contact-left,
+/* ---- FORMULARIO memanejoChat ---- */
 .contact-right {
-    flex: 1 1 45%;
-    min-width: 300px;
-}
-
-.contact-left h1 {
-    font-size: 28px;
-    color: #ababab;
-    margin-bottom: 20px;
-    text-align: left;
-}
-
-.contact-left p {
-    margin: 10px 0;
-}
-
-.contact-left p i {
-    margin-right: 10px;
-    font-size: 20px;
-    color: rgb(9, 184, 18);
-}
-
-.contact-left p a {
-    color: #e8e2e2;
-    text-decoration: none;
-    font-size: 15px;
-}
-
-.social-icons {
-    margin-top: 25px;
-}
-
-.social-icons a {
-    font-size: 28px;
-    margin-right: 15px;
-    color: #fff;
-    transition: transform 0.3s, color 0.3s;
-}
-
-.social-icons a:hover {
-    transform: translateY(-5px);
-}
-
-/* Hover color por ícono */
-.social-icons a.instagram:hover {
-    color: crimson;
-}
-
-.social-icons a.linkedin:hover {
-    color: #0a66c2;
-}
-
-.social-icons a.mail:hover {
-    color: rgb(70, 209, 255);
-}
-
-.social-icons a.whatsapp:hover {
-    color: #25d366;
-}
-
-.btn-download {
-    display: inline-block;
-    margin-top: 30px;
-    padding: 8px 30px;
-    border: 1px solid rgb(9, 184, 18);
-    border-radius: 6px;
-    text-decoration: none;
-    color: #fff;
-    font-size: 12px;
-    transition: background 0.3s, color 0.3s;
-}
-
-.btn-download:hover {
-    background: #fff;
-    color: #000;
+    flex: 1 1 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
 .contact-right h1 {
-    margin-bottom: 20px;
-    font-size: 24px;
-    color: #ffffff;
+    font-family: monospace;
+    margin-top: 0.5rem;
+    font-size: 2.5rem;
+    color: #fff;
 }
 
+/* Inputs y textarea */
 .contact-right form input,
 .contact-right form textarea {
     width: 100%;
-    background: rgb(255, 255, 255);
+    background: #fff;
     border: 1px solid #ccc;
     border-radius: 6px;
     padding: 12px;
-    margin: 12px 0;
-    font-size: 12px;
+    margin: 10px 0;
+    font-size: 13px;
     color: #262626;
     transition: border-color 0.3s, box-shadow 0.3s;
+    box-sizing: border-box;
 }
 
 .contact-right form input:focus,
 .contact-right form textarea:focus {
-    border-color: rgb(9, 184, 18);
+    border-color: #25D366;
     box-shadow: 0 0 5px rgba(9, 184, 18, 0.4);
     outline: none;
 }
 
+/* Botón enviar */
 .contact-right form button {
-    margin-top: 10px;
+    margin-top: 36px;
     background-color: #111;
     color: white;
-    border: 1px solid rgb(9, 184, 18);
-    padding: 8px 30px;
-    border-radius: 6px;
+    border: 1px solid #25D366;
+    padding: 10px 30px;
+    border-radius: 36px;
     font-size: 12px;
     cursor: pointer;
     transition: background 0.3s, color 0.3s;
+    width: 180px;
 }
 
 .contact-right form button:hover {
-    background-color: #0f9c13;
+    background-color: rgb(255, 255, 255);
+    color: #000000;
+    font-size: bold;
 }
+
+button i.fa-whatsapp {
+    color: #25D366;
+    /* verde oficial de WhatsApp */
+    font-size: 1.1em;
+    vertical-align: middle;
+}
+
+.contactowhatsapp {
+    font-size: 10px;
+    color: #a8a8a8;
+    padding: 10px 16px;
+    line-height: 1.2;
+
+}
+
+/* -------- Responsive -------- */
+@media (max-width: 768px) {
+    #contact {
+        padding: 60px 5%;
+    }
+
+    .contact-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .contact-right {
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .contact-right form input,
+    .contact-right form textarea {
+        width: 85%;
+        margin: 8px 0;
+        font-size: 16px;
+    }
+
+    .contact-right form button {
+        width: 100%;
+        max-width: 220px;
+        margin: 36px auto 0;
+        display: block;
+    }
+}
+
+.form-header span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: #0f0;
+    /* verde chat */
+    font-weight: 500;
+}
+
+/* Punto verde tipo estado online */
+.form-header span::before {
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: #0f0;
+    border-radius: 50%;
+    box-shadow: 0 0 6px #0f0;
+}
+
+/* =========================================================
+   SECCIONES COMENTADAS (NO ACTIVAS, SOLO GUARDADAS)
+========================================================= */
+
+/* ---- LADO DERECHO: INFO / REDES ----
+.contact-left {
+  flex: 1 1 45%;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+#contact .sub-title {
+  font-size: 3rem;
+  font-weight: bold;
+  text-align: center;
+  font-family: 'Avenir', sans-serif;
+  color: #ffffff;
+  padding-top: 20px;
+}
+
+#contact .sub-title span {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 200;
+  color: #ccc;
+}
+
+/* Redes sociales verticales
+.social-icons-vertical {
+  display: flex;
+  flex-direction: column;
+  align-items: justify;
+  gap: 16px;
+}
+
+.social-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.icon-link {
+  font-size: 28px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  transition: color 0.5s ease;
+  flex-shrink: 0;
+}
+
+.social-text {
+  color: #fff;
+  font-size: 0.85rem;
+  width: 180px;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+}
+*/
+
+/* ---- BOTONES DE DESCARGA ----
+.download-buttons {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.download-buttons .btn-download {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 180px;
+  padding: 8px 0;
+  border: 1px solid rgb(9, 184, 18);
+  border-radius: 36px;
+  text-decoration: none;
+  color: #fff;
+  font-size: 12px;
+  transition: background 0.3s, color 0.3s;
+}
+
+.download-buttons .btn-download:hover {
+  background: #fff;
+  color: #000;
+}
+*/
 
 .go-top-icon {
     text-align: center;
@@ -1761,58 +2948,193 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .go-top-icon i:hover {
-    transform: translateY(-4px);
+    transform: translateY(-6px);
     color: #888;
 }
 
-/* Footer */
-.footer {
+/* ===========================
+   Footer minimalista y uniforme
+=========================== */
+
+/* Footer principal fijo: sin cambios */
+.footer-main {
     background-color: #000;
-    padding: 15px 0;
     text-align: center;
-}
-
-.footer p {
-    color: #ffffff;
+    padding: 12px 0;
     font-size: 10px;
-    margin: 0;
+    color: #fff;
+    font-family: 'Avenir', sans-serif;
 }
 
-.footer i {
-    color: crimson;
+.footer-main i {
     margin: 0 5px;
+    color: crimson;
+    font-weight: 100;
 }
 
-.accordion-copyright {
-    background-color: #333 !important;
-    color: white;
-    cursor: pointer;
-    padding: 10px;
+/* Acordeones simples e idénticos */
+footer .accordion-copyright,
+footer .accordion-toggle {
     width: 100%;
+    background-color: #000;
     border: none;
+    /* sin borde */
+    color: #fff;
+    /* texto blanco */
     text-align: left;
     font-size: 10px;
-    transition: 0.4s;
-    outline: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 16px;
+    box-sizing: border-box;
 }
 
-.accordion-copyright:after {
+
+/* Contenido de los acordeones */
+footer .panel-copyright {
+    display: none;
+    padding: 10px 16px;
+    line-height: 1.4;
+    color: #fff;
+    box-sizing: border-box;
+    background-color: #000;
+    font-size: 10px;
+}
+
+/* Mostrar contenido activo */
+footer .accordion-copyright.active+.panel-copyright,
+footer .accordion-toggle.active+.accordion-content {
+    display: block;
+}
+
+/* Línea divisoria fina entre acordeones */
+.footer-divider {
+    width: 100%;
+    height: 1px;
+    background-color: #7b7b7b;
+    /* gris sutil */
+    margin: 0;
+    border: none;
+}
+
+/* Iconos + / - al final del texto de cada acordeón */
+footer .accordion-copyright i,
+footer .accordion-toggle i {
+    color: #a5a4a4;
+    font-size: 10px;
+    transition: transform 0.2s ease;
+}
+
+/* Por defecto, mostramos + */
+footer .accordion-copyright:not(.active) i::before,
+footer .accordion-toggle:not(.active) i::before {
     content: '+';
-    float: right;
 }
 
-.accordion-copyright.active:after {
+/* Cuando está activo, mostramos - */
+footer .accordion-copyright.active i::before,
+footer .accordion-toggle.active i::before {
     content: '-';
 }
 
-.panel-copyright {
-    padding: 8px 12px;
-    display: none;
-    background-color: #222;
-    color: #ccc;
+/* Texto pequeño en el lado derecho */
+footer .accordion-toggle .toggle-label {
     font-size: 10px;
+    color: #fff;
+    opacity: 0.7;
+    margin-left: auto;
+    /* lo empuja al extremo derecho */
+    transition: opacity 0.3s ease;
 }
 
-.accordion-copyright.active+.panel-copyright {
+/* cuando está activo, cambia el texto a "Retraer" con más opacidad */
+footer .accordion-toggle.active .toggle-label {
+    opacity: 1;
+}
+
+footer .accordion-content {
+    display: none;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+}
+
+/* Nuevo acordeón en footer: Condiciones del Servicio */
+footer .accordion-condiciones-servicio {
+    width: 100%;
+    background-color: #000;
+    /* fondo negro */
+    border: none;
+    color: #fff;
+    /* texto blanco */
+    text-align: left;
+    font-size: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 16px;
+    box-sizing: border-box;
+    transition: background 0.3s ease;
+}
+
+
+/* Icono + / - al final */
+footer .accordion-condiciones-servicio i {
+    font-size: 10px;
+    color: #a5a4a4;
+    transition: transform 0.2s ease;
+}
+
+/* Por defecto + */
+footer .accordion-condiciones-servicio:not(.active) i::before {
+    content: '+';
+}
+
+/* Cuando está activo - */
+footer .accordion-condiciones-servicio.active i::before {
+    content: '-';
+}
+
+/* Contenido del acordeón */
+footer .panel-condiciones-servicio {
+    display: none;
+    padding: 10px 16px;
+    line-height: 1.4;
+    color: #fff;
+    background-color: #000;
+    font-size: 10px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+/* Mostrar contenido activo */
+footer .accordion-condiciones-servicio.active+.panel-condiciones-servicio {
     display: block;
+}
+
+/* Línea divisoria */
+footer .panel-condiciones-servicio+.footer-divider {
+    margin: 0;
+    height: 1px;
+    background-color: #7b7b7b;
+    border: none;
+}
+
+/* Footer dentro de sección (no interfiere con footer final) */
+.footer-section {
+    text-align: center;
+    margin-top: 120px;
+    font-size: 10px;
+    color: #fff;
+    font-family: 'Avenir', sans-serif;
+}
+
+.footer-section i {
+    color: crimson;
+    /* iconos en crimson */
+    margin: 0 4px;
+    font-weight: 100;
 }
