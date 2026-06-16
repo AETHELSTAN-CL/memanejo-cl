@@ -1,0 +1,11 @@
+# Archivos de sistema
+.DS_Store
+
+# Videos pesados
+*.mov
+*.MP4
+*.MOV
+
+# Carpeta de backups
+estable 5-09-2025/
+

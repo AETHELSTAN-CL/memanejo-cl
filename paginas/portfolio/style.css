@@ -1,82 +1,50 @@
-body {
-  margin: 0;
-  overflow-x: hidden;
-  font-family: 'Segoe UI', sans-serif;
-  color: white;
-  background-color: #000;
-}
+/* Reset */
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body { height:100%; font-family:sans-serif; overflow-x:hidden; background:#0b0f13; color:#fff; }
 
+/* Fondo animado */
 .bg-movimiento {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, #b80c0c 10%, #000 80%);
-  z-index: -1;
-  transform: translate(0, 0);
+  position: sticky; inset:0; z-index:-1;
+  background: radial-gradient(800px at 20% 20%, #091728 0%, transparent 70%),
+              radial-gradient(600px at 80% 80%, #112233 0%, transparent 70%);
+  animation: fondoMove 12s infinite alternate ease-in-out;
+}
+@keyframes fondoMove {
+  from { background-position: 0 0, 100% 100%; }
+  to   { background-position: 20% 10%, 80% 90%; }
 }
 
+/* Paneles full screen */
+.paneles { width:100%; }
 .seccion {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  padding: 2rem;
-  text-align: center;
+  width:100%; height:100vh; display:flex; flex-direction:column;
+  justify-content:center; align-items:center; position:relative;
+  overflow:hidden;
 }
 
-.uno {
-  background: transparent;
-}
+/* Objeto central */
+.objeto-central { position:relative; z-index:2; text-align:center; }
+.cubo { width:180px; height:180px; background:linear-gradient(135deg,#00bcd4,#2261ff);
+       transform-style:preserve-3d; border-radius:10px; margin:auto;
+       animation:girar 12s linear infinite; }
+@keyframes girar { from{transform:rotateX(0deg) rotateY(0deg);} to{transform:rotateX(360deg) rotateY(360deg);} }
 
-.dos {
-  background: rgba(85, 26, 195, 0.6);
+/* Figuras flotantes */
+.figuras-flotantes .figura {
+  position:absolute; width:50px; height:50px; border-radius:50%;
+  background: rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.2);
+  animation: flotar 6s ease-in-out infinite;
 }
+.figuras-flotantes .tetraedro { width:40px; height:40px; clip-path:polygon(50% 0%,0% 100%,100% 100%); background:rgba(200,50,200,0.2);}
+.figuras-flotantes .cubo-pequeno { width:30px; height:30px; background: rgba(50,200,200,0.2); }
+@keyframes flotar { 0%{transform:translateY(0) rotate(0deg);} 50%{transform:translateY(-20px) rotate(180deg);} 100%{transform:translateY(0) rotate(360deg);} }
 
-.tres {
-  background: #a91818;
+/* Botón CTA */
+.boton-llamado.contacto {
+  margin-top:auto; margin-bottom:5%;
+  font-size:1.2rem; padding:1rem 2rem;
+  background: crimson; border:none; color:#fff; border-radius:50px;
+  cursor:pointer; box-shadow:0 4px 12px rgba(0,0,0,0.4);
+  transition:transform 0.3s ease, background 0.3s ease;
 }
-
-.titulo {
-  font-size: 3rem;
-  opacity: 0;
-  transform: translateY(60px);
-}
-
-.texto-largo {
-  width: 60%;
-  font-size: 1.5rem;
-  opacity: 0;
-  transform: translateX(-80px);
-}
-
-.boton-llamado {
-  padding: 1rem 2rem;
-  font-size: 1.2rem;
-  background: crimson;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  opacity: 0;
-  transform: scale(0.8);
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.boton-llamado:hover {
-  background: orangered;
-}
-
-.cubo {
-  position: absolute;
-  top: 10%;
-  left: 5%;
-  width: 100px;
-  height: 100px;
-  background: linear-gradient(135deg, crimson, orangered);
-  transform: rotate3d(1, 1, 0, 45deg);
-  border-radius: 12px;
-  box-shadow: 0 0 20px crimson;
-}
+.boton-llamado.contacto:hover { transform:scale(1.08); background:#e63946; }

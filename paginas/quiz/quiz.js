@@ -574,8 +574,9 @@ const preguntasFacil = [
   const btnDescargar = document.getElementById('btn-descargar-img');
   const btnCompartir = document.getElementById('btn-compartir');
   const btnReintentar = document.getElementById('btn-reintentar');
+  const btnVolver = document.getElementById('btn-volver');
 
-  // Crear elemento para mostrar tiempo
+  // Crear y mostrar contador de tiempo
   const tiempoElemento = document.createElement('div');
   tiempoElemento.id = 'tiempo-restante';
   tiempoElemento.style.marginBottom = '15px';
@@ -588,13 +589,19 @@ const preguntasFacil = [
 
   function iniciarQuiz(dificultad) {
     pantallaBienvenida.style.display = 'none';
-    quizContainer.style.display = 'block';
+    quizContainer.style.display = 'flex';
+    quizContainer.style.flexDirection = 'column';
+    quizContainer.style.justifyContent = 'center';
+    quizContainer.style.alignItems = 'center';
+    quizContainer.style.minHeight = '100vh';
+    quizContainer.style.overflow = 'hidden';
+
     indice = 0;
     score = 0;
     preguntasActuales = dificultad === 'facil' ? preguntasFacil : preguntasAvanzado;
 
-    // Definir tiempo según dificultad
-    tiempoRestante = dificultad === 'facil' ? 35 * 60 : 45 * 60; // segundos
+    // Tiempo
+    tiempoRestante = dificultad === 'facil' ? 35 * 60 : 45 * 60;
     actualizarTiempo();
     if (timerInterval) clearInterval(timerInterval);
     timerInterval = setInterval(() => {
@@ -602,9 +609,7 @@ const preguntasFacil = [
       if (tiempoRestante <= 0) {
         clearInterval(timerInterval);
         mostrarResultado();
-      } else {
-        actualizarTiempo();
-      }
+      } else actualizarTiempo();
     }, 1000);
 
     mostrarPregunta();
@@ -613,13 +618,14 @@ const preguntasFacil = [
   function actualizarTiempo() {
     const min = Math.floor(tiempoRestante / 60);
     const seg = tiempoRestante % 60;
-    tiempoElemento.innerText = `⏱ Tiempo restante: ${min.toString().padStart(2, '0')}:${seg.toString().padStart(2, '0')}`;
+    tiempoElemento.innerText = `Tiempo restante: ⏱ ${min.toString().padStart(2, '0')}:${seg.toString().padStart(2, '0')}`;
   }
 
   function mostrarPregunta() {
     resetearEstado();
     const q = preguntasActuales[indice];
     if (!q) return;
+
     preguntaElemento.innerText = q.pregunta;
     progresoElemento.innerText = `Pregunta ${indice + 1} de ${preguntasActuales.length}`;
 
@@ -636,24 +642,35 @@ const preguntasFacil = [
   function resetearEstado() {
     btnSiguiente.style.display = 'none';
     respuestasElemento.style.display = 'flex';
+    respuestasElemento.style.flexDirection = 'column';
+    respuestasElemento.style.alignItems = 'center';
+    respuestasElemento.style.gap = '10px';
     while (respuestasElemento.firstChild) {
       respuestasElemento.removeChild(respuestasElemento.firstChild);
     }
   }
 
-  function seleccionarRespuesta(e) {
-    const seleccion = e.target;
-    const correcta = seleccion.dataset.correcta === "true";
-    if (correcta) score += preguntasActuales[indice].puntos;
+function seleccionarRespuesta(e) {
+  const seleccion = e.target;
+  const correcta = seleccion.dataset.correcta === "true";
+  if (correcta) score += preguntasActuales[indice].puntos;
 
-    Array.from(respuestasElemento.children).forEach(btn => {
-      btn.disabled = true;
-      if (btn.dataset.correcta === "true") btn.classList.add('correct');
-      else btn.classList.add('wrong');
-    });
+  Array.from(respuestasElemento.children).forEach(btn => {
+    btn.disabled = true;
+    if (btn.dataset.correcta === "true") {
+      btn.classList.add('correct');
+    } else {
+      btn.classList.add('wrong');
+    }
+  });
 
-    btnSiguiente.style.display = 'inline-block';
+  // 👇 La respuesta elegida tendrá estilo “hover” permanente
+  if (!correcta) {
+    seleccion.classList.add('selected-wrong');
   }
+
+  btnSiguiente.style.display = 'inline-block';
+}
 
   btnSiguiente.addEventListener('click', () => {
     indice++;
@@ -661,32 +678,31 @@ const preguntasFacil = [
     else mostrarResultado();
   });
 
-  function mostrarResultado() {
-    clearInterval(timerInterval);
-    respuestasElemento.style.display = 'none';
-    btnSiguiente.style.display = 'none';
-    tiempoElemento.style.display = 'none';
+function mostrarResultado() {
+  clearInterval(timerInterval);
 
-    const puntajeTotal = calcularPuntajeTotal();
-    textoPuntaje.innerText = `Obtuviste ${score} puntos de ${puntajeTotal} posibles.`;
+  // Oculta quiz y elementos
+  quizContainer.style.display = 'none';
+  tiempoElemento.style.display = 'none';
+  btnSiguiente.style.display = 'none';
+  
+  const puntajeTotal = calcularPuntajeTotal();
+  textoPuntaje.innerText = `Obtuviste ${score} puntos de ${puntajeTotal} posibles.`;
 
-    // Calcular aprobación: 87%
-    const porcentaje = (score / puntajeTotal) * 100;
-    const aprobado = porcentaje >= 87;
+  const porcentaje = (score / puntajeTotal) * 100;
+  const aprobado = porcentaje >= 87;
 
-    // Mostrar mensaje adicional
-    const mensaje = document.createElement('p');
-    mensaje.style.fontWeight = 'bold';
-    mensaje.style.marginTop = '15px';
-    mensaje.innerText = aprobado ? "🎉 ¡Aprobaste el examen!" : "❌ No alcanzaste el puntaje mínimo para aprobar.";
-    textoPuntaje.parentNode.appendChild(mensaje);
+  const mensaje = document.createElement('p');
+  mensaje.style.fontWeight = 'bold';
+  mensaje.style.marginTop = '15px';
+  mensaje.innerText = aprobado ? "🎉 ¡Aprobaste el Quiz!" : "❌ No alcanzaste el puntaje mínimo para aprobar este Quiz.";
+  textoPuntaje.parentNode.appendChild(mensaje);
 
-    modal.classList.remove('oculto');
+  modal.classList.remove('oculto');
 
-    // Preparar botón de compartir Twitter
-    const textoParaCompartir = encodeURIComponent(`Obtuve ${score} puntos (${porcentaje.toFixed(0)}%) en el quiz Clase B 🚗 en www.memanejo.cl`);
-    btnCompartir.href = `https://twitter.com/intent/tweet?text=${textoParaCompartir}`;
-  }
+  const textoParaCompartir = encodeURIComponent(`Obtuve ${score} puntos (${porcentaje.toFixed(0)}%) en el quiz Clase B 🚗 en www.memanejo.cl`);
+  btnCompartir.href = `https://twitter.com/intent/tweet?text=${textoParaCompartir}`;
+}
 
   function calcularPuntajeTotal() {
     return preguntasActuales.reduce((acc, p) => acc + p.puntos, 0);
@@ -719,11 +735,10 @@ const preguntasFacil = [
       captura.style.overflow = originalOverflow;
     });
   });
-  const btnVolver = document.getElementById('btn-volver');
-  const btnCerrarModal = document.getElementById('btn-cerrar-modal');
 
-  btnVolver.addEventListener('click', () => {
-    window.location.href = "https://www.memanejo.cl/#services";
-  });
-
+btnVolver.addEventListener('click', () => {
+  modal.classList.add('oculto');          // Oculta el modal final
+  quizContainer.style.display = 'none';   // Oculta la sección del quiz
+  pantallaBienvenida.style.display = 'flex'; // Muestra la pantalla inicial con el logo
+});
 });

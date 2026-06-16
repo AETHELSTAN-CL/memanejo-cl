@@ -1,56 +1,44 @@
-gsap.registerPlugin(ScrollTrigger);
+document.addEventListener('DOMContentLoaded', () => {
+  // Cada sección se fija al viewport con sticky natural
+  const sections = document.querySelectorAll('.seccion');
+  sections.forEach(section => {
+    section.style.position = 'sticky';
+    section.style.top = '0';
+  });
 
-// Animación inicial de entrada
-gsap.to(".titulo", {
-  y: 0,
-  opacity: 1,
-  duration: 1.2,
-  ease: "power3.out"
-});
+  // Animación continua de cubos y figuras 3D
+  const cubes = document.querySelectorAll('.cubo');
+  cubes.forEach(c => {
+    let rotX = 0, rotY = 0;
+    const speed = 0.2;
+    function rotateCube() {
+      rotX += speed; rotY += speed;
+      c.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+      requestAnimationFrame(rotateCube);
+    }
+    rotateCube();
+  });
 
-// ScrollTrigger: texto largo aparece
-gsap.to(".texto-largo", {
-  scrollTrigger: {
-    trigger: ".dos",
-    start: "top 80%",
-    toggleActions: "play none none none"
-  },
-  x: 0,
-  opacity: 1,
-  duration: 1.2,
-  ease: "power2.out"
-});
+  // Figuras flotantes independientes
+  const floats = document.querySelectorAll('.figura');
+  floats.forEach(f => {
+    const amplitude = Math.random()*30 + 10;
+    const speed = Math.random()*0.03 + 0.01;
+    let pos = 0, direction = 1;
+    function floatAnim() {
+      pos += speed*direction;
+      if(pos>amplitude || pos<-amplitude) direction*=-1;
+      f.style.transform = `translateY(${pos}px) rotate(${pos*5}deg)`;
+      requestAnimationFrame(floatAnim);
+    }
+    floatAnim();
+  });
 
-// ScrollTrigger: botón de contacto
-gsap.to(".boton-llamado", {
-  scrollTrigger: {
-    trigger: ".tres",
-    start: "top 80%",
-    toggleActions: "play none none none"
-  },
-  opacity: 1,
-  scale: 1,
-  duration: 1.2,
-  ease: "elastic.out(1, 0.4)"
-});
-
-// Cubo rotando
-gsap.to(".cubo", {
-  duration: 6,
-  rotationY: 360,
-  rotationX: 360,
-  repeat: -1,
-  ease: "linear"
-});
-
-// Fondo animado que se mueve con scroll
-gsap.to(".bg-movimiento", {
-  scrollTrigger: {
-    trigger: "body",
-    start: "top top",
-    end: "bottom bottom",
-    scrub: true
-  },
-  x: "-10%",
-  y: "-10%"
+  // Desaparecer sección 1 al hacer scroll
+  const seccion1 = document.querySelector('.seccion1');
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    // Ajusta la velocidad de desvanecimiento
+    seccion1.style.opacity = Math.max(0, 1 - scrollY / 200);
+  });
 });
