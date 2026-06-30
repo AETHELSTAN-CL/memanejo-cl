@@ -1,10 +1,9 @@
 # Archivos de sistema
 .DS_Store
+**/.DS_Store
 
-# Videos pesados
-*.mov
-*.MP4
-*.MOV
+# VSCode (recomendado)
+.vscode/
 
 # Carpeta de backups
 estable 5-09-2025/mailing/
