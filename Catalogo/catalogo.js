@@ -651,13 +651,13 @@ toggle.addEventListener('click', () => {
     document.body.classList.remove('dark-theme');
     document.body.classList.add('light-theme');
     circle.className = 'fa-solid fa-sun';
-    label.textContent = 'Ambiente Oscuro';
+    label.textContent = 'Ambiente Claro';
     label.style.textAlign = 'right';
   } else {
     document.body.classList.remove('light-theme');
     document.body.classList.add('dark-theme');
     circle.className = 'fa-solid fa-moon';
-    label.textContent = 'Ambiente Claro';
+    label.textContent = 'Ambiente Oscuro';
     label.style.textAlign = 'left';
   }
 });

@@ -331,20 +331,24 @@ actualizarOpcionesHorario();
     mostrarFrase();
     setInterval(mostrarFrase, 4000);
   }
+document.querySelectorAll('[data-bs-toggle="collapse"]').forEach(btn => {
+  const target = document.querySelector(btn.getAttribute('data-bs-target'));
+  const icon = btn.querySelector('i');
 
+  if (!target || !icon) return;
+
+  target.addEventListener('show.bs.collapse', () => {
+    icon.style.transform = 'rotate(180deg)';
+  });
+
+  target.addEventListener('hide.bs.collapse', () => {
+    icon.style.transform = 'rotate(0deg)';
+  });
+});
 
   // --- BOTON GO TOP ---
   const goTop = document.getElementById('goTop');
   if (goTop) goTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-
-  // --- TOGGLE PRECIOS ---
-  document.querySelectorAll('.precios-toggle').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const collapse = btn.closest('.card-body').querySelector('.precios-burbuja');
-      if (collapse) collapse.classList.toggle('show');
-    });
-  });
 
   // --- ACTUALIZAR LOGO SEGÚN SECCIÓN ---
   function actualizarLogoPorSeccion() {
@@ -368,9 +372,9 @@ actualizarOpcionesHorario();
   const tooltipEl = document.getElementById("tooltipText");
   if (tooltipEl) {
     const textosTooltip = [
-      'Presiona Aquí <i class="fa-solid fa-arrow-right"></i>',
-      'Abrir Menú <i class="fa-solid fa-arrow-right"></i>',
-      'Deslizar Página <i class="fa-solid fa-arrow-down"></i>'
+      'Presiona aquí <i class="fa-solid fa-arrow-right"></i>',
+      'Abrir menú <i class="fa-solid fa-arrow-right"></i>',
+      'Deslizar página <i class="fa-solid fa-arrow-down"></i>'
     ];
 
     let i = 0;
