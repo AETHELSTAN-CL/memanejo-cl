@@ -203,13 +203,14 @@ body {
     font-size: 2.5rem;
     /* más contenido */
     font-weight: 500;
-
+    align-items: start;
     display: block;
-    /* ocupa su propia línea */
+    text-align: center;
 }
 .welcome-soy{
     display:block;
-    margin-top: 3rem; /* prueba entre 0.3rem y 0.6rem */
+    margin-top: 2rem;
+    text-align: left;
 }
 .brand-highlight {
     font-family: 'Avenir', sans-serif;
@@ -224,6 +225,7 @@ body {
 .welcome-subtitle {
     font-size: 0.8rem;
     color: #fff;
+
     
 }
 
