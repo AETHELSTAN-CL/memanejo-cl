@@ -40,6 +40,86 @@ body {
     box-shadow: none;
 }
 
+/* SLIDER PRINCIPAL de escritorio */
+.nav-slider-wrapper .nav-fullscreen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(12px, 3vw, 60px);
+    padding: 0.6rem 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #111;
+    z-index: 5;
+}
+
+/* Links dentro del nav */
+.nav-slider-wrapper .nav-fullscreen .nav-link-fx {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    flex: 1 1 0;
+    max-width: 33%;
+
+    padding: 10px 22px;
+    margin-top: 20px;
+
+    text-align: center;
+    text-decoration: none;
+
+    font-weight: 700;
+    font-size: clamp(14px, 1.7vw, 20px);
+    line-height: 1.05;
+
+    color: #fff;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    transition:
+        color .25s ease,
+        transform .25s ease;
+}
+
+/* Borde animado */
+.nav-slider-wrapper .nav-fullscreen .nav-link-fx::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 1.75rem;
+
+    background: rgba(255,255,255,.10);
+
+    opacity: 0;
+    transform: scale(.88);
+
+    z-index: -1;
+
+    transition:
+        opacity .28s ease,
+        transform .28s ease,
+        background .28s ease;
+}
+
+/* Hover */
+.nav-slider-wrapper .nav-fullscreen .nav-link-fx:hover {
+    color: rgb(0, 0, 0);
+    transform: scale(1.02);
+}
+
+/* Animación del botón */
+.nav-slider-wrapper .nav-fullscreen .nav-link-fx:hover::before {
+    opacity: 1;
+    transform: scale(1);
+    background: rgb(255, 255, 255);
+}
+
 
 /* Tooltip estilo burbuja */
 .tooltip-bubble {
@@ -68,7 +148,30 @@ body {
     opacity: 1;
 }
 
+/* TEXTO MENU FLOTANTE  */
+/* Contenedor principal: todo negro */
+.nav-slider-wrapper {
+    background-color: #111;
+    /* fondo negro unificado */
+    padding: 0;
+    position: relative;
+    /* importante para tooltip absoluto */
+    width: 100%;
+}
 
+
+.nav-slider-wrapper .nav-fullscreen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(12px, 3vw, 60px);
+    padding: 0.6rem 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #111;
+    /* asegura fondo negro aunque tooltip se borre */
+    z-index: 5;
+}
 
 /* =======================
    OFFCANVAS MENU CLEAN
@@ -100,30 +203,36 @@ body {
     font-size: 2.5rem;
     /* más contenido */
     font-weight: 500;
-    
+    align-items: start;
     display: block;
-    /* ocupa su propia línea */
+    text-align: center;
 }
-
+.welcome-soy{
+    display:block;
+    margin-top: 2rem;
+    text-align: left;
+}
 .brand-highlight {
     font-family: 'Avenir', sans-serif;
     font-weight: 700;
-    font-size: 3rem;
+    font-size: 4rem;
     color: #fff;
-    text-transform: uppercase;
     line-height: 0.8;
     /* junta las palabras ME MA NEJO .cl */
+    
 }
 
 .welcome-subtitle {
     font-size: 0.8rem;
     color: #fff;
-    margin-top: 1rem;
+
+    
 }
 
 .title-btn {
     color: #bbb;
     font-size: 0.7rem;
+    margin: 0 0 10px 0;
 }
 
 /* Botones centrales */
@@ -149,13 +258,13 @@ body {
     height: 50px;
     /* 🔽 reduce grosor vertical */
     white-space: nowrap;
-    margin-top: 5%;
+    margin-top: 16px;
 }
 
 .d-grid .menu-btn:hover {
     background: #0e3abe;
     color: #fff;
-    transform: translateY(-2px);
+    transform:scale(1.05);
 }
 
 .menu-icon {
@@ -178,13 +287,13 @@ body {
 
 /* Íconos dentro de los botones principales */
 .menu-icon i {
-    font-size: 1.1rem;
+    font-size: 1.4rem;
     /* Cambiá este valor según necesites */
 }
 
 /* Íconos en los botones inferiores */
 .offcanvas-bottom-buttons i {
-    font-size: 1rem;
+    font-size: .9rem;
     /* Más pequeño que los principales, opcional */
 }
 
@@ -194,7 +303,7 @@ body {
     flex-direction: column;
     align-items: flex-end;
     /* mantiene los botones al borde derecho */
-    gap: 12px;
+    gap: 8px;
 }
 
 /* Botones inferiores */
@@ -205,55 +314,109 @@ body {
     align-items: center;
     justify-content: flex-start;
     /* todo el contenido alineado a la derecha */
-    gap: 12px;
+    gap: 8px;
     /* separación entre texto e icono */
-    min-width: 120px;
+    min-width: 100px;
     /* ancho mínimo */
-    max-width: 150px;
+    max-width: 100px;
     /* limita que no se alarguen demasiado */
-    padding: 4px 18px;
+    padding: 4px 10px;
     /* altura y relleno */
     font-size: 0.8rem;
     white-space: nowrap;
     /* evita que el texto se rompa en varias líneas */
 }
+/* ===========================
+   BOTONES INFERIORES OFFCANVAS
+   =========================== */
 
-/* Botón de contacto - negro puro */
-.offcanvas-bottom-buttons .btn-dark {
-    background-color: #000 !important;
-    /* negro puro */
-    border-color: #000 !important;
-    color: #fff !important;
-    padding: 5px 11px;
+.offcanvas-bottom-buttons .btn-home,
+.offcanvas-bottom-buttons .btn-contact,
+.offcanvas-bottom-buttons .btn-closemac{
+
+    transition:
+        transform .25s ease,
+        border-color .25s ease,
+        box-shadow .25s ease,
+        color .25s ease;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* 👈 TODO a la derecha */
+    gap: 6px;
+    text-align: right;
 }
 
-.offcanvas-bottom-buttons .btn-dark i {
-    margin-right: 8px;
-    /* aumenta este valor según lo que necesites */
+/* icono sin separación rara */
+.offcanvas-bottom-buttons .btn-bottom i{
+    margin-left: 6px;
+    margin-right: 0;
 }
 
-.offcanvas-bottom-buttons .btn-dark:hover {
-    background-color: #fff !important;
-    /* blanco en hover */
-    color: #000 !important;
-    /* texto negro */
-    border-color: #000 !important;
+/* ===== INICIO ===== */
+
+.offcanvas-bottom-buttons .btn-home{
+    background:#fff;
+    color:#000;
+    border:1px solid #d9d9d9;
 }
 
-/* Botón Inicio: border verde luminoso al hover */
-.offcanvas-bottom-buttons .btn-light:hover {
-    border: 1px solid #0ff700;
-    /* verde brillante */
+.offcanvas-bottom-buttons .btn-home:hover{
+    background:#fff;
+    color:#000;
+    border-color:#37ff58;
+    transform:scale(1.05);
+    box-shadow:0 0 10px rgba(55,255,88,.55);
 }
 
-/* Botón Cerrar: border rojo luminoso al hover */
-.offcanvas-bottom-buttons .btn-danger:hover {
-    border: 1px solid #ff1a1a;
-    /* rojo brillante */
-    box-shadow: 0 0 8px #ff1a1a;
-    /* efecto glow */
+/* ===== CONTACTO ===== */
+
+.offcanvas-bottom-buttons .btn-contact{
+    background:#fff;
+    color:#000;
+    border:1px solid #d9d9d9;
 }
 
+.offcanvas-bottom-buttons .btn-contact:hover{
+    background:#fff;
+    color:#000;
+    border-color:#ffd84f;
+    transform:scale(1.05);
+    box-shadow:0 0 10px rgba(255,216,79,.55);
+}
+
+/* ===== CERRAR (RESET BOOTSTRAP + TU ESTILO) ===== */
+
+.offcanvas-bottom-buttons .btn-closemac{
+
+    background:#dc3545 !important;
+    color:#fff !important;
+    border:1px solid #dc3545 !important;
+
+    box-shadow:none !important;
+    outline:none !important;
+
+    transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease, background .25s ease;
+}
+
+/* eliminar estados raros de Bootstrap */
+.offcanvas-bottom-buttons .btn-closemac:focus,
+.offcanvas-bottom-buttons .btn-closemac:active,
+.offcanvas-bottom-buttons .btn-closemac:focus-visible{
+    background:#dc3545 !important;
+    color:#fff !important;
+    box-shadow:none !important;
+}
+
+/* hover limpio */
+.offcanvas-bottom-buttons .btn-closemac:hover{
+    background:#ff0019 !important;
+    color:#fff !important;
+    border-color:#ff5d5d !important;
+
+    transform:scale(1.05);
+    box-shadow:0 0 10px rgba(255,93,93,.55);
+}
 /* ============================
    MODALES RUTA Y CURSOS
 ============================ */
@@ -324,7 +487,7 @@ body {
     content: "•";
     position: absolute;
     left: 0;
-    color: #9e9e9e;
+    color: #ededed;
     font-weight: bold;
     font-size: 1em;
 }
@@ -335,7 +498,7 @@ body {
     margin-top: 0.8rem;
     font-size: 0.95rem;
     line-height: 1.1;
-    color: #9e9e9e;
+    color: #cacaca;
 }
 
 /* Quitar la línea divisoria por defecto del footer en modales */
@@ -356,30 +519,52 @@ body {
 .modal-ruta .btn-secondary,
 .modal-cursos .btn-secondary {
     background: #ff0000;
-    color: #ffffff;
-    border: 1px solid #ffffff;
+    color: #fff;
+    border: 1px solid #ff0000;
+
+    transition:
+        background-color .30s ease,
+        color .30s ease,
+        border-color .30s ease,
+        box-shadow .30s ease,
+        transform .20s ease;
 }
 
 .modal-ruta .btn-secondary:hover,
 .modal-cursos .btn-secondary:hover {
     background: #ff0000;
-    color: #000000;
-    border: 1px solid #000000;
+    color: #fff;
+    border-color: #ff4d4d;
+
+    transform: scale(1.03);
+
+    box-shadow: 0 0 12px rgba(255, 77, 77, .45);
 }
 
 /* Botón WhatsApp */
 .modal-ruta .btn-success,
 .modal-cursos .btn-success {
-    background-color: #000;
-    color: #ffffff;
-    border: 1px solid #00b73a;
+    background: #111;
+    color: #fff;
+    border: 1px solid #198754;
+
+    transition:
+        background-color .30s ease,
+        color .30s ease,
+        border-color .30s ease,
+        box-shadow .30s ease,
+        transform .20s ease;
 }
 
 .modal-ruta .btn-success:hover,
 .modal-cursos .btn-success:hover {
-    background-color: #ffffff;
-    color: #000;
-    border: 1px solid #00ff51;
+    background: #fff !important;
+    color: #000 !important;
+    border-color: #00ff51 !important;
+
+    transform: scale(1.03);
+
+    box-shadow: 0 0 12px rgba(0,255,81,.45);
 }
 
 /* X de cerrar en modales ruta y cursos */
@@ -395,12 +580,13 @@ body {
     filter: invert(1);
     /* blanca */
     opacity: 1;
+    
 }
 
 /* Hover opcional */
 .modal-ruta .btn-close:hover,
 .modal-cursos .btn-close:hover {
-    filter: invert(0.8);
+    transform: scale(1.05);
 }
 
 /* Responsivo móvil */
@@ -448,74 +634,6 @@ body {
     }
 }
 
-/* modal card promo */
-.modal-dialog.modal-custom {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto;
-    max-width: 100%;
-}
-
-/* Card blur */
-.modal-bubble {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-radius: 2rem;
-    width: 310px;
-    /* móvil base */
-    max-width: 450px;
-    min-width: 240px;
-    text-align: center;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-    margin: 0 auto;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-}
-
-/* Imagen vertical */
-.modal-image {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-}
-
-/* X simple blanca */
-.close-x {
-    font-size: 1.5rem;
-    color: #fff;
-    cursor: pointer;
-    display: block;
-    margin: 1rem auto;
-}
-
-.modal-content-buttons {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    text-align: center;
-}
-
-.modal-btn {
-    padding: 6px 16px !important;
-    font-size: 0.9rem !important;
-    line-height: 1.2 !important;
-}
-
-.modal-conditions {
-    font-size: 0.6rem;
-    /* fuente pequeña */
-    color: #989898;
-    line-height: 1.4;
-    text-align: center;
-}
-
 /* Modal de pago - ajustes visuales */
 #modalPagoClases .modal-content {
     background: rgba(139, 139, 139, 0.25);
@@ -554,16 +672,20 @@ body {
     line-height: 1.5;
     color: #ccc;
 }
+
 #modalPagoClases .modal-header .modal-title {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    top: 50%; /* opcional: ajusta verticalmente */
+    top: 50%;
+    /* opcional: ajusta verticalmente */
     transform: translate(-50%, -50%);
     color: #fff;
     margin: 0;
-    font-size: 1.25rem; /* ajusta según tu gusto */
+    font-size: 1.25rem;
+    /* ajusta según tu gusto */
 }
+
 /* Footer */
 #modalPagoClases .modal-footer {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -624,38 +746,41 @@ body {
         max-width: none;
     }
 }
+
 /* ===== Botón Instagram centrado ===== */
 .btn-instagram-follow {
-  position: absolute;
-  bottom: 75px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #fff;
-  color: #000;
-  border: 1px solid #E1306C; /* color Instagram */
-  border-radius: 36px;
-  padding: 6px 28px;
-  font-size: 15px;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  z-index: 10;
-  text-decoration: none;
+    position: absolute;
+    bottom: 75px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fff;
+    color: #000;
+    border: 1px solid #E1306C;
+    /* color Instagram */
+    border-radius: 36px;
+    padding: 6px 28px;
+    font-size: 15px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+    text-decoration: none;
 }
 
 .btn-instagram-follow i {
-  color: #E1306C;
-  font-size: 18px;
+    color: #E1306C;
+    font-size: 18px;
 }
 
 .btn-instagram-follow:hover {
-  background: #f7f7f7;
-  transform: translateX(-50%) scale(1.05);
+    background: #f7f7f7;
+    transform: translateX(-50%) scale(1.05);
 }
-/* 🔄 MODERN HORIZONTAL SLIDER SECTION */
+
+/* SLIDER PRINCIPAL ESCRITORIO  */
 .slide-movil {
     position: relative;
     width: 100%;
@@ -798,7 +923,7 @@ body {
 
 /* Todos los botones dentro del slider */
 .slider-card .btn-slide-pill {
-    background: #fff;
+    background: #ffffff68;
     /* fondo blanco */
     color: #000;
     /* texto negro */
@@ -920,12 +1045,14 @@ body {
 .carousel-control-next.invisible-button {
     right: 0;
 }
+
 /* ===== CONTROL DE VISIBILIDAD SEGÚN PANTALLA ===== */
 
 /* Base: ocultar todo por defecto */
 .desktop-slide {
     display: none;
 }
+
 .slide-movil {
     display: none;
 }
@@ -935,6 +1062,7 @@ body {
     .slide-movil {
         display: block !important;
     }
+
     .desktop-slide {
         display: none !important;
     }
@@ -945,10 +1073,12 @@ body {
     .slide-movil {
         display: none !important;
     }
+
     .desktop-slide {
         display: block !important;
     }
 }
+
 .logo-carousel-section {
     overflow: hidden;
 }
@@ -988,29 +1118,7 @@ body {
 
 /*----------------end slides section -------------*/
 
-/* Contenedor principal: todo negro */
-.nav-slider-wrapper {
-    background-color: #111;
-    /* fondo negro unificado */
-    padding: 0;
-    position: relative;
-    /* importante para tooltip absoluto */
-    width: 100%;
-}
 
-/* NAV de escritorio */
-.nav-slider-wrapper .nav-fullscreen {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: clamp(12px, 3vw, 60px);
-    padding: 0.6rem 1rem;
-    width: 100%;
-    box-sizing: border-box;
-    background-color: #111;
-    /* asegura fondo negro aunque tooltip se borre */
-    z-index: 5;
-}
 
 /* Links dentro del nav */
 .nav-slider-wrapper .nav-fullscreen .nav-link-fx {
@@ -1030,28 +1138,13 @@ body {
     transition: color 0.22s ease, transform 0.15s ease;
 }
 
-/* Subrayado animado en hover */
-.nav-slider-wrapper .nav-fullscreen .nav-link-fx::after {
-    content: '';
-    display: block;
-    height: 2px;
-    background: crimson;
+/* Contenedor principal: todo negro */
+.nav-slider-wrapper {
+    background-color: #111;
+    padding: 0;
+    position: relative;
     width: 100%;
-    transform: scaleX(0);
-    transform-origin: center;
-    transition: transform 0.25s ease;
-    margin-top: 6px;
 }
-
-.nav-slider-wrapper .nav-fullscreen .nav-link-fx:hover {
-    color: crimson;
-    transform: translateY(-2px);
-}
-
-.nav-slider-wrapper .nav-fullscreen .nav-link-fx:hover::after {
-    transform: scaleX(1);
-}
-
 
 
 /* Animación flotante */
@@ -1104,28 +1197,7 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-/* subrayado animado y hover */
-.nav-link-fx::after {
-    content: '';
-    display: block;
-    height: 2px;
-    background: crimson;
-    width: 100%;
-    transform: scaleX(0);
-    transform-origin: center;
-    transition: transform .25s ease;
-    margin-top: 6px;
-    opacity: .95;
-}
 
-.nav-link-fx:hover {
-    color: crimson;
-    transform: translateY(-2px);
-}
-
-.nav-link-fx:hover::after {
-    transform: scaleX(1);
-}
 
 /* Ajustes para pantallas muy grandes (más separación y tamaño) */
 @media (min-width: 1200px) {
@@ -1156,6 +1228,7 @@ body {
         background-color: transparent !important;
     }
 }
+
 /* ============================
    Slider Bloques A y B FIX
 ============================ */
@@ -1376,6 +1449,7 @@ body {
         box-sizing: border-box;
     }
 }
+
 /* =========================
    VIDEO base: responsivo y con sombra
 ========================= */
@@ -1392,7 +1466,7 @@ body {
    TEXTOS Y BANNERS
 ========================= */
 .promo-text {
-    font-size: 0.85rem;
+    font-size: 1.1rem;
     color: #f1f1f1;
     margin-bottom: 0.8rem;
     text-align: center;
@@ -1431,7 +1505,8 @@ body {
     padding: 1rem;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
     max-width: 720px;
-    margin: 1rem auto; /* centrado y separación */
+    margin: 1rem auto;
+    /* centrado y separación */
 }
 
 .promo-banner.principal .btn {
@@ -1444,7 +1519,7 @@ body {
 
 .promo-banner.principal small {
     font-size: 0.7rem;
-    color: #aaa;
+    color: #929292;
     display: block;
     margin-top: 6px;
     line-height: 1.1;
@@ -1456,9 +1531,19 @@ body {
     padding: 1rem 0.5rem;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
     text-align: center;
-    color: white;
+    color: #929292;
+}
+#mm-espacio-publicidad .promo-text {
+    line-height: 1.2;
 }
 
+#mm-espacio-publicidad .promo-banner small {
+    display: block;
+    color: #929292 !important;
+    font-size: 0.8rem;
+    line-height: 1.2;
+    margin-top: 12px;
+}
 /* =========================
    CONTROL DE VISIBILIDAD MOBILE / DESKTOP Y SEPARACIÓN
 ========================= */
@@ -1497,7 +1582,8 @@ body {
     .promo-banner.principal {
         max-width: 80%;
         font-size: 0.8rem;
-        margin: 1rem auto; /* mantiene separación */
+        margin: 1rem auto;
+        /* mantiene separación */
     }
 
     .promo-banner.principal .btn {
@@ -1514,11 +1600,13 @@ body {
 @media (min-width: 450px) {
     .promo-video.desktop-only {
         display: block !important;
-        width: 90%;           /* no ocupa todo el ancho */
+        width: 90%;
+        /* no ocupa todo el ancho */
         max-width: 720px;
-        margin: 1rem auto;    /* centrado y separación */
+        margin: 1rem auto;
+        /* centrado y separación */
         border-radius: 12px;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
     }
 
     .promo-video.mobile-only {
@@ -1527,7 +1615,8 @@ body {
 
     .mm-publicidad-wrapper {
         max-width: 720px;
-        padding: 0 10px;      /* separación lateral extra */
+        padding: 0 10px;
+        /* separación lateral extra */
     }
 
     .video-vertical {
@@ -1537,8 +1626,10 @@ body {
 
     .promo-banner.principal {
         max-width: 720px;
-        width: 90%;           /* no pega a los bordes */
-        margin: 1rem auto;    /* separación superior e inferior */
+        width: 90%;
+        /* no pega a los bordes */
+        margin: 1rem auto;
+        /* separación superior e inferior */
         font-size: 0.85rem;
     }
 
@@ -1551,6 +1642,7 @@ body {
         margin-top: 6px;
     }
 }
+
 /* ------------------ CONTENIDOS DEL CURSO ------------------ */
 #contenidos {
     background: #f8f9fa;
@@ -1654,12 +1746,14 @@ body {
     word-wrap: break-word;
     /* quiebra bonito si es largo */
 }
+
 .button-grid a.btn-modern {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
 }
+
 /* Botón de pago */
 .button-grid a.btn-modern.pay {
     background: linear-gradient(135deg, #ff416c, #ff4b2b);
@@ -1683,6 +1777,7 @@ body {
         font-size: 1rem;
     }
 }
+
 /* Contenidos del Curso */
 #contenidos h3 {
     font-weight: 600;
@@ -1773,16 +1868,35 @@ body {
 #contenidos .col-md-4 {
     margin-bottom: 2rem;
 }
-
-.linea-divide {
-  width: 100%;
-  height: 2px;
-  background-color: #2261ff;
-  margin-bottom: 5px;
+.d-flex .btn {
+    display: inline-block;
+    transition: transform .22s ease;
 }
 
+.d-flex .btn:hover {
+    transform: scale(1.05);
+}
+.linea-divide {
+    width: 100%;
+    height: 2px;
+    background-color: #2261ff;
+    margin-bottom: 5px;
+}
 
-
+/* BOTONES BASE */
+.d-flex .btn {
+    transition: transform .25s ease, box-shadow .25s ease, background .25s ease, color .25s ease;
+}
+.d-flex button.btn:hover {
+    transform: scale(1.04);
+    box-shadow: 0 6px 18px rgba(255,255,255,.08);
+    background-color: #000000;
+}
+.acceso-text{
+    font-size: .68rem;
+    opacity: .75;
+    letter-spacing: .2px;
+}
 /* Responsive tweaks */
 @media (max-width: 768px) {
     #contenidos .card-body {
@@ -1851,109 +1965,145 @@ body {
     }
 }
 
+.precios-toggle i {
+  display: inline-block;
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-origin: center;
+  will-change: transform;
+}
 
+.precios-toggle i.rotated {
+  transform: rotate(180deg);
+}
+.row-cursos{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px,1fr));
+    gap: 25px;
+}
 /* ===== Overlay Agenda ===== */
 .modal-overlay {
-  position: fixed;
-  inset: 0;
-  padding-top: env(safe-area-inset-top);
-  padding-bottom: env(safe-area-inset-bottom);
-  background: rgba(0, 0, 0, 0.5); /* fondo semitransparente */
-  backdrop-filter: blur(12px); /* efecto blur */
-  -webkit-backdrop-filter: blur(12px); /* soporte Safari */
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 5000;
+    position: fixed;
+    inset: 0;
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    background: rgba(0, 0, 0, 0.5);
+    /* fondo semitransparente */
+    backdrop-filter: blur(12px);
+    /* efecto blur */
+    -webkit-backdrop-filter: blur(12px);
+    /* soporte Safari */
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 5000;
 }
 
 /* Activo */
 .modal-overlay.activo {
-  display: flex;
+    display: flex;
 }
 
-/* Wrapper translúcido estilo modalPagoClases */
+/* Wrapper translúcido */
 .modal-wrapper {
-  background: rgba(139, 139, 139, 0.25); /* gris translúcido */
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  color: #383838;
-  border-radius: 16px;
-  padding: 20px 25px;
-  width: 450px;
-  max-height: 100vh;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
+    background: rgba(139, 139, 139, 0.25);
+    /* gris translúcido */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: #383838;
+    border-radius: 16px;
+    padding: 20px 25px;
+    width: 450px;
+    max-height: 100vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
 }
+
 /* Centrar título dentro del modal */
 .modal-wrapper h2 {
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  color: #ffffff;
-  font-size: 1.5rem;
-  text-align: center;
-  margin-bottom: 20px;
-}
-/* Botón cerrar */
-.modal-close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: #ffffff;
-  z-index: 10;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #ffffff;
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
+/* Botón cerrar */
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+
+    background: none;
+    border: none;
+
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #ffffff;
+
+    z-index: 10;
+    transition: transform .2s ease, color .2s ease;
+}
+
+.modal-close:hover {
+    transform: scale(1.25);
+    color: #8e8e8e;
+}
 /* Formulario */
 .form-agenda {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
 }
 
 .form-agenda label {
-  font-weight: 200;
-  color: #ffffff;
-  font-size: 14px;
-  margin-bottom: -25px;
+    font-weight: 200;
+    color: #ffffff;
+    font-size: 14px;
+    margin-bottom: -25px;
 }
 
 .form-agenda input,
 .form-agenda select {
-  width: 100%;
-  padding: 8px 10px;
-  border: none;
-  border-bottom: 1px solid #ffffff;
-  background: transparent;
-  color: #ffffff;
-  font-size: 16px;
-  box-sizing: border-box;
+    width: 100%;
+    padding: 8px 10px;
+    border: none;
+    border-bottom: 1px solid #ffffff;
+    background: transparent;
+    color: #ffffff;
+    font-size: 16px;
+    box-sizing: border-box;
 }
 
 .form-agenda input:focus,
 .form-agenda select:focus {
-  outline: none;
-  border-bottom: 2px solid #2261ff; 
+    outline: none;
+    border-bottom: 2px solid #2261ff;
 }
+
+/* Select Bloque y Horario */
 /* Select Bloque y Horario */
 .form-agenda select {
     width: 100%;
     padding: 8px 12px;
-    border: 1px solid #ffffff; /* borde completo */
+
+    border: 1px solid #ffffff;
     border-radius: 8px;
-    background: rgba(255, 255, 255, 0.05); /* leve translúcido */
+
+    background-color: rgba(35, 35, 35, 0.9);
+
     color: #ffffff;
+
     font-size: 16px;
     box-sizing: border-box;
     cursor: pointer;
+
+    transition: all .25s ease;
 }
 
 /* Focus */
@@ -1961,32 +2111,36 @@ body {
     outline: none;
     background: rgba(255, 255, 255, 0.1);
 }
+
 /* Botón enviar */
 .form-agenda button {
-  width: 100%;
-  padding: 10px;
-  margin-top: 10px;
-  background-color: transparent;
-  color: #ffffff;
-  border: 1px solid #0047fc;
-  border-radius: 36px;
-  cursor: pointer;
-  text-align: center;
-  transition: all 0.3s ease;
-  font-size: 14px;
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: transparent;
+    color: #ffffff;
+    border: 1px solid #0047fc;
+    border-radius: 36px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.3s ease;
+    font-size: 14px;
 }
 
 .form-agenda button:hover {
-  border: 1px solid #ffffff;
+    border: 1px solid #ffffff;
+    transform: scale(1.05);
 }
 
 /* Campo fecha estilo moderno */
 input[type="date"] {
     -webkit-appearance: none;
     appearance: none;
-    border: 1px solid #ffffff; /* borde completo */
+    border: 1px solid #ffffff;
+    /* borde completo */
     border-radius: 8px;
-    background: rgba(255, 255, 255, 0.05); /* leve translúcido */
+    background: rgba(255, 255, 255, 0.05);
+    /* leve translúcido */
     color: #ffffff;
     font-size: 16px;
     cursor: pointer;
@@ -2003,11 +2157,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     filter: invert(1);
     cursor: pointer;
 }
+
 /* Ajuste específico para móviles: ancho 350px */
 @media (max-width: 420px) {
-  .modal-wrapper {
-    width: 350px;
-  }
+    .modal-wrapper {
+        width: 350px;
+    }
 }
 
 
@@ -2029,7 +2184,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 #titulo-rotativo {
-    font-size: 2rem;
+    font-size: 2.1rem;
     font-weight: bold;
     line-height: 1.2;
     margin: 0;
@@ -2044,7 +2199,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .gris {
-    color: #8f8e8e;
+    color: #929292;
 }
 
 @keyframes slideUp {
@@ -2086,7 +2241,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     scroll-snap-align: center;
 }
 
-/* Tarjeta minimalista con altura uniforme */
+/* Modal oferta */
 .mm-tarjeta {
     display: flex;
     flex-direction: column;
@@ -2131,7 +2286,17 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     width: calc(100% - 40px);
     max-width: 280px;
 }
+/* Botones dentro del contenedor */
+.mm-btn-container .btn {
+    transition: transform .22s ease, box-shadow .22s ease;
+    will-change: transform;
+}
 
+/* Hover individual */
+.mm-btn-container .btn:hover {
+    transform: scale(1.06);
+    box-shadow: 0 6px 16px rgba(0,0,0,.25);
+}
 /* Card body debajo de la imagen, altura consistente */
 .mm-cuerpo {
     flex: 1;
@@ -2215,6 +2380,96 @@ input[type="date"]::-webkit-calendar-picker-indicator {
         padding: 0.8rem 1rem;
     }
 }
+.btn-instagram {
+    background: #fff !important;
+    color: #212529 !important; /* o el color que uses */
+    border: 1px solid #E4405F !important;
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.btn-instagram i {
+    color: #E4405F !important;
+    margin-right: 2px;
+}
+
+.btn-instagram:hover,
+.btn-instagram:focus {
+    transform: scale(1.03);
+    border-color: #E4405F !important;
+    background: #fff !important;
+    color: inherit !important;
+    box-shadow: 0 6px 16px rgba(228, 64, 95, .2);
+    font-weight: 400 !important;
+}
+
+/* modal card promo */
+.modal-dialog.modal-custom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 100%;
+}
+
+/* Card blur */
+.modal-bubble {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 2rem;
+    width: 310px;
+    /* móvil base */
+    max-width: 450px;
+    min-width: 240px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    margin: 0 auto;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* Imagen vertical */
+.modal-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+/* X simple blanca */
+.close-x {
+    font-size: 1.5rem;
+    color: #201f1f;
+    cursor: pointer;
+    display: block;
+    margin: 1rem auto;
+}
+
+
+.modal-content-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+}
+
+.modal-btn {
+    padding: 6px 16px !important;
+    font-size: 0.9rem !important;
+    line-height: 1.2 !important;
+}
+
+.modal-conditions {
+    font-size: 0.6rem;
+    /* fuente pequeña */
+    color: #cacaca;
+    line-height: 1.4;
+    text-align: center;
+}
 
 /*start sobre mi section*/
 .sobre-mi-section {
@@ -2251,7 +2506,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .tab-buttons {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: flex-start;
     gap: 25px;
 }
 
@@ -2259,12 +2514,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     background-color: transparent;
     color: #ccc;
     border: none;
-    padding: 10px;
     font-size: 18px;
     cursor: pointer;
-    width: 100%;
+    width: auto;
     position: relative;
-    text-align: center;
+    text-align: right;
+    justify-content: flex-end;
     transition: color 0.3s ease;
 }
 
@@ -2276,9 +2531,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     width: 0;
     position: absolute;
     bottom: 0;
-    left: 50%;
+    left: 65%;
     transform: translateX(-50%);
     transition: width 0.3s ease, background-color 0.3s ease;
+    margin-right: 15px;
 }
 
 /* Iconos dentro de los botones de tabs */
@@ -2295,6 +2551,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .tab-btn.active::after {
     width: 70%;
     background-color: crimson;
+    
 }
 
 .tab-btn.active i {
@@ -2637,7 +2894,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 /* Botón Instagram */
-.btn-instagram {
+.btn-instagram-marcas {
     background-color: whitesmoke;
     color: rgb(0, 0, 0);
     font-weight: bold;
@@ -2650,12 +2907,15 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.btn-instagram:hover {
+.btn-instagram-marcas:hover {
     background-color: crimson;
     color: black;
     font-weight: bold;
 }
 
+.btn-instagram-marcas:hover i {
+    color: #fff;
+}
 /* ===== INDICADORES DOTS ===== */
 .brand-slider-dots {
     text-align: center;
@@ -2687,21 +2947,25 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     background: crimson;
     /* color activo */
 }
+
 /* Ajuste para mobile */
 @media (max-width: 768px) {
-  .marca-nombre {
-    white-space: nowrap;
-  }
+    .marca-nombre {
+        white-space: nowrap;
+    }
 
-  .brand-slide .work-img {
-    margin-bottom: 20px; /* separa la imagen del botón */
-  }
+    .brand-slide .work-img {
+        margin-bottom: 20px;
+        /* separa la imagen del botón */
+    }
 
-  .btn-instagram {
-    margin-top: 15px; /* opcional: más espacio arriba del botón */
-  }
+    .btn-instagram {
+        margin-top: 15px;
+        /* opcional: más espacio arriba del botón */
+    }
 
 }
+
 /*---------------- Start Contact section -------------*/
 #contact {
     background: #111;
@@ -2786,13 +3050,25 @@ button i.fa-whatsapp {
 }
 
 .contactowhatsapp {
-    font-size: 10px;
+    font-size: 11px;
     color: #a8a8a8;
     padding: 10px 16px;
-    line-height: 1.2;
-
+    line-height: 1.3;
 }
 
+/* 🔥 CLAVE: evita separación del icono y texto */
+.wa-inline {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    white-space: nowrap;
+}
+
+/* evita que el icono se vaya arriba */
+.wa-inline i {
+    display: inline-block;
+    line-height: 1;
+}
 /* -------- Responsive -------- */
 @media (max-width: 768px) {
     #contact {
@@ -2845,100 +3121,6 @@ button i.fa-whatsapp {
     box-shadow: 0 0 6px #0f0;
 }
 
-/* =========================================================
-   SECCIONES COMENTADAS (NO ACTIVAS, SOLO GUARDADAS)
-========================================================= */
-
-/* ---- LADO DERECHO: INFO / REDES ----
-.contact-left {
-  flex: 1 1 45%;
-  min-width: 300px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
-#contact .sub-title {
-  font-size: 3rem;
-  font-weight: bold;
-  text-align: center;
-  font-family: 'Avenir', sans-serif;
-  color: #ffffff;
-  padding-top: 20px;
-}
-
-#contact .sub-title span {
-  display: block;
-  font-size: 1.25rem;
-  font-weight: 200;
-  color: #ccc;
-}
-
-/* Redes sociales verticales
-.social-icons-vertical {
-  display: flex;
-  flex-direction: column;
-  align-items: justify;
-  gap: 16px;
-}
-
-.social-item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-
-.icon-link {
-  font-size: 28px;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  transition: color 0.5s ease;
-  flex-shrink: 0;
-}
-
-.social-text {
-  color: #fff;
-  font-size: 0.85rem;
-  width: 180px;
-  text-align: left;
-  white-space: nowrap;
-  overflow: hidden;
-}
-*/
-
-/* ---- BOTONES DE DESCARGA ----
-.download-buttons {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.download-buttons .btn-download {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 180px;
-  padding: 8px 0;
-  border: 1px solid rgb(9, 184, 18);
-  border-radius: 36px;
-  text-decoration: none;
-  color: #fff;
-  font-size: 12px;
-  transition: background 0.3s, color 0.3s;
-}
-
-.download-buttons .btn-download:hover {
-  background: #fff;
-  color: #000;
-}
-*/
 
 .go-top-icon {
     text-align: center;
