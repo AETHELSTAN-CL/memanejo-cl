@@ -372,6 +372,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // -----------------------
   // Función global ver producto
   // -----------------------
+  const modo = document.body.dataset.mode;
   window.verProducto = function (id) {
     const producto = catalogo.find(p => p.id === id);
     if (!producto) return;
