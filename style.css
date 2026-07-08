@@ -94,7 +94,7 @@ body {
     inset: 0;
     border-radius: 1.75rem;
 
-    background: rgba(255,255,255,.10);
+    background: rgba(255, 255, 255, .10);
 
     opacity: 0;
     transform: scale(.88);
@@ -200,18 +200,20 @@ body {
 .welcome-greeting {
     font-family: 'Avenir', sans-serif;
     /* ejemplo más limpio */
-    font-size: 2.5rem;
+    font-size: 3rem;
     /* más contenido */
     font-weight: 500;
     align-items: start;
     display: block;
     text-align: center;
 }
-.welcome-soy{
-    display:block;
-    margin-top: 2rem;
+
+.welcome-soy {
+    display: block;
+    margin-top: 3rem;
     text-align: left;
 }
+
 .brand-highlight {
     font-family: 'Avenir', sans-serif;
     font-weight: 700;
@@ -219,19 +221,19 @@ body {
     color: #fff;
     line-height: 0.8;
     /* junta las palabras ME MA NEJO .cl */
-    
+
 }
 
 .welcome-subtitle {
     font-size: 0.8rem;
     color: #fff;
 
-    
+
 }
 
 .title-btn {
     color: #bbb;
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     margin: 0 0 10px 0;
 }
 
@@ -264,7 +266,7 @@ body {
 .d-grid .menu-btn:hover {
     background: #0e3abe;
     color: #fff;
-    transform:scale(1.05);
+    transform: scale(1.05);
 }
 
 .menu-icon {
@@ -326,13 +328,14 @@ body {
     white-space: nowrap;
     /* evita que el texto se rompa en varias líneas */
 }
+
 /* ===========================
    BOTONES INFERIORES OFFCANVAS
    =========================== */
 
 .offcanvas-bottom-buttons .btn-home,
 .offcanvas-bottom-buttons .btn-contact,
-.offcanvas-bottom-buttons .btn-closemac{
+.offcanvas-bottom-buttons .btn-closemac {
 
     transition:
         transform .25s ease,
@@ -342,59 +345,60 @@ body {
 
     display: flex;
     align-items: center;
-    justify-content: flex-end; /* 👈 TODO a la derecha */
+    justify-content: flex-end;
+    /* 👈 TODO a la derecha */
     gap: 6px;
     text-align: right;
 }
 
 /* icono sin separación rara */
-.offcanvas-bottom-buttons .btn-bottom i{
+.offcanvas-bottom-buttons .btn-bottom i {
     margin-left: 6px;
     margin-right: 0;
 }
 
 /* ===== INICIO ===== */
 
-.offcanvas-bottom-buttons .btn-home{
-    background:#fff;
-    color:#000;
-    border:1px solid #d9d9d9;
+.offcanvas-bottom-buttons .btn-home {
+    background: #fff;
+    color: #000;
+    border: 1px solid #d9d9d9;
 }
 
-.offcanvas-bottom-buttons .btn-home:hover{
-    background:#fff;
-    color:#000;
-    border-color:#37ff58;
-    transform:scale(1.05);
-    box-shadow:0 0 10px rgba(55,255,88,.55);
+.offcanvas-bottom-buttons .btn-home:hover {
+    background: #fff;
+    color: #000;
+    border-color: #37ff58;
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(55, 255, 88, .55);
 }
 
 /* ===== CONTACTO ===== */
 
-.offcanvas-bottom-buttons .btn-contact{
-    background:#fff;
-    color:#000;
-    border:1px solid #d9d9d9;
+.offcanvas-bottom-buttons .btn-contact {
+    background: #fff;
+    color: #000;
+    border: 1px solid #d9d9d9;
 }
 
-.offcanvas-bottom-buttons .btn-contact:hover{
-    background:#fff;
-    color:#000;
-    border-color:#ffd84f;
-    transform:scale(1.05);
-    box-shadow:0 0 10px rgba(255,216,79,.55);
+.offcanvas-bottom-buttons .btn-contact:hover {
+    background: #fff;
+    color: #000;
+    border-color: #ffd84f;
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(255, 216, 79, .55);
 }
 
 /* ===== CERRAR (RESET BOOTSTRAP + TU ESTILO) ===== */
 
-.offcanvas-bottom-buttons .btn-closemac{
+.offcanvas-bottom-buttons .btn-closemac {
 
-    background:#dc3545 !important;
-    color:#fff !important;
-    border:1px solid #dc3545 !important;
+    background: #dc3545 !important;
+    color: #fff !important;
+    border: 1px solid #dc3545 !important;
 
-    box-shadow:none !important;
-    outline:none !important;
+    box-shadow: none !important;
+    outline: none !important;
 
     transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease, background .25s ease;
 }
@@ -402,21 +406,22 @@ body {
 /* eliminar estados raros de Bootstrap */
 .offcanvas-bottom-buttons .btn-closemac:focus,
 .offcanvas-bottom-buttons .btn-closemac:active,
-.offcanvas-bottom-buttons .btn-closemac:focus-visible{
-    background:#dc3545 !important;
-    color:#fff !important;
-    box-shadow:none !important;
+.offcanvas-bottom-buttons .btn-closemac:focus-visible {
+    background: #dc3545 !important;
+    color: #fff !important;
+    box-shadow: none !important;
 }
 
 /* hover limpio */
-.offcanvas-bottom-buttons .btn-closemac:hover{
-    background:#ff0019 !important;
-    color:#fff !important;
-    border-color:#ff5d5d !important;
+.offcanvas-bottom-buttons .btn-closemac:hover {
+    background: #ff0019 !important;
+    color: #fff !important;
+    border-color: #ff5d5d !important;
 
-    transform:scale(1.05);
-    box-shadow:0 0 10px rgba(255,93,93,.55);
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(255, 93, 93, .55);
 }
+
 /* ============================
    MODALES RUTA Y CURSOS
 ============================ */
@@ -544,10 +549,9 @@ body {
 /* Botón WhatsApp */
 .modal-ruta .btn-success,
 .modal-cursos .btn-success {
-    background: #111;
-    color: #fff;
+    background: #fff;
+    color: #000;
     border: 1px solid #198754;
-
     transition:
         background-color .30s ease,
         color .30s ease,
@@ -558,13 +562,9 @@ body {
 
 .modal-ruta .btn-success:hover,
 .modal-cursos .btn-success:hover {
-    background: #fff !important;
-    color: #000 !important;
     border-color: #00ff51 !important;
-
     transform: scale(1.03);
-
-    box-shadow: 0 0 12px rgba(0,255,81,.45);
+    box-shadow: 0 0 12px rgba(0, 255, 81, .45);
 }
 
 /* X de cerrar en modales ruta y cursos */
@@ -580,7 +580,7 @@ body {
     filter: invert(1);
     /* blanca */
     opacity: 1;
-    
+
 }
 
 /* Hover opcional */
@@ -780,11 +780,11 @@ body {
     transform: translateX(-50%) scale(1.05);
 }
 
-/* SLIDER PRINCIPAL ESCRITORIO  */
+/* SLIDER PRINCIPAL MOBILE  */
 .slide-movil {
     position: relative;
     width: 100%;
-    overflow: hidden;
+    padding-top: max(16px, env(safe-area-inset-top));
     background-color: #111;
 }
 
@@ -838,7 +838,7 @@ body {
 }
 
 /* =======================
-   Slider moderno
+   Slider card cuadrado
 ======================= */
 .modern-slider-section {
     background-color: #111;
@@ -1533,6 +1533,7 @@ body {
     text-align: center;
     color: #929292;
 }
+
 #mm-espacio-publicidad .promo-text {
     line-height: 1.2;
 }
@@ -1544,6 +1545,7 @@ body {
     line-height: 1.2;
     margin-top: 12px;
 }
+
 /* =========================
    CONTROL DE VISIBILIDAD MOBILE / DESKTOP Y SEPARACIÓN
 ========================= */
@@ -1820,7 +1822,7 @@ body {
 #contenidos .card-title {
     font-size: 1.25rem;
     font-weight: 600;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
     color: #111;
     display: flex;
     justify-content: center;
@@ -1868,6 +1870,7 @@ body {
 #contenidos .col-md-4 {
     margin-bottom: 2rem;
 }
+
 .d-flex .btn {
     display: inline-block;
     transition: transform .22s ease;
@@ -1876,6 +1879,7 @@ body {
 .d-flex .btn:hover {
     transform: scale(1.05);
 }
+
 .linea-divide {
     width: 100%;
     height: 2px;
@@ -1887,16 +1891,19 @@ body {
 .d-flex .btn {
     transition: transform .25s ease, box-shadow .25s ease, background .25s ease, color .25s ease;
 }
+
 .d-flex button.btn:hover {
     transform: scale(1.04);
-    box-shadow: 0 6px 18px rgba(255,255,255,.08);
+    box-shadow: 0 6px 18px rgba(255, 255, 255, .08);
     background-color: #000000;
 }
-.acceso-text{
+
+.acceso-text {
     font-size: .68rem;
     opacity: .75;
     letter-spacing: .2px;
 }
+
 /* Responsive tweaks */
 @media (max-width: 768px) {
     #contenidos .card-body {
@@ -1966,20 +1973,22 @@ body {
 }
 
 .precios-toggle i {
-  display: inline-block;
-  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
-  transform-origin: center;
-  will-change: transform;
+    display: inline-block;
+    transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform-origin: center;
+    will-change: transform;
 }
 
 .precios-toggle i.rotated {
-  transform: rotate(180deg);
+    transform: rotate(180deg);
 }
-.row-cursos{
+
+.row-cursos {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px,1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 25px;
 }
+
 /* ===== Overlay Agenda ===== */
 .modal-overlay {
     position: fixed;
@@ -2054,6 +2063,7 @@ body {
     transform: scale(1.25);
     color: #8e8e8e;
 }
+
 /* Formulario */
 .form-agenda {
     display: flex;
@@ -2286,6 +2296,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     width: calc(100% - 40px);
     max-width: 280px;
 }
+
 /* Botones dentro del contenedor */
 .mm-btn-container .btn {
     transition: transform .22s ease, box-shadow .22s ease;
@@ -2295,8 +2306,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 /* Hover individual */
 .mm-btn-container .btn:hover {
     transform: scale(1.06);
-    box-shadow: 0 6px 16px rgba(0,0,0,.25);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, .25);
 }
+
 /* Card body debajo de la imagen, altura consistente */
 .mm-cuerpo {
     flex: 1;
@@ -2380,9 +2392,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
         padding: 0.8rem 1rem;
     }
 }
+
 .btn-instagram {
     background: #fff !important;
-    color: #212529 !important; /* o el color que uses */
+    color: #212529 !important;
+    /* o el color que uses */
     border: 1px solid #E4405F !important;
     transition: transform .25s ease, box-shadow .25s ease;
 }
@@ -2551,7 +2565,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .tab-btn.active::after {
     width: 70%;
     background-color: crimson;
-    
+
 }
 
 .tab-btn.active i {
@@ -2916,6 +2930,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .btn-instagram-marcas:hover i {
     color: #fff;
 }
+
 /* ===== INDICADORES DOTS ===== */
 .brand-slider-dots {
     text-align: center;
@@ -3069,6 +3084,7 @@ button i.fa-whatsapp {
     display: inline-block;
     line-height: 1;
 }
+
 /* -------- Responsive -------- */
 @media (max-width: 768px) {
     #contact {

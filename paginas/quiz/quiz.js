@@ -16,7 +16,7 @@ const preguntasFacil = [
     respuestas: [
       { texto: "Frenar fuerte para detenerse", correcta: false },
       { texto: "Acelerar para salir rápido de la curva", correcta: false },
-      { texto: "Sujetar firmemente el volante y reducir velocidad", correcta: true },
+      { texto: "Sujetar firme el volante y reducir velocidad", correcta: true },
       { texto: "Encender luces altas", correcta: false }
     ],
     puntos: 2
@@ -57,7 +57,7 @@ const preguntasFacil = [
       { texto: "Cédula de identidad", correcta: false },
       { texto: "Licencia de conducir", correcta: false },
       { texto: "Certificado de revisión técnica", correcta: false },
-      { texto: "Boleta del último mantención", correcta: true }
+      { texto: "Boleta de la última mantención", correcta: true }
     ],
     puntos: 2
   },
@@ -195,7 +195,7 @@ const preguntasFacil = [
     pregunta: "¿Qué significa una señal azul con una flecha blanca hacia arriba?",
     respuestas: [
       { texto: "Curva obligatoria", correcta: false },
-      { texto: "Siga de frente", correcta: true },
+      { texto: "Dirección obligatoria", correcta: true },
       { texto: "Giro a la derecha", correcta: false },
       { texto: "Desvío", correcta: false }
     ],
@@ -579,7 +579,7 @@ const preguntasFacil = [
   // Crear y mostrar contador de tiempo
   const tiempoElemento = document.createElement('div');
   tiempoElemento.id = 'tiempo-restante';
-  tiempoElemento.style.marginBottom = '15px';
+  tiempoElemento.style.marginBottom = '65px';
   tiempoElemento.style.fontWeight = 'bold';
   quizContainer.insertBefore(tiempoElemento, preguntaElemento);
 
@@ -694,8 +694,8 @@ function mostrarResultado() {
 
   const mensaje = document.createElement('p');
   mensaje.style.fontWeight = 'bold';
-  mensaje.style.marginTop = '15px';
-  mensaje.innerText = aprobado ? "🎉 ¡Aprobaste el Quiz!" : "❌ No alcanzaste el puntaje mínimo para aprobar este Quiz.";
+  mensaje.style.marginTop = '12px';
+  mensaje.innerText = aprobado ? "🎉 ¡Aprobaste el Quiz!" : "❌ No alcanzaste el puntaje mínimo para aprobar.";
   textoPuntaje.parentNode.appendChild(mensaje);
 
   modal.classList.remove('oculto');
