@@ -119,7 +119,78 @@ body {
     transform: scale(1);
     background: rgb(255, 255, 255);
 }
+/* Cada slide es el contenedor de referencia para el botón */
+.carousel-item {
+  position: relative;
+}
 
+/* Estilo base del botón (compartido por todos) */
+.slide-btn {
+  position: absolute;
+  z-index: 10;
+  padding: clamp(6px, 1.8vw, 10px) clamp(16px, 4vw, 40px);
+  border-radius: 1.75rem;
+  background: rgba(255, 255, 255, .10);
+  color: #fff;
+  font-weight: 700;
+  font-size: clamp(13px, 3vw, 24px);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color .25s ease, transform .25s ease, background .28s ease;
+}
+
+.slide-btn:hover {
+  color: #000;
+  background: rgb(255, 255, 255);
+  transform: scale(1.05);
+}
+
+/* Posición individual por cada slide */
+.slide-btn-1 {
+  top: 70%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 1px solid #fff;
+}
+.slide-btn-1:hover {
+  transform: translateX(-50%) scale(1.05);
+}
+.slide-btn-2 {
+  top: 50%;
+  left: 12%;
+  transform: translateX(-40%);
+  border: 1px solid #fff;
+}
+.slide-btn-2:hover {
+  transform: translateX(-40%) scale(1.05);
+}
+.slide-btn-3 {
+  top: 50%;
+  left: 12%;
+  transform: translateX(-40%);
+  border: 1px solid #fff;
+}
+.slide-btn-3:hover {
+  transform: translateX(-40%) scale(1.05);
+}
+.slide-btn-4 {
+  top: 80%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 1px solid #fff;
+}
+.slide-btn-4:hover {
+  transform: translateX(-50%) scale(1.05);
+}
+.slide-btn-5 {
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 1px solid #fff;
+}
+.slide-btn-5:hover {
+  transform: translateX(-50%) scale(1.05);
+}
 
 /* Tooltip estilo burbuja */
 .tooltip-bubble {
@@ -1198,7 +1269,6 @@ body {
 }
 
 
-
 /* Ajustes para pantallas muy grandes (más separación y tamaño) */
 @media (min-width: 1200px) {
     .nav-fullscreen {
@@ -2205,7 +2275,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .blanco {
-    color: rgb(0, 0, 0);
+    color: #fff;
 }
 
 .gris {
@@ -2358,40 +2428,13 @@ input[type="date"]::-webkit-calendar-picker-indicator {
         /* asegura que no se rompa la línea */
         text-align: center;
     }
-}
 
-/* ===== Responsive ===== */
-@media (max-width: 768px) {
-    .mm-slider-track {
-        gap: 12px;
-        padding: 0 10px;
-    }
-
-    .mm-fondo-blur {
-        flex: 0 0 90%;
-        max-width: 360px;
-    }
-
-    .mm-tarjeta {
-        flex-direction: column;
-    }
-
-    .mm-tarjeta .card-img-top {
-        height: 200px;
-        /* más chico en móvil */
-    }
-
-    .mm-btn-container {
-        flex-direction: column;
-        gap: 0.4rem;
-        padding: 0.4rem 0.8rem;
-    }
-
-    .mm-cuerpo {
-        font-size: 0.85rem;
-        padding: 0.8rem 1rem;
+    #titulo-rotativo {
+        font-size: 2.6rem;
     }
 }
+
+
 
 .btn-instagram {
     background: #fff !important;
@@ -2453,13 +2496,19 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     border-bottom-right-radius: 0;
 }
 
-/* X simple blanca */
+/* X sobre la imagen */
 .close-x {
-    font-size: 1.5rem;
-    color: #201f1f;
+    position: absolute;
+    top: 12px;
+    right: 5%;
+    transform: translateX(-50%);
+    z-index: 100;
+    font-size: 1.6rem;
+    color: #000000;
     cursor: pointer;
-    display: block;
-    margin: 1rem auto;
+    margin: 0;
+    padding: 0;
+    line-height: 1;
 }
 
 

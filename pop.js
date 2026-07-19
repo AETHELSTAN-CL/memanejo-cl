@@ -299,7 +299,7 @@ actualizarOpcionesHorario();
   const frases = [
     ["SERVICIOS", "AUTOMOTRICES"],
     ["TALLERES", "ASOCIADOS"],
-    ["CARWASH", "PREMIUM"],
+    ["DETAILING", "AUTOMOTRIZ"],
     ["MANTENCIÓN", "PREVENTIVA"]
   ];
   const colores = [

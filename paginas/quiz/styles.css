@@ -33,7 +33,6 @@ body {
 #question {
   width: 100%;
   max-width: 550px;
-  /* 🔧 límite visual del texto */
   text-align: left;
   /* o center si prefieres */
   margin-bottom: 60px;
@@ -62,11 +61,10 @@ body {
   align-items: center;
   justify-content: center;
   gap: 20px;
-  margin-bottom: 60px;
 }
 
 .logo-texto h2 {
-  margin-bottom: 50px;
+  margin-bottom: 45px;
 }
 
 .logo-bienvenida {
