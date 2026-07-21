@@ -1899,13 +1899,15 @@ body {
     margin-bottom: 2rem;
     color: #111;
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
 
 #contenidos .card-title i {
     color: #2261ff;
     font-size: 1.5rem;
-    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
 #contenidos .card-text {
