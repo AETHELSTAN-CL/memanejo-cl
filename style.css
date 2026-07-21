@@ -1528,9 +1528,7 @@ body {
     }
 }
 
-/* =========================
-   VIDEO base: responsivo y con sombra
-========================= */
+/* Esopacio publicitario talleres*/
 .promo-video {
     width: 100%;
     height: auto;
@@ -1540,9 +1538,6 @@ body {
     display: none;
 }
 
-/* =========================
-   TEXTOS Y BANNERS
-========================= */
 .promo-text {
     font-size: 1.1rem;
     color: #f1f1f1;
@@ -1591,7 +1586,7 @@ body {
     border-radius: 36px;
     padding: 5px 14px;
     font-size: 0.85rem;
-    font-weight: 600;
+    font-weight: 700;
     margin-bottom: 5px;
 }
 
@@ -1613,7 +1608,8 @@ body {
 }
 
 #mm-espacio-publicidad .promo-text {
-    line-height: 1.2;
+    
+    font-size: 16px;
 }
 
 #mm-espacio-publicidad .promo-banner small {
