@@ -2315,7 +2315,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     scroll-behavior: smooth;
 }
 
-/* Contenedor de cada card */
+/* Contenedor de cada card — ahora también es el marco con borde fijo */
 .mm-fondo-blur {
     display: flex;
     justify-content: center;
@@ -2323,6 +2323,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     flex: 0 0 90%;
     max-width: 540px;
     scroll-snap-align: center;
+    border-radius: 1rem;
+    border: 1px solid rgb(255, 255, 255); /* NUEVO: el borde vive aquí, estático */
+    overflow: hidden; /* NUEVO: contiene el scale interno sin afectar el borde */
 }
 
 /* Modal oferta */
@@ -2333,11 +2336,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     border-radius: 1rem;
     overflow: hidden;
     transition: transform 0.3s ease;
+    /* sin borde aquí — se quitó porque ahora vive en .mm-fondo-blur */
 }
 
-/* Hover ligero */
 .mm-tarjeta:hover {
-    transform: translateY(-3px);
+    transform: scale(1.03);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 }
 
 /* Imagen de la card */
@@ -2445,7 +2449,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 
 }
-
 
 .btn-instagram {
     background: #fff !important;
