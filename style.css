@@ -5,8 +5,6 @@ body {
     background-color: #111;
     scroll-behavior: smooth;
     overflow-x: hidden;
-    padding-top: env(safe-area-inset-top);
-    padding-bottom: env(safe-area-inset-bottom);
 }
 
 
@@ -119,77 +117,87 @@ body {
     transform: scale(1);
     background: rgb(255, 255, 255);
 }
+
 /* Cada slide es el contenedor de referencia para el botón */
 .carousel-item {
-  position: relative;
+    position: relative;
 }
 
 /* Estilo base del botón (compartido por todos) */
 .slide-btn {
-  position: absolute;
-  z-index: 10;
-  padding: clamp(6px, 1.8vw, 10px) clamp(16px, 4vw, 40px);
-  border-radius: 1.75rem;
-  background: rgba(255, 255, 255, .10);
-  color: #fff;
-  font-weight: 700;
-  font-size: clamp(13px, 3vw, 24px);
-  text-decoration: none;
-  white-space: nowrap;
-  transition: color .25s ease, transform .25s ease, background .28s ease;
+    position: absolute;
+    z-index: 10;
+    padding: clamp(6px, 1.8vw, 10px) clamp(16px, 4vw, 40px);
+    border-radius: 1.75rem;
+    background: rgba(255, 255, 255, .10);
+    color: #fff;
+    font-weight: 700;
+    font-size: clamp(13px, 3vw, 24px);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color .25s ease, transform .25s ease, background .28s ease;
 }
 
 .slide-btn:hover {
-  color: #000;
-  background: rgb(255, 255, 255);
-  transform: scale(1.05);
+    color: #000;
+    background: rgb(255, 255, 255);
+    transform: scale(1.05);
 }
 
 /* Posición individual por cada slide */
 .slide-btn-1 {
-  top: 70%;
-  left: 50%;
-  transform: translateX(-50%);
-  border: 1px solid #fff;
+    top: 70%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 1px solid #fff;
 }
+
 .slide-btn-1:hover {
-  transform: translateX(-50%) scale(1.05);
+    transform: translateX(-50%) scale(1.05);
 }
+
 .slide-btn-2 {
-  top: 50%;
-  left: 12%;
-  transform: translateX(-40%);
-  border: 1px solid #fff;
+    top: 50%;
+    left: 12%;
+    transform: translateX(-40%);
+    border: 1px solid #fff;
 }
+
 .slide-btn-2:hover {
-  transform: translateX(-40%) scale(1.05);
+    transform: translateX(-40%) scale(1.05);
 }
+
 .slide-btn-3 {
-  top: 50%;
-  left: 12%;
-  transform: translateX(-40%);
-  border: 1px solid #fff;
+    top: 50%;
+    left: 12%;
+    transform: translateX(-40%);
+    border: 1px solid #fff;
 }
+
 .slide-btn-3:hover {
-  transform: translateX(-40%) scale(1.05);
+    transform: translateX(-40%) scale(1.05);
 }
+
 .slide-btn-4 {
-  top: 80%;
-  left: 50%;
-  transform: translateX(-50%);
-  border: 1px solid #fff;
+    top: 80%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 1px solid #fff;
 }
+
 .slide-btn-4:hover {
-  transform: translateX(-50%) scale(1.05);
+    transform: translateX(-50%) scale(1.05);
 }
+
 .slide-btn-5 {
-  top: 50%;
-  left: 50%;
-  transform: translateX(-50%);
-  border: 1px solid #fff;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 1px solid #fff;
 }
+
 .slide-btn-5:hover {
-  transform: translateX(-50%) scale(1.05);
+    transform: translateX(-50%) scale(1.05);
 }
 
 /* Tooltip estilo burbuja */
@@ -665,7 +673,7 @@ body {
 
     .modal-ruta,
     .modal-cursos {
-        max-width: 90%;
+        max-width: 98%;
     }
 
     .modal-ruta .modal-title,
@@ -2247,11 +2255,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 
 /* ------------------ Lubricentros Asociados ------------------ */
-#lubricentros {
-    background-color: #f8de3f;
-    width: 100%;
-    padding: 3rem 0;
-}
+
 
 .titulo-rotativo-box {
     text-align: center;
@@ -2317,7 +2321,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     justify-content: center;
     width: 100%;
     flex: 0 0 90%;
-    max-width: 600px;
+    max-width: 540px;
     scroll-snap-align: center;
 }
 
@@ -2414,15 +2418,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 @media (min-width: 768px) {
     .mm-tarjeta .mm-btn-container {
         flex-direction: row;
-        /* horizontal */
         justify-content: center;
         gap: 1rem;
-        width: auto;
-        /* que se ajuste al contenido */
-        max-width: none;
     }
 
-    /* Opcional: hacer que los botones tengan un ancho mínimo */
     .mm-tarjeta .mm-btn-container .btn {
         min-width: 200px;
         /* asegura que no se rompa la línea */
@@ -2432,8 +2431,20 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     #titulo-rotativo {
         font-size: 2.6rem;
     }
+
 }
 
+/* Mobile y tablets pequeñas */
+
+@media (max-width: 767px) {
+
+    .mm-fondo-blur {
+        flex: 0 0 75%;
+        max-width: 550px;
+    }
+
+
+}
 
 
 .btn-instagram {
@@ -2475,7 +2486,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     -webkit-backdrop-filter: blur(12px);
     border-radius: 2rem;
     width: 310px;
-    /* móvil base */
     max-width: 450px;
     min-width: 240px;
     text-align: center;
@@ -2533,7 +2543,22 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     line-height: 1.4;
     text-align: center;
 }
+@media (min-width: 768px) {
+    .modal-dialog.modal-custom {
+        max-width: 600px;
+    }
 
+    .modal-bubble {
+        width: 620px;
+        max-width: 620px;
+        min-height: 550px;
+    }
+
+    .modal-image {
+        height: 720px;
+        object-fit: cover;
+    }
+}
 /*start sobre mi section*/
 .sobre-mi-section {
     background-color: #070303;
