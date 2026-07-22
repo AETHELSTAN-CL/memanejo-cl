@@ -127,10 +127,11 @@ body {
 .slide-btn {
     position: absolute;
     z-index: 10;
-    padding: clamp(6px, 1.8vw, 10px) clamp(16px, 4vw, 40px);
-    border-radius: 1.75rem;
-    background: rgba(255, 255, 255, .10);
-    color: #fff;
+    padding: clamp(6px, 1.8vw, 4px) clamp(16px, 4vw, 100px);
+    border-radius: 36px;
+    background: rgb(255, 255, 255);
+    color: #000000;
+    border: 1px solid #000000;
     font-weight: 700;
     font-size: clamp(13px, 3vw, 24px);
     text-decoration: none;
@@ -146,10 +147,9 @@ body {
 
 /* Posición individual por cada slide */
 .slide-btn-1 {
-    top: 70%;
+    top: 25%;
     left: 50%;
     transform: translateX(-50%);
-    border: 1px solid #fff;
 }
 
 .slide-btn-1:hover {
@@ -160,7 +160,6 @@ body {
     top: 50%;
     left: 12%;
     transform: translateX(-40%);
-    border: 1px solid #fff;
 }
 
 .slide-btn-2:hover {
@@ -171,7 +170,6 @@ body {
     top: 50%;
     left: 12%;
     transform: translateX(-40%);
-    border: 1px solid #fff;
 }
 
 .slide-btn-3:hover {
@@ -182,7 +180,6 @@ body {
     top: 80%;
     left: 50%;
     transform: translateX(-50%);
-    border: 1px solid #fff;
 }
 
 .slide-btn-4:hover {
@@ -193,7 +190,6 @@ body {
     top: 50%;
     left: 50%;
     transform: translateX(-50%);
-    border: 1px solid #fff;
 }
 
 .slide-btn-5:hover {
@@ -1914,6 +1910,8 @@ body {
     font-size: 0.95rem;
     color: #555;
     line-height: 1.6;
+    padding: 0 1rem;
+    margin-bottom: 16px;
 }
 
 /* Cards gris */
