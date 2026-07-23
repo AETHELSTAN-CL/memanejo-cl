@@ -1492,10 +1492,6 @@ body {
         width: 100%;
         max-width: 100%;
         overflow: hidden;
-        padding-left: 1rem;
-        /* espacio inicial */
-        padding-right: 1rem;
-        /* espacio final */
     }
 
     #sliderMobileQA {
@@ -1580,12 +1576,14 @@ body {
 
 .promo-banner.principal .btn {
     border-radius: 36px;
-    padding: 5px 14px;
     font-size: 0.85rem;
     font-weight: 700;
-    margin-bottom: 5px;
 }
-
+.promo-banner .btn-publicidad-taller {
+    border-radius: 36px;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
 .promo-banner.principal small {
     font-size: 0.7rem;
     color: #929292;
@@ -1605,17 +1603,22 @@ body {
 
 #mm-espacio-publicidad .promo-text {
     
-    font-size: 16px;
+    font-size: 18px;
 }
 
 #mm-espacio-publicidad .promo-banner small {
     display: block;
-    color: #929292 !important;
+    color: #dcdcdc;
     font-size: 0.8rem;
-    line-height: 1.2;
-    margin-top: 12px;
+    margin-top: 6px;
 }
-
+#mm-espacio-publicidad .promo-banner .text-bottom {
+    display: block;
+    color: #a9a9a9;
+    font-size: 0.6rem;
+    line-height: 1.2;
+    margin-top: 8px;
+}
 /* =========================
    CONTROL DE VISIBILIDAD MOBILE / DESKTOP Y SEPARACIÓN
 ========================= */
@@ -1664,7 +1667,6 @@ body {
 
     .promo-banner.principal small {
         font-size: 0.7rem;
-        margin-top: 4px;
     }
 }
 
@@ -1711,7 +1713,6 @@ body {
 
     .promo-banner.principal small {
         font-size: 0.7rem;
-        margin-top: 6px;
     }
 }
 
@@ -2544,9 +2545,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .modal-btn {
-    padding: 6px 16px !important;
     font-size: 0.9rem !important;
-    line-height: 1.2 !important;
+    font-weight: 700;
 }
 
 .modal-conditions {
@@ -2572,6 +2572,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
         object-fit: cover;
     }
 }
+
+
 /*start sobre mi section*/
 .sobre-mi-section {
     background-color: #070303;

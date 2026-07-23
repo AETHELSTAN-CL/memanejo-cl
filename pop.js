@@ -171,14 +171,14 @@ if (segundoBtn && segundoCollapseEl) {
 
   // Actualizar texto al cerrar
   segundoCollapseEl.addEventListener('hidden.bs.collapse', () => {
-    segundoBtn.innerHTML = `<i class="fa-solid fa-gift" style="margin-right:6px;"></i> Abrir una promoción para ti`;
+    segundoBtn.innerHTML = `<i class="fa-solid fa-gift" style="margin-right:6px;"></i>Descubre un beneficio exclusivo`;
   });
 
   // Inicializar texto según estado actual
   if (segundoCollapseEl.classList.contains('show')) {
     segundoBtn.textContent = "Cerrar Publicidad";
   } else {
-    segundoBtn.innerHTML = `<i class="fa-solid fa-gift" style="margin-right:6px;"></i> Abrir una promoción para ti`;
+    segundoBtn.innerHTML = `<i class="fa-solid fa-gift" style="margin-right:6px;"></i>Descubre un beneficio exclusivo`;
   }
 }
 // --- MODAL AGENDA ---
