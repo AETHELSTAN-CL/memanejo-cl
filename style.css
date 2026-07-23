@@ -146,7 +146,7 @@ body {
 
 /* Posición individual por cada slide */
 .slide-btn-1 {
-    top: 25%;
+    top: 70%;
     left: 50%;
     transform: translateX(-50%);
 }
@@ -226,7 +226,6 @@ body {
 /* Contenedor principal: todo negro */
 .nav-slider-wrapper {
     background-color: #111;
-    /* fondo negro unificado */
     padding: 0;
     position: relative;
     /* importante para tooltip absoluto */
@@ -284,7 +283,7 @@ body {
 
 .welcome-soy {
     display: block;
-    margin-top: 3rem;
+    margin-top: 1.5rem;
     text-align: left;
 }
 
@@ -516,14 +515,9 @@ body {
 
 /* Eliminar borde y fondo del dialog */
 .modal-dialog {
-    margin: 0;
-    /* quitar margen predeterminado */
     display: flex;
     align-items: center;
-    /* centrado vertical */
     justify-content: center;
-    /* centrado horizontal */
-    min-height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
 }
 
 /* Header */
@@ -858,7 +852,6 @@ body {
 .slide-movil {
     position: relative;
     width: 100%;
-    padding-top: max(16px, env(safe-area-inset-top));
     background-color: #111;
 }
 
@@ -1155,6 +1148,7 @@ body {
 
 .logo-carousel-section {
     overflow: hidden;
+    background-color: #fff;
 }
 
 .logo-track-wrapper {
@@ -1308,9 +1302,9 @@ body {
 
 /* Contenedor principal */
 .accordion-slider-section {
-    padding: 2rem 1rem;
+    background-color: #fff;
+    padding: 3rem 0.5rem;
     box-sizing: border-box;
-    max-width: 1200px;
     margin: 0 auto;
 }
 
@@ -1341,7 +1335,6 @@ body {
 /* ===== Acordeón moderno ===== */
 .accordion .accordion-item {
     border: none;
-    /* elimina líneas de borde */
     border-radius: 12px;
     margin-bottom: 1rem;
     overflow: hidden;
@@ -1353,7 +1346,7 @@ body {
     background: #f5f5f5;
     /* claro y moderno */
     color: #222;
-    padding: 1rem 1.25rem;
+    padding: 1rem 2rem;
     font-size: 1rem;
     border-radius: 12px;
     cursor: pointer;
@@ -1373,7 +1366,7 @@ body {
     background: #fafafa;
     /* color muy claro, limpio */
     color: #555;
-    padding: 1rem 1.25rem;
+    padding: 1rem 1.5rem;
     font-size: 0.95rem;
     line-height: 1.5;
     border-radius: 0 0 12px 12px;
@@ -1410,7 +1403,7 @@ body {
 
     .accordion-body {
         font-size: 0.9rem;
-        padding: 0.75rem 1rem;
+        padding: 0.75rem 1.5rem;
     }
 }
 
@@ -1513,6 +1506,11 @@ body {
         scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
     }
+    #sliderMobileQA h3 {
+        white-space: nowrap;
+        font-size: 1rem; /* ajusta si es necesario */
+
+    }
 
     #sliderMobileQA .slider-item {
         flex: 0 0 100%;
@@ -1522,7 +1520,10 @@ body {
         box-sizing: border-box;
     }
 }
-
+.espacio-publicidad-principal {
+    background-color: #fff;
+    padding: 2rem 0;
+}
 /* Esopacio publicitario talleres*/
 .promo-video {
     width: 100%;
@@ -1534,7 +1535,7 @@ body {
 }
 
 .promo-text {
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: #f1f1f1;
     margin-bottom: 0.8rem;
     text-align: center;
@@ -2342,7 +2343,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 /* Imagen de la card */
 .mm-tarjeta .card-img-top {
     width: 100%;
-    height: 300px;
+    height: 550px;
     /* altura fija para uniformidad */
     object-fit: cover;
     border-top-left-radius: 1rem;
@@ -2436,13 +2437,27 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 /* Mobile y tablets pequeñas */
 
 @media (max-width: 767px) {
-
     .mm-fondo-blur {
-        flex: 0 0 75%;
-        max-width: 550px;
+        flex: 0 0 70%;
+        max-width: 320px;
     }
 
-
+    /* Imagen alargada en X / delgada en Y, solo mobile */
+    .mm-tarjeta .card-img-top {
+        height: 280px; /* más cerca del ancho de 320px = menos recorte lateral */
+        object-fit: cover;
+    }
+    .mm-tarjeta .mm-btn-container {
+        position: static;
+        transform: none;
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        background: rgba(0, 0, 0, 0.35);
+        backdrop-filter: blur(10px);
+        border-radius: 0;
+        padding: 0.8rem 1rem;
+    }
 }
 
 .btn-instagram {

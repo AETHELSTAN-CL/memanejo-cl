@@ -21,7 +21,7 @@
   <link rel="apple-touch-icon" sizes="167x167" href="/img/apple-touch-icon-167.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon-180.png">
   <link rel="manifest" href="/site.webmanifest"> <!-- Open Graph -->
-  <meta property="og:title" content="Repuestos Automotrices, Servicio Técnico y Formación Vial" />
+  <meta property="og:title" content="Mantención Automotriz, Repuestos y Entrenamiento Vial" />
   <meta property="og:description"
     content="Mantención automotriz, clases de conducción, venta de repuestos, alianzas con talleres y atención personalizada. Todo en un solo sitio: memanejo.cl." />
   <meta property="og:image" content="https://www.memanejo.cl/img/photo-output_1.jpeg" />
@@ -36,8 +36,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <script
     type="application/ld+json"> { "@context": "https://schema.org", "@type": "Organization", "name": "memanejo.cl", "url": "https://www.memanejo.cl", "logo": "https://www.memanejo.cl/img/logopngicon.png", "sameAs": ["https://www.memanejo.cl"], "contactPoint": { "@type": "ContactPoint", "contactType": "customer service", "availableLanguage": "Spanish" } } </script>
-  <!-- Estilos -->
-  <link rel="stylesheet" href="style.css" /> <!-- Tus estilos personalizados --> <!-- Bootstrap CSS -->
+
+  <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <!-- AOS (animaciones al hacer scroll) -->
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" /> <!-- Font Awesome (iconos) -->
@@ -46,6 +46,8 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-07XB2NNQ0J"></script>
   <script> window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'G-07XB2NNQ0J'); </script>
   <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Estilos -->
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
@@ -343,8 +345,7 @@
         <div class="mm-fondo-blur">
           <div class="mm-tarjeta overflow-hidden rounded-4">
             <div class="position-relative">
-              <img src="img/automaniaracing.png" class="card-img-top object-fit-cover" alt="Lubricentro 1"
-                style="height:550px; width:100%;">
+              <img src="img/automaniaracing.png" class="card-img-top" alt="Lubricentro 1">
               <div class="mm-btn-container">
                 <a class="btn-instagram btn btn-light btn-sm rounded-pill px-3"
                   href="https://www.instagram.com/auto.maniaracing/" target="_blank">
@@ -372,8 +373,7 @@
         <div class="mm-fondo-blur">
           <div class="mm-tarjeta overflow-hidden rounded-4">
             <div class="position-relative">
-              <img src="img/landscapemazda.JPG" class="card-img-top object-fit-cover" alt="Lubricentro 2"
-                style="height:550px; width:100%;">
+              <img src="img/landscapemazda.JPG" class="card-img-top" alt="Lubricentro 2">
               <div class="mm-btn-container">
                 <a class="btn-instagram btn btn-light btn-sm rounded-pill px-3"
                   href="https://www.instagram.com/memanejo_app" target="_blank">
@@ -402,8 +402,7 @@
         <div class="mm-fondo-blur">
           <div class="mm-tarjeta overflow-hidden rounded-4">
             <div class="position-relative">
-              <img src="img/mantención_img1.JPG" class="card-img-top object-fit-cover" alt="Lubricentro 3"
-                style="height:550px; width:100%;">
+              <img src="img/mantención_img1.JPG" class="card-img-top" alt="Lubricentro 3">
               <div class="mm-btn-container">
                 <a class="btn-instagram btn btn-light btn-sm rounded-pill px-3"
                   href="https://www.instagram.com/memanejo_app" target="_blank">
@@ -458,7 +457,7 @@
   </div>
 
   <!----- Start Q&A section ----->
-  <section class="accordion-slider-section py-5">
+  <section class="accordion-slider-section">
     <div class="container">
 
       <!-- Desktop: dos bloques lado a lado -->
@@ -765,7 +764,7 @@
   </section>
 
   <!-- ======= Espacio Publicitario Principal ======= -->
-  <div class="text-center my-4">
+  <div class="text-center espacio-publicidad-principal">
     <button id="publicidadBtn" class="btn btn-info rounded-pill btn-sm mb-3 px-4" type="button" aria-expanded="true"
       aria-controls="publicidadCollapse">
       Cerrar Publicidad
@@ -786,7 +785,7 @@
         <p class="promo-text mb-2">
           ¿Quieres mostrar tu marca aquí? <br><a href="https://wa.me/56946914558" target="_blank"
             class="btn btn-info btn-sm rounded-pill px-4 mt-2">Contáctanos</a> <br>
-          <small>Presiona el botón <br>y accede a este espacio publicitario.</small>
+          <small>Presiona el botón <br>para acceder a este espacio publicitario.</small>
         </p>
         <div id="contador" style="color:rgb(180, 180, 180); font-size:14px; font-weight:bold;">
           Visitas: <span id="visitas"></span>
@@ -796,7 +795,7 @@
     </div>
   </div>
 
-  <section id="contenidos" class="py-5 bg-light">
+  <section id="contenidos" class="bg-light">
     <div class="container-fluid">
       <div class="titulo-divisor mb-4 p-3 rounded d-flex align-items-center gap-3" data-bg="dark"> <img
           src="img/logopngwhite.png" alt="Logo" class="logo-divisor">
@@ -1094,10 +1093,10 @@
                 class="video-vertical shadow rounded-3"> </div> <!-- Tarjeta Promoción -->
             <div class="promo-banner">
               <p class="promo-text mb-2">
-                <strong>Conoce el proceso de mantención de tu vehículo.</strong><br>
-                Seguimiento en vivo de tu servicio.<br>
-                Totalmente sin costo.<br>
-                <small>Disponibles solicitándolos a tu Asesor de Servicio.</small>
+                <strong>Seguimiento en vivo de tu servicio</strong><br>
+                <small>Conoce el proceso de mantención de tu vehículo.
+                <br>
+                Totalmente sin costo.<br>Disponible solicitándolo a tu Asesor de Servicio.</small>
               </p>
               <a href="#contact" class="btn btn-warning btn-sm rounded-pill px-4 mt-2">Reservar Mantención</a>
             </div>
