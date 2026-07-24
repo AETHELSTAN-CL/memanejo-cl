@@ -53,26 +53,64 @@
   <div id="modal-memanejo" class="modal-memanejo oculto">
     <div class="contenido-modal" id="captura">
 
-      <img src="img/logo.jpeg" alt="Logo Me Manejo" class="logo-modal">
+      <div class="score-ring" id="scoreRing">
+        <div class="score-ring-inner">
+          <span id="scorePuntos" class="score-numero">0/0</span>
+          <span class="score-label">puntos</span>
+        </div>
+      </div>
+
+      <div id="badgeEstado" class="badge-estado">
+        <i class="fas fa-check"></i>
+        <span id="badgeTexto">Aprobado</span>
+      </div>
+
       <h2 class="titulo-modal">Resultado del Quiz</h2>
       <p id="texto-puntaje" class="texto-puntaje-modal"></p>
 
-      <!-- Contenedor de botones finales con espacio uniforme -->
+      <div class="stats-grid">
+        <div class="stat-item">
+          <p id="statCorrectas" class="stat-valor">0</p>
+          <p class="stat-label">correctas</p>
+        </div>
+        <div class="stat-item">
+          <p id="statErradas" class="stat-valor">0</p>
+          <p class="stat-label">erradas</p>
+        </div>
+        <div class="stat-item">
+          <p id="statTiempo" class="stat-valor">0:00</p>
+          <p class="stat-label">tiempo</p>
+        </div>
+      </div>
+
       <div class="modal-buttons">
-        <button id="btn-descargar-img" class="btn">
-          <i class="fas fa-download"></i> Descargar Imagen
+
+        <button id="btn-descargar-img" class="modal-btn modal-btn-principal">
+          <i class="fas fa-download"></i>
+          Descargar Imagen
         </button>
-        <a id="btn-compartir" class="btn" target="_blank">
-          <i class="fab fa-twitter"></i> Compartir en Twitter
+
+        <a id="btn-compartir" class="modal-btn modal-btn-secundario" target="_blank">
+          <i class="fab fa-twitter"></i>
+          Compartir en Twitter
         </a>
-        <button id="btn-reintentar" class="btn btn-reintentar">
-          <i class="fas fa-redo"></i> Reintentar
+
+        <a id="btn-instagram" class="modal-btn modal-btn-instagram" target="_blank">
+          <i class="fab fa-instagram"></i>
+          Compartir en Instagram
+        </a>
+
+        <button id="btn-reintentar" class="modal-btn modal-btn-reintentar">
+          <i class="fas fa-redo"></i>
+          Reintentar
         </button>
+
       </div>
     </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="preguntas.js"></script>
   <script src="quiz.js"></script>
 </body>
 
