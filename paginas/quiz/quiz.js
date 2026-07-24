@@ -579,7 +579,7 @@ const preguntasFacil = [
   // Crear y mostrar contador de tiempo
   const tiempoElemento = document.createElement('div');
   tiempoElemento.id = 'tiempo-restante';
-  tiempoElemento.style.marginBottom = '65px';
+  tiempoElemento.style.marginBottom = '15px';
   tiempoElemento.style.fontWeight = 'bold';
   quizContainer.insertBefore(tiempoElemento, preguntaElemento);
 
@@ -593,7 +593,7 @@ const preguntasFacil = [
     quizContainer.style.flexDirection = 'column';
     quizContainer.style.justifyContent = 'center';
     quizContainer.style.alignItems = 'center';
-    quizContainer.style.minHeight = '100vh';
+    quizContainer.style.minHeight = '100dvh';
     quizContainer.style.overflow = 'hidden';
 
     indice = 0;
@@ -681,18 +681,22 @@ function seleccionarRespuesta(e) {
 function mostrarResultado() {
   clearInterval(timerInterval);
 
-  // Oculta quiz y elementos
   quizContainer.style.display = 'none';
   tiempoElemento.style.display = 'none';
   btnSiguiente.style.display = 'none';
-  
+
   const puntajeTotal = calcularPuntajeTotal();
   textoPuntaje.innerText = `Obtuviste ${score} puntos de ${puntajeTotal} posibles.`;
 
   const porcentaje = (score / puntajeTotal) * 100;
   const aprobado = porcentaje >= 87;
 
+  // 👇 Elimina el mensaje anterior si existe, antes de crear uno nuevo
+  const mensajeAnterior = textoPuntaje.parentNode.querySelector('.mensaje-resultado');
+  if (mensajeAnterior) mensajeAnterior.remove();
+
   const mensaje = document.createElement('p');
+  mensaje.classList.add('mensaje-resultado'); // 👈 le agregamos una clase para identificarlo
   mensaje.style.fontWeight = 'bold';
   mensaje.style.marginTop = '12px';
   mensaje.innerText = aprobado ? "🎉 ¡Aprobaste el Quiz!" : "❌ No alcanzaste el puntaje mínimo para aprobar.";
@@ -703,7 +707,7 @@ function mostrarResultado() {
   const textoParaCompartir = encodeURIComponent(`Obtuve ${score} puntos (${porcentaje.toFixed(0)}%) en el quiz Clase B 🚗 en www.memanejo.cl`);
   btnCompartir.href = `https://twitter.com/intent/tweet?text=${textoParaCompartir}`;
 }
-
+window.mostrarResultado = mostrarResultado;
   function calcularPuntajeTotal() {
     return preguntasActuales.reduce((acc, p) => acc + p.puntos, 0);
   }
@@ -712,7 +716,8 @@ function mostrarResultado() {
   btnReintentar.addEventListener('click', () => {
     modal.classList.add('oculto');
     quizContainer.style.display = 'none';
-    pantallaBienvenida.style.display = 'block';
+    pantallaBienvenida.style.display = 'flex';
+    tiempoElemento.style.display = 'block';
     resetearEstado();
   });
 
