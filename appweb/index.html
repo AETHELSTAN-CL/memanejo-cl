@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ROTA — Mantención automotriz directa, RM</title>
+<meta name="description" content="Agenda la mantención de tu auto por WhatsApp. Talleres verificados en toda la Región Metropolitana, precio cerrado antes de confirmar.">
+<meta name="theme-color" content="#12151A">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --ink:#12151A;
+  --ink-soft:#2A2F38;
+  --paper:#F2F4F4;
+  --paper-raise:#FFFFFF;
+  --steel:#6B7580;
+  --steel-soft:#9AA3AC;
+  --line:#E1E5E6;
+  --line-strong:#CBD1D3;
+  --accent:#FF4E1F;       /* ignition orange */
+  --accent-ink:#7A2607;
+  --scan:#0FB6A4;         /* diagnostic teal */
+  --scan-soft:#E3F7F4;
+  --whats:#25D366;
+  --whats-ink:#12321F;
+  --accent-soft:#FFE7DD;
+  --radius-s:10px;
+  --radius-m:18px;
+  --radius-l:28px;
+  --shadow-1:0 1px 2px rgba(18,21,26,.06);
+  --shadow-2:0 8px 24px -8px rgba(18,21,26,.18);
+  --shadow-3:0 24px 60px -20px rgba(18,21,26,.35);
+  --font-display:'Space Grotesk',system-ui,sans-serif;
+  --font-body:'Inter',system-ui,sans-serif;
+  --font-mono:'IBM Plex Mono',ui-monospace,monospace;
+  --tabbar-h:70px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+body{
+  font-family:var(--font-body);
+  background:var(--paper);
+  color:var(--ink);
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img,svg{display:block;max-width:100%;}
+a{color:inherit;text-decoration:none;}
+button{font:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+ul{list-style:none;}
+:focus-visible{outline:2.5px solid var(--accent);outline-offset:3px;border-radius:4px;}
+.wrap{max-width:1240px;margin:0 auto;padding:0 24px;}
+.eyebrow{
+  font-family:var(--font-mono);
+  font-size:12.5px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--scan);
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  font-weight:500;
+}
+.eyebrow::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--scan);box-shadow:0 0 0 4px var(--scan-soft);}
+h1,h2,h3,h4{font-family:var(--font-display);font-weight:600;letter-spacing:-.01em;color:var(--ink);}
+.section{padding:96px 0;}
+.section-head{max-width:640px;margin-bottom:48px;}
+.section-head h2{font-size:clamp(28px,3.6vw,42px);margin-top:14px;line-height:1.12;}
+.section-head p{color:var(--steel);font-size:17px;margin-top:14px;max-width:52ch;}
+.mono{font-family:var(--font-mono);}
+
+/* ============ BUTTONS ============ */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:14px 24px;border-radius:100px;font-weight:600;font-size:15px;
+  transition:transform .15s ease, box-shadow .15s ease, background-color .15s ease;
+  white-space:nowrap;
+}
+.btn:active{transform:scale(.97);}
+.btn--whats{background:var(--whats);color:#fff;box-shadow:0 10px 24px -8px rgba(37,211,102,.55);}
+.btn--whats:hover{box-shadow:0 14px 30px -8px rgba(37,211,102,.65);}
+.btn--ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line-strong);}
+.btn--ghost:hover{border-color:var(--ink);}
+.btn--dark{background:var(--ink);color:#fff;}
+.btn--dark:hover{background:var(--ink-soft);}
+.btn--sm{padding:10px 16px;font-size:13.5px;}
+
+/* ============ NAV ============ */
+.navbar{
+  position:sticky;top:0;z-index:60;
+  background:rgba(242,244,244,.82);backdrop-filter:blur(14px) saturate(1.4);
+  border-bottom:1px solid var(--line);
+}
+.navbar .wrap{display:flex;align-items:center;justify-content:space-between;height:76px;}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-weight:700;font-size:21px;letter-spacing:-.01em;}
+.brand-mark{width:32px;height:32px;border-radius:9px;background:var(--ink);display:grid;place-items:center;flex:none;}
+.brand-mark svg{width:17px;height:17px;}
+.nav-links{display:flex;align-items:center;gap:36px;font-size:14.5px;font-weight:500;color:var(--ink-soft);}
+.nav-links a{position:relative;padding:6px 0;}
+.nav-links a::after{content:'';position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--accent);transition:width .2s ease;}
+.nav-links a:hover::after{width:100%;}
+.nav-cta{display:flex;align-items:center;gap:14px;}
+.nav-burger{display:none;width:40px;height:40px;border-radius:10px;background:var(--paper-raise);border:1px solid var(--line);align-items:center;justify-content:center;}
+
+/* ============ HERO ============ */
+.hero{padding:64px 0 88px;position:relative;overflow:hidden;}
+.hero::before{
+  content:'';position:absolute;top:-220px;right:-160px;width:620px;height:620px;border-radius:50%;
+  background:radial-gradient(circle at 30% 30%, var(--accent-soft), transparent 70%);
+  opacity:.9;z-index:0;pointer-events:none;
+}
+.hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;}
+.hero-copy h1{font-size:clamp(36px,4.6vw,58px);line-height:1.05;margin-top:18px;}
+.hero-copy h1 em{font-style:normal;color:var(--accent);}
+.hero-copy p{font-size:18px;color:var(--steel);max-width:46ch;margin-top:20px;line-height:1.6;}
+.hero-actions{display:flex;gap:14px;margin-top:32px;flex-wrap:wrap;}
+.hero-trust{display:flex;gap:10px;align-items:center;margin-top:28px;font-size:13.5px;color:var(--steel);}
+.avatar-stack{display:flex;}
+.avatar-stack span{width:28px;height:28px;border-radius:50%;background:var(--ink);border:2.5px solid var(--paper);margin-left:-9px;display:grid;place-items:center;color:#fff;font-size:10px;font-family:var(--font-mono);}
+.avatar-stack span:first-child{margin-left:0;}
+
+/* --- phone mock (signature element) --- */
+.phone{
+  position:relative;margin-inline:auto;width:min(340px,86vw);
+  background:var(--ink);border-radius:44px;padding:14px;box-shadow:var(--shadow-3);
+}
+.phone::before{content:'';position:absolute;top:14px;left:50%;transform:translateX(-50%);width:120px;height:24px;background:var(--ink);border-radius:0 0 18px 18px;z-index:3;}
+.phone-screen{
+  background:linear-gradient(180deg,#ECE5DD,#E4DED6);
+  border-radius:32px;overflow:hidden;min-height:520px;display:flex;flex-direction:column;
+}
+.phone-topbar{
+  background:#075E54;color:#fff;padding:38px 18px 14px;display:flex;align-items:center;gap:10px;font-size:13.5px;font-weight:600;
+}
+.phone-topbar .dot{width:36px;height:36px;border-radius:50%;background:#25D366;display:grid;place-items:center;font-size:15px;}
+.phone-topbar small{display:block;font-weight:400;color:#D9F2E6;font-size:11px;margin-top:2px;}
+.chat{flex:1;padding:16px 12px;display:flex;flex-direction:column;gap:10px;}
+.bubble{max-width:82%;padding:10px 13px;border-radius:14px;font-size:13px;line-height:1.42;box-shadow:0 1px 1px rgba(0,0,0,.06);opacity:0;transform:translateY(8px);animation:pop .5s ease forwards;}
+.bubble.in{background:#fff;align-self:flex-start;border-bottom-left-radius:4px;}
+.bubble.out{background:#DCF8C6;align-self:flex-end;border-bottom-right-radius:4px;}
+.bubble b{font-family:var(--font-mono);font-weight:600;}
+.bubble.card{background:#fff;border:1px solid #d9d3c8;font-size:12.5px;}
+.bubble.card .tag{display:inline-block;margin-top:6px;background:var(--scan-soft);color:#0a7a6d;font-family:var(--font-mono);font-size:10.5px;padding:2px 8px;border-radius:100px;}
+@keyframes pop{to{opacity:1;transform:translateY(0);}}
+.bubble:nth-child(1){animation-delay:.2s}
+.bubble:nth-child(2){animation-delay:.9s}
+.bubble:nth-child(3){animation-delay:1.6s}
+.bubble:nth-child(4){animation-delay:2.3s}
+.bubble:nth-child(5){animation-delay:3s}
+.phone-input{padding:10px 12px 16px;display:flex;gap:8px;align-items:center;}
+.phone-input .field{flex:1;background:#fff;border-radius:100px;height:36px;}
+.phone-input .send{width:36px;height:36px;border-radius:50%;background:#075E54;display:grid;place-items:center;flex:none;}
+.phone-input .send svg{width:15px;height:15px;fill:#fff;}
+.phone-float{position:absolute;bottom:-18px;left:-18px;background:#fff;border-radius:16px;padding:11px 14px;box-shadow:var(--shadow-2);display:flex;align-items:center;gap:9px;}
+.phone-float .ico{width:30px;height:30px;border-radius:9px;background:var(--scan-soft);display:grid;place-items:center;flex:none;}
+.phone-float .ico svg{width:15px;height:15px;stroke:#0a7a6d;}
+.phone-float b{font-size:13px;display:block;}
+.phone-float span{font-size:11px;color:var(--steel);}
+
+/* ============ STATS BAR ============ */
+.statsbar{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--paper-raise);}
+.statsbar .wrap{display:grid;grid-template-columns:repeat(4,1fr);}
+.stat{padding:28px 20px;text-align:center;border-left:1px solid var(--line);}
+.stat:first-child{border-left:none;}
+.stat b{font-family:var(--font-mono);font-size:clamp(22px,2.6vw,30px);font-weight:600;color:var(--ink);display:block;}
+.stat span{font-size:12.5px;color:var(--steel);display:block;margin-top:4px;}
+
+/* ============ SERVICES ============ */
+.services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+.svc-card{
+  background:var(--paper-raise);border:1px solid var(--line);border-radius:var(--radius-m);
+  padding:26px 22px;transition:box-shadow .2s ease, transform .2s ease, border-color .2s ease;
+}
+.svc-card:hover{box-shadow:var(--shadow-2);transform:translateY(-3px);border-color:var(--line-strong);}
+.svc-ico{width:44px;height:44px;border-radius:12px;background:var(--accent-soft);display:grid;place-items:center;margin-bottom:16px;}
+.svc-ico svg{width:22px;height:22px;stroke:var(--accent-ink);}
+.svc-card h3{font-size:16.5px;font-weight:600;margin-bottom:6px;}
+.svc-card p{font-size:13.5px;color:var(--steel);line-height:1.5;min-height:44px;}
+.svc-meta{display:flex;justify-content:space-between;align-items:center;margin-top:16px;padding-top:14px;border-top:1px dashed var(--line);}
+.svc-price{font-family:var(--font-mono);font-size:13px;font-weight:600;color:var(--ink);}
+.svc-time{font-size:11.5px;color:var(--steel-soft);}
+
+/* ============ STEPS (whatsapp flow) ============ */
+.steps-wrap{background:var(--ink);border-radius:var(--radius-l);padding:64px;position:relative;overflow:hidden;}
+.steps-wrap::after{content:'';position:absolute;inset:0;background:radial-gradient(600px 300px at 85% 0%, rgba(255,78,31,.16), transparent 70%);}
+.steps-head{position:relative;color:#fff;max-width:560px;margin-bottom:48px;}
+.steps-head .eyebrow{color:var(--scan);}
+.steps-head h2{color:#fff;margin-top:14px;}
+.steps-head p{color:#B7BEC7;margin-top:14px;font-size:16.5px;}
+.steps-grid{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.step{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius-m);padding:26px;}
+.step-num{font-family:var(--font-mono);font-size:13px;color:var(--accent);font-weight:600;}
+.step h3{color:#fff;font-size:18px;margin:12px 0 8px;}
+.step p{color:#AEB5BE;font-size:14px;line-height:1.55;}
+
+/* ============ WORKSHOPS + MAP ============ */
+.workshops-layout{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start;}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px;}
+.chip{
+  padding:8px 15px;border-radius:100px;border:1.3px solid var(--line-strong);font-size:13px;font-weight:500;
+  color:var(--steel);background:var(--paper-raise);transition:.15s ease;
+}
+.chip.active{background:var(--ink);color:#fff;border-color:var(--ink);}
+.workshop-list{display:flex;flex-direction:column;gap:12px;max-height:520px;overflow:auto;padding-right:4px;}
+.workshop-card{
+  display:flex;gap:14px;align-items:flex-start;background:var(--paper-raise);border:1px solid var(--line);
+  border-radius:var(--radius-m);padding:16px 18px;
+}
+.w-ico{width:42px;height:42px;border-radius:11px;background:var(--scan-soft);display:grid;place-items:center;flex:none;}
+.w-ico svg{width:20px;height:20px;stroke:#0a7a6d;}
+.workshop-card h4{font-size:15px;font-weight:600;}
+.workshop-card .comuna{font-family:var(--font-mono);font-size:11.5px;color:var(--steel);margin-top:2px;}
+.workshop-card .spec{font-size:12.5px;color:var(--steel);margin-top:6px;}
+.w-rating{margin-left:auto;text-align:right;flex:none;}
+.w-rating b{font-family:var(--font-mono);font-size:14px;}
+.w-rating span{display:block;font-size:10.5px;color:var(--steel-soft);}
+.map-box{
+  position:sticky;top:100px;background:#DCE4E2;border-radius:var(--radius-l);overflow:hidden;height:560px;
+  border:1px solid var(--line);position:relative;
+}
+.map-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(18,21,26,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(18,21,26,.06) 1px,transparent 1px);background-size:32px 32px;}
+.map-pin{position:absolute;width:30px;height:30px;border-radius:50% 50% 50% 0;background:var(--accent);transform:rotate(-45deg);box-shadow:0 4px 10px rgba(0,0,0,.25);}
+.map-pin.big{background:var(--ink);width:38px;height:38px;}
+.map-pin::after{content:'';position:absolute;inset:7px;background:#fff;border-radius:50%;}
+.map-label{position:absolute;background:#fff;padding:5px 10px;border-radius:8px;font-size:11px;font-family:var(--font-mono);box-shadow:var(--shadow-1);white-space:nowrap;transform:translate(-50%,-140%);}
+
+/* ============ TRUST FEATURES ============ */
+.features-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line);border-left:1px solid var(--line);}
+.feature{padding:32px 26px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);}
+.feature svg{width:24px;height:24px;stroke:var(--accent);margin-bottom:16px;}
+.feature h3{font-size:16px;margin-bottom:8px;}
+.feature p{font-size:13.5px;color:var(--steel);line-height:1.55;}
+
+/* ============ TESTIMONIALS ============ */
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.testi{background:var(--paper-raise);border:1px solid var(--line);border-radius:var(--radius-m);padding:26px;}
+.testi p{font-size:14.5px;line-height:1.6;color:var(--ink-soft);}
+.testi footer{display:flex;align-items:center;gap:10px;margin-top:18px;}
+.testi .who{width:36px;height:36px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-family:var(--font-mono);font-size:12px;}
+.testi b{font-size:13.5px;display:block;}
+.testi span{font-size:12px;color:var(--steel);}
+
+/* ============ FINAL CTA ============ */
+.final-cta{background:var(--ink);border-radius:var(--radius-l);padding:72px 48px;text-align:center;position:relative;overflow:hidden;}
+.final-cta::before{content:'';position:absolute;inset:0;background:radial-gradient(500px 260px at 50% 0%, rgba(15,182,164,.18), transparent 70%);}
+.final-cta h2{position:relative;color:#fff;font-size:clamp(28px,4vw,42px);max-width:680px;margin:0 auto 16px;}
+.final-cta p{position:relative;color:#AEB5BE;max-width:50ch;margin:0 auto 30px;}
+.final-cta .btn{position:relative;}
+
+/* ============ FOOTER ============ */
+footer.site{padding:56px 0 calc(56px + env(safe-area-inset-bottom));border-top:1px solid var(--line);}
+.foot-grid{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:32px;margin-bottom:40px;}
+.foot-grid h5{font-size:12.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--steel-soft);margin-bottom:14px;font-weight:600;}
+.foot-grid ul{display:flex;flex-direction:column;gap:10px;font-size:14px;color:var(--steel);}
+.foot-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px;border-top:1px solid var(--line);font-size:12.5px;color:var(--steel-soft);flex-wrap:wrap;gap:12px;}
+
+/* ============ INSTALL BANNER (mobile) ============ */
+.install-banner{
+  display:none;align-items:center;gap:12px;background:var(--ink);color:#fff;padding:12px 16px;
+  border-radius:16px;margin:12px 24px 0;box-shadow:var(--shadow-2);
+}
+.install-banner .ico{width:38px;height:38px;border-radius:10px;background:var(--accent);display:grid;place-items:center;flex:none;}
+.install-banner .ico svg{width:19px;height:19px;stroke:#fff;}
+.install-banner strong{font-size:13px;display:block;}
+.install-banner span{font-size:11.5px;color:#AEB5BE;}
+.install-banner button.install{margin-left:auto;background:#fff;color:var(--ink);padding:8px 13px;border-radius:100px;font-size:12.5px;font-weight:600;flex:none;}
+.install-banner button.close{color:#AEB5BE;font-size:18px;padding:4px;flex:none;}
+
+/* ============ BOTTOM TAB BAR (mobile app feel) ============ */
+.tabbar{
+  display:none;position:fixed;bottom:0;left:0;right:0;z-index:80;
+  background:rgba(255,255,255,.92);backdrop-filter:blur(16px) saturate(1.4);
+  border-top:1px solid var(--line);
+  padding:8px 6px calc(6px + env(safe-area-inset-bottom));
+  justify-content:space-between;align-items:center;
+}
+.tab-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 2px;color:var(--steel-soft);position:relative;}
+.tab-item svg{width:21px;height:21px;stroke:currentColor;}
+.tab-item span{font-size:10px;font-weight:600;}
+.tab-item.active{color:var(--ink);}
+.tab-item.active svg{stroke:var(--accent);}
+.tab-item .fab{
+  width:48px;height:48px;border-radius:50%;background:var(--whats);display:grid;place-items:center;
+  margin-top:-26px;box-shadow:0 10px 22px -6px rgba(37,211,102,.6);border:4px solid var(--paper);
+}
+.tab-item .fab svg{width:22px;height:22px;stroke:none;fill:#fff;}
+.tab-item.fab-wrap span{color:var(--whats-ink);margin-top:1px;}
+
+/* ============ SCROLL REVEAL ============ */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+
+/* =====================================================
+   TABLET — reflow inteligente (768–1023px)
+===================================================== */
+@media (max-width:1023px){
+  .section{padding:72px 0;}
+  .hero .wrap{grid-template-columns:1fr;gap:44px;text-align:center;}
+  .hero-copy p{margin-inline:auto;}
+  .hero-actions{justify-content:center;}
+  .hero-trust{justify-content:center;}
+  .phone{width:min(320px,74vw);}
+  .services-grid{grid-template-columns:repeat(2,1fr);}
+  .steps-wrap{padding:44px 32px;}
+  .steps-grid{grid-template-columns:1fr;gap:16px;}
+  .workshops-layout{grid-template-columns:1fr;}
+  .map-box{height:340px;position:relative;top:0;order:-1;}
+  .features-grid{grid-template-columns:repeat(2,1fr);}
+  .testi-grid{grid-template-columns:repeat(2,1fr);}
+  .testi-grid .testi:last-child{grid-column:span 2;}
+  .foot-grid{grid-template-columns:1fr 1fr;}
+  .nav-links{gap:22px;font-size:13.5px;}
+  .statsbar .wrap{grid-template-columns:repeat(2,1fr);}
+  .stat:nth-child(3){border-left:none;}
+}
+
+/* =====================================================
+   MOBILE — sensación de app real (<768px)
+===================================================== */
+@media (max-width:767px){
+  .wrap{padding:0 18px;}
+  body{padding-bottom:var(--tabbar-h);}
+  .section{padding:52px 0;}
+  .section-head{margin-bottom:32px;}
+  .section-head p{font-size:15px;}
+
+  .navbar .wrap{height:64px;}
+  .brand{font-size:18px;}
+  .nav-links{display:none;}
+  .nav-cta .btn--whats span.long{display:none;}
+  .nav-burger{display:none;} /* la tab-bar reemplaza la navegación secundaria */
+
+  .hero{padding:28px 0 40px;}
+  .hero .wrap{gap:32px;}
+  .hero-copy h1{font-size:clamp(30px,8vw,38px);}
+  .hero-copy p{font-size:15.5px;}
+  .hero-actions{flex-direction:column;width:100%;}
+  .hero-actions .btn{width:100%;}
+  .phone{width:min(300px,84vw);}
+  .phone-float{left:50%;transform:translateX(-50%);bottom:-14px;}
+
+  .install-banner{display:flex;}
+
+  .statsbar .wrap{grid-template-columns:repeat(2,1fr);}
+  .stat{padding:20px 12px;}
+  .stat:nth-child(3){border-left:1px solid var(--line);}
+  .stat:nth-child(2n+1){border-left:none;}
+
+  .services-grid{grid-template-columns:1fr;gap:14px;}
+  .svc-card{display:flex;gap:16px;align-items:flex-start;padding:18px;border-radius:var(--radius-m);}
+  .svc-ico{margin-bottom:0;}
+  .svc-card .svc-body{flex:1;}
+  .svc-meta{margin-top:10px;padding-top:10px;}
+
+  .steps-wrap{padding:30px 20px;border-radius:22px;}
+  .steps-grid{gap:12px;}
+
+  .filters{overflow-x:auto;flex-wrap:nowrap;margin:0 -18px 18px;padding:0 18px 4px;}
+  .chip{flex:none;}
+  .map-box{height:220px;border-radius:20px;}
+  .workshop-list{max-height:none;overflow:visible;}
+  .workshop-card{border-radius:16px;}
+
+  .features-grid{grid-template-columns:1fr;border-left:none;}
+  .feature{border-right:none;padding:22px 4px;}
+
+  .testi-grid{grid-template-columns:1fr;}
+  .testi-grid .testi:last-child{grid-column:auto;}
+
+  .final-cta{padding:48px 24px;border-radius:24px;}
+  .final-cta .btn{width:100%;}
+
+  .foot-grid{grid-template-columns:1fr;gap:26px;}
+  footer.site{padding:40px 0 24px;}
+
+  .tabbar{display:flex;}
+}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto;}
+  .bubble,.reveal{animation:none !important;opacity:1 !important;transform:none !important;transition:none !important;}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="navbar">
+  <div class="wrap">
+    <a href="#top" class="brand">
+      <span class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/><circle cx="12" cy="12" r="3"/></svg>
+      </span>
+      memanejo.cl
+    </a>
+    <nav class="nav-links">
+      <a href="#servicios">Servicios</a>
+      <a href="#como-funciona">Cómo funciona</a>
+      <a href="#talleres">Talleres</a>
+      <a href="#confianza">Confianza</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn--whats btn--sm" href="#" id="navWhats">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="#fff"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.28-1.38a9.9 9.9 0 0 0 4.76 1.21h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2Z"/></svg>
+        <span class="long">Agendar por WhatsApp</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-copy">
+      <span class="eyebrow">Región Metropolitana · talleres verificados</span>
+      <h1>Tu auto, en manos de confianza, a <em>un mensaje</em> de distancia.</h1>
+      <p>Mantención personalizada y directa: cuéntanos qué le pasa a tu auto por WhatsApp y te conectamos con el taller asociado más cercano, con precio y hora confirmados antes de mover el auto.</p>
+      <div class="hero-actions">
+        <a href="#" class="btn btn--whats">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="#fff"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.28-1.38a9.9 9.9 0 0 0 4.76 1.21h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2Z"/></svg>
+          Agenda tu mantención
+        </a>
+        <a href="#servicios" class="btn btn--ghost">Ver servicios</a>
+      </div>
+      <div class="hero-trust">
+        <div class="avatar-stack"><span>MC</span><span>PR</span><span>NR</span><span>+</span></div>
+        <span>Más de 2.100 mantenciones agendadas este año en la RM</span>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="phone-topbar">
+            <div class="dot">🔧</div>
+            <div>ROTA — Asesor
+              <small>en línea · responde al toque</small>
+            </div>
+          </div>
+          <div class="chat">
+            <div class="bubble out">Hola! Mi auto está frenando raro, hace un ruido metálico. Vivo en Ñuñoa 🚗</div>
+            <div class="bubble in">Entendido. Por el ruido, probablemente sean <b>pastillas de freno</b>. Tengo 3 talleres asociados a menos de 4&nbsp;km tuyo.</div>
+            <div class="bubble card">
+              <b>Taller Rulmán Sur</b> — Ñuñoa<br>
+              Freno delantero completo · 55 min
+              <span class="tag">Hoy 17:30 disponible</span>
+            </div>
+            <div class="bubble out">Perfecto, esa hora! 👍</div>
+            <div class="bubble in">Listo, quedaste agendado. Precio cerrado: <b>$42.000</b>. Te llega la confirmación y el mapa por acá mismo.</div>
+          </div>
+          <div class="phone-input">
+            <div class="field"></div>
+            <div class="send"><svg viewBox="0 0 24 24"><path d="M3 20l18-8L3 4v6l13 2-13 2z"/></svg></div>
+          </div>
+        </div>
+        <div class="phone-float">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></div>
+          <div><b>Hora confirmada</b><span>Sin llamadas, sin esperas</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STATS ============ -->
+<section class="statsbar">
+  <div class="wrap">
+    <div class="stat"><b class="mono">40+</b><span>talleres asociados</span></div>
+    <div class="stat"><b class="mono">32</b><span>comunas cubiertas</span></div>
+    <div class="stat"><b class="mono">&lt;15min</b><span>tiempo de respuesta</span></div>
+    <div class="stat"><b class="mono">4.8/5</b><span>calificación promedio</span></div>
+  </div>
+</section>
+
+<!-- ============ SERVICIOS ============ -->
+<section class="section" id="servicios">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Qué puedes agendar</span>
+      <h2>Servicios más pedidos, con precio a la vista</h2>
+      <p>Todos los precios son referenciales y se cierran antes de confirmar la hora. Ningún taller te cobra sin avisarte primero.</p>
+    </div>
+    <div class="services-grid">
+
+      <div class="svc-card reveal">
+        <div class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></div>
+        <div class="svc-body">
+          <h3>Mantención básica</h3>
+          <p>Cambio de aceite, filtros y revisión de 20 puntos.</p>
+          <div class="svc-meta"><span class="svc-price">desde $35.000</span><span class="svc-time">45 min</span></div>
+        </div>
+      </div>
+
+      <div class="svc-card reveal">
+        <div class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2.4"/></svg></div>
+        <div class="svc-body">
+          <h3>Frenos</h3>
+          <p>Pastillas, discos y purga de sistema de frenos.</p>
+          <div class="svc-meta"><span class="svc-price">desde $42.000</span><span class="svc-time">55 min</span></div>
+        </div>
+      </div>
+
+      <div class="svc-card reveal">
+        <div class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/><circle cx="12" cy="12" r="6"/></svg></div>
+        <div class="svc-body">
+          <h3>Neumáticos y alineación</h3>
+          <p>Rotación, alineación, balanceo y cambio de neumáticos.</p>
+          <div class="svc-meta"><span class="svc-price">desde $28.000</span><span class="svc-time">40 min</span></div>
+        </div>
+      </div>
+
+      <div class="svc-card reveal">
+        <div class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg></div>
+        <div class="svc-body">
+          <h3>Batería y eléctrico</h3>
+          <p>Diagnóstico de carga, cambio de batería y alternador.</p>
+          <div class="svc-meta"><span class="svc-price">desde $18.000</span><span class="svc-time">25 min</span></div>
+        </div>
+      </div>
+
+      <div class="svc-card reveal">
+        <div class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h6"/></svg></div>
+        <div class="svc-body">
+          <h3>Revisión pre-técnica</h3>
+          <p>Chequeo completo antes de ir a la Planta de Revisión Técnica.</p>
+          <div class="svc-meta"><span class="svc-price">desde $22.000</span><span class="svc-time">50 min</span></div>
+        </div>
+      </div>
+
+      <div class="svc-card reveal">
+        <div class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="9" width="16" height="10" rx="2"/><path d="M8 9V6a4 4 0 0 1 8 0v3"/></svg></div>
+        <div class="svc-body">
+          <h3>Diagnóstico computarizado</h3>
+          <p>Escaneo de luz check-engine y códigos de falla.</p>
+          <div class="svc-meta"><span class="svc-price">desde $15.000</span><span class="svc-time">30 min</span></div>
+        </div>
+      </div>
+
+      <div class="svc-card reveal">
+        <div class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M4 12H1M23 12h-3"/><circle cx="12" cy="12" r="5"/></svg></div>
+        <div class="svc-body">
+          <h3>Aire acondicionado</h3>
+          <p>Recarga de gas, revisión de fugas y filtro de cabina.</p>
+          <div class="svc-meta"><span class="svc-price">desde $30.000</span><span class="svc-time">40 min</span></div>
+        </div>
+      </div>
+
+      <div class="svc-card reveal">
+        <div class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l4-9 4 3 4-9 4 8"/></svg></div>
+        <div class="svc-body">
+          <h3>Suspensión</h3>
+          <p>Amortiguadores, rótulas y ruidos de tren delantero.</p>
+          <div class="svc-meta"><span class="svc-price">desde $48.000</span><span class="svc-time">70 min</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ CÓMO FUNCIONA ============ -->
+<section class="section" id="como-funciona">
+  <div class="wrap">
+    <div class="steps-wrap reveal">
+      <div class="steps-head">
+        <span class="eyebrow">El proceso completo</span>
+        <h2>Todo pasa dentro del chat, en tres pasos</h2>
+        <p>Nada de formularios largos ni llamadas en espera. Agendar tu mantención toma el mismo tiempo que escribir un mensaje.</p>
+      </div>
+      <div class="steps-grid">
+        <div class="step">
+          <span class="step-num">01 — Escribe</span>
+          <h3>Cuéntanos qué pasa</h3>
+          <p>Describe el problema o el servicio que necesitas y tu comuna. Sin cuentas ni registros previos.</p>
+        </div>
+        <div class="step">
+          <span class="step-num">02 — Compara</span>
+          <h3>Recibe opciones reales</h3>
+          <p>Te mostramos los talleres asociados más cercanos, con horarios disponibles y precio cerrado.</p>
+        </div>
+        <div class="step">
+          <span class="step-num">03 — Confirma</span>
+          <h3>Tu hora queda lista</h3>
+          <p>Eliges el horario que más te acomode y recibes la confirmación con dirección y contacto directo del taller.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TALLERES + MAPA ============ -->
+<section class="section" id="talleres">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Cobertura RM</span>
+      <h2>Talleres asociados, verificados uno por uno</h2>
+      <p>Visitamos cada taller antes de sumarlo a la red: revisamos equipamiento, tiempos de entrega y trato con el cliente.</p>
+    </div>
+
+    <div class="workshops-layout">
+      <div>
+        <div class="filters reveal">
+          <button class="chip active">Todas las comunas</button>
+          <button class="chip">Providencia</button>
+          <button class="chip">Las Condes</button>
+          <button class="chip">Ñuñoa</button>
+          <button class="chip">Maipú</button>
+          <button class="chip">Puente Alto</button>
+          <button class="chip">La Florida</button>
+          <button class="chip">San Miguel</button>
+        </div>
+        <div class="workshop-list reveal">
+
+          <div class="workshop-card">
+            <div class="w-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/><circle cx="12" cy="12" r="6"/></svg></div>
+            <div>
+              <h4>Taller Rulmán Sur</h4>
+              <div class="comuna">ÑUÑOA · 3.8 KM</div>
+              <div class="spec">Frenos · Suspensión · Diagnóstico</div>
+            </div>
+            <div class="w-rating"><b>4.9</b><span>128 reseñas</span></div>
+          </div>
+
+          <div class="workshop-card">
+            <div class="w-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></div>
+            <div>
+              <h4>Mecánica Providencia Norte</h4>
+              <div class="comuna">PROVIDENCIA · 2.1 KM</div>
+              <div class="spec">Mantención básica · Batería · A/C</div>
+            </div>
+            <div class="w-rating"><b>4.8</b><span>94 reseñas</span></div>
+          </div>
+
+          <div class="workshop-card">
+            <div class="w-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="9" width="16" height="10" rx="2"/><path d="M8 9V6a4 4 0 0 1 8 0v3"/></svg></div>
+            <div>
+              <h4>Autocenter Las Condes</h4>
+              <div class="comuna">LAS CONDES · 5.4 KM</div>
+              <div class="spec">Diagnóstico computarizado · Eléctrico</div>
+            </div>
+            <div class="w-rating"><b>4.9</b><span>201 reseñas</span></div>
+          </div>
+
+          <div class="workshop-card">
+            <div class="w-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2.4"/></svg></div>
+            <div>
+              <h4>Taller Maipú Motor</h4>
+              <div class="comuna">MAIPÚ · 1.2 KM</div>
+              <div class="spec">Neumáticos · Alineación · Frenos</div>
+            </div>
+            <div class="w-rating"><b>4.7</b><span>76 reseñas</span></div>
+          </div>
+
+          <div class="workshop-card">
+            <div class="w-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h6"/></svg></div>
+            <div>
+              <h4>Pre-Revisión San Miguel</h4>
+              <div class="comuna">SAN MIGUEL · 4.6 KM</div>
+              <div class="spec">Revisión pre-técnica · Emisiones</div>
+            </div>
+            <div class="w-rating"><b>4.8</b><span>63 reseñas</span></div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="map-box reveal">
+        <div class="map-grid"></div>
+        <div class="map-pin big" style="top:44%;left:48%;"></div>
+        <div class="map-label" style="top:44%;left:48%;">Tú estás aquí</div>
+        <div class="map-pin" style="top:30%;left:35%;"></div>
+        <div class="map-pin" style="top:60%;left:30%;"></div>
+        <div class="map-pin" style="top:25%;left:62%;"></div>
+        <div class="map-pin" style="top:70%;left:60%;"></div>
+        <div class="map-pin" style="top:55%;left:75%;"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONFIANZA ============ -->
+<section class="section" id="confianza">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Por qué confiar en ROTA</span>
+      <h2>Directo, transparente y hecho para Chile</h2>
+    </div>
+    <div class="features-grid reveal">
+      <div class="feature">
+        <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+        <h3>Talleres verificados</h3>
+        <p>Cada taller pasa por una evaluación presencial antes de unirse a la red.</p>
+      </div>
+      <div class="feature">
+        <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v8M8 12h8"/><circle cx="12" cy="12" r="9"/></svg>
+        <h3>Precio cerrado</h3>
+        <p>Confirmas el valor exacto antes de agendar. Sin sorpresas al retirar el auto.</p>
+      </div>
+      <div class="feature">
+        <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.28-1.38a9.9 9.9 0 0 0 4.76 1.21h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2Z"/></svg>
+        <h3>Seguimiento directo</h3>
+        <p>Hablas con el taller y con nosotros por el mismo chat, de principio a fin.</p>
+      </div>
+      <div class="feature">
+        <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l6 6L20 6"/></svg>
+        <h3>Garantía de servicio</h3>
+        <p>30 días de garantía en mano de obra en todos los trabajos agendados por ROTA.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIOS ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Lo que dicen</span>
+      <h2>Gente real, autos reales</h2>
+    </div>
+    <div class="testi-grid reveal">
+      <div class="testi">
+        <p>"Nunca pensé que agendar una mantención fuera tan simple. Mandé un audio contando el problema y en 10 minutos ya tenía hora."</p>
+        <footer><div class="who">MJ</div><div><b>María José R.</b><span>Ñuñoa</span></div></footer>
+      </div>
+      <div class="testi">
+        <p>"Lo que más me gustó es que el precio quedó cerrado antes de dejar el auto. Nada de sorpresas al retirarlo."</p>
+        <footer><div class="who">FC</div><div><b>Felipe C.</b><span>Puente Alto</span></div></footer>
+      </div>
+      <div class="testi">
+        <p>"El taller que me asignaron quedaba a cinco cuadras de mi casa y ni sabía que existía. Volví a agendar con ellos directo."</p>
+        <footer><div class="who">CP</div><div><b>Camila P.</b><span>Maipú</span></div></footer>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA FINAL ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="final-cta reveal">
+      <h2>Tu próxima mantención empieza con un mensaje.</h2>
+      <p>Sin apps que descargar, sin formularios. Escríbenos ahora y te respondemos con opciones reales en minutos.</p>
+      <a href="#" class="btn btn--whats">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="#fff"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.28-1.38a9.9 9.9 0 0 0 4.76 1.21h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2Z"/></svg>
+        Agenda por WhatsApp ahora
+      </a>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ============ INSTALL BANNER (mobile) ============ -->
+<div class="install-banner" id="installBanner">
+  <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg></div>
+  <div>
+    <strong>Instala ROTA en tu pantalla de inicio</strong>
+    <span>Agenda más rápido, como una app</span>
+  </div>
+  <button class="install" id="installBtn">Instalar</button>
+  <button class="close" id="closeBanner" aria-label="Cerrar">&times;</button>
+</div>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="#top" class="brand">
+          <span class="brand-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/><circle cx="12" cy="12" r="3"/></svg>
+          </span>
+          ROTA
+        </a>
+        <p style="color:var(--steel);font-size:13.5px;margin-top:14px;max-width:30ch;">Mantención automotriz directa y personalizada en la Región Metropolitana.</p>
+      </div>
+      <div>
+        <h5>Servicios</h5>
+        <ul><li>Mantención básica</li><li>Frenos</li><li>Neumáticos</li><li>Diagnóstico</li></ul>
+      </div>
+      <div>
+        <h5>Empresa</h5>
+        <ul><li>Cómo funciona</li><li>Talleres asociados</li><li>Trabaja con nosotros</li></ul>
+      </div>
+      <div>
+        <h5>Contacto</h5>
+        <ul><li>WhatsApp directo</li><li>hola@rota.cl</li><li>Santiago, Chile</li></ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 ROTA. Hecho en Chile 🇨🇱</span>
+      <span>Términos · Privacidad</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ TAB BAR (mobile app feel) ============ -->
+<nav class="tabbar" id="tabbar">
+  <a href="#top" class="tab-item active" data-target="#top">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+    <span>Inicio</span>
+  </a>
+  <a href="#servicios" class="tab-item" data-target="#servicios">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    <span>Servicios</span>
+  </a>
+  <a href="#" class="tab-item fab-wrap">
+    <span class="fab"><svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.28-1.38a9.9 9.9 0 0 0 4.76 1.21h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2Z"/></svg></span>
+    <span>Agendar</span>
+  </a>
+  <a href="#talleres" class="tab-item" data-target="#talleres">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.4"/></svg>
+    <span>Talleres</span>
+  </a>
+  <a href="#confianza" class="tab-item" data-target="#confianza">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg>
+    <span>Perfil</span>
+  </a>
+</nav>
+
+<script>
+// ---- número de WhatsApp (reemplazar por el real) ----
+const WHATS_NUMBER = "56912345678";
+const WHATS_MSG = encodeURIComponent("Hola! Quiero agendar una mantención para mi auto.");
+const WHATS_URL = `https://wa.me/${WHATS_NUMBER}?text=${WHATS_MSG}`;
+document.querySelectorAll('a[href="#"]').forEach(a=>{
+  if(a.classList.contains('btn--whats') || a.classList.contains('fab-wrap')){
+    a.setAttribute('href', WHATS_URL);
+    a.setAttribute('target','_blank');
+    a.setAttribute('rel','noopener');
+  }
+});
+
+// ---- filtros de comuna (demo visual) ----
+document.querySelectorAll('.chip').forEach(chip=>{
+  chip.addEventListener('click', ()=>{
+    document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+    chip.classList.add('active');
+  });
+});
+
+// ---- scroll reveal ----
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// ---- tab bar: estado activo por scroll ----
+const tabItems = document.querySelectorAll('.tab-item[data-target]');
+const targets = [...tabItems].map(t=>document.querySelector(t.dataset.target)).filter(Boolean);
+const tabIO = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      const id = '#'+entry.target.id;
+      tabItems.forEach(t=>t.classList.toggle('active', t.dataset.target===id));
+    }
+  });
+},{rootMargin:'-40% 0px -50% 0px'});
+targets.forEach(t=>tabIO.observe(t));
+
+// ---- install banner (PWA) ----
+let deferredPrompt;
+const banner = document.getElementById('installBanner');
+window.addEventListener('beforeinstallprompt', (e)=>{
+  e.preventDefault();
+  deferredPrompt = e;
+});
+document.getElementById('installBtn').addEventListener('click', async ()=>{
+  if(deferredPrompt){ deferredPrompt.prompt(); await deferredPrompt.userChoice; deferredPrompt=null; }
+  banner.style.display='none';
+});
+document.getElementById('closeBanner').addEventListener('click', ()=>{ banner.style.display='none'; });
+
+// ---- manifest PWA generado en línea (para que todo viva en un solo archivo) ----
+const manifest = {
+  name: "ROTA — Mantención automotriz",
+  short_name: "ROTA",
+  start_url: ".",
+  display: "standalone",
+  background_color: "#F2F4F4",
+  theme_color: "#12151A",
+  description: "Agenda mantenciones automotrices por WhatsApp con talleres verificados en la Región Metropolitana.",
+  icons: [
+    {src:"icon-192.png", sizes:"192x192", type:"image/png"},
+    {src:"icon-512.png", sizes:"512x512", type:"image/png"}
+  ]
+};
+const manifestBlob = new Blob([JSON.stringify(manifest)], {type:'application/json'});
+const manifestLink = document.createElement('link');
+manifestLink.rel = 'manifest';
+manifestLink.href = URL.createObjectURL(manifestBlob);
+document.head.appendChild(manifestLink);
+</script>
+</body>
+</html>

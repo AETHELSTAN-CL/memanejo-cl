@@ -1502,9 +1502,11 @@ body {
         scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
     }
+
     #sliderMobileQA h3 {
         white-space: nowrap;
-        font-size: 1rem; /* ajusta si es necesario */
+        font-size: 1rem;
+        /* ajusta si es necesario */
 
     }
 
@@ -1516,10 +1518,12 @@ body {
         box-sizing: border-box;
     }
 }
+
 .espacio-publicidad-principal {
     background-color: #fff;
     padding: 2rem 0;
 }
+
 /* Esopacio publicitario talleres*/
 .promo-video {
     width: 100%;
@@ -1579,11 +1583,13 @@ body {
     font-size: 0.85rem;
     font-weight: 700;
 }
+
 .promo-banner .btn-publicidad-taller {
     border-radius: 36px;
     font-size: 0.85rem;
     font-weight: 700;
 }
+
 .promo-banner.principal small {
     font-size: 0.7rem;
     color: #929292;
@@ -1602,7 +1608,7 @@ body {
 }
 
 #mm-espacio-publicidad .promo-text {
-    
+
     font-size: 18px;
 }
 
@@ -1612,6 +1618,7 @@ body {
     font-size: 0.8rem;
     margin-top: 6px;
 }
+
 #mm-espacio-publicidad .promo-banner .text-bottom {
     display: block;
     color: #a9a9a9;
@@ -1619,6 +1626,7 @@ body {
     line-height: 1.2;
     margin-top: 8px;
 }
+
 /* =========================
    CONTROL DE VISIBILIDAD MOBILE / DESKTOP Y SEPARACIÓN
 ========================= */
@@ -2252,8 +2260,74 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 
 /* ------------------ Lubricentros Asociados ------------------ */
+/* =====================================================================
+   TÍTULO / MENSAJE — grande, a la izquierda, con subtítulo gris y botones
+===================================================================== */
+.titulo-portada {
+    max-width: 640px;
+    margin: 0 auto 40px;
+    padding: 0 20px;
+    text-align: left;
+}
 
+.titulo-portada h1 {
+    font-family: 'Avenir', sans-serif;
+    font-weight: 800;
+    font-size: 72px;
+    line-height: 1.05;
+    margin: 0;
+    color: #fff;
+}
 
+.titulo-portada .lp-sub {
+    color: #999;
+    font-size: 14.5px;
+    line-height: 1.6;
+    margin-top: 16px;
+    max-width: 50ch;
+}
+
+.lp-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+}
+
+.lp-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: 40px;
+    font-weight: 700;
+    font-size: 14px;
+    border: 1px solid #b8b8b8;
+    transition: .25s ease;
+    white-space: nowrap;
+    text-decoration: none;
+    color: #d9d9d9;
+}
+
+.lp-btn-whats {
+    border-color: #25D366;
+}
+
+.lp-btn-whats:hover {
+    background: #25D366;
+    color: #06210F;
+    box-shadow: 0 0 18px rgba(37, 211, 102, .5);
+}
+
+.lp-btn-ghost:hover {
+    background: #fff;
+    color: #000;
+    border-color: #fff;
+}
+
+/* =====================================================================
+   ROTADOR — ahora va debajo del slider de cards
+===================================================================== */
 .titulo-rotativo-box {
     text-align: center;
     height: 4.5rem;
@@ -2262,6 +2336,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     justify-content: center;
     overflow: hidden;
     padding: 0 1rem;
+    margin-top: 12px;
 }
 
 #titulo-rotativo {
@@ -2275,6 +2350,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     max-width: 120vw;
 }
 
+#titulo-rotativo span {
+    transition: opacity .4s ease;
+}
+
 .blanco {
     color: #fff;
 }
@@ -2283,25 +2362,23 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     color: #929292;
 }
 
-@keyframes slideUp {
-    0% {
-        transform: translateY(40px);
-        opacity: 0;
-    }
-
-    100% {
-        transform: translateY(0);
-        opacity: 1;
+@media (min-width:768px) {
+    #titulo-rotativo {
+        font-size: 2.6rem;
     }
 }
 
-/* ================= SLIDER ================= */
+/* =====================================================================
+   SLIDER — estructura y clases originales (mm-*), con mejoras agregadas
+===================================================================== */
 .mm-slider-wrapper {
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     display: flex;
     justify-content: center;
+    max-width: 1320px;
+    margin: 0 auto;
 }
 
 .mm-slider-track {
@@ -2312,20 +2389,18 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     scroll-behavior: smooth;
 }
 
-/* Contenedor de cada card — ahora también es el marco con borde fijo */
 .mm-fondo-blur {
     display: flex;
     justify-content: center;
+    flex: 0 0 70%;
+    max-width: 320px;
     width: 100%;
-    flex: 0 0 90%;
-    max-width: 540px;
     scroll-snap-align: center;
     border-radius: 1rem;
-    border: 1px solid rgb(255, 255, 255); /* NUEVO: el borde vive aquí, estático */
-    overflow: hidden; /* NUEVO: contiene el scale interno sin afectar el borde */
+    border: 1px solid rgb(255, 255, 255);
+    overflow: hidden;
 }
 
-/* Modal oferta */
 .mm-tarjeta {
     display: flex;
     flex-direction: column;
@@ -2333,58 +2408,53 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     border-radius: 1rem;
     overflow: hidden;
     transition: transform 0.3s ease;
-    /* sin borde aquí — se quitó porque ahora vive en .mm-fondo-blur */
 }
 
 .mm-tarjeta:hover {
     transform: scale(1.03);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
-/* Imagen de la card */
+.mm-tarjeta .card-img-wrap {
+    position: relative;
+}
+
 .mm-tarjeta .card-img-top {
     width: 100%;
-    height: 550px;
-    /* altura fija para uniformidad */
+    height: 280px;
     object-fit: cover;
+    display: block;
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
     transition: transform 0.4s ease;
 }
 
-/* Hover zoom imagen */
 .mm-tarjeta:hover .card-img-top {
     transform: scale(1.05);
 }
 
-/* Botones sobre la imagen */
-.mm-tarjeta .mm-btn-container {
+/* ---- NUEVO: tag sobre la imagen ---- */
+.mm-tag {
     position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    padding: 0.8rem 1rem;
-    border-radius: 12px;
-    width: calc(100% - 40px);
-    max-width: 280px;
+    top: 14px;
+    left: 14px;
+    z-index: 2;
+    background: rgba(0, 0, 0, .55);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255, 255, 255, .18);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 6px 13px;
+    border-radius: 40px;
+    letter-spacing: .02em;
 }
 
-/* Botones dentro del contenedor */
-.mm-btn-container .btn {
-    transition: transform .22s ease, box-shadow .22s ease;
-    will-change: transform;
+.mm-tag.hot {
+    background: #dc143c;
+    border-color: #dc143c;
 }
 
-/* Hover individual */
-.mm-btn-container .btn:hover {
-    transform: scale(1.06);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, .25);
-}
-
-/* Card body debajo de la imagen, altura consistente */
 .mm-cuerpo {
     flex: 1;
     display: flex;
@@ -2392,97 +2462,147 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     justify-content: flex-start;
     text-align: center;
     padding: 1rem;
-    font-size: 0.9rem;
+    font-size: .9rem;
     line-height: 1.3;
     color: #fff;
-    background: rgba(0, 0, 0, 0.35);
+    background: rgba(0, 0, 0, .35);
     backdrop-filter: blur(10px);
     border-radius: 0 0 1rem 1rem;
-    box-shadow: none;
 }
 
 .mm-cuerpo h5 {
     color: #fff;
+    font-weight: 700;
+    margin: 0 0 4px;
+    text-decoration: none;
 }
 
 .mm-cuerpo h5 small {
-    font-size: 0.7em;
+    font-size: .7em;
     color: #ccc;
     font-weight: normal;
 }
 
 .mm-cuerpo p {
     color: #ddd;
+    margin: .8rem 0 0;
 }
 
-/* Desktop: botones en fila y ocupando más espacio */
-@media (min-width: 768px) {
-    .mm-tarjeta .mm-btn-container {
-        flex-direction: row;
-        justify-content: center;
-        gap: 1rem;
-    }
-
-    .mm-tarjeta .mm-btn-container .btn {
-        min-width: 200px;
-        /* asegura que no se rompa la línea */
-        text-align: center;
-    }
-
-    #titulo-rotativo {
-        font-size: 2.6rem;
-    }
-
+/* ---- NUEVO: botón con flecha animada, debajo del texto ---- */
+.mm-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 16px;
+    padding: 11px 22px;
+    border: 1px solid #dc143c;
+    border-radius: 40px;
+    font-weight: 700;
+    font-size: 13.5px;
+    color: #fff;
+    transition: .25s ease;
+    align-self: center;
+    text-decoration: none;
 }
 
-/* Mobile y tablets pequeñas */
+.mm-cta:hover {
+    background: #dc143c;
+    box-shadow: 0 0 16px rgba(220, 20, 60, .45);
+}
 
-@media (max-width: 767px) {
+.mm-cta i {
+    transition: transform .25s ease;
+}
+
+.mm-cta:hover i {
+    transform: translateX(4px);
+}
+
+@media (min-width:768px) and (max-width:1023px) {
     .mm-fondo-blur {
-        flex: 0 0 70%;
-        max-width: 320px;
+        flex: 0 0 60%;
+        max-width: 480px;
     }
 
-    /* Imagen alargada en X / delgada en Y, solo mobile */
     .mm-tarjeta .card-img-top {
-        height: 280px; /* más cerca del ancho de 320px = menos recorte lateral */
-        object-fit: cover;
-    }
-    .mm-tarjeta .mm-btn-container {
-        position: static;
-        transform: none;
-        width: 100%;
-        max-width: 100%;
-        margin: 0;
-        background: rgba(0, 0, 0, 0.35);
-        backdrop-filter: blur(10px);
-        border-radius: 0;
-        padding: 0.8rem 1rem;
+        height: 460px;
     }
 }
 
-.btn-instagram {
-    background: #fff !important;
-    color: #212529 !important;
-    /* o el color que uses */
-    border: 1px solid #E4405F !important;
-    transition: transform .25s ease, box-shadow .25s ease;
+@media (min-width:1024px) and (max-width:1439px) {
+    .mm-fondo-blur {
+        flex: 0 0 42%;
+        max-width: 520px;
+    }
+
+    .mm-tarjeta .card-img-top {
+        height: 520px;
+    }
 }
 
-.btn-instagram i {
-    color: #E4405F !important;
-    margin-right: 2px;
+@media (min-width:1440px) {
+    .mm-fondo-blur {
+        flex: 0 0 33%;
+        max-width: 540px;
+    }
+
+    .mm-tarjeta .card-img-top {
+        height: 550px;
+    }
 }
 
-.btn-instagram:hover,
-.btn-instagram:focus {
-    transform: scale(1.03);
-    border-color: #E4405F !important;
-    background: #fff !important;
-    color: inherit !important;
-    box-shadow: 0 6px 16px rgba(228, 64, 95, .2);
-    font-weight: 400 !important;
+.hero-tags {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+    margin-top: 26px;
+    flex-wrap: wrap;
+    margin-bottom: 26px;
+    gap: 120px;
 }
+
+.hero-tag {
+    font-size: 12px;
+    color: rgb(136, 148, 136);
+    border: 1px solid #e8dcdc;
+    padding: 6px 14px;
+    border-radius: 24px;
+}
+
+.hero-tag i {
+    color: #2f6aff;
+    margin-right: 6px;
+}
+
+:root {
+    --bg: #0d0d0d;
+    --card: #1a1a1a;
+    --card-line: #262626;
+    --text: #fff;
+    --text-soft: #b8b8b8;
+    --text-dim: #7a7a7a;
+    --blue: #e6e6ea;
+    --blue-glow: rgba(20, 133, 220, 0.4);
+    --whats: #25D366;
+    --pill: 40px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'League Spartan', sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+
 
 /* modal card promo */
 .modal-dialog.modal-custom {
@@ -2556,6 +2676,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     line-height: 1.4;
     text-align: center;
 }
+
 @media (min-width: 768px) {
     .modal-dialog.modal-custom {
         max-width: 600px;
