@@ -622,6 +622,51 @@ document.addEventListener('DOMContentLoaded', () => {
     calcularKit();
   }
 }
+// ===== off canvas =====
+const WHATS_NUMBER = "56946914558";
+const DEMO_EMAIL = "memanejo@memanejo.cl";
+const DEMO_PASS  = "memanejo";
+
+const overlay   = document.getElementById('driverOverlay');
+const btn       = document.getElementById('menuButton');
+const closeBtn  = document.getElementById('driverClose');
+const loginView = document.getElementById('dv-login');
+const dashView  = document.getElementById('dv-dash');
+const form      = document.getElementById('dvForm');
+const errorBox  = document.getElementById('dvError');
+const logoutBtn = document.getElementById('dvLogout');
+
+function openSheet(){ overlay.classList.add('open'); document.body.style.overflow='hidden'; }
+function closeSheet(){ overlay.classList.remove('open'); document.body.style.overflow=''; }
+
+btn.addEventListener('click', openSheet);
+closeBtn.addEventListener('click', closeSheet);
+overlay.addEventListener('click', (e)=>{ if(e.target === overlay) closeSheet(); });
+
+form.addEventListener('submit', (e)=>{
+  e.preventDefault();
+  const email = document.getElementById('dvEmail').value.trim().toLowerCase();
+  const pass  = document.getElementById('dvPass').value;
+  if(email === DEMO_EMAIL && pass === DEMO_PASS){
+    errorBox.classList.remove('show');
+    loginView.style.display = 'none';
+    dashView.classList.add('show');
+  } else {
+    errorBox.classList.add('show');
+  }
+});
+
+logoutBtn.addEventListener('click', ()=>{
+  dashView.classList.remove('show');
+  loginView.style.display = 'block';
+  form.reset();
+  errorBox.classList.remove('show');
+});
+
+document.getElementById('dvAgendar').addEventListener('click', ()=>{
+  closeSheet();
+});
+
   // ===== Slider Mobile QA =====
   const slider = document.getElementById("sliderMobileQA");
   if (slider) {

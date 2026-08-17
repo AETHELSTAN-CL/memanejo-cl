@@ -523,58 +523,105 @@
     </div>
   </div>
 
-  <!-- BOTÓN FLOTANTE CON LOGO --> <button id="menuButton" class="rounded-circle shadow glass-btn" type="button"
-    data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"> <img
-      src="img/logopng.png" alt="Abrir menú principal"> <span id="tooltipText" class="tooltip-bubble">Inicia aquí</span>
-  </button>
-  <!-- OFFCANVAS MENU -->
-  <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
-    aria-labelledby="offcanvasWithBothOptionsLabel">
-    <div class="offcanvas-header d-none"></div>
-    <div class="offcanvas-body d-flex flex-column justify-content-between">
-      <!-- Título / Bienvenida alineado a la izquierda -->
-      <div class="offcanvas-welcome">
-        <h2 class="welcome-title">
-          <span class="welcome-greeting">
-            ¡Hola!<br>
-            <span class="welcome-soy"><strong>Soy</strong></span>
-          </span>
-          <span class="brand-highlight"> me<br>manejo <br></span>
-        </h2>
-        <p class="title-btn mt-3">La App del mundo automotriz en Chile.</p>
-        </p>
+<!-- ============ BOTÓN FLOTANTE ============ -->
+<button id="menuButton" class="rounded-circle glass-btn" type="button">
+  <img src="img/logopng.png" alt="Abrir panel del conductor">
+  <span id="tooltipText" class="tooltip-bubble">Inicia aquí</span>
+</button>
 
+<!-- ============ OVERLAY + SHEET (login → dashboard) ============ -->
+<div class="driver-overlay" id="driverOverlay">
+  <div class="driver-sheet" id="driverSheet" role="dialog" aria-modal="true" aria-label="Panel del conductor">
+    <div class="driver-handle"></div>
+    <div class="driver-topbar">
+      <span class="driver-badge-beta">Beta</span>
+      <div class="driver-close" id="driverClose"><i class="fa-solid fa-xmark"></i></div>
+    </div>
+
+    <!-- ---- VISTA: LOGIN ---- -->
+    <div id="dv-login">
+      <div class="dv-login-head">
+        <div class="dv-login-icon"><i class="fa-solid fa-user"></i></div>
+        <h3>Panel del conductor</h3>
+        <p>Ingresa para ver el estado de mantención de tu vehículo.</p>
       </div>
 
-      <!-- Botones Centrales -->
-      <div class="d-grid gap-2 mx-auto" style="width: 100%;">
-        <p class="welcome-subtitle text-center"><strong>TU EXPERIENCIA COMIENZA AQUÍ</strong>
-          <a href="Catalogo/index.html" target="_blank" class="menu-btn"> <span class="menu-text">Repuestos</span> <span
-              class="menu-icon"><i class="fa-solid fa-car-battery"></i></span></a>
-          <a href="#lubricentros" class="menu-btn"> <span class="menu-text">Servicios Automotrices</span> <span
-              class="menu-icon"><i class="fa-solid fa-car"></i></span> </a>
-          <a href="#contenidos" class="menu-btn"> <span class="menu-text">Formación Vial</span> <span
-              class="menu-icon"><i class="fa-solid fa-user-graduate"></i></span> </a>
-      </div>
-      <!-- Botones Inferiores -->
-      <div class="offcanvas-bottom-buttons">
+      <div class="dv-error" id="dvError">Correo o clave incorrectos. Intenta de nuevo.</div>
 
-        <a href="#" class="btn btn-home btn-sm rounded-pill btn-bottom">
-          Inicio <i class="fa-solid fa-house"></i>
-        </a>
+      <form id="dvForm">
+        <div class="dv-field">
+          <label>Correo</label>
+          <input type="email" id="dvEmail" placeholder="tucorreo@ejemplo.cl" autocomplete="username" required>
+        </div>
+        <div class="dv-field">
+          <label>Clave</label>
+          <input type="password" id="dvPass" placeholder="••••••••" autocomplete="current-password" required>
+        </div>
+        <button type="submit" class="dv-submit">Ingresar</button>
+      </form>
 
-        <a href="#contact" class="btn btn-contact btn-sm rounded-pill btn-bottom">
-          Contacto <i class="fa-solid fa-headset"></i>
-        </a>
-
-        <button type="button" class="btn btn-closemac btn-sm rounded-pill btn-bottom" data-bs-dismiss="offcanvas">
-          Cerrar <i class="fa-solid fa-xmark"></i>
-        </button>
-
+      <div class="dv-hint">
+        Panel en fase de prueba — usa la cuenta demo:<br>
+        <b>memanejo@memanejo.cl</b> · clave <b>memanejo</b>
       </div>
     </div>
+
+    <!-- ---- VISTA: DASHBOARD ---- -->
+    <div id="dv-dash">
+      <div class="dv-user-row">
+        <div class="dv-avatar">M</div>
+        <div>
+          <h4>Hola, Conductor</h4>
+          <span>memanejo@memanejo.cl</span>
+        </div>
+        <div class="dv-logout" id="dvLogout">Cerrar sesión</div>
+      </div>
+
+      <div class="dv-car-card">
+        <div class="dv-emblem"><span>AR</span></div>
+        <div class="dv-car-info">
+          <div class="brand">Alfa Romeo</div>
+          <h4>Giulia 2.0 Ti</h4>
+          <span class="plate">AR·JU·12</span>
+        </div>
+      </div>
+
+      <div class="dv-stats">
+        <div class="dv-stat">
+          <div class="lbl"><i class="fa-solid fa-gauge-high"></i>Último kilometraje</div>
+          <div class="val">48.230 km</div>
+          <div class="sub">Registrado el 20 jul 2026</div>
+        </div>
+        <div class="dv-stat">
+          <div class="lbl"><i class="fa-solid fa-screwdriver-wrench"></i>Próxima mantención</div>
+          <div class="val">15 sept</div>
+          <div class="sub">Cambio de aceite · en 12 días</div>
+        </div>
+        <div class="dv-stat wide">
+          <div class="lbl"><i class="fa-solid fa-clipboard-check"></i>Revisión técnica</div>
+          <div class="val">Vence en 2 meses</div>
+          <div class="sub">Te avisaremos con anticipación por WhatsApp</div>
+        </div>
+      </div>
+
+      <div class="dv-list">
+        <div class="dv-list-item">
+          <i class="fa-solid fa-user-tie"></i>
+          <div><div class="t">Taller asociado habitual</div><div class="d">Automania Racing · La Florida</div></div>
+        </div>
+        <div class="dv-list-item">
+          <i class="fa-solid fa-box"></i>
+          <div><div class="t">Último kit realizado</div><div class="d">Kit Intermedio · 15 jun 2026</div></div>
+        </div>
+      </div>
+
+      <a href="#" class="dv-cta" id="dvAgendar" data-bs-toggle="modal" data-bs-target="#mm-modal-publicidad">
+  <i class="fa-solid fa-fire"></i> Revisar promoción
+</a>
+    </div>
+
   </div>
-  <!-----End BOTÓN FLOTANTE CON LOGO ----->
+</div>
 
 
   <!----- Start Q&A section ----->

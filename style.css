@@ -263,253 +263,526 @@ body {
     z-index: 5;
 }
 
-/* =======================
-   OFFCANVAS MENU CLEAN
-======================= */
-.offcanvas {
-    background-color: rgba(33, 37, 41, 0.65) !important;
-    backdrop-filter: blur(15px);
-    color: white;
-    width: 260px !important;
-    /* más ancho */
-    border-left: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.offcanvas .offcanvas-body h5 {
-    color: white;
-}
-
-/* Bienvenida */
-.welcome-title {
-    font-size: 2rem;
-    /* tamaño general del bloque */
-    font-weight: 600;
-    color: #fff;
-}
-
-.welcome-greeting {
-    font-family: 'Avenir', sans-serif;
-    /* ejemplo más limpio */
-    font-size: 3rem;
-    /* más contenido */
-    font-weight: 500;
-    align-items: start;
-    display: block;
-    text-align: center;
-}
-
-.welcome-soy {
-    display: block;
-    margin-top: 1.5rem;
-    text-align: left;
-}
-
-.brand-highlight {
-    font-family: 'Avenir', sans-serif;
-    font-weight: 700;
-    font-size: 4rem;
-    color: #fff;
-    line-height: 0.8;
-    /* junta las palabras ME MA NEJO .cl */
-
-}
-
-.welcome-subtitle {
-    font-size: 0.8rem;
-    color: #fff;
-
-
-}
-
-.title-btn {
-    color: #bbb;
-    font-size: 0.8rem;
-    margin: 0 0 10px 0;
-}
-
-/* Botones centrales */
-.d-grid .menu-btn {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #000;
-    color: #fff;
-    padding: 16px 12px;
-    /* 🔽 menos alto, 🔼 más ancho */
-    border-radius: 36px;
-    /* forma alargada */
-    text-decoration: none;
-    font-size: 0.8rem;
-    font-weight: 600;
-    transition: background 0.3s ease, transform 0.2s ease;
+/* ============ BOTÓN FLOTANTE (igual que el tuyo) ============ */
+.glass-btn {
+    position: fixed;
+    bottom: 24px;
+    right: 20px;
+    z-index: 1050;
+    width: 56px;
+    height: 56px;
+    padding: 6px;
+    background: rgba(255, 255, 255, .15);
     backdrop-filter: blur(8px);
-    border: 1px solid #fff;
-    width: 100%;
-    max-width: 300px;
-    /* controla el ancho máximo */
-    height: 50px;
-    /* 🔽 reduce grosor vertical */
-    white-space: nowrap;
-    margin-top: 16px;
-}
-
-.d-grid .menu-btn:hover {
-    background: #0e3abe;
-    color: #fff;
-    transform: scale(1.05);
-}
-
-.menu-icon {
-    width: 40px;
-    height: 40px;
     border-radius: 50%;
-    background: rgb(0, 0, 0);
+    border: 1px solid rgba(255, 255, 255, .2);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #ffffff;
-    margin-left: 16px;
+    transition: background .3s ease, border .3s ease;
+    cursor: pointer;
 }
 
-.menu-text {
-    flex: 1;
-    /* ocupa espacio a la izquierda */
-    text-align: left;
+.glass-btn img {
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
 }
 
-/* Íconos dentro de los botones principales */
-.menu-icon i {
-    font-size: 1.4rem;
-    /* Cambiá este valor según necesites */
+.glass-btn:focus {
+    outline: none;
+    box-shadow: none;
 }
 
-/* Íconos en los botones inferiores */
-.offcanvas-bottom-buttons i {
-    font-size: .9rem;
-    /* Más pequeño que los principales, opcional */
+.tooltip-bubble {
+    position: absolute;
+    right: 64px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #000;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: .75rem;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity .5s ease;
+    pointer-events: none;
 }
 
-/* Contenedor botones inferiores */
-.offcanvas-bottom-buttons {
+.glass-btn:hover .tooltip-bubble {
+    opacity: 1;
+}
+
+/* ============ OVERLAY + SHEET ============ */
+.driver-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background: rgba(0, 0, 0, .6);
+    backdrop-filter: blur(6px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .35s ease;
+}
+
+.driver-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.driver-sheet {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2001;
+    background: #121212;
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-top-left-radius: 26px;
+    border-top-right-radius: 26px;
+    max-height: 90vh;
+    overflow-y: auto;
+    transform: translateY(100%);
+    transition: transform .45s cubic-bezier(.32, .72, 0, 1);
+    padding-bottom: calc(24px + env(safe-area-inset-bottom));
+}
+
+.driver-overlay.open .driver-sheet {
+    transform: translateY(0);
+}
+
+.driver-handle {
+    width: 42px;
+    height: 5px;
+    border-radius: 3px;
+    background: #3a3a3a;
+    margin: 12px auto 2px;
+}
+
+.driver-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 20px 4px;
+}
+
+.driver-badge-beta {
+    font-size: 10.5px;
+    font-weight: 800;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    background: rgba(220, 20, 60, .15);
+    color: var(--crimson);
+    border: 1px solid rgba(220, 20, 60, .4);
+    padding: 4px 11px;
+    border-radius: 20px;
+}
+
+.driver-close {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #1e1e1e;
+    border: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #bbb;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.driver-close:hover {
+    color: #fff;
+    border-color: #444;
+}
+
+/* ============ Vista LOGIN ============ */
+#dv-login {
+    padding: 10px 28px 8px;
+}
+
+.dv-login-head {
+    text-align: center;
+    margin-bottom: 22px;
+}
+
+.dv-login-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    background: linear-gradient(150deg, #1e1e1e, #0a0a0a);
+    border: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 14px;
+    color: var(--crimson);
+    font-size: 22px;
+}
+
+.dv-login-head h3 {
+    margin: 0;
+    font-size: 21px;
+    font-weight: 800;
+}
+
+.dv-login-head p {
+    margin: 8px 0 0;
+    color: var(--text-soft);
+    font-size: 13.5px;
+    line-height: 1.5;
+}
+
+.dv-field {
+    margin-bottom: 14px;
+}
+
+.dv-field label {
+    display: block;
+    font-size: 11.5px;
+    color: var(--text-dim);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    margin-bottom: 7px;
+}
+
+.dv-field input {
+    width: 100%;
+    background: #090909;
+    border: 1px solid #303030;
+    border-radius: 14px;
+    color: #fff;
+    padding: 14px 16px;
+    font-size: 14.5px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color .2s ease;
+}
+
+.dv-field input:focus {
+    border-color: var(--crimson);
+}
+
+.dv-error {
+    display: none;
+    background: rgba(220, 20, 60, .1);
+    border: 1px solid rgba(220, 20, 60, .35);
+    color: #ff8fa3;
+    font-size: 12.5px;
+    padding: 10px 14px;
+    border-radius: 12px;
+    margin-bottom: 14px;
+}
+
+.dv-error.show {
+    display: block;
+}
+
+.dv-submit {
+    width: 100%;
+    padding: 15px 0;
+    border: none;
+    border-radius: 999px;
+    background: var(--crimson);
+    color: #fff;
+    font-weight: 800;
+    font-size: 14.5px;
+    cursor: pointer;
+    transition: .25s ease;
+}
+
+.dv-submit:hover {
+    box-shadow: 0 0 18px var(--crimson-glow);
+}
+
+.dv-hint {
+    margin-top: 16px;
+    text-align: center;
+    font-size: 11.5px;
+    color: var(--text-dim);
+    line-height: 1.6;
+    background: #0c0c0c;
+    border: 1px dashed #2c2c2c;
+    border-radius: 12px;
+    padding: 10px 12px;
+}
+
+.dv-hint b {
+    color: #ccc;
+}
+
+/* ============ Vista DASHBOARD ============ */
+#dv-dash {
+    display: none;
+    padding: 6px 22px 8px;
+}
+
+#dv-dash.show {
+    display: block;
+}
+
+.dv-user-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 22px;
+}
+
+.dv-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(150deg, var(--crimson), #7a0d20);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 15px;
+    flex: none;
+}
+
+.dv-user-row h4 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.dv-user-row span {
+    font-size: 12px;
+    color: var(--text-dim);
+}
+
+.dv-logout {
+    margin-left: auto;
+    font-size: 12px;
+    color: var(--text-dim);
+    border: 1px solid var(--line);
+    padding: 7px 14px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.dv-logout:hover {
+    color: #fff;
+    border-color: #444;
+}
+
+/* card del vehículo con emblema */
+.dv-car-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: linear-gradient(150deg, #1c1c1c, #0a0a0a);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 18px;
+    margin-bottom: 18px;
+    position: relative;
+    overflow: hidden;
+}
+
+.dv-car-card::before {
+    content: '';
+    position: absolute;
+    top: -60%;
+    right: -30%;
+    width: 60%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(220, 20, 60, .14), transparent 65%);
+}
+
+.dv-emblem {
+    width: 58px;
+    height: 64px;
+    flex: none;
+    position: relative;
+    z-index: 1;
+    clip-path: polygon(50% 0%, 100% 20%, 100% 70%, 50% 100%, 0% 70%, 0% 20%);
+    background: linear-gradient(160deg, #8b0000, #1a0000);
+    border: 1px solid rgba(255, 255, 255, .15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dv-emblem span {
+    font-family: 'League Spartan', sans-serif;
+    font-weight: 800;
+    font-size: 16px;
+    color: #fff;
+    letter-spacing: -.5px;
+}
+
+.dv-car-info {
+    position: relative;
+    z-index: 1;
+}
+
+.dv-car-info .brand {
+    font-size: 11px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    font-weight: 700;
+}
+
+.dv-car-info h4 {
+    margin: 2px 0 4px;
+    font-size: 18px;
+}
+
+.dv-car-info .plate {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    color: #ccc;
+    background: #000;
+    border: 1px solid #333;
+    padding: 3px 10px;
+    border-radius: 6px;
+}
+
+/* grid de stats */
+.dv-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.dv-stat {
+    background: var(--card2);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 16px;
+}
+
+.dv-stat .lbl {
+    font-size: 10.5px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.dv-stat .lbl i {
+    color: var(--crimson);
+}
+
+.dv-stat .val {
+    font-size: 19px;
+    font-weight: 800;
+    margin-top: 8px;
+}
+
+.dv-stat .sub {
+    font-size: 11.5px;
+    color: var(--text-soft);
+    margin-top: 3px;
+}
+
+.dv-stat.wide {
+    grid-column: 1/-1;
+}
+
+.dv-list {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
-    /* mantiene los botones al borde derecho */
-    gap: 8px;
+    gap: 10px;
+    margin-bottom: 20px;
 }
 
-/* Botones inferiores */
-.offcanvas-bottom-buttons .btn-bottom {
-    display: flex;
-    flex-direction: row-reverse;
-    /* icono a la derecha */
-    align-items: center;
-    justify-content: flex-start;
-    /* todo el contenido alineado a la derecha */
-    gap: 8px;
-    /* separación entre texto e icono */
-    min-width: 100px;
-    /* ancho mínimo */
-    max-width: 100px;
-    /* limita que no se alarguen demasiado */
-    padding: 4px 10px;
-    /* altura y relleno */
-    font-size: 0.8rem;
-    white-space: nowrap;
-    /* evita que el texto se rompa en varias líneas */
-}
-
-/* ===========================
-   BOTONES INFERIORES OFFCANVAS
-   =========================== */
-
-.offcanvas-bottom-buttons .btn-home,
-.offcanvas-bottom-buttons .btn-contact,
-.offcanvas-bottom-buttons .btn-closemac {
-
-    transition:
-        transform .25s ease,
-        border-color .25s ease,
-        box-shadow .25s ease,
-        color .25s ease;
-
+.dv-list-item {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
-    /* 👈 TODO a la derecha */
-    gap: 6px;
-    text-align: right;
+    gap: 12px;
+    background: var(--card2);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 12px 14px;
 }
 
-/* icono sin separación rara */
-.offcanvas-bottom-buttons .btn-bottom i {
-    margin-left: 6px;
-    margin-right: 0;
+.dv-list-item i {
+    width: 32px;
+    height: 32px;
+    border-radius: 9px;
+    background: #000;
+    border: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--crimson);
+    flex: none;
+    font-size: 13px;
 }
 
-/* ===== INICIO ===== */
-
-.offcanvas-bottom-buttons .btn-home {
-    background: #fff;
-    color: #000;
-    border: 1px solid #d9d9d9;
+.dv-list-item .t {
+    font-size: 13.5px;
+    font-weight: 600;
 }
 
-.offcanvas-bottom-buttons .btn-home:hover {
-    background: #fff;
-    color: #000;
-    border-color: #37ff58;
-    transform: scale(1.05);
-    box-shadow: 0 0 10px rgba(55, 255, 88, .55);
+.dv-list-item .d {
+    font-size: 11.5px;
+    color: var(--text-dim);
 }
 
-/* ===== CONTACTO ===== */
-
-.offcanvas-bottom-buttons .btn-contact {
-    background: #fff;
-    color: #000;
-    border: 1px solid #d9d9d9;
+.dv-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 15px 0;
+    border-radius: 999px;
+    border: 1px solid #25D366;
+    color: #fff;
+    font-weight: 800;
+    font-size: 14px;
+    cursor: pointer;
+    transition: .25s ease;
+    text-decoration: none;
 }
 
-.offcanvas-bottom-buttons .btn-contact:hover {
-    background: #fff;
-    color: #000;
-    border-color: #ffd84f;
-    transform: scale(1.05);
-    box-shadow: 0 0 10px rgba(255, 216, 79, .55);
+.dv-cta:hover {
+    background: #25D366;
+    color: #06210F;
 }
 
-/* ===== CERRAR (RESET BOOTSTRAP + TU ESTILO) ===== */
+@media (min-width:1024px) {
+    .driver-sheet {
+        left: 50%;
+        right: auto;
+        bottom: auto;
+        top: 50%;
+        width: 440px;
+        max-height: min(660px, 86vh);
+        border-radius: 26px;
+        transform: translate(-50%, -42%) scale(.94);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform .35s ease, opacity .35s ease;
+    }
 
-.offcanvas-bottom-buttons .btn-closemac {
+    .driver-overlay.open .driver-sheet {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+        pointer-events: auto;
+    }
 
-    background: #dc3545 !important;
-    color: #fff !important;
-    border: 1px solid #dc3545 !important;
+    .driver-handle {
+        display: none;
+    }
 
-    box-shadow: none !important;
-    outline: none !important;
-
-    transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease, background .25s ease;
-}
-
-/* eliminar estados raros de Bootstrap */
-.offcanvas-bottom-buttons .btn-closemac:focus,
-.offcanvas-bottom-buttons .btn-closemac:active,
-.offcanvas-bottom-buttons .btn-closemac:focus-visible {
-    background: #dc3545 !important;
-    color: #fff !important;
-    box-shadow: none !important;
-}
-
-/* hover limpio */
-.offcanvas-bottom-buttons .btn-closemac:hover {
-    background: #ff0019 !important;
-    color: #fff !important;
-    border-color: #ff5d5d !important;
-
-    transform: scale(1.05);
-    box-shadow: 0 0 10px rgba(255, 93, 93, .55);
+    .driver-topbar {
+        padding-top: 16px;
+    }
 }
 
 /* ============================
@@ -2894,7 +3167,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 /* ============ KIT POR VEHÍCULO (tu CSS, sin cambios) ============ */
-#kit { padding: 50px 0 110px; }
+#kit {
+    padding: 50px 0 110px;
+}
 
 #kit .wrap {
     width: min(1680px, 100%);
@@ -2903,7 +3178,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     padding: 0 clamp(24px, 3.5vw, 64px);
 }
 
-#kit .section-head { max-width: 850px; margin: 0 0 46px; }
+#kit .section-head {
+    max-width: 850px;
+    margin: 0 0 46px;
+}
 
 #kit .eyebrow {
     display: inline-block;
@@ -2946,7 +3224,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     row-gap: 24px;
 }
 
-#kit .field-group { display: flex; flex-direction: column; gap: 10px; }
+#kit .field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
 
 #kit .field-group label {
     color: var(--text-dim, #929292);
@@ -3003,32 +3285,109 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     border-radius: 20px;
 }
 
-#kit .kit-result.is-visible { display: flex; }
+#kit .kit-result.is-visible {
+    display: flex;
+}
 
-#kit .r-left, #kit .r-price { display: flex; flex-direction: column; }
-#kit .r-left { gap: 8px; }
-#kit .r-left b { color: #fff; font-size: 17px; }
-#kit .r-left span, #kit .r-price span { color: var(--text-soft, #ababab); font-size: 13px; line-height: 1.55; }
-#kit .r-price { flex: 0 0 auto; align-items: flex-end; gap: 6px; text-align: right; }
-#kit .r-price b { color: var(--crimson, #e50914); font-size: 30px; }
+#kit .r-left,
+#kit .r-price {
+    display: flex;
+    flex-direction: column;
+}
+
+#kit .r-left {
+    gap: 8px;
+}
+
+#kit .r-left b {
+    color: #fff;
+    font-size: 17px;
+}
+
+#kit .r-left span,
+#kit .r-price span {
+    color: var(--text-soft, #ababab);
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+#kit .r-price {
+    flex: 0 0 auto;
+    align-items: flex-end;
+    gap: 6px;
+    text-align: right;
+}
+
+#kit .r-price b {
+    color: var(--crimson, #e50914);
+    font-size: 30px;
+}
 
 @media (max-width: 1000px) {
-    #kit { padding: 50px 0; }
-    #kit .section-head h2 { font-size: 48px; letter-spacing: -2px; }
-    #kit .kit-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    #kit .btn--solid { width: 100%; }
+    #kit {
+        padding: 50px 0;
+    }
+
+    #kit .section-head h2 {
+        font-size: 48px;
+        letter-spacing: -2px;
+    }
+
+    #kit .kit-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #kit .btn--solid {
+        width: 100%;
+    }
 }
 
 @media (max-width: 600px) {
-    #kit { padding: 50px 0; margin-bottom: 20px; }
-    #kit .wrap { padding: 0 14px; }
-    #kit .section-head { margin-bottom: 30px; }
-    #kit .section-head h2 { font-size: 36px; line-height: 1.04; letter-spacing: -1.4px; }
-    #kit .section-head p { margin-top: 6px; font-size: 15px; }
-    #kit .kit-panel { padding: 22px; border-radius: 22px; }
-    #kit .kit-grid { grid-template-columns: 1fr; gap: 18px; }
-    #kit .kit-result.is-visible { align-items: flex-start; flex-direction: column; gap: 18px; padding: 22px; }
-    #kit .r-price { align-items: flex-start; text-align: left; }
+    #kit {
+        padding: 50px 0;
+        margin-bottom: 20px;
+    }
+
+    #kit .wrap {
+        padding: 0 14px;
+    }
+
+    #kit .section-head {
+        margin-bottom: 30px;
+    }
+
+    #kit .section-head h2 {
+        font-size: 36px;
+        line-height: 1.04;
+        letter-spacing: -1.4px;
+    }
+
+    #kit .section-head p {
+        margin-top: 6px;
+        font-size: 15px;
+    }
+
+    #kit .kit-panel {
+        padding: 22px;
+        border-radius: 22px;
+    }
+
+    #kit .kit-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    #kit .kit-result.is-visible {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 18px;
+        padding: 22px;
+    }
+
+    #kit .r-price {
+        align-items: flex-start;
+        text-align: left;
+    }
 }
 
 @media (min-width: 1200px) {
@@ -3038,11 +3397,29 @@ input[type="date"]::-webkit-calendar-picker-indicator {
         align-items: center;
         gap: clamp(40px, 5vw, 88px);
     }
-    #kit .section-head { margin: 0; }
-    #kit .section-head h2 { font-size: 56px; line-height: 1; }
-    #kit .kit-panel { width: 100%; box-sizing: border-box; }
-    #kit .kit-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    #kit .kit-grid .btn--solid { grid-column: 1 / -1; width: 100%; }
+
+    #kit .section-head {
+        margin: 0;
+    }
+
+    #kit .section-head h2 {
+        font-size: 56px;
+        line-height: 1;
+    }
+
+    #kit .kit-panel {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    #kit .kit-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #kit .kit-grid .btn--solid {
+        grid-column: 1 / -1;
+        width: 100%;
+    }
 }
 
 /* ============ CÓMO FUNCIONA (retiro y entrega) ============ */
@@ -3052,6 +3429,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     padding: 40px;
     margin-bottom: 20px;
 }
+
 .steps-wrap h2 {
     font-size: 46px;
     font-weight: 600;
