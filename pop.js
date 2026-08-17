@@ -372,9 +372,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const tooltipEl = document.getElementById("tooltipText");
   if (tooltipEl) {
     const textosTooltip = [
-      'Presiona aquí <i class="fa-solid fa-arrow-right"></i>',
-      'Abrir menú <i class="fa-solid fa-arrow-right"></i>',
-      'Deslizar página <i class="fa-solid fa-arrow-down"></i>'
+      'Presiona aquí <i class="fa-solid fa-arrow-right ms-2"></i>',
+      'Abrir panel del conductor <i class="fa-solid fa-arrow-right ms-2"></i>',
+      'Deslizar página <i class="fa-solid fa-arrow-down ms-2"></i>'
     ];
 
     let i = 0;
