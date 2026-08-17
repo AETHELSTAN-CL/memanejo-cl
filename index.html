@@ -117,7 +117,7 @@
           <div class="mm-tarjeta overflow-hidden rounded-4">
             <div class="card-img-wrap">
               <span class="mm-tag">Próximamente</span>
-              <img src="img/mantencion_img3.JPG" class="card-img-top" alt="Lubricentro 3">
+              <img src="img/car-brake.jpg" class="card-img-top" alt="Lubricentro 3">
             </div>
             <div class="mm-cuerpo text-center">
               <h5 class="mt-3">Cambio pastillas de frenos<br><small>desde</small><strong><br>$89.900</strong></h5>
@@ -280,13 +280,53 @@
     </div>
   </div>
   -->
-  <!-- Contenedor principal que unifica nav, tooltip y slider -->
-  <div class="nav-slider-wrapper">
-    <!-- NAV SOLO ESCRITORIO -->
+
+    <!-- NAV SOLO ESCRITORIO 
     <section class="nav-fullscreen d-none d-md-flex" data-bg="dark"> <a href="Catalogo/index.html" target="_blank"
         class="nav-link-fx"> <i class="fa-solid fa-car-battery me-2"></i> Repuestos Automotrices </a> <a
         href="#contenidos" class="nav-link-fx"> <i class="fa-solid fa-user-graduate me-2"></i> Formación Vial </a>
     </section>
+    -->
+<!-- ============ KIT POR VEHÍCULO ============ -->
+<section class="section" id="kit">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Cotización instantánea</span>
+      <span><em>En fase de prueba (Beta)</em></span>
+      <h2>Tu kit de mantención, según tu auto exacto</h2>
+      <p>Selecciona marca, modelo y año: te mostramos el kit de repuestos recomendado para tu mantención, igual que si lo hablaras con el asesor por WhatsApp.<br>No incluye mano de obra técnica.</p>
+    </div>
+
+    <div class="kit-panel">
+      <div class="kit-grid">
+        <div class="field-group">
+          <label>Marca</label>
+          <select id="kitMarca"></select>
+        </div>
+        <div class="field-group">
+          <label>Modelo</label>
+          <select id="kitModelo"></select>
+        </div>
+        <div class="field-group">
+          <label>Año</label>
+          <select id="kitAnio"></select>
+        </div>
+        <button class="btn btn--solid" id="kitBtn" type="button">Calcular kit</button>
+      </div>
+
+      <div class="kit-result" id="kitResult">
+        <div class="r-left">
+          <b>Kit Mantención Básica — <span id="kitAutoLabel"></span></b>
+          <span>Cambio de aceite + filtros + inspección de 20 puntos · Disponible en tu comuna</span>
+        </div>
+        <div class="r-price">
+          <b class="mono" id="kitPrice"></b>
+          <span>precio cerrado · retiro y entrega sin costo</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
     <!-- Rotador: ahora debajo del slider -->
     <div class="titulo-rotativo-box text-center">
       <h2 id="titulo-rotativo">
@@ -341,7 +381,68 @@
         </div>
       </div>
     </section>
+
+<!-- ============ CÓMO FUNCIONA (retiro y entrega) ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="steps-wrap" data-aos="fade-up">
+      <span class="eyebrow">El proceso completo</span>
+      <h2 style="margin-top:14px;">Tú agendas, nosotros hacemos el resto</h2>
+      <p style="color:var(--text-soft);margin-top:12px;max-width:60ch;">Así de simple es tener tu auto en mantención sin perder tu día.</p>
+      <div class="steps-grid">
+        <div class="step"><div class="n">01</div><h3>Agenda por WhatsApp</h3><p>Cuéntanos qué necesita tu auto y en qué dirección lo retiramos: casa, trabajo, donde estés.</p></div>
+        <div class="step"><div class="n">02</div><h3>Retiramos y llevamos</h3><p>Pasamos a buscar tu vehículo y lo llevamos directo a un taller asociado verificado.</p></div>
+        <div class="step"><div class="n">03</div><h3>Entrega en tu puerta</h3><p>Con la mantención lista, te devolvemos el auto donde nos digas. Sin que muevas un dedo.</p></div>
+      </div>
+    </div>
   </div>
+</section>
+    <!-- ============ SERVICIOS: slider con hover-card ============ -->
+<section class="section" id="servicios">
+  <div class="wrap">
+    <div class="section-head" data-aos="fade-up">
+      <span class="eyebrow">Qué puedes agendar</span>
+      <h2>Servicios más pedidos</h2>
+      <p>Presiona sobre cada servicio para ver precio y duración.</p>
+    </div>
+
+    <div class="svc-slider" data-aos="fade-up">
+      <div class="svc-chip" tabindex="0">
+        <div class="row1"><span class="ico"><i class="fa-solid fa-circle-dot"></i></span><span class="label">Cambio pastillas de freno</span></div>
+        <div class="reveal"><p class="desc">Pastillas delanteras o traseras + revisión de discos.</p><div class="price-row"><span class="price">$69.000</span><span class="time">120 min</span></div><a href="#" class="pill pill-crimson pill-sm w-100 svc-book">Agendar</a></div>
+      </div>
+      <div class="svc-chip" tabindex="0">
+        <div class="row1"><span class="ico"><i class="fa-solid fa-oil-can"></i></span><span class="label">Cambio de aceite y filtros</span></div>
+        <div class="reveal"><p class="desc">Aceite + filtro de aceite, aire y revisión de 20 puntos.</p><div class="price-row"><span class="price">$79.000</span><span class="time">60 min</span></div><a href="#" class="pill pill-crimson pill-sm w-100 svc-book">Agendar</a></div>
+      </div>
+      <div class="svc-chip" tabindex="0">
+        <div class="row1"><span class="ico"><i class="fa-solid fa-car-side"></i></span><span class="label">Alineación y balanceo</span></div>
+        <div class="reveal"><p class="desc">Alineación computarizada + balanceo de las 4 ruedas.</p><div class="price-row"><span class="price">$38.900</span><span class="time">55 min</span></div><a href="#" class="pill pill-crimson pill-sm w-100 svc-book">Agendar</a></div>
+      </div>
+      <div class="svc-chip" tabindex="0">
+        <div class="row1"><span class="ico"><i class="fa-solid fa-car-battery"></i></span><span class="label">Batería y sistema eléctrico</span></div>
+        <div class="reveal"><p class="desc">Diagnóstico de carga de batería y alternador.</p><div class="price-row"><span class="price">$29.000</span><span class="time">25 min</span></div><a href="#" class="pill pill-crimson pill-sm w-100 svc-book">Agendar</a></div>
+      </div>
+      <div class="svc-chip" tabindex="0">
+        <div class="row1"><span class="ico"><i class="fa-solid fa-magnifying-glass"></i></span><span class="label">Revisión pre-técnica</span></div>
+        <div class="reveal"><p class="desc">Chequeo de gases previo a la Revisión Técnica.</p><div class="price-row"><span class="price">$29.000</span><span class="time">50 min</span></div><a href="#" class="pill pill-crimson pill-sm w-100 svc-book">Agendar</a></div>
+      </div>
+      <div class="svc-chip" tabindex="0">
+        <div class="row1"><span class="ico"><i class="fa-solid fa-microchip"></i></span><span class="label">Diagnóstico computarizado</span></div>
+        <div class="reveal"><p class="desc">Escaneo de luz check-engine y códigos de falla.</p><div class="price-row"><span class="price">$79.900</span><span class="time">45 min</span></div><a href="#" class="pill pill-crimson pill-sm w-100 svc-book">Agendar</a></div>
+      </div>
+      <div class="svc-chip" tabindex="0">
+        <div class="row1"><span class="ico"><i class="fa-solid fa-wind"></i></span><span class="label">Aire acondicionado</span></div>
+        <div class="reveal"><p class="desc">Recarga de gas, revisión de fugas y filtro de cabina.</p><div class="price-row"><span class="price">$39.900</span><span class="time">40 min</span></div><a href="#" class="pill pill-crimson pill-sm w-100 svc-book">Agendar</a></div>
+      </div>
+      <div class="svc-chip" tabindex="0">
+        <div class="row1"><span class="ico"><i class="fa-solid fa-gauge-high"></i></span><span class="label">Suspensión</span></div>
+        <div class="reveal"><p class="desc">Amortiguadores, rótulas y ruidos de tren delantero.</p><div class="price-row"><span class="price">$59.900</span><span class="time">70 min</span></div><a href="#" class="pill pill-crimson pill-sm w-100 svc-book">Agendar</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
   <!-- Modal Visita Ruta-->
   <div class="modal fade" id="modalVisitaRuta" tabindex="-1" aria-labelledby="modalVisitaRutaLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
