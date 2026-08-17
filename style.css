@@ -1,9 +1,26 @@
-html,
+:root {
+    --bg: #0d0d0d;
+    --card: #1a1a1a;
+    --card-line: #262626;
+    --text: #fff;
+    --text-soft: #b8b8b8;
+    --text-dim: #7a7a7a;
+    --blue: #e6e6ea;
+    --blue-glow: rgba(20, 133, 220, 0.4);
+    --whats: #25D366;
+    --pill: 40px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
-    padding: 0;
-    background: #111;
-    min-height: 100%;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Avenir', sans-serif;
+    -webkit-font-smoothing: antialiased;
 }
 
 
@@ -909,9 +926,9 @@ body {
 ======================= */
 .modern-slider-section {
     background-color: #111;
-    padding: 20px 8px;
+    padding: 50px 8px;
     overflow-x: auto;
-    padding-bottom: 30px;
+    margin-top: 20px;
 }
 
 .slider-container {
@@ -926,11 +943,12 @@ body {
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     width: max-content;
+    padding-bottom: 50px;
 }
 
 .slider-card {
     flex: 0 0 auto;
-    width: 400px;
+    width: 450px;
     border-radius: 20px;
     overflow: hidden;
     scroll-snap-align: start;
@@ -960,7 +978,7 @@ body {
 }
 
 .card-img-slider:hover img {
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 /* Primera tarjeta: rotación de imágenes */
@@ -990,18 +1008,16 @@ body {
 
 /* Todos los botones dentro del slider */
 .slider-card .btn-slide-pill {
-    background: #ffffff68;
-    /* fondo blanco */
-    color: #000;
-    /* texto negro */
-    border: 1px solid #000;
-    /* borde negro uniforme */
+    background: #000;
+    color: #fff;
+    border: 1px solid #b5b4b4;
     position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    height: 32px;
+    width: 320px;
+    padding: 14px 0;
     border-radius: 50px;
     font-weight: 700;
     font-size: 12px;
@@ -1010,12 +1026,6 @@ body {
     text-align: center;
 }
 
-/* Hover */
-.slider-card .btn-slide-pill:hover {
-    background: #000;
-    color: #fff;
-    border-color: #000;
-}
 
 /* Rotador centrado y animado */
 .slider-card .btn-slide-pill .rotator {
@@ -2264,16 +2274,16 @@ input[type="date"]::-webkit-calendar-picker-indicator {
    TÍTULO / MENSAJE — grande, a la izquierda, con subtítulo gris y botones
 ===================================================================== */
 .titulo-portada {
-    max-width: 640px;
-    margin: 0 auto 40px;
-    padding: 0 20px;
+    max-width: 720px;
+    margin: 0 10px 40px;
+    padding: 0 15px;
     text-align: left;
 }
 
 .titulo-portada h1 {
     font-family: 'Avenir', sans-serif;
     font-weight: 800;
-    font-size: 72px;
+    font-size: 46px;
     line-height: 1.05;
     margin: 0;
     color: #fff;
@@ -2284,39 +2294,44 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     font-size: 14.5px;
     line-height: 1.6;
     margin-top: 16px;
-    max-width: 50ch;
 }
 
 .lp-actions {
     display: flex;
-    gap: 12px;
+    justify-content: center;
+    align-items: center;
     margin-top: 24px;
     flex-wrap: wrap;
 }
 
 .lp-btn {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 24px;
-    border-radius: 40px;
-    font-weight: 700;
-    font-size: 14px;
-    border: 1px solid #b8b8b8;
-    transition: .25s ease;
-    white-space: nowrap;
-    text-decoration: none;
-    color: #d9d9d9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 220px;
+  box-sizing: border-box;
+  padding: 12px 24px;
+  border-radius: 40px;
+  font-weight: 700;
+  font-size: 14px;
+  border: 1px solid #b8b8b8;
+  transition: .25s ease;
+  white-space: nowrap;
+  text-decoration: none;
+  color: #d9d9d9;
+  margin-bottom: 20px;
 }
 
 .lp-btn-whats {
-    border-color: #25D366;
+    background: #e0e0e0;
+    color: #06210F;
 }
 
 .lp-btn-whats:hover {
-    background: #25D366;
-    color: #06210F;
-    box-shadow: 0 0 18px rgba(37, 211, 102, .5);
+    background: #000;
+    color: #fff;
+    border-color: #fff;
 }
 
 .lp-btn-ghost:hover {
@@ -2330,24 +2345,20 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 ===================================================================== */
 .titulo-rotativo-box {
     text-align: center;
-    height: 4.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    padding: 0 1rem;
-    margin-top: 12px;
+    margin-top: 40px;
 }
 
 #titulo-rotativo {
-    font-size: 2.1rem;
+    font-size: 1.7rem;
     font-weight: bold;
     line-height: 1.2;
     margin: 0;
     text-align: center;
-    word-break: break-word;
-    white-space: normal;
-    max-width: 120vw;
+    white-space: nowrap;
 }
 
 #titulo-rotativo span {
@@ -2377,7 +2388,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     -webkit-overflow-scrolling: touch;
     display: flex;
     justify-content: center;
-    max-width: 1320px;
+    width: 100%;
     margin: 0 auto;
 }
 
@@ -2410,10 +2421,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     transition: transform 0.3s ease;
 }
 
-.mm-tarjeta:hover {
-    transform: scale(1.03);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-}
 
 .mm-tarjeta .card-img-wrap {
     position: relative;
@@ -2445,7 +2452,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     color: #fff;
     font-size: 11px;
     font-weight: 700;
-    padding: 6px 13px;
+    padding: 6px 20px;
     border-radius: 40px;
     letter-spacing: .02em;
 }
@@ -2496,19 +2503,15 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     gap: 8px;
     margin-top: 16px;
     padding: 11px 22px;
-    border: 1px solid #dc143c;
+    border: 1px solid #fff;
     border-radius: 40px;
     font-weight: 700;
     font-size: 13.5px;
-    color: #fff;
+    color: #000;
+    background: #f4f4f4;
     transition: .25s ease;
     align-self: center;
     text-decoration: none;
-}
-
-.mm-cta:hover {
-    background: #dc143c;
-    box-shadow: 0 0 16px rgba(220, 20, 60, .45);
 }
 
 .mm-cta i {
@@ -2516,92 +2519,112 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .mm-cta:hover i {
-    transform: translateX(4px);
+    transform: translateY(-4px);
 }
 
-@media (min-width:768px) and (max-width:1023px) {
+@media (min-width:450px) and (max-width:1023px) {
+    .titulo-portada {
+        max-width: 720px;
+    }
+
+    .titulo-portada h1{
+        font-size: 72px;
+    }
+    .titulo-portada .lp-sub {
+        font-size: 20px;
+    }
     .mm-fondo-blur {
         flex: 0 0 60%;
-        max-width: 480px;
+        max-width: 580px;
     }
 
     .mm-tarjeta .card-img-top {
         height: 460px;
     }
+    .lp-actions {
+        gap: 20px;
+        flex-wrap: nowrap;   /* fuerza que queden uno al lado del otro */
+    }
+    .lp-btn{
+        padding: 12px 18px;  /* un poco más angosto para que ambos entren cómodos */
+        font-size: 13px;
+    }
 }
 
 @media (min-width:1024px) and (max-width:1439px) {
+    .titulo-portada {
+    max-width: 920px;
+    }
+    .titulo-portada h1{
+        font-size: 94px;
+    }
+    .titulo-portada .lp-sub {
+        font-size: 20px;
+    }
+    .lp-actions {
+        gap: 40px;
+    }
     .mm-fondo-blur {
-        flex: 0 0 42%;
-        max-width: 520px;
+        flex: 0 0 60%;
+        max-width: 620px;
     }
 
     .mm-tarjeta .card-img-top {
-        height: 520px;
+        height: 620px;
     }
 }
 
 @media (min-width:1440px) {
+    .titulo-portada {
+        max-width: 920px;
+    }
+    .titulo-portada h1 {
+        font-size: 94px;
+    }
+    .titulo-portada .lp-sub {
+        font-size: 20px;
+    }
+    .lp-actions {
+        gap: 40px;
+    }
+
     .mm-fondo-blur {
-        flex: 0 0 33%;
-        max-width: 540px;
+        flex: 0 0 60%;
+        max-width: 620px;
     }
 
     .mm-tarjeta .card-img-top {
-        height: 550px;
+        height: 620px;
     }
 }
 
 .hero-tags {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-    text-align: center;
+    text-align: left;
     gap: 10px;
-    margin-top: 26px;
+    margin-top: 6px;
     flex-wrap: wrap;
-    margin-bottom: 26px;
-    gap: 120px;
+    margin-bottom: 30px;
 }
 
 .hero-tag {
-    font-size: 12px;
-    color: rgb(136, 148, 136);
-    border: 1px solid #e8dcdc;
-    padding: 6px 14px;
-    border-radius: 24px;
+  position: relative;
+  padding: 6px 50px; /* reserva espacio para el icono */
+  font-size: 16px;
+  text-align: center;
+  white-space: nowrap;
 }
 
 .hero-tag i {
-    color: #2f6aff;
-    margin-right: 6px;
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #f9f9fb;
+  margin: 0;
 }
-
-:root {
-    --bg: #0d0d0d;
-    --card: #1a1a1a;
-    --card-line: #262626;
-    --text: #fff;
-    --text-soft: #b8b8b8;
-    --text-dim: #7a7a7a;
-    --blue: #e6e6ea;
-    --blue-glow: rgba(20, 133, 220, 0.4);
-    --whats: #25D366;
-    --pill: 40px;
-}
-
-* {
-    box-sizing: border-box;
-}
-
-body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'League Spartan', sans-serif;
-    -webkit-font-smoothing: antialiased;
-}
-
 
 
 /* modal card promo */

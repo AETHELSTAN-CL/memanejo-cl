@@ -298,8 +298,8 @@ actualizarOpcionesHorario();
   // --- Título rotativo ---
   const frases = [
     ["SERVICIOS", "AUTOMOTRICES"],
-    ["TALLERES", "ASOCIADOS"],
-    ["DETAILING", "AUTOMOTRIZ"],
+    ["ENTRENAMIENTO", "VIAL"],
+    ["AULA", "VIRTUAL"],
     ["MANTENCIÓN", "PREVENTIVA"]
   ];
   const colores = [
@@ -329,7 +329,7 @@ actualizarOpcionesHorario();
 
   if (contenedor) {
     mostrarFrase();
-    setInterval(mostrarFrase, 4000);
+    setInterval(mostrarFrase, 2000);
   }
 document.querySelectorAll('[data-bs-toggle="collapse"]').forEach(btn => {
   const target = document.querySelector(btn.getAttribute('data-bs-target'));
@@ -460,7 +460,7 @@ document.querySelectorAll('[data-bs-toggle="collapse"]').forEach(btn => {
     let maxWidth = 0;
     textos.forEach(t => { spanTemp.textContent = t; maxWidth = Math.max(maxWidth, spanTemp.offsetWidth); });
     document.body.removeChild(spanTemp);
-    btn.style.width = (maxWidth + 40) + "px";
+    btn.style.width = (maxWidth + 60) + "px";
 
     btn.innerHTML = '';
     const first = document.createElement('div');
