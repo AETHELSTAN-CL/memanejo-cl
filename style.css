@@ -1047,7 +1047,10 @@ body {
     width: max-content;
     padding-bottom: 10px;
 }
-
+.slider-card p {
+    font-family: 'Avenir',Verdana, Geneva, Tahoma, sans-serif;
+    font-size: clamp(1rem, 1.1vw, 3rem);
+}
 .slider-card {
     flex: 0 0 auto;
     width: 450px;
@@ -1874,8 +1877,9 @@ body {
     justify-content: center;
     background-color: #001c40;
     color: #fff;
+    border: 1px solid #fff;
     padding: 0.75rem 2rem;
-    border-radius: 0.5rem;
+    border-radius: 14px;
     width: 100%;
 }
 
@@ -1898,7 +1902,7 @@ body {
     height: 50px;
     flex: 0 0 50px;
     object-fit: cover;
-    border-radius: 12px;
+    border-radius: 10px;
 }
 
 /* Texto derecha */
@@ -1980,9 +1984,9 @@ body {
     min-height: 86px;
     padding: 8px 16px 8px 8px;
     gap: 24px;
-    background: linear-gradient(145deg, #1d1d1d, #151515);
+    background: linear-gradient(145deg, #001c40, #2261ff);
     border: 1px solid rgba(255, 255, 255, 0.691);
-    border-radius: 18px;
+    border-radius: 14px;
     color: #fff;
     text-decoration: none;
     box-shadow:
@@ -2009,11 +2013,11 @@ body {
 /* ================= IMAGEN ================= */
 
 .floating-card img {
-    width: 70px;
-    height: 70px;
+    width: 60px;
+    height: 60px;
     flex: none;
     object-fit: cover;
-    border-radius: 18px;
+    border-radius: 10px;
     display: block;
 }
 
@@ -2152,36 +2156,6 @@ body {
 
 }
 
-
-/* =================================================
-   ESCRITORIO GRANDE
-   ================================================= */
-
-@media (min-width: 1400px) {
-
-    .floating-cards {
-        max-width: 780px;
-        gap: 20px;
-    }
-
-    .floating-card {
-        min-height: 118px;
-    }
-
-    .floating-card img {
-        width: 90px;
-        height: 90px;
-    }
-
-    .floating-card-title {
-        font-size: 17px;
-    }
-
-    .floating-card-text {
-        font-size: 13px;
-    }
-
-}
 
 /* Contenedor de botones */
 .button-grid {
@@ -2665,7 +2639,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .titulo-portada h1 {
     font-family: 'Avenir', sans-serif;
     font-weight: 800;
-    font-size: 46px;
+    font-size: 38px;
     line-height: 1.05;
     margin: 0;
     color: #fff;
@@ -2714,34 +2688,53 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     background: #000;
     color: #fff;
     border-color: #06ba48;
-}
 
+}
+.lp-btn-whats i {
+    transition: .25s ease;
+}
+.lp-btn-whats:hover i {
+    transform: scale(1.15);
+}
 .lp-btn-ghost:hover {
     border-color: #fff;
 }
+.lp-btn-ghost i {
+    transition: .3s ease;
+}
+.lp-btn-ghost:hover i {
+    transform: translateY(6px);
+    
+}
 
-/* =====================================================================
-   ROTADOR — ahora va debajo del slider de cards
-===================================================================== */
+/* =========================================================
+   ROTADOR — debajo del slider
+   ========================================================= */
+
 .titulo-rotativo-box {
-    text-align: center;
+    width: 100%;
+    margin: 40px 20px 0;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start;
+    justify-content: flex-start;
+    text-align: left;
     overflow: hidden;
-    margin-top: 40px;
 }
 
 #titulo-rotativo {
-    font-size: 1.6rem;
-    font-weight: bold;
-    line-height: 1.2;
     margin: 0;
-    text-align: center;
-    white-space: nowrap;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: clamp(2.9rem, 7vw, 7rem);
+    font-weight: 800;
+    line-height: .95;
+
+    text-align: left;
 }
 
 #titulo-rotativo span {
+    display: block;
     transition: opacity .4s ease;
 }
 
@@ -2753,9 +2746,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     color: #929292;
 }
 
-@media (min-width:568px) {
+
+@media (max-width:568px) {
     #titulo-rotativo {
-        font-size: 2.6rem;
+        font-size: clamp(1.9rem, 5vw, 5rem);
     }
 }
 
@@ -2896,20 +2890,20 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .mm-cta i {
-    transition: transform .25s ease;
+    transition: transform .4s ease;
 }
 
 .mm-cta:hover i {
-    transform: translateY(-4px);
+    transform: translateX(6px);
 }
 
-@media (min-width:450px) and (max-width:1023px) {
+@media (min-width:540px) and (max-width:1023px) {
     .titulo-portada {
-        max-width: 720px;
+        max-width: 650px;
     }
 
     .titulo-portada h1 {
-        font-size: 72px;
+        font-size: 70px;
     }
 
     .titulo-portada .lp-sub {
@@ -2922,7 +2916,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     }
 
     .mm-tarjeta .card-img-top {
-        height: 450px;
+        height: 400px;
     }
 
     .lp-actions {
@@ -2940,11 +2934,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 @media (min-width:1024px) and (max-width:1439px) {
     .titulo-portada {
-        max-width: 920px;
+        max-width: 820px;
     }
 
     .titulo-portada h1 {
-        font-size: 94px;
+        font-size: 90px;
     }
 
     .titulo-portada .lp-sub {
@@ -2957,17 +2951,17 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
     .mm-fondo-blur {
         flex: 0 0 60%;
-        max-width: 620px;
+        max-width: 550px;
     }
 
     .mm-tarjeta .card-img-top {
-        height: 620px;
+        height: 550px;
     }
 }
 
 @media (min-width:1440px) {
     .titulo-portada {
-        max-width: 920px;
+        max-width: 820px;
     }
 
     .titulo-portada h1 {
@@ -2988,7 +2982,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     }
 
     .mm-tarjeta .card-img-top {
-        height: 620px;
+        height: 550px;
     }
 }
 
@@ -3073,7 +3067,13 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     letter-spacing: 1.6px;
     text-transform: uppercase;
 }
-
+.steps-wrap .eyebrow {
+    display: inline-block;
+    color: var(--crimson);
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
 #servicios .section-head h2 {
     margin: 0;
     color: #fff;
@@ -3367,19 +3367,31 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 #kit .btn--solid {
-    min-height: 56px;
-    padding: 0 26px;
+    display: block;
+    width: 100%;
+    max-width: 350px;
+    margin: 0 auto;
+    padding: 8px 16px;
     border: 1px solid var(--crimson, #e50914);
     border-radius: 999px;
     color: #fff;
     background: var(--crimson, #e50914);
     font: inherit;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 800;
     white-space: nowrap;
     cursor: pointer;
 }
+#kit .btn--solid:hover {
+    border: 1px solid #fff;
+}
+#kit .btn--solid i{
+    transition: transform .6s ease;
+}
 
+#kit .btn--solid:hover i{
+    transform: scale(1.15);
+}
 #kit .kit-result {
     display: none;
     align-items: center;
@@ -3444,9 +3456,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    #kit .btn--solid {
-        width: 100%;
-    }
 }
 
 @media (max-width: 600px) {
@@ -3525,7 +3534,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
     #kit .kit-grid .btn--solid {
         grid-column: 1 / -1;
-        width: 100%;
+        max-width: 620px;
     }
 }
 

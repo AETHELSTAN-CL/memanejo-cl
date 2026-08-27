@@ -300,9 +300,11 @@ document.addEventListener('DOMContentLoaded', () => {
     ["SERVICIOS", "AUTOMOTRICES"],
     ["ENTRENAMIENTO", "VIAL"],
     ["AULA", "VIRTUAL"],
+    ["PLATAFORMA", "DE ESTUDIO"],
     ["MANTENCIÓN", "PREVENTIVA"]
   ];
   const colores = [
+    ["blanco", "gris"],
     ["blanco", "gris"],
     ["blanco", "gris"],
     ["blanco", "gris"],
