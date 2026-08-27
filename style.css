@@ -24,194 +24,6 @@ body {
 }
 
 
-/* BOTÓN FLOTANTE */
-.glass-btn {
-    position: fixed;
-    bottom: 80px;
-    right: 20px;
-    z-index: 1050;
-    width: 52px;
-    height: 52px;
-    padding: 6px;
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(8px);
-    border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.3s ease, border 0.3s ease;
-}
-
-.glass-btn img {
-    width: 80%;
-    height: 80%;
-    object-fit: contain;
-}
-
-.glass-btn:focus {
-    outline: none;
-    box-shadow: none;
-}
-
-/* SLIDER PRINCIPAL de escritorio */
-.nav-slider-wrapper .nav-fullscreen {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: clamp(12px, 3vw, 60px);
-    padding: 0.6rem 1rem;
-    width: 100%;
-    box-sizing: border-box;
-    background-color: #111;
-    z-index: 5;
-}
-
-/* Links dentro del nav */
-.nav-slider-wrapper .nav-fullscreen .nav-link-fx {
-    position: relative;
-    z-index: 1;
-    overflow: hidden;
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    flex: 1 1 0;
-    max-width: 33%;
-
-    padding: 10px 22px;
-    margin-top: 20px;
-
-    text-align: center;
-    text-decoration: none;
-
-    font-weight: 700;
-    font-size: clamp(14px, 1.7vw, 20px);
-    line-height: 1.05;
-
-    color: #fff;
-
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-
-    transition:
-        color .25s ease,
-        transform .25s ease;
-}
-
-/* Borde animado */
-.nav-slider-wrapper .nav-fullscreen .nav-link-fx::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 1.75rem;
-
-    background: rgba(255, 255, 255, .10);
-
-    opacity: 0;
-    transform: scale(.88);
-
-    z-index: -1;
-
-    transition:
-        opacity .28s ease,
-        transform .28s ease,
-        background .28s ease;
-}
-
-/* Hover */
-.nav-slider-wrapper .nav-fullscreen .nav-link-fx:hover {
-    color: rgb(0, 0, 0);
-    transform: scale(1.02);
-}
-
-/* Animación del botón */
-.nav-slider-wrapper .nav-fullscreen .nav-link-fx:hover::before {
-    opacity: 1;
-    transform: scale(1);
-    background: rgb(255, 255, 255);
-}
-
-/* Cada slide es el contenedor de referencia para el botón */
-.carousel-item {
-    position: relative;
-}
-
-/* Estilo base del botón (compartido por todos) */
-.slide-btn {
-    position: absolute;
-    z-index: 10;
-    padding: clamp(6px, 1.8vw, 4px) clamp(16px, 4vw, 100px);
-    border-radius: 36px;
-    background: rgb(255, 255, 255);
-    color: #000000;
-    border: 1px solid #000000;
-    font-weight: 700;
-    font-size: clamp(13px, 3vw, 24px);
-    text-decoration: none;
-    white-space: nowrap;
-    transition: color .25s ease, transform .25s ease, background .28s ease;
-}
-
-.slide-btn:hover {
-    color: #000;
-    background: rgb(255, 255, 255);
-    transform: scale(1.05);
-}
-
-/* Posición individual por cada slide */
-.slide-btn-1 {
-    top: 70%;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.slide-btn-1:hover {
-    transform: translateX(-50%) scale(1.05);
-}
-
-.slide-btn-2 {
-    top: 50%;
-    left: 12%;
-    transform: translateX(-40%);
-}
-
-.slide-btn-2:hover {
-    transform: translateX(-40%) scale(1.05);
-}
-
-.slide-btn-3 {
-    top: 50%;
-    left: 12%;
-    transform: translateX(-40%);
-}
-
-.slide-btn-3:hover {
-    transform: translateX(-40%) scale(1.05);
-}
-
-.slide-btn-4 {
-    top: 80%;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.slide-btn-4:hover {
-    transform: translateX(-50%) scale(1.05);
-}
-
-.slide-btn-5 {
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.slide-btn-5:hover {
-    transform: translateX(-50%) scale(1.05);
-}
-
 /* Tooltip estilo burbuja */
 .tooltip-bubble {
     position: absolute;
@@ -245,7 +57,6 @@ body {
     background-color: #111;
     padding: 0;
     position: relative;
-    /* importante para tooltip absoluto */
     width: 100%;
 }
 
@@ -259,7 +70,6 @@ body {
     width: 100%;
     box-sizing: border-box;
     background-color: #111;
-    /* asegura fondo negro aunque tooltip se borre */
     z-index: 5;
 }
 
@@ -337,15 +147,25 @@ body {
     right: 0;
     bottom: 0;
     z-index: 2001;
-    background: #121212;
+
+    /* Glassmorphism */
+    background: rgba(139, 139, 139, 0.25);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
     border: 1px solid rgba(255, 255, 255, .08);
     border-top-left-radius: 26px;
     border-top-right-radius: 26px;
+
     max-height: 90vh;
     overflow-y: auto;
+
     transform: translateY(100%);
     transition: transform .45s cubic-bezier(.32, .72, 0, 1);
+
     padding-bottom: calc(24px + env(safe-area-inset-bottom));
+
+    color: #fff;
 }
 
 .driver-overlay.open .driver-sheet {
@@ -356,7 +176,7 @@ body {
     width: 42px;
     height: 5px;
     border-radius: 3px;
-    background: #3a3a3a;
+    background: rgba(255, 255, 255, .25);
     margin: 12px auto 2px;
 }
 
@@ -378,6 +198,7 @@ body {
     padding: 4px 11px;
     border-radius: 20px;
 }
+
 
 .driver-close {
     width: 32px;
@@ -413,7 +234,7 @@ body {
     height: 56px;
     border-radius: 16px;
     background: linear-gradient(150deg, #1e1e1e, #0a0a0a);
-    border: 1px solid var(--line);
+    border: 1px solid #888;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -487,6 +308,7 @@ body {
     border: none;
     border-radius: 999px;
     background: var(--crimson);
+    border: 1px solid #888;
     color: #fff;
     font-weight: 800;
     font-size: 14.5px;
@@ -495,17 +317,17 @@ body {
 }
 
 .dv-submit:hover {
-    box-shadow: 0 0 18px var(--crimson-glow);
+    border: 1px solid #e2e1e1;
 }
 
 .dv-hint {
     margin-top: 16px;
     text-align: center;
     font-size: 11.5px;
-    color: var(--text-dim);
+    color: #888;
     line-height: 1.6;
     background: #0c0c0c;
-    border: 1px dashed #2c2c2c;
+    border: 1px dashed #575656;
     border-radius: 12px;
     padding: 10px 12px;
 }
@@ -534,15 +356,18 @@ body {
 .dv-avatar {
     width: 44px;
     height: 44px;
-    border-radius: 50%;
-    background: linear-gradient(150deg, var(--crimson), #7a0d20);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 800;
-    font-size: 15px;
+    border-radius: 12px;
+    overflow: hidden;
     flex: none;
 }
+
+.dv-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
 
 .dv-user-row h4 {
     margin: 0;
@@ -551,34 +376,38 @@ body {
 
 .dv-user-row span {
     font-size: 12px;
-    color: var(--text-dim);
+    color: #929292;
 }
 
 .dv-logout {
-    margin-left: auto;
-    font-size: 12px;
-    color: var(--text-dim);
-    border: 1px solid var(--line);
-    padding: 7px 14px;
-    border-radius: 999px;
     cursor: pointer;
-    transition: .2s ease;
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    transition: color .2s ease;
+    color:#929292;
+    font-size: 14px;
 }
 
-.dv-logout:hover {
-    color: #fff;
-    border-color: #444;
+.dv-logout i {
+    transition: transform .25s ease;
 }
+
+.dv-logout:hover i {
+    transform: translateX(5px);
+}
+
+
 
 /* card del vehículo con emblema */
 .dv-car-card {
     display: flex;
     align-items: center;
     gap: 16px;
-    background: linear-gradient(150deg, #1c1c1c, #0a0a0a);
+    background: linear-gradient(150deg, #1c1c1c, #191919);
     border: 1px solid var(--line);
     border-radius: 20px;
-    padding: 18px;
+    padding: 8px;
     margin-bottom: 18px;
     position: relative;
     overflow: hidden;
@@ -587,34 +416,32 @@ body {
 .dv-car-card::before {
     content: '';
     position: absolute;
-    top: -60%;
+    top: -40%;
     right: -30%;
-    width: 60%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(220, 20, 60, .14), transparent 65%);
+    width: 80%;
+    height: 250%;
+    background: radial-gradient(circle, rgba(221, 8, 50, 0.404), transparent 65%);
 }
 
 .dv-emblem {
-    width: 58px;
-    height: 64px;
+    width: 96px;
+    height: 96px;
     flex: none;
     position: relative;
     z-index: 1;
-    clip-path: polygon(50% 0%, 100% 20%, 100% 70%, 50% 100%, 0% 70%, 0% 20%);
-    background: linear-gradient(160deg, #8b0000, #1a0000);
-    border: 1px solid rgba(255, 255, 255, .15);
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 }
 
-.dv-emblem span {
-    font-family: 'League Spartan', sans-serif;
-    font-weight: 800;
-    font-size: 16px;
-    color: #fff;
-    letter-spacing: -.5px;
+.dv-emblem img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
 }
+
 
 .dv-car-info {
     position: relative;
@@ -656,24 +483,25 @@ body {
 
 .dv-stat {
     background: var(--card2);
-    border: 1px solid var(--line);
+    border: 1px solid #888;
     border-radius: 16px;
     padding: 16px;
 }
 
 .dv-stat .lbl {
-    font-size: 10.5px;
-    color: var(--text-dim);
+    font-size: 10px;
+    color: #b8b8b8;
     text-transform: uppercase;
     letter-spacing: .05em;
     font-weight: 700;
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 10px;
 }
 
 .dv-stat .lbl i {
-    color: var(--crimson);
+    color: #f7f4f4;
+    font-size: 16px;
 }
 
 .dv-stat .val {
@@ -684,7 +512,7 @@ body {
 
 .dv-stat .sub {
     font-size: 11.5px;
-    color: var(--text-soft);
+    color: #d1d0d0;
     margin-top: 3px;
 }
 
@@ -741,7 +569,7 @@ body {
     width: 100%;
     padding: 15px 0;
     border-radius: 999px;
-    border: 1px solid #25D366;
+    border: 1px solid #eaebea;
     color: #fff;
     font-weight: 800;
     font-size: 14px;
@@ -751,7 +579,7 @@ body {
 }
 
 .dv-cta:hover {
-    background: #25D366;
+    background: #eaebea;
     color: #06210F;
 }
 
@@ -1834,6 +1662,7 @@ body {
     backdrop-filter: none;
     border: none;
     box-shadow: none;
+    
 }
 
 .video-container {
@@ -1890,7 +1719,9 @@ body {
     text-align: center;
     color: #929292;
 }
-
+#mm-espacio-publicidad {
+    padding-bottom: 3rem;
+}
 #mm-espacio-publicidad .promo-text {
 
     font-size: 18px;
@@ -1909,6 +1740,26 @@ body {
     font-size: 0.6rem;
     line-height: 1.2;
     margin-top: 8px;
+}
+.btn-publicidad-taller {
+    transition: background-color .25s ease,
+                color .25s ease,
+                border-color .25s ease,
+                transform .25s ease;
+}
+
+.btn-publicidad-taller:hover {
+    background: #fff;
+    color: #111;
+    border-color: #fff;
+}
+
+.btn-publicidad-taller i {
+    transition: transform .25s ease;
+}
+
+.btn-publicidad-taller:hover i {
+    transform: scale(1.08);
 }
 
 /* =========================
@@ -2008,72 +1859,329 @@ body {
     }
 }
 
+
 /* ------------------ CONTENIDOS DEL CURSO ------------------ */
+
 #contenidos {
     background: #f8f9fa;
     padding: 5rem 0;
 }
 
-/* Título divisorio tipo header, responsive */
+/* Barra */
 .titulo-divisor {
     display: flex;
-    justify-content: flex-start;
     align-items: center;
+    justify-content: center;
     background-color: #001c40;
     color: #fff;
     padding: 0.75rem 2rem;
     border-radius: 0.5rem;
     width: 100%;
-    /* mantener ancho fijo */
 }
+
+/* CONJUNTO: logo + texto, siempre en una sola línea */
+
+.titulo-divisor-inner {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+/* Logo izquierda */
 
 .titulo-divisor img.logo-divisor {
     display: block;
+    width: 50px;
     height: 50px;
-    flex-shrink: 0;
-    /* evita que se reduzca al cambiar el texto */
+    flex: 0 0 50px;
+    object-fit: cover;
+    border-radius: 12px;
 }
 
-.titulo-divisor p {
+/* Texto derecha */
+
+.titulo-divisor-inner p {
     margin: 0;
+    width: 350px;
+    min-width: 350px;
+    max-width: 350px;
     font-weight: 700;
     font-size: 1.2rem;
-    min-width: 250px;
-    /* ya está */
-    max-width: 350px;
-    /* evitar que crezca demasiado */
+    line-height: 1.3;
+    text-align: right;
     overflow: hidden;
-    /* corta exceso de texto */
-    display: inline-block;
-    text-align: left;
 }
 
+/* Rotador */
 #rotadorCursos {
-    display: inline-block;
-    transition: opacity 0.3s ease-in-out;
+    display: block;
+    width: 100%;
     white-space: nowrap;
+    overflow: hidden;
+    transition: opacity 0.3s ease-in-out;
 }
 
-/* Mobile adjustments */
+
+/* ================= MOBILE ================= */
+
 @media (max-width: 768px) {
+
     .titulo-divisor {
-        justify-content: flex-start;
-        gap: 0.5rem;
         padding: 0.5rem 1rem;
     }
 
-    .titulo-divisor img.logo-divisor {
-        height: 40px;
+    .titulo-divisor-inner {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+
+        width: 100%;
+        gap: 10px;
     }
 
-    .titulo-divisor p {
+    .titulo-divisor img.logo-divisor {
+        width: 40px;
+        height: 40px;
+        flex: 0 0 40px;
+    }
+
+    .titulo-divisor-inner p {
+        width: auto;
+        min-width: 0;
+        max-width: calc(100% - 50px);
+        flex: 1 1 auto;
         font-size: 0.9rem;
-        flex: 1;
-        text-align: left;
-        overflow: hidden;
+        text-align: right;
     }
 }
 
+/* =================================================
+   CARDS FLOTANTES - LOGOS
+   ================================================= */
+
+.floating-cards {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+}
+
+
+/* ================= CARD ================= */
+
+.floating-card {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 86px;
+    padding: 8px 16px 8px 8px;
+    gap: 24px;
+    background: linear-gradient(145deg, #1d1d1d, #151515);
+    border: 1px solid rgba(255, 255, 255, 0.691);
+    border-radius: 18px;
+    color: #fff;
+    text-decoration: none;
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, .35),
+        0 2px 6px rgba(0, 0, 0, .25);
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        border-color .25s ease;
+}
+
+.floating-card:hover {
+    transform: translateY(-2px);
+
+    border-color: rgba(255, 255, 255, .18);
+
+    box-shadow:
+        0 12px 26px rgba(0, 0, 0, .45),
+        0 4px 10px rgba(0, 0, 0, .25);
+}
+
+
+/* ================= IMAGEN ================= */
+
+.floating-card img {
+    width: 70px;
+    height: 70px;
+    flex: none;
+    object-fit: cover;
+    border-radius: 18px;
+    display: block;
+}
+
+
+/* ================= CONTENIDO ================= */
+
+.floating-card-content {
+    min-width: 0;
+    flex: 1;
+}
+
+.floating-card-title {
+    color: #fff;
+    font-size: 15px;
+    font-weight: 800;
+
+}
+
+.floating-card-text {
+    color: #c4c4c4;
+    font-size: 12px;
+}
+
+
+/* ================= ICONO ================= */
+
+.floating-card-icon {
+    flex: none;
+
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #aaa;
+
+    font-size: 13px;
+
+    transition:
+        transform .25s ease,
+        color .25s ease;
+}
+
+.floating-card:hover .floating-card-icon {
+    color: #fff;
+    transform: translateX(4px);
+}
+
+
+/* =================================================
+   PANTALLAS INTERMEDIAS
+   2 CARDS EN EJE X
+   ================================================= */
+
+@media (min-width: 700px) {
+
+    .floating-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+    }
+
+    .floating-card {
+        min-height: 92px;
+        padding: 9px 16px 9px 9px;
+        gap: 14px;
+    }
+
+    .floating-card img {
+        width: 74px;
+        height: 74px;
+    }
+
+    .floating-card-title {
+        font-size: 15px;
+    }
+
+    .floating-card-text {
+        font-size: 12px;
+    }
+
+}
+
+
+/* =================================================
+   ESCRITORIO
+   3 CARDS EN EJE X
+   ================================================= */
+
+@media (min-width: 1100px) {
+
+    .floating-cards {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .floating-card {
+        min-height: 110px;
+
+        padding: 10px 18px 10px 10px;
+
+        gap: 16px;
+
+        border-radius: 22px;
+
+        box-shadow:
+            0 14px 32px rgba(0, 0, 0, .42),
+            0 4px 10px rgba(0, 0, 0, .25);
+    }
+
+    .floating-card img {
+        width: 82px;
+        height: 82px;
+
+        border-radius: 18px;
+    }
+
+    .floating-card-title {
+        font-size: 16px;
+        margin-bottom: 6px;
+    }
+
+    .floating-card-text {
+        font-size: 12px;
+    }
+
+    .floating-card-icon {
+        width: 38px;
+        height: 38px;
+        font-size: 14px;
+    }
+
+}
+
+
+/* =================================================
+   ESCRITORIO GRANDE
+   ================================================= */
+
+@media (min-width: 1400px) {
+
+    .floating-cards {
+        max-width: 780px;
+        gap: 20px;
+    }
+
+    .floating-card {
+        min-height: 118px;
+    }
+
+    .floating-card img {
+        width: 90px;
+        height: 90px;
+    }
+
+    .floating-card-title {
+        font-size: 17px;
+    }
+
+    .floating-card-text {
+        font-size: 13px;
+    }
+
+}
 
 /* Contenedor de botones */
 .button-grid {
@@ -2589,7 +2697,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     border-radius: 40px;
     font-weight: 700;
     font-size: 14px;
-    border: 1px solid #fff;
+    border: 1px solid #888;
     transition: .25s ease;
     white-space: nowrap;
     text-decoration: none;
@@ -2605,12 +2713,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .lp-btn-whats:hover {
     background: #000;
     color: #fff;
-    border-color: #fff;
+    border-color: #06ba48;
 }
 
 .lp-btn-ghost:hover {
-    background: #fff;
-    color: #000;
     border-color: #fff;
 }
 
@@ -2652,6 +2758,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
         font-size: 2.6rem;
     }
 }
+
 
 /* =====================================================================
    SLIDER — estructura y clases originales (mm-*), con mejoras agregadas

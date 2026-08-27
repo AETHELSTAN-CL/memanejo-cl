@@ -10,7 +10,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <title>Mantención Automotriz, Repuestos y Entrenamiento Vial</title>
   <meta name="description"
-    content="En memanejo.cl encuentras mantención para tu vehículo, clases de conducción, venta de repuestos y alianzas con talleres mecánicos. ¡Confianza y respaldo en todo Chile!">
+    content="En memanejo.cl encuentras mantención para tu vehículo, quiz y clases de conducción, venta de repuestos y alianzas con talleres mecánicos. ¡Confianza y respaldo en todo Chile!">
   <meta name="author" content="Leonardo Azo" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.memanejo.cl/" /> <!-- Favicons -->
@@ -23,7 +23,7 @@
   <link rel="manifest" href="/site.webmanifest"> <!-- Open Graph -->
   <meta property="og:title" content="Mantención Automotriz, Repuestos y Entrenamiento Vial" />
   <meta property="og:description"
-    content="Mantención automotriz, clases de conducción, venta de repuestos, alianzas con talleres y atención personalizada. Todo en un solo sitio: memanejo.cl." />
+    content="Mantención automotriz, quiz y clases de conducción, venta de repuestos, alianzas con talleres y atención personalizada. Todo en un solo sitio: memanejo.cl." />
   <meta property="og:image" content="https://www.memanejo.cl/img/photo-output_1.jpeg" />
   <meta property="og:url" content="https://www.memanejo.cl/" />
   <meta property="og:type" content="website" /> <!-- Twitter Cards -->
@@ -281,167 +281,221 @@
   </div>
   -->
 
-    <!-- NAV SOLO ESCRITORIO 
+  <!-- NAV SOLO ESCRITORIO 
     <section class="nav-fullscreen d-none d-md-flex" data-bg="dark"> <a href="Catalogo/index.html" target="_blank"
         class="nav-link-fx"> <i class="fa-solid fa-car-battery me-2"></i> Repuestos Automotrices </a> <a
         href="#contenidos" class="nav-link-fx"> <i class="fa-solid fa-user-graduate me-2"></i> Formación Vial </a>
     </section>
     -->
-<!-- ============ KIT POR VEHÍCULO ============ -->
-<section class="section" id="kit" data-bg="dark">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow">Cotización instantánea</span>
-      <span><em>En fase de prueba (Beta)</em></span>
-      <h2>Tu kit de mantención, según tu auto exacto</h2>
-      <p>Selecciona marca, modelo y año: te mostramos el kit de repuestos recomendado para tu mantención, igual que si lo hablaras con el asesor por WhatsApp.<br>No incluye mano de obra técnica.</p>
-    </div>
-
-    <div class="kit-panel">
-      <div class="kit-grid">
-        <div class="field-group">
-          <label>Marca</label>
-          <select id="kitMarca"></select>
-        </div>
-        <div class="field-group">
-          <label>Modelo</label>
-          <select id="kitModelo"></select>
-        </div>
-        <div class="field-group">
-          <label>Año</label>
-          <select id="kitAnio"></select>
-        </div>
-        <button class="btn btn--solid" id="kitBtn" type="button">Calcular kit</button>
+  <!-- ============ KIT POR VEHÍCULO ============ -->
+  <section class="section" id="kit" data-bg="dark">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Cotización instantánea</span>
+        <span><em>En fase de prueba (Beta)</em></span>
+        <h2>Tu kit de mantención, según tu auto exacto</h2>
+        <p>Selecciona marca, modelo y año: te mostramos el kit de repuestos recomendado para tu mantención, igual que si
+          lo hablaras con el asesor por WhatsApp.<br>No incluye mano de obra técnica.</p>
       </div>
 
-      <div class="kit-result" id="kitResult">
-        <div class="r-left">
-          <b>Kit Mantención Básica — <span id="kitAutoLabel"></span></b>
-          <span>Cambio de aceite + filtros + inspección de 20 puntos · Disponible en tu comuna</span>
+      <div class="kit-panel">
+        <div class="kit-grid">
+          <div class="field-group">
+            <label>Marca</label>
+            <select id="kitMarca"></select>
+          </div>
+          <div class="field-group">
+            <label>Modelo</label>
+            <select id="kitModelo"></select>
+          </div>
+          <div class="field-group">
+            <label>Año</label>
+            <select id="kitAnio"></select>
+          </div>
+          <button class="btn btn--solid" id="kitBtn" type="button">Calcular kit</button>
         </div>
-        <div class="r-price">
-          <b class="mono" id="kitPrice"></b>
-          <span>precio cerrado · retiro y entrega sin costo</span>
+
+        <div class="kit-result" id="kitResult">
+          <div class="r-left">
+            <b>Kit Mantención Básica — <span id="kitAutoLabel"></span></b>
+            <span>Cambio de aceite + filtros + inspección de 20 puntos · Disponible en tu comuna</span>
+          </div>
+          <div class="r-price">
+            <b class="mono" id="kitPrice"></b>
+            <span>precio cerrado · retiro y entrega sin costo</span>
+          </div>
         </div>
       </div>
     </div>
+  </section>
+  <!-- Rotador: ahora debajo del slider -->
+  <div class="titulo-rotativo-box text-center" data-bg="dark">
+    <h2 id="titulo-rotativo">
+      <span class="blanco">Lubricentros</span> <span class="gris">Asociados</span>
+    </h2>
   </div>
-</section>
-    <!-- Rotador: ahora debajo del slider -->
-    <div class="titulo-rotativo-box text-center" data-bg="dark">
-      <h2 id="titulo-rotativo">
-        <span class="blanco">Lubricentros</span> <span class="gris">Asociados</span>
-      </h2>
-    </div>
-    <!-- SLIDER MODERNO -->
-    <section class="modern-slider-section" data-bg="dark">
-      <div class="slider-container">
-        <div class="slider-track"> <!-- Tarjeta 1 -->
-          <div class="slider-card first">
-            <div class="card-img-slider"> <img src="img/tera.vw.2.jpeg" class="slide-img active" alt="Imagen 1"> <img
-                src="img/tera.vw.jpeg" class="slide-img" alt="Imagen 2">
-              <div class="overlay-btn"> <a href="https://wa.me/56946914558" target="_blank" class="btn-slide-pill">
-                  ¡Conoce tu Próximo Auto! / Presiona aquí / Tasa preferencial a 1,36% / Obtener oferta / Presiona aquí
-                </a> </div>
+  <!-- SLIDER MODERNO -->
+  <section class="modern-slider-section" data-bg="dark">
+    <div class="slider-container">
+      <div class="slider-track"> <!-- Tarjeta 1 -->
+        <div class="slider-card first">
+          <div class="card-img-slider"> <img src="img/tera.vw.2.jpeg" class="slide-img active" alt="Imagen 1"> <img
+              src="img/tera.vw.jpeg" class="slide-img" alt="Imagen 2">
+            <div class="overlay-btn"> <a href="https://wa.me/56946914558" target="_blank" class="btn-slide-pill">
+                ¡Conoce tu Próximo Auto! / Presiona aquí / Tasa preferencial a 1,36% / Obtener oferta / Presiona aquí
+              </a> </div>
+          </div>
+        </div> <!-- Tarjeta 2 -->
+        <div class="slider-card">
+          <div class="card-img-slider"> <img src="img/hyundaiN.jpg" alt="Marca 1" class="slide-img">
+            <div class="overlay-btn"> <a href="Catalogo/index.html" target="_blank" class="btn-slide-pill">
+                Repuestos / Ver Catálogo / Presiona aquí / Todas las Marcas / Presiona aquí </a> </div>
+          </div>
+        </div> <!-- Tarjeta 3 -->
+        <div class="slider-card">
+          <div class="card-img-slider"> <img src="img/alfared1.JPG" alt="Marca 1" class="slide-img">
+            <div class="overlay-btn"> <a href="https://www.memanejomanejando.cl" target="_blank" class="btn-slide-pill">
+                Ingresa aquí / Aula Virtual / Ingresa aquí / memanejo+ </a> </div>
+          </div>
+        </div> <!-- Tarjeta 4 -->
+        <div class="slider-card">
+          <div class="card-img-slider"> <img src="img/alfablack.jpeg" alt="Visita técnica" class="slide-img">
+            <div class="overlay-btn"> <button class="btn-slide-pill" data-bs-toggle="modal"
+                data-bs-target="#modalVisitaRuta">Presiona aquí / Visita Técnica / Presiona aquí / Conoce más</button>
             </div>
-          </div> <!-- Tarjeta 2 -->
-          <div class="slider-card">
-            <div class="card-img-slider"> <img src="img/hyundaiN.jpg" alt="Marca 1" class="slide-img">
-              <div class="overlay-btn"> <a href="Catalogo/index.html" target="_blank" class="btn-slide-pill">
-                  Repuestos / Ver Catálogo / Presiona aquí / Todas las Marcas / Presiona aquí </a> </div>
-            </div>
-          </div> <!-- Tarjeta 3 -->
-          <div class="slider-card">
-            <div class="card-img-slider"> <img src="img/alfared1.JPG" alt="Marca 1" class="slide-img">
-              <div class="overlay-btn"> <a href="https://www.memanejomanejando.cl" target="_blank"
-                  class="btn-slide-pill"> Ingresa aquí / Aula Virtual / Ingresa aquí / memanejo+ </a> </div>
-            </div>
-          </div> <!-- Tarjeta 4 -->
-          <div class="slider-card">
-            <div class="card-img-slider"> <img src="img/alfablack.jpeg" alt="Visita técnica" class="slide-img">
-              <div class="overlay-btn"> <button class="btn-slide-pill" data-bs-toggle="modal"
-                  data-bs-target="#modalVisitaRuta">Presiona aquí / Visita Técnica / Presiona aquí / Conoce más</button>
-              </div>
-            </div>
-          </div> <!-- Tarjeta 5 -->
-          <div class="slider-card">
-            <div class="card-img-slider"> <img src="img/publi2.jpeg" alt="Marca 1" class="slide-img">
-              <div class="overlay-btn"> <a href="Catalogo/index.html" target="_blank" class="btn-slide-pill">
-                  Repuestos Volkswagen / Presiona aquí / Ver Catálogo / Presiona aquí </a> </div>
-            </div>
-          </div> <!-- Tarjeta 6 -->
-          <div class="slider-card">
-            <div class="card-img-slider"> <img src="img/publi3.jpeg" alt="Otra Promo" class="slide-img">
-              <div class="overlay-btn"> <button class="btn-slide-pill" data-bs-toggle="modal"
-                  data-bs-target="#modalConoceMas"> Promoción Cursos / Presiona aquí / Más información /
-                  ¡Suscríbete!</button>
-              </div>
+          </div>
+        </div> <!-- Tarjeta 5 -->
+        <div class="slider-card">
+          <div class="card-img-slider"> <img src="img/publi2.jpeg" alt="Marca 1" class="slide-img">
+            <div class="overlay-btn"> <a href="Catalogo/index.html" target="_blank" class="btn-slide-pill">
+                Repuestos Volkswagen / Presiona aquí / Ver Catálogo / Presiona aquí </a> </div>
+          </div>
+        </div> <!-- Tarjeta 6 -->
+        <div class="slider-card">
+          <div class="card-img-slider"> <img src="img/publi3.jpeg" alt="Otra Promo" class="slide-img">
+            <div class="overlay-btn"> <button class="btn-slide-pill" data-bs-toggle="modal"
+                data-bs-target="#modalConoceMas"> Promoción Cursos / Presiona aquí / Más información /
+                ¡Suscríbete!</button>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-<!-- ============ CÓMO FUNCIONA (retiro y entrega) ============ -->
-<section class="section" data-bg="dark">
-  <div class="wrap">
-    <div class="steps-wrap" data-aos="fade-up">
-      <span class="eyebrow">El proceso completo</span>
-      <h2 style="margin-top:14px;">Tú agendas, nosotros hacemos el resto</h2>
-      <p style="color:var(--text-soft);margin-top:12px;max-width:60ch;">Así de simple es tener tu auto en mantención sin perder tu día.</p>
-      <div class="steps-grid">
-        <div class="step"><div class="n">01</div><h3>Agenda por WhatsApp</h3><p>Cuéntanos qué necesita tu auto y en qué dirección lo retiramos: casa, trabajo, donde estés.</p></div>
-        <div class="step"><div class="n">02</div><h3>Retiramos y llevamos</h3><p>Pasamos a buscar tu vehículo y lo llevamos directo a un taller asociado verificado.</p></div>
-        <div class="step"><div class="n">03</div><h3>Entrega en tu puerta</h3><p>Con la mantención lista, te devolvemos el auto donde nos digas. Sin que muevas un dedo.</p></div>
+  <!-- ============ CÓMO FUNCIONA (retiro y entrega) ============ -->
+  <section class="section" data-bg="dark">
+    <div class="wrap">
+      <div class="steps-wrap" data-aos="fade-up">
+        <span class="eyebrow">El proceso completo</span>
+        <h2 style="margin-top:14px;">Tú agendas, nosotros hacemos el resto</h2>
+        <p style="color:var(--text-soft);margin-top:12px;max-width:60ch;">Así de simple es tener tu auto en mantención
+          sin perder tu día.</p>
+        <div class="steps-grid">
+          <div class="step">
+            <div class="n">01</div>
+            <h3>Agenda por WhatsApp</h3>
+            <p>Cuéntanos qué necesita tu auto y en qué dirección lo retiramos: casa, trabajo, donde estés.</p>
+          </div>
+          <div class="step">
+            <div class="n">02</div>
+            <h3>Retiramos y llevamos</h3>
+            <p>Pasamos a buscar tu vehículo y lo llevamos directo a un taller asociado verificado.</p>
+          </div>
+          <div class="step">
+            <div class="n">03</div>
+            <h3>Entrega en tu puerta</h3>
+            <p>Con la mantención lista, te devolvemos el auto donde nos digas. Sin que muevas un dedo.</p>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</section>
-    <!-- ============ SERVICIOS: slider con hover-card ============ -->
-<section class="section" id="servicios" data-bg="dark" >
-  <div class="wrap">
-    <div class="section-head" data-aos="fade-up">
-      <span class="eyebrow">Qué puedes agendar</span>
-      <h2>Servicios más pedidos</h2>
-      <p>Presiona sobre cada servicio para ver precio y duración.</p>
-    </div>
+  </section>
+  <!-- ============ SERVICIOS: slider con hover-card ============ -->
+  <section class="section" id="servicios" data-bg="dark">
+    <div class="wrap">
+      <div class="section-head" data-aos="fade-up">
+        <span class="eyebrow">Qué puedes agendar</span>
+        <h2>Servicios más pedidos</h2>
+        <p>Presiona sobre cada servicio para ver precio y duración.</p>
+      </div>
 
-    <div class="svc-slider" data-aos="fade-up">
-      <div class="svc-chip" tabindex="0">
-        <div class="row1"><span class="ico"><i class="fa-solid fa-circle-dot"></i></span><span class="label">Cambio pastillas de freno</span></div>
-        <div class="reveal"><p class="desc">Pastillas delanteras o traseras + revisión de discos.</p><div class="price-row"><span class="price">$69.000</span><span class="time">120 min</span></div><a href="#" class="pill pill-crimson pill-sm w-100 svc-book">Agendar</a></div>
-      </div>
-      <div class="svc-chip" tabindex="0">
-        <div class="row1"><span class="ico"><i class="fa-solid fa-oil-can"></i></span><span class="label">Cambio de aceite y filtros</span></div>
-        <div class="reveal"><p class="desc">Aceite + filtro de aceite, aire y revisión de 20 puntos.</p><div class="price-row"><span class="price">$79.000</span><span class="time">60 min</span></div><a href="#" class="pill pill-crimson pill-sm w-100 svc-book">Agendar</a></div>
-      </div>
-      <div class="svc-chip" tabindex="0">
-        <div class="row1"><span class="ico"><i class="fa-solid fa-car-side"></i></span><span class="label">Alineación y balanceo</span></div>
-        <div class="reveal"><p class="desc">Alineación computarizada + balanceo de las 4 ruedas.</p><div class="price-row"><span class="price">$38.900</span><span class="time">55 min</span></div><a href="#" class="pill pill-crimson pill-sm w-100 svc-book">Agendar</a></div>
-      </div>
-      <div class="svc-chip" tabindex="0">
-        <div class="row1"><span class="ico"><i class="fa-solid fa-car-battery"></i></span><span class="label">Batería y sistema eléctrico</span></div>
-        <div class="reveal"><p class="desc">Diagnóstico de carga de batería y alternador.</p><div class="price-row"><span class="price">$29.000</span><span class="time">25 min</span></div><a href="#" class="pill pill-crimson pill-sm w-100 svc-book">Agendar</a></div>
-      </div>
-      <div class="svc-chip" tabindex="0">
-        <div class="row1"><span class="ico"><i class="fa-solid fa-magnifying-glass"></i></span><span class="label">Revisión pre-técnica</span></div>
-        <div class="reveal"><p class="desc">Chequeo de gases previo a la Revisión Técnica.</p><div class="price-row"><span class="price">$29.000</span><span class="time">50 min</span></div><a href="#" class="pill pill-crimson pill-sm w-100 svc-book">Agendar</a></div>
-      </div>
-      <div class="svc-chip" tabindex="0">
-        <div class="row1"><span class="ico"><i class="fa-solid fa-microchip"></i></span><span class="label">Diagnóstico computarizado</span></div>
-        <div class="reveal"><p class="desc">Escaneo de luz check-engine y códigos de falla.</p><div class="price-row"><span class="price">$79.900</span><span class="time">45 min</span></div><a href="#" class="pill pill-crimson pill-sm w-100 svc-book">Agendar</a></div>
-      </div>
-      <div class="svc-chip" tabindex="0">
-        <div class="row1"><span class="ico"><i class="fa-solid fa-wind"></i></span><span class="label">Aire acondicionado</span></div>
-        <div class="reveal"><p class="desc">Recarga de gas, revisión de fugas y filtro de cabina.</p><div class="price-row"><span class="price">$39.900</span><span class="time">40 min</span></div><a href="#" class="pill pill-crimson pill-sm w-100 svc-book">Agendar</a></div>
-      </div>
-      <div class="svc-chip" tabindex="0">
-        <div class="row1"><span class="ico"><i class="fa-solid fa-gauge-high"></i></span><span class="label">Suspensión</span></div>
-        <div class="reveal"><p class="desc">Amortiguadores, rótulas y ruidos de tren delantero.</p><div class="price-row"><span class="price">$59.900</span><span class="time">70 min</span></div><a href="#" class="pill pill-crimson pill-sm w-100 svc-book">Agendar</a></div>
+      <div class="svc-slider" data-aos="fade-up">
+        <div class="svc-chip" tabindex="0">
+          <div class="row1"><span class="ico"><i class="fa-solid fa-circle-dot"></i></span><span class="label">Cambio
+              pastillas de freno</span></div>
+          <div class="reveal">
+            <p class="desc">Pastillas delanteras o traseras + revisión de discos.</p>
+            <div class="price-row"><span class="price">$69.000</span><span class="time">120 min</span></div><a href="#"
+              class="pill pill-crimson pill-sm w-100 svc-book">Agendar</a>
+          </div>
+        </div>
+        <div class="svc-chip" tabindex="0">
+          <div class="row1"><span class="ico"><i class="fa-solid fa-oil-can"></i></span><span class="label">Cambio de
+              aceite y filtros</span></div>
+          <div class="reveal">
+            <p class="desc">Aceite + filtro de aceite, aire y revisión de 20 puntos.</p>
+            <div class="price-row"><span class="price">$79.000</span><span class="time">60 min</span></div><a href="#"
+              class="pill pill-crimson pill-sm w-100 svc-book">Agendar</a>
+          </div>
+        </div>
+        <div class="svc-chip" tabindex="0">
+          <div class="row1"><span class="ico"><i class="fa-solid fa-car-side"></i></span><span class="label">Alineación
+              y balanceo</span></div>
+          <div class="reveal">
+            <p class="desc">Alineación computarizada + balanceo de las 4 ruedas.</p>
+            <div class="price-row"><span class="price">$38.900</span><span class="time">55 min</span></div><a href="#"
+              class="pill pill-crimson pill-sm w-100 svc-book">Agendar</a>
+          </div>
+        </div>
+        <div class="svc-chip" tabindex="0">
+          <div class="row1"><span class="ico"><i class="fa-solid fa-car-battery"></i></span><span class="label">Batería
+              y sistema eléctrico</span></div>
+          <div class="reveal">
+            <p class="desc">Diagnóstico de carga de batería y alternador.</p>
+            <div class="price-row"><span class="price">$29.000</span><span class="time">25 min</span></div><a href="#"
+              class="pill pill-crimson pill-sm w-100 svc-book">Agendar</a>
+          </div>
+        </div>
+        <div class="svc-chip" tabindex="0">
+          <div class="row1"><span class="ico"><i class="fa-solid fa-magnifying-glass"></i></span><span
+              class="label">Revisión pre-técnica</span></div>
+          <div class="reveal">
+            <p class="desc">Chequeo de gases previo a la Revisión Técnica.</p>
+            <div class="price-row"><span class="price">$29.000</span><span class="time">50 min</span></div><a href="#"
+              class="pill pill-crimson pill-sm w-100 svc-book">Agendar</a>
+          </div>
+        </div>
+        <div class="svc-chip" tabindex="0">
+          <div class="row1"><span class="ico"><i class="fa-solid fa-microchip"></i></span><span
+              class="label">Diagnóstico computarizado</span></div>
+          <div class="reveal">
+            <p class="desc">Escaneo de luz check-engine y códigos de falla.</p>
+            <div class="price-row"><span class="price">$79.900</span><span class="time">45 min</span></div><a href="#"
+              class="pill pill-crimson pill-sm w-100 svc-book">Agendar</a>
+          </div>
+        </div>
+        <div class="svc-chip" tabindex="0">
+          <div class="row1"><span class="ico"><i class="fa-solid fa-wind"></i></span><span class="label">Aire
+              acondicionado</span></div>
+          <div class="reveal">
+            <p class="desc">Recarga de gas, revisión de fugas y filtro de cabina.</p>
+            <div class="price-row"><span class="price">$39.900</span><span class="time">40 min</span></div><a href="#"
+              class="pill pill-crimson pill-sm w-100 svc-book">Agendar</a>
+          </div>
+        </div>
+        <div class="svc-chip" tabindex="0">
+          <div class="row1"><span class="ico"><i class="fa-solid fa-gauge-high"></i></span><span
+              class="label">Suspensión</span></div>
+          <div class="reveal">
+            <p class="desc">Amortiguadores, rótulas y ruidos de tren delantero.</p>
+            <div class="price-row"><span class="price">$59.900</span><span class="time">70 min</span></div><a href="#"
+              class="pill pill-crimson pill-sm w-100 svc-book">Agendar</a>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
   <!-- Modal Visita Ruta-->
   <div class="modal fade" id="modalVisitaRuta" tabindex="-1" aria-labelledby="modalVisitaRutaLabel" aria-hidden="true">
@@ -523,105 +577,121 @@
     </div>
   </div>
 
-<!-- ============ BOTÓN FLOTANTE ============ -->
-<button id="menuButton" class="rounded-circle glass-btn" type="button">
-  <img src="img/logopng.png" alt="Abrir panel del conductor">
-  <span id="tooltipText" class="tooltip-bubble">Inicia aquí</span>
-</button>
+  <!-- ============ BOTÓN FLOTANTE ============ -->
+  <button id="menuButton" class="rounded-circle glass-btn" type="button">
+    <img src="img/logopng.png" alt="Abrir panel del conductor">
+    <span id="tooltipText" class="tooltip-bubble">Inicia aquí</span>
+  </button>
 
-<!-- ============ OVERLAY + SHEET (login → dashboard) ============ -->
-<div class="driver-overlay" id="driverOverlay">
-  <div class="driver-sheet" id="driverSheet" role="dialog" aria-modal="true" aria-label="Panel del conductor">
-    <div class="driver-handle"></div>
-    <div class="driver-topbar">
-      <span class="driver-badge-beta">Beta</span>
-      <div class="driver-close" id="driverClose"><i class="fa-solid fa-xmark"></i></div>
+  <!-- ============ OVERLAY + SHEET (login → dashboard) ============ -->
+  <div class="driver-overlay" id="driverOverlay">
+    <div class="driver-sheet" id="driverSheet" role="dialog" aria-modal="true" aria-label="Panel del conductor">
+      <div class="driver-handle"></div>
+      <div class="driver-topbar">
+        <span class="driver-badge-beta">Beta</span>
+        <div class="driver-close" id="driverClose"><i class="fa-solid fa-xmark"></i></div>
+      </div>
+
+      <!-- ---- VISTA: LOGIN ---- -->
+      <div id="dv-login">
+        <div class="dv-login-head">
+          <div class="dv-login-icon"><i class="fa-solid fa-user"></i></div>
+          <h3>Panel del conductor</h3>
+          <p>Ingresa para ver el estado de mantención de tu vehículo.</p>
+        </div>
+
+        <div class="dv-error" id="dvError">Correo o clave incorrectos. Intenta de nuevo.</div>
+
+        <form id="dvForm">
+          <div class="dv-field">
+            <label>Correo</label>
+            <input type="email" id="dvEmail" placeholder="tucorreo@ejemplo.cl" autocomplete="username" required>
+          </div>
+          <div class="dv-field">
+            <label>Clave</label>
+            <input type="password" id="dvPass" placeholder="••••••••" autocomplete="current-password" required>
+          </div>
+          <button type="submit" class="dv-submit">Ingresar</button>
+        </form>
+
+        <div class="dv-hint">
+          Panel en fase de prueba — usa la cuenta demo:<br>
+          <b>memanejo@memanejo.cl</b> · clave <b>memanejo</b>
+        </div>
+      </div>
+
+      <!-- ---- VISTA: DASHBOARD ---- -->
+      <div id="dv-dash">
+        <div class="dv-user-row">
+          <div class="dv-avatar">
+            <img src="img/newnewlogo.jpg" alt="Foto de usuario">
+          </div>
+
+          <div>
+            <h4>Hola, Conductor</h4>
+            <span>memanejo@memanejo.cl</span>
+          </div>
+          <div class="dv-logout" id="dvLogout">
+            Cerrar sesión
+            <i class="fa-solid fa-right-from-bracket ms-2"></i>
+          </div>
+
+        </div>
+
+        <div class="dv-car-card">
+          <div class="dv-emblem">
+            <img src="/img/logo-alfa-romeo.png" alt="Alfa Romeo">
+          </div>
+
+          <div class="dv-car-info">
+            <div class="brand">Alfa Romeo</div>
+            <h4>Giulia 2.0 Ti</h4>
+            <span class="plate">MM·LA·89</span>
+          </div>
+        </div>
+
+        <div class="dv-stats">
+          <div class="dv-stat">
+            <div class="lbl"><i class="fa-solid fa-gauge-high"></i>Último kilometraje</div>
+            <div class="val">48.230 km</div>
+            <div class="sub">Registrado el 20 jul 2026</div>
+          </div>
+          <div class="dv-stat">
+            <div class="lbl"><i class="fa-solid fa-screwdriver-wrench"></i>Próxima mantención</div>
+            <div class="val">15 sept</div>
+            <div class="sub">Cambio de aceite · en 12 días</div>
+          </div>
+          <div class="dv-stat wide">
+            <div class="lbl"><i class="fa-solid fa-clipboard-check"></i>Revisión técnica</div>
+            <div class="val">Vence en 2 meses</div>
+            <div class="sub">Te avisaremos con anticipación por WhatsApp</div>
+          </div>
+        </div>
+
+        <div class="dv-list">
+          <div class="dv-list-item">
+            <i class="fa-solid fa-user-tie"></i>
+            <div>
+              <div class="t">Taller asociado habitual</div>
+              <div class="d">Automania Racing · La Florida</div>
+            </div>
+          </div>
+          <div class="dv-list-item">
+            <i class="fa-solid fa-box"></i>
+            <div>
+              <div class="t">Último kit realizado</div>
+              <div class="d">Kit Intermedio · 15 jun 2026</div>
+            </div>
+          </div>
+        </div>
+
+        <a href="#" class="dv-cta" id="dvAgendar" data-bs-toggle="modal" data-bs-target="#mm-modal-publicidad">
+          <i class="fa-solid fa-fire"></i> Revisar promoción
+        </a>
+      </div>
+
     </div>
-
-    <!-- ---- VISTA: LOGIN ---- -->
-    <div id="dv-login">
-      <div class="dv-login-head">
-        <div class="dv-login-icon"><i class="fa-solid fa-user"></i></div>
-        <h3>Panel del conductor</h3>
-        <p>Ingresa para ver el estado de mantención de tu vehículo.</p>
-      </div>
-
-      <div class="dv-error" id="dvError">Correo o clave incorrectos. Intenta de nuevo.</div>
-
-      <form id="dvForm">
-        <div class="dv-field">
-          <label>Correo</label>
-          <input type="email" id="dvEmail" placeholder="tucorreo@ejemplo.cl" autocomplete="username" required>
-        </div>
-        <div class="dv-field">
-          <label>Clave</label>
-          <input type="password" id="dvPass" placeholder="••••••••" autocomplete="current-password" required>
-        </div>
-        <button type="submit" class="dv-submit">Ingresar</button>
-      </form>
-
-      <div class="dv-hint">
-        Panel en fase de prueba — usa la cuenta demo:<br>
-        <b>memanejo@memanejo.cl</b> · clave <b>memanejo</b>
-      </div>
-    </div>
-
-    <!-- ---- VISTA: DASHBOARD ---- -->
-    <div id="dv-dash">
-      <div class="dv-user-row">
-        <div class="dv-avatar">M</div>
-        <div>
-          <h4>Hola, Conductor</h4>
-          <span>memanejo@memanejo.cl</span>
-        </div>
-        <div class="dv-logout" id="dvLogout">Cerrar sesión</div>
-      </div>
-
-      <div class="dv-car-card">
-        <div class="dv-emblem"><span>AR</span></div>
-        <div class="dv-car-info">
-          <div class="brand">Alfa Romeo</div>
-          <h4>Giulia 2.0 Ti</h4>
-          <span class="plate">AR·JU·12</span>
-        </div>
-      </div>
-
-      <div class="dv-stats">
-        <div class="dv-stat">
-          <div class="lbl"><i class="fa-solid fa-gauge-high"></i>Último kilometraje</div>
-          <div class="val">48.230 km</div>
-          <div class="sub">Registrado el 20 jul 2026</div>
-        </div>
-        <div class="dv-stat">
-          <div class="lbl"><i class="fa-solid fa-screwdriver-wrench"></i>Próxima mantención</div>
-          <div class="val">15 sept</div>
-          <div class="sub">Cambio de aceite · en 12 días</div>
-        </div>
-        <div class="dv-stat wide">
-          <div class="lbl"><i class="fa-solid fa-clipboard-check"></i>Revisión técnica</div>
-          <div class="val">Vence en 2 meses</div>
-          <div class="sub">Te avisaremos con anticipación por WhatsApp</div>
-        </div>
-      </div>
-
-      <div class="dv-list">
-        <div class="dv-list-item">
-          <i class="fa-solid fa-user-tie"></i>
-          <div><div class="t">Taller asociado habitual</div><div class="d">Automania Racing · La Florida</div></div>
-        </div>
-        <div class="dv-list-item">
-          <i class="fa-solid fa-box"></i>
-          <div><div class="t">Último kit realizado</div><div class="d">Kit Intermedio · 15 jun 2026</div></div>
-        </div>
-      </div>
-
-      <a href="#" class="dv-cta" id="dvAgendar" data-bs-toggle="modal" data-bs-target="#mm-modal-publicidad">
-  <i class="fa-solid fa-fire"></i> Revisar promoción
-</a>
-    </div>
-
   </div>
-</div>
 
 
   <!----- Start Q&A section ----->
@@ -948,7 +1018,7 @@
         Tu navegador no soporta el video.
       </video>
 
-      <!-- Cambié la clase para diferenciarla -->
+      <!-- Promocion -->
       <div class="promo-banner principal">
         <p class="promo-text mb-2">
           ¿Quieres mostrar tu marca aquí? <br><a href="https://wa.me/56946914558" target="_blank"
@@ -962,16 +1032,182 @@
       </div>
     </div>
   </div>
+<!-- ================================
+     CONTENIDOS ADICIONALES
+     ================================ -->
 
-  <section id="contenidos" class="bg-light">
-    <div class="container-fluid">
-      <div class="titulo-divisor mb-4 p-3 rounded d-flex align-items-center gap-3" data-bg="dark"> <img
-          src="img/logopngwhite.png" alt="Logo" class="logo-divisor">
-        <p class="mb-0 fw-bold"> <span id="rotadorCursos"
-            data-frases="Formación Vial,Cursos de Conducción Particular"></span> </p>
+<section id="contenidos" class="bg-light">
+
+  <div class="container-fluid">
+
+    <!-- Título divisor -->
+    <div class="titulo-divisor mb-4 rounded" data-bg="dark">
+
+      <div class="titulo-divisor-inner">
+
+        <img
+          src="img/newnewlogo.jpg"
+          alt="Logo"
+          class="logo-divisor">
+
+        <p>
+          <span
+            id="rotadorCursos"
+            data-frases="Formación Vial,Cursos de Conducción Particular,Mantención automotriz,Quiz de conducción">
+          </span>
+        </p>
+
       </div>
 
-      <!-- Cambié la clase para diferenciarla 
+    </div>
+
+
+    <!-- ================================
+         CARDS FLOTANTES
+         ================================ -->
+
+    <div class="floating-cards">
+
+      <!-- CARD 1 -->
+      <a
+        href="/appweb/aulavirtual/quiz/quiz-appweb/index.html"
+        class="floating-card"
+        target="_blank"
+        rel="noopener noreferrer">
+
+        <img
+          src="img/logopngicon.png"
+          alt="Quiz de conducción">
+
+        <div class="floating-card-content">
+
+          <div class="floating-card-title">
+            Quiz de conducción
+          </div>
+
+          <div class="floating-card-text">
+            Accede a +800 preguntas en el simulador examen municipal 2026
+          </div>
+
+        </div>
+
+        <i class="fa-solid fa-arrow-right floating-card-icon"></i>
+
+      </a>
+
+
+      <!-- CARD 2 -->
+      <a
+        href="#"
+        class="floating-card">
+
+        <img
+          src="img/logo-alfa-romeo.png"
+          alt="Alfa Romeo">
+
+        <div class="floating-card-content">
+
+          <div class="floating-card-title">
+            Alfa Romeo
+          </div>
+
+          <div class="floating-card-text">
+            Mantención y servicios para tu vehículo
+          </div>
+
+        </div>
+
+        <i class="fa-solid fa-arrow-right floating-card-icon"></i>
+
+      </a>
+
+
+      <!-- CARD 3 -->
+      <a
+        href="#"
+        class="floating-card">
+
+        <img
+          src="img/vw-logo.JPEG"
+          alt="Volkswagen">
+
+        <div class="floating-card-content">
+
+          <div class="floating-card-title">
+            Volkswagen
+          </div>
+
+          <div class="floating-card-text">
+            Mantenciones y descuentos
+          </div>
+
+        </div>
+
+        <i class="fa-solid fa-arrow-right floating-card-icon"></i>
+
+      </a>
+
+
+      <!-- CARD 4 -->
+      <a
+        href="/appweb/aulavirtual/quiz/quiz-nivelacion/index.html"
+        class="floating-card">
+
+        <img
+          src="img/logopngicon.png"
+          alt="Quiz nivelación">
+
+        <div class="floating-card-content">
+
+          <div class="floating-card-title">
+            Quiz de nivelación
+          </div>
+
+          <div class="floating-card-text">
+         Escoge entre nivel fácil o avanzado <br>¡Suscríbete! y recibe tu puntaje y errores
+          </div>
+
+        </div>
+
+        <i class="fa-solid fa-arrow-right floating-card-icon"></i>
+
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+  <!-- Espacio Publicitario Talleres -->
+  <section id="mm-espacio-publicidad" class="text-center bg-light">
+    <div class="mm-publicidad-wrapper mx-auto" data-aos="fade-down"> <!-- Botón --> <button
+        class="btn btn-warning btn-sm rounded-pill mb-3 px-4" type="button" data-bs-toggle="collapse"
+        data-bs-target="#contenidoPublicidad" aria-expanded="false" aria-controls="contenidoPublicidad"> Descubre un
+        beneficio exclusivo</button> <!-- Contenido desplegable -->
+      <div class="collapse" id="contenidoPublicidad">
+        <div class="mm-publicidad-contenido p-3 rounded-4"> <!-- Imagen vertical -->
+          <div class="video-container mb-3"> <img src="img/mecanicorg.jpg" alt="Mecánicos"
+              class="video-vertical shadow rounded-3"> </div> <!-- Tarjeta Promoción -->
+          <div class="promo-banner">
+            <p class="promo-text mb-2">
+              <strong>Sigue en vivo tu mantención</strong>
+              <small>Más transparencia y confianza durante todo el proceso.<br></small>
+            </p>
+            <a href="#contact" class="btn-publicidad-taller btn btn-warning btn-sm rounded-pill px-4 mt-2">
+              <i class="fa-solid fa-calendar-check me-2"></i>Programar mantención
+            </a>
+
+            <p class="text-bottom">Sin costo adicional.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cambié la clase para diferenciarla 
       <div class="button-grid">
 
         <a href="#" class="btn-modern" id="abrirAgenda">
@@ -997,7 +1233,7 @@
 
       </div>
 -->
-      <!-- Modal de pago 
+  <!-- Modal de pago 
       <div class="modal fade" id="modalPagoClases" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
@@ -1025,7 +1261,7 @@
         </div>
       </div>
       -->
-      <!-- Título con guion azul 
+  <!-- Título con guion azul 
       <h3 class="text-center mb-4" data-aos="fade-up">Contenidos del Curso</h3>
       <div class="row-cursos"> 
          Card 1 
@@ -1050,7 +1286,7 @@
                 Desbloquea contenido exclusivo y test online de práctica
               </small>
               -->
-      <!-- Burbuja de precios 
+  <!-- Burbuja de precios 
               <div id="precioNivel0" class="collapse precios-burbuja mt-2">
                 <div class="card card-body shadow-sm text-dark"> <strong>NIVEL: CONOCIMIENTO
                     INICIAL</strong><small>Clase teórica
@@ -1096,7 +1332,7 @@
           </div>
         </div>
         -->
-      <!-- Card 2 con scroll 
+  <!-- Card 2 con scroll 
         <div class="curso-item" data-aos="fade-up">
           <div class="card card-gris">
             <div class="card-body d-flex flex-column">
@@ -1184,7 +1420,7 @@
           </div>
         </div> 
         -->
-      <!-- Card 3 
+  <!-- Card 3 
         <div class="curso-item" data-aos="fade-up">
           <div class="card card-gris">
             <div class="card-body d-flex flex-column">
@@ -1259,30 +1495,7 @@
     </div>
     </div>
     -->
-      <!-- Espacio Publicitario Talleres -->
-      <section id="mm-espacio-publicidad" class="my-5 text-center">
-        <div class="mm-publicidad-wrapper mx-auto" data-aos="fade-down"> <!-- Botón --> <button
-            class="btn btn-warning btn-sm rounded-pill mb-3 px-4" type="button" data-bs-toggle="collapse"
-            data-bs-target="#contenidoPublicidad" aria-expanded="false" aria-controls="contenidoPublicidad"> Descubre un
-            beneficio exclusivo</button> <!-- Contenido desplegable -->
-          <div class="collapse" id="contenidoPublicidad">
-            <div class="mm-publicidad-contenido p-3 rounded-4"> <!-- Imagen vertical -->
-              <div class="video-container mb-3"> <img src="img/mecanicorg.jpg" alt="Mecánicos"
-                  class="video-vertical shadow rounded-3"> </div> <!-- Tarjeta Promoción -->
-              <div class="promo-banner">
-                <p class="promo-text mb-2">
-                  <strong>Sigue en vivo tu mantención</strong>
-                  <small>Más transparencia y confianza durante todo el proceso.<br></small>
-                </p>
-                <a href="#contact" class="btn-publicidad-taller btn btn-warning btn-sm rounded-pill px-4 mt-2">Programar
-                  mantención</a>
-                <p class="text-bottom">Sin costo adicional.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-  </section>
+
 
 
   <!-- Contact Section Start -->
@@ -1291,7 +1504,7 @@
       <div class="contact-right" data-bg="dark">
         <form id="formAgenda">
           <div class="form-header text-center mb-3"> <i class="fa-solid fa-headset"
-              style="font-size: 48px; color: #0f0;"></i>
+              style="font-size: 48px; color:#25d366;"></i>
             <h1 style="margin-top: 0.5rem;">memanejoChat</h1> <span>En línea</span>
           </div> <input type="text" class="name" placeholder="Escribe aquí tu nombre" required> <input type="email"
             class="email" placeholder="Escribe aquí tu correo electrónico" required> <input type="tel" class="numero"
