@@ -463,7 +463,7 @@
 
       <div class="svc-slider" data-aos="fade-up">
         <div class="svc-chip" tabindex="0">
-          <div class="row1"><span class="ico"><i class="fa-solid fa-screwdriver-wrench me-2"></i></span><span
+          <div class="row1"><span class="ico"><i class="fa-solid fa-screwdriver-wrench"></i></span><span
               class="label">Cambio
               pastillas de freno</span></div>
           <div class="reveal">
@@ -1584,27 +1584,6 @@
   </section>
 
 
-  <script> function sendwhatsapp() { var name = document.querySelector(".name").value; var email = document.querySelector(".email").value; var numero = document.querySelector(".numero").value; var message = document.querySelector(".message").value; var url = "https://wa.me/+56946914558?text=" + "Nombre: " + name + "%0a" + "Email: " + email + "%0a" + "Teléfono: " + numero + "%0a" + "Mensaje: " + message; window.open(url, '_blank').focus(); } </script>
-  <div class="modal-overlay" id="modalAgenda">
-    <div class="modal-wrapper">
-      <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2 class="m-0 text-white">Agendar Clase Práctica</h2> <button class="modal-close" id="cerrarAgenda"
-          aria-label="Cerrar formulario">&times;</button>
-      </div>
-      <form action="procesar_agenda.php" method="POST" class="form-agenda"> <label for="nombre">Nombre:</label> <input
-          type="text" name="nombre" id="nombre" required /> <label for="telefono">Teléfono:</label> <input type="tel"
-          name="telefono" id="telefono" required /> <label for="fecha">Fecha deseada:</label> <input type="date"
-          name="fecha" id="fecha" required
-          style="appearance: none; -webkit-appearance: none; font-size: 1rem; padding: 1rem;" /> <label
-          for="bloque">Duración del bloque:</label> <select name="bloque" id="bloque" required>
-          <option value="2" selected>2 horas (recomendado)</option>
-          <option value="1">1 hora</option>
-          <option value="3">3 horas</option>
-        </select> <label for="hora">Horario disponible:</label> <select name="hora" id="hora" required>
-          <!-- Opciones generadas por JavaScript --> </select> <button type="submit">Enviar Solicitud</button> </form>
-    </div>
-  </div>
-  </div>
   <div class="go-top-icon" data-bg="dark"> <i class="fa-solid fa-circle-arrow-up" id="goTop" title="Volver arriba"></i>
   </div>
   <script> document.getElementById('goTop').addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); }); </script>

@@ -181,87 +181,6 @@ document.addEventListener('DOMContentLoaded', () => {
       segundoBtn.innerHTML = `<i class="fa-solid fa-gift" style="margin-right:6px;"></i>Descubre un beneficio exclusivo`;
     }
   }
-  // --- MODAL AGENDA ---
-  const btnAbrir = document.getElementById('abrirAgenda');
-  const modal = document.getElementById('modalAgenda');
-  const btnCerrar = document.getElementById('cerrarAgenda');
-
-  if (btnAbrir && modal && btnCerrar) {
-    // Abrir modal
-    btnAbrir.addEventListener('click', e => {
-      e.preventDefault();
-      modal.classList.add('activo');
-      document.body.style.overflow = 'hidden'; // Bloquea scroll de fondo
-    });
-
-    // Cerrar modal con la X
-    btnCerrar.addEventListener('click', () => {
-      modal.classList.remove('activo');
-      document.body.style.overflow = '';
-    });
-
-    // Cerrar modal al hacer click afuera
-    modal.addEventListener('click', e => {
-      if (e.target === modal) {
-        modal.classList.remove('activo');
-        document.body.style.overflow = '';
-      }
-    });
-
-    // Cerrar modal con tecla ESC
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape' && modal.classList.contains('activo')) {
-        modal.classList.remove('activo');
-        document.body.style.overflow = '';
-      }
-    });
-  }
-
-  // --- SELECTOR HORARIOS (Modal Agenda) ---
-  const horariosBase = [
-    { inicio: "10:00", label: "AM" },
-    { inicio: "15:00", label: "PM" },
-    { inicio: "17:30", label: "PM" }
-  ];
-
-  const selectHora = document.getElementById("hora");
-  const selectBloque = document.getElementById("bloque");
-
-  // Calcula el rango de horario según duración
-  function agregarHoras(horaStr, duracion) {
-    const [h, m] = horaStr.split(":").map(Number);
-    const inicio = new Date();
-    inicio.setHours(h, m, 0);
-    const fin = new Date(inicio.getTime() + duracion * 60 * 60 * 1000);
-    const limite = new Date();
-    limite.setHours(20, 30, 0);
-    if (fin > limite) return null;
-    return `${horaStr} - ${fin.toTimeString().slice(0, 5)}`;
-  }
-
-  // Actualiza opciones del select de horarios según duración del bloque
-  function actualizarOpcionesHorario() {
-    if (!selectHora || !selectBloque) return;
-
-    const duracion = parseInt(selectBloque.value, 10);
-    selectHora.innerHTML = '<option value="" disabled selected>Selecciona un horario</option>';
-
-    horariosBase.forEach(h => {
-      const rango = agregarHoras(h.inicio, duracion);
-      if (rango) {
-        const option = document.createElement("option");
-        option.value = h.inicio;
-        option.textContent = `${rango} ${h.label}`;
-        selectHora.appendChild(option);
-      }
-    });
-  }
-
-  // Escucha cambio en duración y actualiza horarios
-  if (selectBloque) selectBloque.addEventListener('change', actualizarOpcionesHorario);
-
-  // Inicializa opciones al cargar la página
-  actualizarOpcionesHorario();
 
   // --- PLACEHOLDER ANIMADO ---
   const frasesInput = ["Escribe aquí tu mensaje", "Ej: Necesito pastillas de freno para Mazda 3", "Dime qué auto tienes y qué buscas...", "Estamos para ayudarte 😉", "¿Consulta técnica o de repuesto?"];
@@ -638,8 +557,27 @@ const form      = document.getElementById('dvForm');
 const errorBox  = document.getElementById('dvError');
 const logoutBtn = document.getElementById('dvLogout');
 
-function openSheet(){ overlay.classList.add('open'); document.body.style.overflow='hidden'; }
-function closeSheet(){ overlay.classList.remove('open'); document.body.style.overflow=''; }
+let scrollY = 0; // guarda la posición de scroll al abrir
+
+function openSheet(){
+  scrollY = window.scrollY;
+  document.body.style.position = 'fixed';
+  document.body.style.top = `-${scrollY}px`;
+  document.body.style.left = '0';
+  document.body.style.right = '0';
+  document.body.style.width = '100%';
+  overlay.classList.add('open');
+}
+
+function closeSheet(){
+  overlay.classList.remove('open');
+  document.body.style.position = '';
+  document.body.style.top = '';
+  document.body.style.left = '';
+  document.body.style.right = '';
+  document.body.style.width = '';
+  window.scrollTo(0, scrollY);
+}
 
 btn.addEventListener('click', openSheet);
 closeBtn.addEventListener('click', closeSheet);
