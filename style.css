@@ -21,7 +21,6 @@ body {
     color: var(--text);
     font-family: 'Avenir', sans-serif;
     -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
 }
 
 
@@ -1051,6 +1050,8 @@ body {
 .slider-card p {
     font-family: 'Avenir',Verdana, Geneva, Tahoma, sans-serif;
     font-size: clamp(1rem, 1.1vw, 3rem);
+    margin: 10px 10px;
+    font-weight: bold;
 }
 .slider-card {
     flex: 0 0 auto;
@@ -1060,6 +1061,7 @@ body {
     scroll-snap-align: start;
     position: relative;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    border: 1px solid #fff;
 }
 
 /* Contenedor de imagen y overlay */
@@ -1069,7 +1071,7 @@ body {
     height: 400px;
     /* Proporción más grande que antes */
     overflow: hidden;
-    border-radius: 20px;
+    border-radius: 16px;
 }
 
 /* Imagenes normales */
@@ -2639,7 +2641,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
    ========================================================= */
 
 .titulo-rotativo-box {
-    width: 100%;
+    width: auto;              /* en vez de 100% */
     margin: 40px 20px 0;
     display: flex;
     align-items: flex-start;
@@ -2653,10 +2655,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    font-size: clamp(2.9rem, 7vw, 7rem);
+    font-size: clamp(2.9rem, 6vw, 6rem);
     font-weight: 800;
     line-height: .95;
-
     text-align: left;
 }
 
@@ -2676,7 +2677,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 @media (max-width:568px) {
     #titulo-rotativo {
-        font-size: clamp(1.9rem, 5vw, 5rem);
+        font-size: clamp(2.2rem, 7vw, 5.5rem);
     }
 }
 
