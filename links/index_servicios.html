@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>memanejo servicios</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <style>
+    :root {
+      --navy: #000968;
+      --blue: #1738ff;
+      --text: #101114;
+      --muted: #70747d;
+      --line: #e9eaf0;
+      --bg: #f7f8fb;
+      --white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Inter", sans-serif;
+      color: var(--text);
+      background: var(--bg);
+    }
+
+    .page {
+      min-height: 100vh;
+      padding: 70px 7vw 90px;
+    }
+
+    .services-shell {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    /* ===== ENCABEZADO ===== */
+    .services-header {
+      margin-bottom: 42px;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin: 0 0 13px;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .12em;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 28px;
+      height: 2px;
+      background: var(--blue);
+      border-radius: 10px;
+    }
+
+    h1 {
+      max-width: 650px;
+      margin: 0;
+      font-size: clamp(42px, 6vw, 78px);
+      line-height: .98;
+      letter-spacing: -0.055em;
+      font-weight: 800;
+    }
+
+    .intro {
+      max-width: 570px;
+      margin: 19px 0 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    /* ===== CARDS ===== */
+    .services-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .service-card {
+      position: relative;
+      display: grid;
+      grid-template-columns: 72px 1fr 46px;
+      align-items: center;
+      min-height: 108px;
+      padding: 16px 20px 16px 16px;
+      background: var(--white);
+      border: 1px solid var(--blue);
+      border-radius: 20px;
+      text-decoration: none;
+      color: inherit;
+      overflow: hidden;
+      transition:
+        transform .25s ease,
+        border-color .25s ease,
+        box-shadow .25s ease;
+    }
+
+    .service-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 14px 35px rgba(0, 9, 104, .08);
+    }
+
+    .service-card:hover::after {
+      transform: scaleY(1);
+    }
+
+    .service-icon {
+      width: 58px;
+      height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .service-icon img {
+      width: 58px;
+      height: 58px;
+      object-fit: contain;
+      border: 1px solid #000;
+      border-radius: 15px;
+      padding: 6px;
+      display: block;
+    }
+
+    .service-content {
+      padding: 0 20px;
+    }
+
+    .service-content h2 {
+      margin: 0 0 6px;
+      font-size: 18px;
+      font-weight: 750;
+      letter-spacing: -.02em;
+    }
+
+    .service-content p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .service-arrow {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      color: var(--text);
+      font-size: 14px;
+      transition: all .25s ease;
+    }
+
+    .service-card:hover .service-arrow {
+      background: var(--navy);
+      border-color: var(--navy);
+      color: white;
+      transform: translateX(2px);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (min-width: 850px) {
+      .services-header {
+        width: 55%;
+      }
+
+      .services-list {
+        width: 78%;
+        margin-left: 8%;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .page {
+        padding: 42px 18px 60px;
+      }
+
+      .services-header {
+        margin-bottom: 30px;
+      }
+
+      h1 {
+        font-size: clamp(42px, 13vw, 62px);
+      }
+
+      .intro {
+        font-size: 14px;
+        margin-top: 15px;
+      }
+
+      .service-card {
+        grid-template-columns: 58px 1fr 38px;
+        min-height: 94px;
+        padding: 13px 13px 13px 11px;
+        border-radius: 17px;
+      }
+
+      .service-icon {
+        width: 49px;
+        height: 49px;
+        border-radius: 14px;
+        font-size: 19px;
+      }
+
+      .service-content {
+        padding: 0 12px;
+      }
+
+      .service-content h2 {
+        font-size: 15px;
+        margin-bottom: 4px;
+      }
+
+      .service-content p {
+        font-size: 10px;
+      }
+
+      .service-arrow {
+        width: 34px;
+        height: 34px;
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="page">
+    <section class="services-shell">
+
+      <header class="services-header">
+        <p class="eyebrow">memanejo.cl</p>
+        <h1>¿Qué necesitas<br>hoy?</h1>
+        <p class="intro">
+          Selecciona el servicio que buscas y continúa directamente
+          con la opción que necesites resolver.
+        </p>
+      </header>
+
+      <div class="services-list">
+
+        <a href="/appweb/aulavirtual/index.html" class="service-card">
+          <div class="service-icon">
+            <img src="/img/logopngicon.png" alt="Servicio">
+          </div>
+          <div class="service-content">
+            <h2>Clases de conducción</h2>
+            <p>Aprende, practica y mejora tus habilidades al volante.</p>
+          </div>
+          <div class="service-arrow">
+            <i class="fa-solid fa-arrow-right"></i>
+          </div>
+        </a>
+
+        <a href="/paginas/quiz/quiz-nivelacion/" class="service-card">
+          <div class="service-icon">
+            <img src="/img/logopngicon.png" alt="Servicio">
+          </div>
+          <div class="service-content">
+            <h2>Preparación licencia Clase B</h2>
+            <p>Realiza quiz de conducción que simulan el examen municipal real.</p>
+          </div>
+          <div class="service-arrow">
+            <i class="fa-solid fa-arrow-right"></i>
+          </div>
+        </a>
+
+        <a href="/index.html" class="service-card">
+          <div class="service-icon">
+            <img src="/img/newnewlogo.jpg" alt="Servicio">
+          </div>
+          <div class="service-content">
+            <h2>Mantención automotriz</h2>
+            <p>Encuentra soluciones y servicios para el cuidado de tu vehículo.</p>
+          </div>
+          <div class="service-arrow">
+            <i class="fa-solid fa-arrow-right"></i>
+          </div>
+        </a>
+
+        <a href="/Catalogo/index.html" class="service-card">
+          <div class="service-icon">
+            <img src="/img/logo-filtro.PNG" alt="Servicio">
+          </div>
+          <div class="service-content">
+            <h2>Repuestos</h2>
+            <p>Busca repuestos y encuentra la alternativa adecuada para tu vehículo.</p>
+          </div>
+          <div class="service-arrow">
+            <i class="fa-solid fa-arrow-right"></i>
+          </div>
+        </a>
+
+      </div>
+    </section>
+  </main>
+
+</body>
+
+</html>
