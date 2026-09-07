@@ -69,7 +69,7 @@
     h1 {
       max-width: 650px;
       margin: 0;
-      font-size: clamp(42px, 6vw, 78px);
+      font-size: clamp(52px, 6vw, 78px);
       line-height: .98;
       letter-spacing: -0.055em;
       font-weight: 800;
@@ -159,18 +159,15 @@
       height: 42px;
       display: grid;
       place-items: center;
-      border: 1px solid var(--line);
+      background: var(--navy);
       border-radius: 50%;
-      color: var(--text);
+      color: var(--line);
       font-size: 14px;
       transition: all .25s ease;
     }
 
     .service-card:hover .service-arrow {
-      background: var(--navy);
-      border-color: var(--navy);
-      color: white;
-      transform: translateX(2px);
+      transform: translateX(-2px);
     }
 
     /* ===== RESPONSIVE ===== */
@@ -224,6 +221,7 @@
       .service-content h2 {
         font-size: 15px;
         margin-bottom: 4px;
+        margin: 0 0 2px;
       }
 
       .service-content p {
@@ -254,20 +252,7 @@
       </header>
 
       <div class="services-list">
-
-        <a href="/appweb/aulavirtual/index.html" class="service-card">
-          <div class="service-icon">
-            <img src="/img/logopngicon.png" alt="Servicio">
-          </div>
-          <div class="service-content">
-            <h2>Clases de conducción</h2>
-            <p>Aprende, practica y mejora tus habilidades al volante.</p>
-          </div>
-          <div class="service-arrow">
-            <i class="fa-solid fa-arrow-right"></i>
-          </div>
-        </a>
-
+        
         <a href="/paginas/quiz/quiz-nivelacion/" class="service-card">
           <div class="service-icon">
             <img src="/img/logopngicon.png" alt="Servicio">
@@ -301,6 +286,18 @@
           <div class="service-content">
             <h2>Repuestos</h2>
             <p>Busca repuestos y encuentra la alternativa adecuada para tu vehículo.</p>
+          </div>
+          <div class="service-arrow">
+            <i class="fa-solid fa-arrow-right"></i>
+          </div>
+        </a>
+        <a href="/appweb/aulavirtual/index.html" class="service-card">
+          <div class="service-icon">
+            <img src="/img/logopngicon.png" alt="Servicio">
+          </div>
+          <div class="service-content">
+            <h2>Clases de conducción</h2>
+            <p>Aprende, practica y mejora tus habilidades al volante.</p>
           </div>
           <div class="service-arrow">
             <i class="fa-solid fa-arrow-right"></i>
