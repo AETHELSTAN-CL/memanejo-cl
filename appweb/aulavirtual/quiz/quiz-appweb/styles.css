@@ -296,7 +296,6 @@ body.modo-activado .panel-form .contenido {
   font-weight: 700;
   font-family: var(--font);
   cursor: pointer;
-
   transition: background-color .35s ease;
 }
 
