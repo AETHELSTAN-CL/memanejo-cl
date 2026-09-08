@@ -59,11 +59,8 @@ document.addEventListener("DOMContentLoaded", () => {
   /* =========================
      CONTADOR
   ========================= */
-  const tiempoElemento = document.createElement('div');
-  tiempoElemento.id = 'tiempo-restante';
-  tiempoElemento.style.marginBottom = '20px';
-  tiempoElemento.style.fontWeight = 'bold';
-  quizContainer.insertBefore(tiempoElemento, preguntaElemento);
+  /* NUEVO */
+  const tiempoElemento = document.getElementById('tiempo-restante');
 
   /* =========================
      INICIAR QUIZ
@@ -77,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
     quizContainer.style.display = 'flex';
     quizContainer.style.flexDirection = 'column';
     quizContainer.style.alignItems = 'center';
-    tiempoElemento.style.display = 'block';
+    tiempoElemento.classList.add('visible');
 
     preguntasActuales = armarQuizNivelacion();
     indice = 0;
@@ -143,6 +140,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const seleccion = e.target;
     const correcta = seleccion.dataset.correcta === "true";
 
+    if (seleccion.disabled) return;
+
     if (correcta) {
       score += preguntasActuales[indice].puntos;
       correctasCount++;
@@ -150,21 +149,41 @@ document.addEventListener("DOMContentLoaded", () => {
       erradasCount++;
     }
 
-    Array.from(respuestasElemento.children).forEach(btn => {
+    const botones = Array.from(respuestasElemento.children);
+
+    botones.forEach(btn => {
       btn.disabled = true;
-      if (btn.dataset.correcta === "true") btn.classList.add('correct');
-      else btn.classList.add('wrong');
     });
 
-    if (!correcta) {
+    if (correcta) {
+      seleccion.classList.add('correct');
+    } else {
       seleccion.classList.add('selected-wrong');
+
       const pregunta = preguntasActuales[indice].pregunta;
       const respuestaUsuario = seleccion.innerText;
       const correctaTexto = preguntasActuales[indice].respuestas.find(r => r.correcta).texto;
       errores.push(`Pregunta: ${pregunta}<br>Tu respuesta: ${respuestaUsuario}<br>Respuesta correcta: ${correctaTexto}`);
+
+      const botonCorrecto = botones.find(b => b.dataset.correcta === "true");
+      if (botonCorrecto) botonCorrecto.classList.add('correct');
     }
 
+    botones.forEach(btn => {
+      const esSeleccionado = btn === seleccion;
+      const esCorrecto = btn.dataset.correcta === "true";
+      if (!esSeleccionado && !esCorrecto) {
+        btn.classList.add('respuesta-oculta');
+      }
+    });
+
     btnSiguiente.style.display = 'inline-block';
+
+    setTimeout(() => {
+      seleccion.classList.add('feedback-final');
+      const botonCorrecto = botones.find(b => b.dataset.correcta === "true");
+      if (botonCorrecto) botonCorrecto.classList.add('feedback-final');
+    }, 6000);
   }
 
   btnSiguiente.addEventListener('click', () => {
@@ -266,6 +285,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Modal
 
     modal.classList.remove('oculto');
+    tiempoElemento.classList.remove('visible');
 
     const textoParaCompartir = encodeURIComponent(
       `Obtuve ${score} puntos (${porcentaje.toFixed(0)}%) en el quiz de Nivelación 🚗 en www.memanejo.cl`
@@ -325,6 +345,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   btnReintentar.addEventListener('click', () => {
+    tiempoElemento.classList.remove('visible');
     modal.classList.add('oculto');
     quizContainer.style.display = 'none';
     pantallaBienvenida.style.display = 'flex';
@@ -344,6 +365,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   btnVolver.addEventListener('click', () => {
+    tiempoElemento.classList.remove('visible');
     modal.classList.add('oculto');
     quizContainer.style.display = 'none';
     pantallaBienvenida.style.display = 'flex';

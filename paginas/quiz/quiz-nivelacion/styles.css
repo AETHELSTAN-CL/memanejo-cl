@@ -239,21 +239,34 @@ a { color: var(--accent); text-decoration: none; }
 }
 
 /* === QUIZ === */
-#tiempo-restante {
-  width: 100%;
-  text-align: center;
+/* NUEVO — pegar en su lugar */
+.barra-tiempo {
+  display: none;
+  position: fixed;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  padding: 8px 18px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-weight: 700;
   font-size: 13px;
-  color: var(--text-dim);
-  margin-bottom: 8px;
+  color: var(--text);
+  box-shadow: var(--shadow);
+}
+
+.barra-tiempo.visible {
+  display: block;
 }
 
 #question {
-  width: 100%;
-  text-align: center;
-  margin-bottom: 20px;
   font-size: 19px;
   line-height: 1.5;
+  margin: 0 0 20px;
   color: var(--text);
+  text-align: center;
 }
 
 #progress {
@@ -273,7 +286,7 @@ a { color: var(--accent); text-decoration: none; }
 .btn-container .btn {
   width: 100%;
   text-align: left;
-  border-radius: 24px;
+  border-radius: 999px;
   background: var(--accent);
   color: var(--surface);
   font-size: 14.5px;
@@ -286,6 +299,37 @@ a { color: var(--accent); text-decoration: none; }
 
 .btn-container .btn:hover:not(:disabled) {
   color: #fff;
+}
+.btn-container .btn.respuesta-oculta {
+  background: #eb1313 !important;
+  color: transparent !important;
+  text-shadow: none;
+  border: none;
+  pointer-events: none;
+}
+
+.btn-container .btn.respuesta-oculta::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #eb1313;
+  border: 1px solid #eb5353;
+  border-radius: inherit;
+  z-index: 10;
+}
+
+.btn-container .btn.feedback-final {
+  color: transparent !important;
+  text-shadow: none;
+}
+
+.btn-container .btn.feedback-final::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: inherit;
+  border-radius: inherit;
+  z-index: 10;
 }
 
 .next-btn {
@@ -314,8 +358,9 @@ a { color: var(--accent); text-decoration: none; }
   transition: color .25s ease, transform .25s ease;
 }
 
+/* NUEVO */
 .btn-volver:hover {
-  color: var(--text);
+  color: var(--accent);
   transform: translateX(-6px);
 }
 
