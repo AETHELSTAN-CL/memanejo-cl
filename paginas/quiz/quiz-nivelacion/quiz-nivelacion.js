@@ -203,7 +203,7 @@ document.addEventListener("DOMContentLoaded", () => {
     statTiempo.innerText = `${min}:${seg.toString().padStart(2, '0')}`;
 
     textoPuntaje.innerText = aprobado
-      ? "🎉 ¡Aprobaste el Quiz de Nivelación!"
+      ? "¡Aprobaste el Quiz de Nivelación!"
       : "No alcanzaste el puntaje mínimo. Sigue practicando.";
 
     const incentivoAnterior = document.getElementById('bloque-incentivo');
@@ -221,7 +221,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const numeroWhatsapp = "56912345678"; // 👈 reemplaza por tu número real
 
       incentivo.innerHTML = `
-    <p style="font-size:14px; color:#ccc; margin-bottom:12px;">
+    <p style="font-size:14px; color:#6e6d6d; margin-bottom:12px;">
       ¿Quieres saber en qué preguntas fallaste y por qué?
     </p>
 
@@ -235,26 +235,33 @@ document.addEventListener("DOMContentLoaded", () => {
        Te contactaremos por <i class="fab fa-whatsapp"></i>WhatsApp
     </small>
   `;
-      textoPuntaje.parentNode.appendChild(incentivo);
+      const captura = document.getElementById('captura');
+      const footer = captura.querySelector('.footer-bottom');
+
+      if (footer) {
+        captura.insertBefore(incentivo, footer);
+      } else {
+        captura.appendChild(incentivo);
+      }
     }
 
-
-emailjs.send("service_ijgm7ie", "template_o43bfnj", {
-  nombre: localStorage.getItem("nombre") || "Invitado",
-  correo: localStorage.getItem("correo") || "sin_correo",
-  telefono: localStorage.getItem("telefono") || "sin_telefono",
-  puntaje: score,
-  total: puntajeTotal,
-  porcentaje: porcentaje.toFixed(0),
-  estado: aprobado ? "Aprobado" : "No aprobado",
-  errores: errores.join('\n\n')
-}).then(() => {
-  console.log("Resultado enviado por correo correctamente");
-}).catch(err => {
-  console.error("Error enviando resultado:", err);
-});
-   
-
+    /*
+    emailjs.send("service_ijgm7ie", "template_o43bfnj", {
+      nombre: localStorage.getItem("nombre") || "Invitado",
+      correo: localStorage.getItem("correo") || "sin_correo",
+      telefono: localStorage.getItem("telefono") || "sin_telefono",
+      puntaje: score,
+      total: puntajeTotal,
+      porcentaje: porcentaje.toFixed(0),
+      estado: aprobado ? "Aprobado" : "No aprobado",
+      errores: errores.join('\n\n')
+    }).then(() => {
+      console.log("Resultado enviado por correo correctamente");
+    }).catch(err => {
+      console.error("Error enviando resultado:", err);
+    });
+       
+    */
 
     // Modal
 
@@ -272,50 +279,50 @@ emailjs.send("service_ijgm7ie", "template_o43bfnj", {
     window.open(btnCompartir.href, '_blank', 'noopener,noreferrer');
   });
 
-if (btnInstagram) {
-  btnInstagram.addEventListener('click', async (e) => {
-    e.preventDefault();
+  if (btnInstagram) {
+    btnInstagram.addEventListener('click', async (e) => {
+      e.preventDefault();
 
-    const captura = document.getElementById('captura');
-    const texto = `Obtuve ${score}/${calcularPuntajeTotal()} puntos en el quiz de memanejo.cl 🚗`;
+      const captura = document.getElementById('captura');
+      const texto = `Obtuve ${score}/${calcularPuntajeTotal()} puntos en el quiz de memanejo.cl 🚗`;
 
-    try {
-      // Genera la imagen del resultado
-      const canvas = await html2canvas(captura, { backgroundColor: '#121212' });
-      const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
-      const archivo = new File([blob], 'resultado-quiz-memanejo.png', { type: 'image/png' });
+      try {
+        // Genera la imagen del resultado
+        const canvas = await html2canvas(captura, { backgroundColor: '#121212' });
+        const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+        const archivo = new File([blob], 'resultado-quiz-memanejo.png', { type: 'image/png' });
 
-      // Si el navegador soporta compartir archivos (mayoría de celulares)
-      if (navigator.canShare && navigator.canShare({ files: [archivo] })) {
-        await navigator.share({
-          files: [archivo],
-          title: 'Mi resultado en memanejo.cl',
-          text: texto
-        });
-        return;
+        // Si el navegador soporta compartir archivos (mayoría de celulares)
+        if (navigator.canShare && navigator.canShare({ files: [archivo] })) {
+          await navigator.share({
+            files: [archivo],
+            title: 'Mi resultado en memanejo.cl',
+            text: texto
+          });
+          return;
+        }
+
+        // Si soporta compartir pero no archivos (algunos navegadores)
+        if (navigator.share) {
+          await navigator.share({
+            title: 'Mi resultado en memanejo.cl',
+            text: texto
+          });
+          return;
+        }
+
+      } catch (err) {
+        // El usuario canceló el share, o hubo un error real
+        if (err.name !== 'AbortError') {
+          console.error("Error al compartir:", err);
+        }
       }
-
-      // Si soporta compartir pero no archivos (algunos navegadores)
-      if (navigator.share) {
-        await navigator.share({
-          title: 'Mi resultado en memanejo.cl',
-          text: texto
-        });
-        return;
-      }
-
-    } catch (err) {
-      // El usuario canceló el share, o hubo un error real
-      if (err.name !== 'AbortError') {
-        console.error("Error al compartir:", err);
-      }
-    }
-  });
-}
-// Al final de tu DOMContentLoaded, junto a las otras inicializaciones
-if (btnInstagram && !navigator.share) {
-  btnInstagram.style.display = 'none';
-}
+    });
+  }
+  // Al final de tu DOMContentLoaded, junto a las otras inicializaciones
+  if (btnInstagram && !navigator.share) {
+    btnInstagram.style.display = 'none';
+  }
 
   btnReintentar.addEventListener('click', () => {
     modal.classList.add('oculto');

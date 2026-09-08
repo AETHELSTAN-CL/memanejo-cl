@@ -221,8 +221,8 @@ a { color: var(--accent); text-decoration: none; }
   color: var(--text-dim);
   text-align: center;
   max-width: 340px;
-  line-height: 1.5;
-  margin: 12px auto 0;
+  line-height: 1.2;
+  margin: 2px auto 0;
 }
 
 .volver-inicio {
@@ -274,14 +274,14 @@ a { color: var(--accent); text-decoration: none; }
   width: 100%;
   text-align: left;
   border-radius: 24px;
-  background: var(--surface);
-  color: var(--text);
+  background: var(--accent);
+  color: var(--surface);
   font-size: 14.5px;
   margin-top: 0;
 }
 
 .btn-container .btn::before {
-  background: var(--accent);
+  background: var(--surface);
 }
 
 .btn-container .btn:hover:not(:disabled) {
@@ -357,7 +357,7 @@ a { color: var(--accent); text-decoration: none; }
   display: flex;
   align-items: center;
   justify-content: center;
-  background: conic-gradient(var(--accent) var(--progreso), var(--surface-alt) 0);
+  background: conic-gradient(var(--accent) var(--progreso), var(--text-dim) 0);
 }
 
 .score-ring-inner {
@@ -380,6 +380,7 @@ a { color: var(--accent); text-decoration: none; }
   gap: 8px;
   background: rgba(34, 197, 94, .12);
   color: var(--correct);
+  border: 1px solid var(--correct);
   padding: 6px 16px;
   border-radius: 999px;
   font-size: 13px;
@@ -390,6 +391,7 @@ a { color: var(--accent); text-decoration: none; }
 .badge-estado.reprobado {
   background: rgba(239, 68, 68, .12);
   color: var(--wrong);
+  border: 1px solid var(--wrong);
 }
 
 .titulo-modal { margin: 0 0 6px; font-size: 20px; color: var(--text); }
@@ -404,7 +406,7 @@ a { color: var(--accent); text-decoration: none; }
 .stat-item {
   flex: 1;
   background: var(--surface);
-  border: 1px solid var(--border);
+  border: 1px solid var(--accent);
   border-radius: 18px;
   padding: 16px;
   box-sizing: border-box;
@@ -412,6 +414,12 @@ a { color: var(--accent); text-decoration: none; }
 
 .stat-valor { margin: 0; font-size: 19px; font-weight: 800; color: var(--text); }
 .stat-label { margin: 4px 0 0; font-size: 11px; color: var(--text-dim); }
+
+.modal-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 
 .modal-buttons {
   display: flex;
@@ -431,15 +439,89 @@ a { color: var(--accent); text-decoration: none; }
   cursor: pointer;
   border: none;
   font-family: var(--font);
-  text-decoration: none;
-  white-space: nowrap;
 }
 
-.modal-btn-principal { background: #020202; color: #fff; }
-.modal-btn-secundario { background: #020202; color: #fff; }
-.modal-btn-secundario i { color: #1DA1F2; }
-.modal-btn-instagram { background: #020202; color: #fff; display: none; }
-.modal-btn-instagram i { color: #E1306C; }
+.modal-btn-principal {
+  background: #020202;
+  color: #fff;
+  transition: transform .25s ease;
+}
+
+.modal-btn-secundario {
+  background: #020202;
+  color: #fff;
+  transition: transform .25s ease;
+}
+
+.modal-btn-instagram {
+  background: #020202;
+  color: #fff;
+  transition: transform .25s ease;
+}
+
+.modal-btn-reintentar {
+  background: var(--surface-alt);
+  color: var(--text);
+  transition: transform .25s ease;
+}
+
+.modal-btn-reintentar:hover i{
+  transform: scale(1.2);
+}
+.modal-btn-instagram:hover i{
+  transform: scale(1.2);
+}
+.modal-btn-principal:hover i{
+  transform: translateY(2px);
+}
+.modal-btn-secundario:hover i{
+  transform: scale(1.2);
+}
+
+#btn-compartir i {
+  color: #1DA1F2;
+}
+
+#btn-instagram i {
+  color: #E1306C;
+}
+/* Bloque de incentivo */
+#bloque-incentivo {
+  margin-top: 6px;
+}
+
+.btn-incentivo {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--accent);
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: var(--radius-btn);
+  font-size: 13.5px;
+  font-weight: 700;
+}
+
+.btn-incentivo-precio {
+  font-weight: 800;
+}
+
+.acceso-text {
+  display: block;
+  margin-top: 8px;
+  font-size: 11.5px;
+  color: var(--text-dim);
+}
+.acceso-text i {
+  color: #22c55e;
+  margin-right: 2px;
+}
+
+.texto-incentivo {
+  font-size: 14px;
+  color: #6e6d6d;
+  margin-bottom: 12px;
+}
 
 @media (hover: none) and (pointer: coarse) {
   .modal-btn-instagram { display: flex; }
@@ -449,11 +531,53 @@ a { color: var(--accent); text-decoration: none; }
   background: var(--surface-alt);
   color: var(--text);
 }
+/* =========================
+   FOOTER DEL MODAL
+========================= */
 
-.modal-btn-reintentar:hover {
-  border: 1px solid var(--text-dim);
+.footer-bottom {
+  width: 100%;
+  margin-top: 18px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  font-size: 11px;
+  color: #6e6d6d;
 }
 
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.footer-brand a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.footer-brand img {
+  width: 24px;
+  height: 24px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.footer-brand small,
+.footer-brand .text-secondary {
+  color: #999;
+}
+
+.footer-chile {
+  color: #777;
+  font-size: 11px;
+  white-space: nowrap;
+}
 /* === RESPONSIVE === */
 @media (max-width: 600px) {
   #pantalla-bienvenida { padding: 20px 14px; overflow-x: hidden; }

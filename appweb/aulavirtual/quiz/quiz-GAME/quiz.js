@@ -1,473 +1,349 @@
 document.addEventListener("DOMContentLoaded", () => {
+
+  /* =========================
+      VARIABLES
+  ========================= */
   let preguntasActuales = [];
   let indice = 0;
   let score = 0;
   let correctasCount = 0;
   let erradasCount = 0;
-  let errores = [];
-
   let tiempoRestante = 0;
   let tiempoTotalSeg = 0;
   let timerInterval = null;
+  let errores = [];
 
-  let resultadoEnviado = false;
-
-  let datosUsuario = {
-    nombre: "",
-    correo: "",
-    telefono: ""
-  };
-
-  // ===== Elementos HTML =====
-  const pantallaBienvenida = document.getElementById("pantalla-bienvenida");
-  const quizContainer = document.getElementById("quiz-container");
-  const formulario = document.getElementById("form-usuario");
-
-  const preguntaElemento = document.getElementById("question");
-  const respuestasElemento = document.getElementById("answer-buttons");
-  const btnSiguiente = document.getElementById("next-btn");
-  const progresoElemento = document.getElementById("progress");
-  const tiempoElemento = document.getElementById("tiempo-restante");
-
-  const modal = document.getElementById("modal-memanejo");
-  const textoPuntaje = document.getElementById("texto-puntaje");
-  const btnDescargar = document.getElementById("btn-descargar-img");
-  const btnCompartir = document.getElementById("btn-compartir");
-  const btnInstagram = document.getElementById("btn-instagram");
-  const btnReintentar = document.getElementById("btn-reintentar");
-  const btnVolver = document.getElementById("btn-volver");
-
-  const scoreRing = document.getElementById("scoreRing");
-  const scorePuntos = document.getElementById("scorePuntos");
-  const badgeEstado = document.getElementById("badgeEstado");
-  const badgeTexto = document.getElementById("badgeTexto");
-  const statCorrectas = document.getElementById("statCorrectas");
-  const statErradas = document.getElementById("statErradas");
-  const statTiempo = document.getElementById("statTiempo");
-
-  // ===== Sortea 35 preguntas: 3 especiales y 32 generales =====
-  function armarExamenMunicipal() {
-    const especiales = bancoExamenMunicipal.filter((pregunta) =>
-      ["alcohol", "cinturon", "retencion_infantil"].includes(
-        pregunta.categoria
-      )
-    );
-
-    const generales = bancoExamenMunicipal.filter(
-      (pregunta) => pregunta.categoria === "general"
-    );
-
-    const especialesSorteadas = mezclarArray(especiales).slice(0, 3);
-    const generalesSorteadas = mezclarArray(generales).slice(0, 32);
-
-    const examen = mezclarArray([
-      ...especialesSorteadas,
-      ...generalesSorteadas
-    ]);
-
-    return examen.map((pregunta) => ({
-      ...pregunta,
-      respuestas: mezclarArray(pregunta.respuestas),
-      puntos: pregunta.categoria !== "general" ? 2 : 1
-    }));
-  }
-
+  /* =========================
+     SORTEO — usa bancoExamenMunicipal de preguntas.js
+  ========================= */
   function mezclarArray(array) {
     const copia = [...array];
-
     for (let i = copia.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [copia[i], copia[j]] = [copia[j], copia[i]];
     }
-
     return copia;
   }
 
-  // ===== Inicio desde el formulario =====
-  formulario.addEventListener("submit", (e) => {
-    e.preventDefault();
+  function armarQuizNivelacion() {
+    const generales = bancoExamenMunicipal.filter(p => p.categoria === "general");
+    return mezclarArray(generales).slice(0, 20).map(p => ({ ...p, puntos: 1 }));
+  }
 
-    datosUsuario = {
-      nombre: document.getElementById("nombre").value.trim(),
-      correo: document.getElementById("correo").value.trim(),
-      telefono: document.getElementById("telefono").value.trim()
-    };
+  /* =========================
+     ELEMENTOS DOM
+  ========================= */
+  const pantallaBienvenida = document.getElementById('pantalla-bienvenida');
+  const quizContainer = document.getElementById('quiz-container');
+  const preguntaElemento = document.getElementById('question');
+  const respuestasElemento = document.getElementById('answer-buttons');
+  const btnSiguiente = document.getElementById('next-btn');
+  const progresoElemento = document.getElementById('progress');
+  const modal = document.getElementById('modal-memanejo');
+  const textoPuntaje = document.getElementById('texto-puntaje');
+  const btnDescargar = document.getElementById('btn-descargar-img');
+  const btnCompartir = document.getElementById('btn-compartir');
+  const btnInstagram = document.getElementById('btn-instagram');
+  const btnReintentar = document.getElementById('btn-reintentar');
+  const btnVolver = document.getElementById('btn-volver');
+  const form = document.getElementById('form-usuario');
 
-    iniciarQuiz();
-  });
+  const scoreRing = document.getElementById('scoreRing');
+  const scorePuntos = document.getElementById('scorePuntos');
+  const badgeEstado = document.getElementById('badgeEstado');
+  const badgeTexto = document.getElementById('badgeTexto');
+  const statCorrectas = document.getElementById('statCorrectas');
+  const statErradas = document.getElementById('statErradas');
+  const statTiempo = document.getElementById('statTiempo');
 
+  /* =========================
+     CONTADOR
+  ========================= */
+  const tiempoElemento = document.createElement('div');
+  tiempoElemento.id = 'tiempo-restante';
+  tiempoElemento.style.marginBottom = '20px';
+  tiempoElemento.style.fontWeight = 'bold';
+  quizContainer.insertBefore(tiempoElemento, preguntaElemento);
+
+  /* =========================
+     INICIAR QUIZ
+  ========================= */
   function iniciarQuiz() {
-    pantallaBienvenida.style.display = "none";
+    localStorage.setItem("nombre", document.getElementById("nombre")?.value || "Invitado");
+    localStorage.setItem("correo", document.getElementById("correo")?.value || "sin_correo");
+    localStorage.setItem("telefono", document.getElementById("telefono")?.value || "sin_telefono");
 
-    quizContainer.style.display = "flex";
-    quizContainer.style.flexDirection = "column";
-    quizContainer.style.justifyContent = "center";
-    quizContainer.style.alignItems = "center";
-    quizContainer.style.minHeight = "100dvh";
+    pantallaBienvenida.style.display = 'none';
+    quizContainer.style.display = 'flex';
+    quizContainer.style.flexDirection = 'column';
+    quizContainer.style.alignItems = 'center';
+    tiempoElemento.style.display = 'block';
 
-    modal.classList.add("oculto");
-
+    preguntasActuales = armarQuizNivelacion();
     indice = 0;
     score = 0;
     correctasCount = 0;
     erradasCount = 0;
     errores = [];
-    resultadoEnviado = false;
 
-    preguntasActuales = armarExamenMunicipal();
-
-    // 45 minutos para las 35 preguntas.
-    tiempoTotalSeg = 45 * 60;
+    tiempoTotalSeg = 20 * 60;
     tiempoRestante = tiempoTotalSeg;
 
     actualizarTiempo();
-
-    if (timerInterval) {
-      clearInterval(timerInterval);
-    }
-
+    if (timerInterval) clearInterval(timerInterval);
     timerInterval = setInterval(() => {
       tiempoRestante--;
-
       if (tiempoRestante <= 0) {
-        tiempoRestante = 0;
-        actualizarTiempo();
         clearInterval(timerInterval);
         mostrarResultado();
-        return;
-      }
-
-      actualizarTiempo();
+      } else actualizarTiempo();
     }, 1000);
 
     mostrarPregunta();
   }
+  window.iniciarQuiz = iniciarQuiz;
 
   function actualizarTiempo() {
     const min = Math.floor(tiempoRestante / 60);
     const seg = tiempoRestante % 60;
-
-    tiempoElemento.innerText =
-      `Tiempo restante: ⏱ ${min.toString().padStart(2, "0")}:` +
-      `${seg.toString().padStart(2, "0")}`;
+    tiempoElemento.innerText = `Tiempo restante: ⏱ ${min.toString().padStart(2, '0')}:${seg.toString().padStart(2, '0')}`;
   }
 
+  /* =========================
+     MOSTRAR PREGUNTA
+  ========================= */
   function mostrarPregunta() {
     resetearEstado();
+    const q = preguntasActuales[indice];
+    if (!q) return;
 
-    const preguntaActual = preguntasActuales[indice];
+    preguntaElemento.innerText = q.pregunta;
+    progresoElemento.innerText = `Pregunta ${indice + 1} de ${preguntasActuales.length}`;
 
-    if (!preguntaActual) {
-      mostrarResultado();
-      return;
-    }
-
-    preguntaElemento.innerText = preguntaActual.pregunta;
-    progresoElemento.innerText =
-      `Pregunta ${indice + 1} de ${preguntasActuales.length}`;
-
-    preguntaActual.respuestas.forEach((respuesta) => {
-      const botonRespuesta = document.createElement("button");
-
-      botonRespuesta.type = "button";
-      botonRespuesta.innerText = respuesta.texto;
-      botonRespuesta.classList.add("btn");
-      botonRespuesta.dataset.correcta = respuesta.correcta ? "true" : "false";
-
-      botonRespuesta.addEventListener("click", seleccionarRespuesta);
-
-      respuestasElemento.appendChild(botonRespuesta);
+    q.respuestas.forEach(r => {
+      const btn = document.createElement('button');
+      btn.innerText = r.texto;
+      btn.className = 'btn';
+      btn.dataset.correcta = r.correcta ? "true" : "false";
+      btn.addEventListener('click', seleccionarRespuesta);
+      respuestasElemento.appendChild(btn);
     });
   }
 
   function resetearEstado() {
-    btnSiguiente.style.display = "none";
-
-    respuestasElemento.style.display = "flex";
-    respuestasElemento.style.flexDirection = "column";
-    respuestasElemento.style.alignItems = "center";
-    respuestasElemento.style.gap = "10px";
-
-    while (respuestasElemento.firstChild) {
-      respuestasElemento.removeChild(respuestasElemento.firstChild);
-    }
+    btnSiguiente.style.display = 'none';
+    respuestasElemento.innerHTML = '';
+    respuestasElemento.style.display = 'flex';
+    respuestasElemento.style.flexDirection = 'column';
+    respuestasElemento.style.alignItems = 'center';
+    respuestasElemento.style.gap = '10px';
   }
 
   function seleccionarRespuesta(e) {
     const seleccion = e.target;
-    const preguntaActual = preguntasActuales[indice];
-    const esCorrecta = seleccion.dataset.correcta === "true";
+    const correcta = seleccion.dataset.correcta === "true";
 
-    if (esCorrecta) {
-      score += preguntaActual.puntos;
+    if (correcta) {
+      score += preguntasActuales[indice].puntos;
       correctasCount++;
     } else {
       erradasCount++;
-      seleccion.classList.add("selected-wrong");
-
-      const respuestaCorrecta = preguntaActual.respuestas.find(
-        (respuesta) => respuesta.correcta
-      );
-
-      errores.push(
-        `Pregunta ${indice + 1}: ${preguntaActual.pregunta}\n` +
-        `Tu respuesta: ${seleccion.innerText}\n` +
-        `Respuesta correcta: ${respuestaCorrecta?.texto || "No disponible"}`
-      );
     }
 
-    Array.from(respuestasElemento.children).forEach((boton) => {
-      boton.disabled = true;
-
-      if (boton.dataset.correcta === "true") {
-        boton.classList.add("correct");
-      } else {
-        boton.classList.add("wrong");
-      }
+    Array.from(respuestasElemento.children).forEach(btn => {
+      btn.disabled = true;
+      if (btn.dataset.correcta === "true") btn.classList.add('correct');
+      else btn.classList.add('wrong');
     });
 
-    btnSiguiente.style.display = "inline-block";
+    if (!correcta) {
+      seleccion.classList.add('selected-wrong');
+      const pregunta = preguntasActuales[indice].pregunta;
+      const respuestaUsuario = seleccion.innerText;
+      const correctaTexto = preguntasActuales[indice].respuestas.find(r => r.correcta).texto;
+      errores.push(`Pregunta: ${pregunta}<br>Tu respuesta: ${respuestaUsuario}<br>Respuesta correcta: ${correctaTexto}`);
+    }
+
+    btnSiguiente.style.display = 'inline-block';
   }
 
-  btnSiguiente.addEventListener("click", () => {
+  btnSiguiente.addEventListener('click', () => {
     indice++;
-
-    if (indice < preguntasActuales.length) {
-      mostrarPregunta();
-    } else {
-      mostrarResultado();
-    }
+    if (indice < preguntasActuales.length) mostrarPregunta();
+    else mostrarResultado();
   });
 
+  /* =========================
+     RESULTADO FINAL
+  ========================= */
   function calcularPuntajeTotal() {
-    return preguntasActuales.reduce(
-      (total, pregunta) => total + pregunta.puntos,
-      0
-    );
+    return preguntasActuales.reduce((acc, p) => acc + p.puntos, 0);
   }
 
-  // ===== Resultado, incentivo y EmailJS =====
   function mostrarResultado() {
-    // Evita que se envíen dos correos por el mismo intento.
-    if (resultadoEnviado) {
-      return;
-    }
-
-    resultadoEnviado = true;
     clearInterval(timerInterval);
+    quizContainer.style.display = 'none';
 
-    quizContainer.style.display = "none";
+    const puntajeTotal = calcularPuntajeTotal() || 1;
+    const porcentaje = (score / puntajeTotal) * 100;
+    const aprobado = porcentaje >= 87;
 
-    const puntajeTotal = calcularPuntajeTotal();
-    const porcentaje = puntajeTotal > 0 ? (score / puntajeTotal) * 100 : 0;
-
-    // Para el examen municipal de 35 preguntas.
-    const aprobado = preguntasActuales.length === 35
-      ? score >= 33
-      : porcentaje >= 87;
-
-    const tiempoUsado = tiempoTotalSeg - tiempoRestante;
-    const min = Math.floor(tiempoUsado / 60);
-    const seg = tiempoUsado % 60;
-    const tiempoUsadoTexto = `${min}:${seg.toString().padStart(2, "0")}`;
-
-    // Modal de resultado.
     scorePuntos.innerText = `${score}/${puntajeTotal}`;
+    scoreRing.style.setProperty('--progreso', `${Math.min(porcentaje, 100)}%`);
 
-    scoreRing.style.setProperty(
-      "--progreso",
-      `${Math.min(porcentaje, 100)}%`
-    );
-
-    badgeEstado.classList.toggle("reprobado", !aprobado);
-    badgeTexto.innerText = aprobado ? "Aprobado" : "Reprobado";
-
-    badgeEstado.querySelector("i").className = aprobado
-      ? "fas fa-check"
-      : "fas fa-times";
+    badgeEstado.classList.toggle('reprobado', !aprobado);
+    badgeTexto.innerText = aprobado ? 'Aprobado' : 'Reprobado';
+    badgeEstado.querySelector('i').className = aprobado ? 'fas fa-check' : 'fas fa-times';
 
     statCorrectas.innerText = correctasCount;
     statErradas.innerText = erradasCount;
-    statTiempo.innerText = tiempoUsadoTexto;
+    const tiempoUsado = tiempoTotalSeg - tiempoRestante;
+    const min = Math.floor(tiempoUsado / 60);
+    const seg = tiempoUsado % 60;
+    statTiempo.innerText = `${min}:${seg.toString().padStart(2, '0')}`;
 
     textoPuntaje.innerText = aprobado
-      ? "¡Aprobaste el Quiz!"
-      : "No alcanzaste el puntaje mínimo para aprobar.";
+      ? "🎉 ¡Aprobaste el Quiz de Nivelación!"
+      : "No alcanzaste el puntaje mínimo. Sigue practicando.";
 
-    // Elimina un incentivo anterior, antes de crear uno nuevo.
-    const incentivoAnterior = document.getElementById("bloque-incentivo");
+    const incentivoAnterior = document.getElementById('bloque-incentivo');
+    if (incentivoAnterior) incentivoAnterior.remove();
 
-    if (incentivoAnterior) {
-      incentivoAnterior.remove();
-    }
-
-    // Incentivo solo para quien no aprueba.
     if (!aprobado) {
-      const incentivo = document.createElement("div");
-
-      incentivo.id = "bloque-incentivo";
-      incentivo.style.textAlign = "center";
-      incentivo.style.marginTop = "20px";
+      const incentivo = document.createElement('div');
+      incentivo.id = 'bloque-incentivo';
+      incentivo.style.textAlign = 'center';
+      incentivo.style.marginTop = '20px';
 
       const mensajeWhatsapp = encodeURIComponent(
-        `Hola, hice el quiz en memanejo.cl y obtuve ${score}/${puntajeTotal} puntos. Quiero revisar mis errores.`
+        `Hola, hice el quiz de nivelación en memanejo.cl y obtuve ${score}/${puntajeTotal} puntos. Quiero revisar mis errores.`
       );
-
-      const numeroWhatsapp = "56946914558";
+      const numeroWhatsapp = "56912345678"; // 👈 reemplaza por tu número real
 
       incentivo.innerHTML = `
-        <p style="font-size:14px; color:#555; margin-bottom:12px;">
-          ¿Quieres saber en qué preguntas fallaste y por qué?
-        </p>
+    <p style="font-size:14px; color:#ccc; margin-bottom:12px;">
+      ¿Quieres saber en qué preguntas fallaste y por qué?
+    </p>
 
-        <a
-          href="https://wa.me/${numeroWhatsapp}?text=${mensajeWhatsapp}"
-          target="_blank"
-          rel="noopener"
-          class="btn-incentivo">
-          Revisa tus errores por solo
-          <span class="btn-incentivo-precio">$1.990</span>
-        </a>
+    <a href="https://wa.me/${numeroWhatsapp}?text=${mensajeWhatsapp}" target="_blank"
+  class="btn-incentivo">
+  Revisa tus errores por solo
+  <span class="btn-incentivo-precio">$1.990</span>
+</a>
 
-        <small class="acceso-text">
-          Te contactaremos por
-          <i class="fab fa-whatsapp"></i> WhatsApp
-        </small>
-      `;
-
+    <small class="acceso-text">
+       Te contactaremos por <i class="fab fa-whatsapp"></i>WhatsApp
+    </small>
+  `;
       textoPuntaje.parentNode.appendChild(incentivo);
     }
 
-    modal.classList.remove("oculto");
 
-    // Correo para el administrador mediante EmailJS.
-    emailjs.send("service_ujyq6hg", "template_o43bfnj", {
-      nombre: datosUsuario.nombre,
-      correo: datosUsuario.correo,
-      telefono: datosUsuario.telefono,
-      puntaje: score,
-      total: puntajeTotal,
-      porcentaje: porcentaje.toFixed(0),
-      estado: aprobado ? "Aprobado" : "No aprobado",
-      correctas: correctasCount,
-      erradas: erradasCount,
-      tiempo: tiempoUsadoTexto,
-      errores: errores.length
-        ? errores.join("\n\n")
-        : "El usuario no registró respuestas incorrectas."
-    })
-      .then(() => {
-        console.log("Resultado enviado por correo correctamente.");
-      })
-      .catch((error) => {
-        console.error("Error enviando resultado:", error);
-      });
+emailjs.send("service_ijgm7ie", "template_o43bfnj", {
+  nombre: localStorage.getItem("nombre") || "Invitado",
+  correo: localStorage.getItem("correo") || "sin_correo",
+  telefono: localStorage.getItem("telefono") || "sin_telefono",
+  puntaje: score,
+  total: puntajeTotal,
+  porcentaje: porcentaje.toFixed(0),
+  estado: aprobado ? "Aprobado" : "No aprobado",
+  errores: errores.join('\n\n')
+}).then(() => {
+  console.log("Resultado enviado por correo correctamente");
+}).catch(err => {
+  console.error("Error enviando resultado:", err);
+});
+   
+
+
+    // Modal
+
+    modal.classList.remove('oculto');
 
     const textoParaCompartir = encodeURIComponent(
-      `Obtuve ${score} puntos (${porcentaje.toFixed(0)}%) ` +
-      "en el quiz Clase B 🚗 en www.memanejo.cl"
+      `Obtuve ${score} puntos (${porcentaje.toFixed(0)}%) en el quiz de Nivelación 🚗 en www.memanejo.cl`
     );
-
-    btnCompartir.href =
-      `https://twitter.com/intent/tweet?text=${textoParaCompartir}`;
+    btnCompartir.href = `https://twitter.com/intent/tweet?text=${textoParaCompartir}`;
   }
-
   window.mostrarResultado = mostrarResultado;
 
-  // ===== Botones del resultado =====
-  btnCompartir.addEventListener("click", (e) => {
+  btnCompartir.addEventListener('click', (e) => {
     e.preventDefault();
-    window.open(btnCompartir.href, "_blank", "noopener,noreferrer");
+    window.open(btnCompartir.href, '_blank', 'noopener,noreferrer');
   });
 
-  btnInstagram.addEventListener("click", async (e) => {
+if (btnInstagram) {
+  btnInstagram.addEventListener('click', async (e) => {
     e.preventDefault();
 
-    const captura = document.getElementById("captura");
-    const texto = `Obtuve ${score}/${calcularPuntajeTotal()} puntos en el quiz Clase B 🚗 en memanejo.cl`;
+    const captura = document.getElementById('captura');
+    const texto = `Obtuve ${score}/${calcularPuntajeTotal()} puntos en el quiz de memanejo.cl 🚗`;
 
     try {
-      const canvas = await html2canvas(captura, {
-        backgroundColor: "#ffffff",
-        scale: 2
-      });
+      // Genera la imagen del resultado
+      const canvas = await html2canvas(captura, { backgroundColor: '#121212' });
+      const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+      const archivo = new File([blob], 'resultado-quiz-memanejo.png', { type: 'image/png' });
 
-      const blob = await new Promise((resolve) => {
-        canvas.toBlob(resolve, "image/png");
-      });
-
-      const imagen = new File(
-        [blob],
-        "resultado-quiz-memanejo.png",
-        { type: "image/png" }
-      );
-
-      // En celular: abre el menú para seleccionar Instagram.
-      if (navigator.canShare && navigator.canShare({ files: [imagen] })) {
+      // Si el navegador soporta compartir archivos (mayoría de celulares)
+      if (navigator.canShare && navigator.canShare({ files: [archivo] })) {
         await navigator.share({
-          title: "Mi resultado en memanejo.cl",
-          text: texto,
-          files: [imagen]
+          files: [archivo],
+          title: 'Mi resultado en memanejo.cl',
+          text: texto
         });
         return;
       }
 
-      // En computador: descarga la imagen.
-      const link = document.createElement("a");
-      link.href = URL.createObjectURL(blob);
-      link.download = "resultado-quiz-manejo.png";
-      link.click();
+      // Si soporta compartir pero no archivos (algunos navegadores)
+      if (navigator.share) {
+        await navigator.share({
+          title: 'Mi resultado en memanejo.cl',
+          text: texto
+        });
+        return;
+      }
 
-      URL.revokeObjectURL(link.href);
-
-      alert("La imagen fue descargada. Ahora puedes subirla a Instagram.");
-    } catch (error) {
-      // No muestra error si el usuario cerró el menú de compartir.
-      if (error.name !== "AbortError") {
-        console.error("No se pudo compartir la imagen:", error);
+    } catch (err) {
+      // El usuario canceló el share, o hubo un error real
+      if (err.name !== 'AbortError') {
+        console.error("Error al compartir:", err);
       }
     }
   });
+}
+// Al final de tu DOMContentLoaded, junto a las otras inicializaciones
+if (btnInstagram && !navigator.share) {
+  btnInstagram.style.display = 'none';
+}
 
-  btnReintentar.addEventListener("click", () => {
-    clearInterval(timerInterval);
-
-    modal.classList.add("oculto");
-    quizContainer.style.display = "none";
-    pantallaBienvenida.style.display = "flex";
-
-    formulario.reset();
+  btnReintentar.addEventListener('click', () => {
+    modal.classList.add('oculto');
+    quizContainer.style.display = 'none';
+    pantallaBienvenida.style.display = 'flex';
+    correctasCount = 0;
+    erradasCount = 0;
     resetearEstado();
   });
 
-  btnDescargar.addEventListener("click", () => {
-    const captura = document.getElementById("captura");
-    const alturaOriginal = captura.style.height;
-    const overflowOriginal = captura.style.overflow;
-
-    captura.style.height = "auto";
-    captura.style.overflow = "visible";
-
-    html2canvas(captura).then((canvas) => {
-      const link = document.createElement("a");
-
-      link.download = "resultado-quiz-memanejo.png";
-      link.href = canvas.toDataURL("image/png");
+  btnDescargar.addEventListener('click', () => {
+    const captura = document.getElementById('captura');
+    html2canvas(captura, { backgroundColor: '#121212' }).then(canvas => {
+      const link = document.createElement('a');
+      link.download = 'resultado-quiz-nivelacion-memanejo.png';
+      link.href = canvas.toDataURL();
       link.click();
-
-      captura.style.height = alturaOriginal;
-      captura.style.overflow = overflowOriginal;
     });
   });
 
-  btnVolver.addEventListener("click", () => {
-    clearInterval(timerInterval);
+  btnVolver.addEventListener('click', () => {
+    modal.classList.add('oculto');
+    quizContainer.style.display = 'none';
+    pantallaBienvenida.style.display = 'flex';
+  });
 
-    quizContainer.style.display = "none";
-    modal.classList.add("oculto");
-    pantallaBienvenida.style.display = "flex";
-
-    formulario.reset();
-    resetearEstado();
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    iniciarQuiz();
   });
 });
