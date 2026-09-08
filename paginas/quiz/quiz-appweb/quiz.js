@@ -487,29 +487,29 @@ document.addEventListener("DOMContentLoaded", () => {
     modal.classList.remove("oculto");
     tiempoElemento.classList.remove("visible");
 
-  
-        // Correo para el administrador mediante EmailJS.
-        emailjs.send("service_ujyq6hg", "template_o43bfnj", {
-          nombre: datosUsuario.nombre,
-          correo: datosUsuario.correo,
-          telefono: datosUsuario.telefono,
-          puntaje: score,
-          total: puntajeTotal,
-          porcentaje: porcentaje.toFixed(0),
-          estado: aprobado ? "Aprobado" : "No aprobado",
-          correctas: correctasCount,
-          erradas: erradasCount,
-          tiempo: tiempoUsadoTexto,
-          errores: errores.length
-            ? errores.join("\n\n")
-            : "El usuario no registró respuestas incorrectas."
-        })
-          .then(() => {
-            console.log("Resultado enviado por correo correctamente.");
-          })
-          .catch((error) => {
-            console.error("Error enviando resultado:", error);
-          });
+
+    // Correo para el administrador mediante EmailJS.
+    emailjs.send("service_ujyq6hg", "template_o43bfnj", {
+      nombre: datosUsuario.nombre,
+      correo: datosUsuario.correo,
+      telefono: datosUsuario.telefono,
+      puntaje: score,
+      total: puntajeTotal,
+      porcentaje: porcentaje.toFixed(0),
+      estado: aprobado ? "Aprobado" : "No aprobado",
+      correctas: correctasCount,
+      erradas: erradasCount,
+      tiempo: tiempoUsadoTexto,
+      errores: errores.length
+        ? errores.join("\n\n")
+        : "El usuario no registró respuestas incorrectas."
+    })
+      .then(() => {
+        console.log("Resultado enviado por correo correctamente.");
+      })
+      .catch((error) => {
+        console.error("Error enviando resultado:", error);
+      });
 
     const textoParaCompartir = encodeURIComponent(
       `Obtuve ${score} puntos (${porcentaje.toFixed(0)}%) ` +
@@ -528,15 +528,32 @@ document.addEventListener("DOMContentLoaded", () => {
     window.open(btnCompartir.href, "_blank", "noopener,noreferrer");
   });
 
-  btnInstagram.addEventListener("click", async (e) => {
+  btnInstagram.addEventListener('click', async (e) => {
     e.preventDefault();
 
-    const captura = document.getElementById("captura");
+    const captura = document.getElementById('captura');
+    const precio = captura.querySelector('.btn-incentivo-precio');
     const texto = `Obtuve ${score}/${calcularPuntajeTotal()} puntos en el quiz Clase B 🚗 en memanejo.cl`;
+
+    // Guardar estilos originales para restaurar después
+    const estiloOriginal = {
+      maxHeight: captura.style.maxHeight,
+      overflow: captura.style.overflow,
+      height: captura.style.height
+    };
+
+    // Expandir el contenedor para que quepa TODO (incluye footer)
+    captura.style.maxHeight = 'none';
+    captura.style.overflow = 'visible';
+    captura.style.height = 'auto';
+
+    // Ocultar solo el precio antes de capturar
+    if (precio) precio.style.visibility = 'hidden';
 
     try {
       const canvas = await html2canvas(captura, {
-        scale: 2
+        scale: 2,
+        backgroundColor: null
       });
 
       const blob = await new Promise((resolve) => {
@@ -549,30 +566,30 @@ document.addEventListener("DOMContentLoaded", () => {
         { type: "image/png" }
       );
 
-      // En celular: abre el menú para seleccionar Instagram.
       if (navigator.canShare && navigator.canShare({ files: [imagen] })) {
         await navigator.share({
           title: "Mi resultado en memanejo.cl",
           text: texto,
           files: [imagen]
         });
-        return;
+      } else {
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = "resultado-quiz-manejo.png";
+        link.click();
+        URL.revokeObjectURL(link.href);
+        alert("La imagen fue descargada. Ahora puedes compartirla.");
       }
-
-      // En computador: descarga la imagen.
-      const link = document.createElement("a");
-      link.href = URL.createObjectURL(blob);
-      link.download = "resultado-quiz-manejo.png";
-      link.click();
-
-      URL.revokeObjectURL(link.href);
-
-      alert("La imagen fue descargada. Ahora puedes subirla a Instagram.");
     } catch (error) {
-      // No muestra error si el usuario cerró el menú de compartir.
       if (error.name !== "AbortError") {
         console.error("No se pudo compartir la imagen:", error);
       }
+    } finally {
+      // Restaurar todo a como estaba, pase lo que pase
+      captura.style.maxHeight = estiloOriginal.maxHeight;
+      captura.style.overflow = estiloOriginal.overflow;
+      captura.style.height = estiloOriginal.height;
+      if (precio) precio.style.visibility = 'visible';
     }
   });
 
@@ -588,23 +605,37 @@ document.addEventListener("DOMContentLoaded", () => {
     resetearEstado();
   });
 
-  btnDescargar.addEventListener("click", () => {
-    const captura = document.getElementById("captura");
-    const alturaOriginal = captura.style.height;
-    const overflowOriginal = captura.style.overflow;
+  btnDescargar.addEventListener('click', () => {
+    const captura = document.getElementById('captura');
+    const precio = captura.querySelector('.btn-incentivo-precio');
+    const linkIncentivo = captura.querySelector('#bloque-incentivo a.btn-incentivo');
 
-    captura.style.height = "auto";
-    captura.style.overflow = "visible";
+    // Guardar estilos originales para restaurar después
+    const estiloOriginal = {
+      maxHeight: captura.style.maxHeight,
+      overflow: captura.style.overflow,
+      height: captura.style.height
+    };
 
-    html2canvas(captura).then((canvas) => {
-      const link = document.createElement("a");
+    // Expandir el contenedor para que quepa TODO (incluye footer)
+    captura.style.maxHeight = 'none';
+    captura.style.overflow = 'visible';
+    captura.style.height = 'auto';
 
-      link.download = "resultado-quiz-memanejo.png";
-      link.href = canvas.toDataURL("image/png");
+    // Ocultar solo el precio antes de capturar
+    if (precio) precio.style.visibility = 'hidden';
+
+    html2canvas(captura, { backgroundColor: null, scale: 2 }).then(canvas => {
+      const link = document.createElement('a');
+      link.download = 'resultado-quiz-memanejo.png';
+      link.href = canvas.toDataURL('image/png');
       link.click();
 
-      captura.style.height = alturaOriginal;
-      captura.style.overflow = overflowOriginal;
+      // Restaurar todo a como estaba
+      captura.style.maxHeight = estiloOriginal.maxHeight;
+      captura.style.overflow = estiloOriginal.overflow;
+      captura.style.height = estiloOriginal.height;
+      if (precio) precio.style.visibility = 'visible';
     });
   });
 

@@ -264,8 +264,8 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    /*
-    emailjs.send("service_ijgm7ie", "template_o43bfnj", {
+
+    emailjs.send("service_ujyq6hg", "template_o43bfnj", {
       nombre: localStorage.getItem("nombre") || "Invitado",
       correo: localStorage.getItem("correo") || "sin_correo",
       telefono: localStorage.getItem("telefono") || "sin_telefono",
@@ -279,8 +279,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }).catch(err => {
       console.error("Error enviando resultado:", err);
     });
-       
-    */
+
+
 
     // Modal
 
@@ -293,7 +293,6 @@ document.addEventListener("DOMContentLoaded", () => {
     btnCompartir.href = `https://twitter.com/intent/tweet?text=${textoParaCompartir}`;
   }
   window.mostrarResultado = mostrarResultado;
-
   btnCompartir.addEventListener('click', (e) => {
     e.preventDefault();
     window.open(btnCompartir.href, '_blank', 'noopener,noreferrer');
@@ -304,11 +303,27 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
 
       const captura = document.getElementById('captura');
+      const precio = captura.querySelector('.btn-incentivo-precio');
       const texto = `Obtuve ${score}/${calcularPuntajeTotal()} puntos en el quiz de memanejo.cl 🚗`;
+
+      // Guardar estilos originales para restaurar después
+      const estiloOriginal = {
+        maxHeight: captura.style.maxHeight,
+        overflow: captura.style.overflow,
+        height: captura.style.height
+      };
+
+      // Expandir el contenedor para que quepa TODO (incluye footer)
+      captura.style.maxHeight = 'none';
+      captura.style.overflow = 'visible';
+      captura.style.height = 'auto';
+
+      // Ocultar solo el precio antes de capturar
+      if (precio) precio.style.visibility = 'hidden';
 
       try {
         // Genera la imagen del resultado
-        const canvas = await html2canvas(captura, { backgroundColor: '#121212' });
+        const canvas = await html2canvas(captura, { backgroundColor: '#121212', scale: 2 });
         const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
         const archivo = new File([blob], 'resultado-quiz-memanejo.png', { type: 'image/png' });
 
@@ -336,6 +351,12 @@ document.addEventListener("DOMContentLoaded", () => {
         if (err.name !== 'AbortError') {
           console.error("Error al compartir:", err);
         }
+      } finally {
+        // Restaurar todo a como estaba, pase lo que pase
+        captura.style.maxHeight = estiloOriginal.maxHeight;
+        captura.style.overflow = estiloOriginal.overflow;
+        captura.style.height = estiloOriginal.height;
+        if (precio) precio.style.visibility = 'visible';
       }
     });
   }
@@ -356,11 +377,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
   btnDescargar.addEventListener('click', () => {
     const captura = document.getElementById('captura');
-    html2canvas(captura, { backgroundColor: '#121212' }).then(canvas => {
+    const precio = captura.querySelector('.btn-incentivo-precio');
+    const linkIncentivo = captura.querySelector('#bloque-incentivo a.btn-incentivo');
+
+    // Guardar estilos originales para restaurar después
+    const estiloOriginal = {
+      maxHeight: captura.style.maxHeight,
+      overflow: captura.style.overflow,
+      height: captura.style.height
+    };
+
+    // Expandir el contenedor para que quepa TODO (incluye footer)
+    captura.style.maxHeight = 'none';
+    captura.style.overflow = 'visible';
+    captura.style.height = 'auto';
+
+    // Ocultar solo el precio antes de capturar
+    if (precio) precio.style.visibility = 'hidden';
+
+    html2canvas(captura, { backgroundColor: null, scale: 2 }).then(canvas => {
       const link = document.createElement('a');
-      link.download = 'resultado-quiz-nivelacion-memanejo.png';
-      link.href = canvas.toDataURL();
+      link.download = 'resultado-quiz-memanejo.png';
+      link.href = canvas.toDataURL('image/png');
       link.click();
+
+      // Restaurar todo a como estaba
+      captura.style.maxHeight = estiloOriginal.maxHeight;
+      captura.style.overflow = estiloOriginal.overflow;
+      captura.style.height = estiloOriginal.height;
+      if (precio) precio.style.visibility = 'visible';
     });
   });
 

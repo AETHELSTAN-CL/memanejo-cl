@@ -569,13 +569,14 @@ body.modo-activado .panel-form .contenido {
 .contenido-modal {
   width: 100%;
   max-width: 420px;
-  max-height: 100dvh;
+  max-height: 92dvh;
   overflow-y: auto;
   background: var(--surface);
   border-radius: var(--radius-card);
   box-shadow: var(--shadow);
-  padding: 12px 26px;
+  padding: 24px 26px 32px;
   text-align: center;
+  box-sizing: border-box;
 }
 
 .score-ring {
@@ -793,12 +794,6 @@ body.modo-activado .panel-form .contenido {
   margin-bottom: 12px;
 }
 
-@media (max-width: 450px) {
-  .texto-incentivo {
-    font-size: 12px;
-    white-space: nowrap;
-  }
-}
 
 /* =========================
    FOOTER DEL MODAL
@@ -1060,63 +1055,5 @@ body.modo-activado .panel-form .contenido {
   body.modo-activado .next-btn,
   body.modo-activado .btn-volver {
     width: 100%;
-  }
-
-  /* ===== MODAL ===== */
-
-  body.modo-activado .modal-memanejo {
-    align-items: flex-end;
-    padding: 0;
-  }
-
-  body.modo-activado .contenido-modal {
-    width: 100%;
-    max-width: none;
-    box-sizing: border-box;
-    border-radius: 24px 24px 0 0;
-    max-height: 92dvh;
-    animation: subirModal .3s ease;
-  }
-
-  @keyframes subirModal {
-    from {
-      transform: translateY(30px);
-      opacity: 0;
-    }
-
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
-}
-
-
-/* =====================================================
-   MOBILE MUY ANGOSTO
-   ===================================================== */
-
-@media (max-width: 380px) {
-
-  #pantalla-bienvenida {
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-
-  .panel-form .contenido {
-    padding-left: 14px;
-    padding-right: 14px;
-  }
-
-  .hero-titulo {
-    font-size: 25px;
-  }
-
-  .hero-sub {
-    font-size: 13px;
-  }
-
-  .formulario input {
-    padding: 12px;
   }
 }
