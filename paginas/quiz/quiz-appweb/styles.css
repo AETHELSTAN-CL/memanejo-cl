@@ -376,6 +376,8 @@ body.modo-activado .panel-form .contenido {
   font-size: 13px;
   color: var(--text);
   box-shadow: var(--shadow);
+  white-space: nowrap;   /* ← agregar */
+  max-width: calc(100vw - 24px);
 }
 
 .barra-tiempo.visible {
@@ -391,7 +393,7 @@ body.modo-activado .panel-form .contenido {
 
 
 #question {
-  font-size: 19px;
+  font-size: 21px;
   line-height: 1.5;
   margin: 0 0 20px;
   color: var(--text);
@@ -412,7 +414,7 @@ body.modo-activado .panel-form .contenido {
   border-radius: 999px;
   background: var(--accent);
   color: var(--surface);
-  font-size: 14.5px;
+  font-size: 15px;
   font-family: var(--font);
   cursor: pointer;
   transition: color 0.35s ease, background-color 0.35s ease;
@@ -501,7 +503,6 @@ body.modo-activado .panel-form .contenido {
 
 
 /* === TEXTO DEL BOTÓN === */
-
 .btn-container .btn span {
   position: relative;
   z-index: 1;
