@@ -33,22 +33,49 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // === SHOW PILL NAV ON SCROLL (MOBILE ONLY) ===
-  document.addEventListener("scroll", () => {
-    const pill = document.getElementById("pillNav");
-    if (!pill) return;
+ // === SHOW PILL NAV ON SCROLL (MOBILE ONLY) ===
+let scrollTimer;
 
-    if (window.innerWidth > 768) {
-      pill.classList.remove("visible");
-      return;
-    }
+document.addEventListener("scroll", () => {
+  const pill = document.getElementById("pillNav");
+  const studentPill = document.querySelector(".pill-student");
 
-    if (window.scrollY > 50) {
-      pill.classList.add("visible");
-    } else {
-      pill.classList.remove("visible");
-    }
-  });
+  if (!pill) return;
+
+  if (window.innerWidth > 768) {
+    pill.classList.remove("visible", "scrolling");
+    studentPill?.classList.remove("scrolling");
+    clearTimeout(scrollTimer);
+    return;
+  }
+
+  if (window.scrollY > 50) {
+
+    // Aparece suavemente
+    pill.classList.add("visible");
+
+    // Mientras hay movimiento: ambos se compactan
+    pill.classList.add("scrolling");
+    studentPill?.classList.add("scrolling");
+
+    // Reinicia el temporizador con cada movimiento
+    clearTimeout(scrollTimer);
+
+    // Cuando se detiene el scroll: ambos vuelven a tamaño normal
+    scrollTimer = setTimeout(() => {
+      pill.classList.remove("scrolling");
+      studentPill?.classList.remove("scrolling");
+    }, 220);
+
+  } else {
+
+    // Volver arriba: desaparece el nav
+    clearTimeout(scrollTimer);
+
+    pill.classList.remove("visible", "scrolling");
+    studentPill?.classList.remove("scrolling");
+  }
+});
 
   // === Icon select scale + blue + auto-reset ===
   pillItems.forEach(item => {
@@ -205,29 +232,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 document.getElementById('btnReferidos')
-?.addEventListener('click', () => {
+  ?.addEventListener('click', () => {
 
-  const session = getSession();
+    const session = getSession();
 
-  if (!session) return;
+    if (!session) return;
 
 
-  const nombre = session.nombre;
+    const nombre = session.nombre;
 
-  const mensaje = encodeURIComponent(
-`¡Hola memanejo!. Quiero activar mi código de referido para recomendar la plataforma.
+    const mensaje = encodeURIComponent(
+      `¡Hola memanejo!. Quiero activar mi código de referido para recomendar la plataforma.
 
 Nombre: ${nombre}
 memanejo ID: ${session.memanejoId}`
-  );
+    );
 
 
-  window.open(
-    `https://wa.me/56946914558?text=${mensaje}`,
-    '_blank'
-  );
+    window.open(
+      `https://wa.me/56946914558?text=${mensaje}`,
+      '_blank'
+    );
 
-});
+  });
 // ===== SWIPE UP PARA DESCARTAR NOTIFICACIÓN iOS =====
 const notif = document.getElementById("ios-notificacion");
 
@@ -279,7 +306,7 @@ if (notif) {
 
 document.querySelectorAll('.whatsapp-sub').forEach(btn => {
 
-  btn.addEventListener('click', function(e) {
+  btn.addEventListener('click', function (e) {
     e.preventDefault();
 
     const plan = this.dataset.plan;
@@ -313,20 +340,20 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 document.querySelectorAll('.footer-toggle')
-.forEach(btn => {
+  .forEach(btn => {
 
-  btn.addEventListener('click',()=>{
+    btn.addEventListener('click', () => {
 
-    const item = btn.parentElement;
-    const content = item.querySelector('.footer-content');
+      const item = btn.parentElement;
+      const content = item.querySelector('.footer-content');
 
-    item.classList.toggle('active');
+      item.classList.toggle('active');
 
-    if(item.classList.contains('active')){
-      content.style.maxHeight = content.scrollHeight + "px";
-    }else{
-      content.style.maxHeight = null;
-    }
+      if (item.classList.contains('active')) {
+        content.style.maxHeight = content.scrollHeight + "px";
+      } else {
+        content.style.maxHeight = null;
+      }
 
-  });
+    });
   });

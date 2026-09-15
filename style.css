@@ -21,6 +21,7 @@ body {
     color: var(--text);
     font-family: 'Avenir', sans-serif;
     -webkit-font-smoothing: antialiased;
+
 }
 
 
@@ -385,7 +386,7 @@ body {
     align-items: center;
     margin-left: auto;
     transition: color .2s ease;
-    color:#929292;
+    color: #929292;
     font-size: 14px;
 }
 
@@ -1026,7 +1027,6 @@ body {
    Slider card cuadrado
 ======================= */
 .modern-slider-section {
-    background-color: #111;
     padding: 10px 8px;
     overflow-x: auto;
     margin-top: 40px;
@@ -1047,12 +1047,14 @@ body {
     width: max-content;
     padding-bottom: 10px;
 }
+
 .slider-card p {
-    font-family: 'Avenir',Verdana, Geneva, Tahoma, sans-serif;
+    font-family: 'Avenir', Verdana, Geneva, Tahoma, sans-serif;
     font-size: clamp(1rem, 1.1vw, 3rem);
     margin: 10px 10px;
     font-weight: bold;
 }
+
 .slider-card {
     flex: 0 0 auto;
     width: 450px;
@@ -1668,7 +1670,7 @@ body {
     backdrop-filter: none;
     border: none;
     box-shadow: none;
-    
+
 }
 
 .video-container {
@@ -1725,9 +1727,11 @@ body {
     text-align: center;
     color: #929292;
 }
+
 #mm-espacio-publicidad {
     padding-bottom: 3rem;
 }
+
 #mm-espacio-publicidad .promo-text {
 
     font-size: 18px;
@@ -1747,11 +1751,12 @@ body {
     line-height: 1.2;
     margin-top: 8px;
 }
+
 .btn-publicidad-taller {
     transition: background-color .25s ease,
-                color .25s ease,
-                border-color .25s ease,
-                transform .25s ease;
+        color .25s ease,
+        border-color .25s ease,
+        transform .25s ease;
 }
 
 .btn-publicidad-taller:hover {
@@ -2560,7 +2565,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 ===================================================================== */
 .titulo-portada {
     max-width: 720px;
-    margin: 0 10px 40px;
+    margin: 0 5px 10px;
     padding: 0 15px;
     text-align: left;
 }
@@ -2568,7 +2573,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .titulo-portada h1 {
     font-family: 'Avenir', sans-serif;
     font-weight: 800;
-    font-size: 38px;
+    font-size: 41px;
     line-height: 1.05;
     margin: 0;
     color: #fff;
@@ -2619,21 +2624,26 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     border-color: #06ba48;
 
 }
+
 .lp-btn-whats i {
     transition: .25s ease;
 }
+
 .lp-btn-whats:hover i {
     transform: scale(1.15);
 }
+
 .lp-btn-ghost:hover {
     border-color: #fff;
 }
+
 .lp-btn-ghost i {
     transition: .3s ease;
 }
+
 .lp-btn-ghost:hover i {
     transform: translateY(6px);
-    
+
 }
 
 /* =========================================================
@@ -2641,21 +2651,22 @@ input[type="date"]::-webkit-calendar-picker-indicator {
    ========================================================= */
 
 .titulo-rotativo-box {
-    width: auto;              /* en vez de 100% */
-    margin: 40px 20px 0;
+    width: auto;
+    margin: 10px 25px 0;
     display: flex;
     align-items: flex-start;
-    justify-content: flex-start;
-    text-align: left;
+    justify-content: center;
+    text-align: center;
     overflow: hidden;
 }
 
 #titulo-rotativo {
     margin: 0;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-start;
-    font-size: clamp(2.9rem, 6vw, 6rem);
+    gap: 12px;
+    font-size: clamp(3rem, 7vw, 6rem);
     font-weight: 800;
     line-height: .95;
     text-align: left;
@@ -2676,8 +2687,20 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 
 @media (max-width:568px) {
+    .titulo-rotativo-box {
+        width: auto;
+        margin: 5px 25px 0;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        text-align: left;
+    }
+
     #titulo-rotativo {
-        font-size: clamp(2.2rem, 7vw, 5.5rem);
+        font-size: clamp(2.8rem, 8vw, 7rem);
+        flex-direction: column;
+        gap: 0;
+        line-height: .95;
     }
 }
 
@@ -2714,6 +2737,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     border: 1px solid rgb(255, 255, 255);
     overflow: hidden;
 }
+.mm-fondo-blur.mm-card-nivelacion {
+    border: 1px solid #0026ff;
+}
 
 .mm-tarjeta {
     display: flex;
@@ -2742,7 +2768,27 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .mm-tarjeta:hover .card-img-top {
     transform: scale(1.05);
 }
+/* =========================================================
+   CARD QUIZ DE NIVELACIÓN
+   ========================================================= */
 
+
+.mm-card-nivelacion .mm-tag {
+  background: #0026ff;
+  color: #fff;
+}
+
+.mm-card-nivelacion .mm-cta {
+  background: #00dbe7;
+  color: #000968;
+  border-color: #00dbe7;
+}
+
+.mm-card-nivelacion .mm-cta:hover {
+  background: #0026ff;
+  color: #fff;
+  border-color: #000968;
+}
 /* ---- NUEVO: tag sobre la imagen ---- */
 .mm-tag {
     position: absolute;
@@ -2790,7 +2836,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .mm-cuerpo h5 small {
     font-size: .7em;
     color: #ccc;
-    font-weight: normal;
 }
 
 .mm-cuerpo p {
@@ -2855,7 +2900,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
     .lp-btn {
         padding: 12px 18px;
-        /* un poco más angosto para que ambos entren cómodos */
         font-size: 13px;
     }
 }
@@ -2995,6 +3039,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     letter-spacing: 1.6px;
     text-transform: uppercase;
 }
+
 .steps-wrap .eyebrow {
     display: inline-block;
     color: var(--crimson);
@@ -3002,6 +3047,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     font-weight: 800;
     text-transform: uppercase;
 }
+
 #servicios .section-head h2 {
     margin: 0;
     color: #fff;
@@ -3081,7 +3127,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     box-sizing: border-box;
     padding: 14px 20px;
     background: var(--card);
-    border: 1px solid #262626;
+    border: 1px solid #656565;
     border-radius: 24px;
     cursor: pointer;
 
@@ -3310,16 +3356,19 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     white-space: nowrap;
     cursor: pointer;
 }
+
 #kit .btn--solid:hover {
     border: 1px solid #fff;
 }
-#kit .btn--solid i{
+
+#kit .btn--solid i {
     transition: transform .6s ease;
 }
 
-#kit .btn--solid:hover i{
+#kit .btn--solid:hover i {
     transform: scale(1.15);
 }
+
 #kit .kit-result {
     display: none;
     align-items: center;
@@ -3488,7 +3537,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .step {
     background: #0f0f0f;
-    border: 1px solid #232323;
+    border: 1px solid #656565;
     border-radius: 20px;
     padding: 26px;
 }

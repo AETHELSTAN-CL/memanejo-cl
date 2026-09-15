@@ -128,71 +128,66 @@ function mostrarPortalAlumno() {
       </div>
     </div>
 
-
     <div class="card-subblock portal-intro">
       <div class="card-text card-plus-text">
-
-        Obtén tu <strong>memanejo ID</strong> para ingresar a la plataforma.
-        <Br>Accederás a material de estudio gratis, quiz de nivelación y recibir futuras novedades.
-
+        Completa tus datos y haz nuestro <strong>Quiz de Nivelación gratis</strong> para saber qué tan preparado estás para tu examen de conducción.
       </div>
     </div>
 
-
     <div class="portal-form">
 
+      <div class="card-field">
+        <input
+          type="text"
+          id="portalNombre"
+          class="card-input"
+          placeholder="Nombre"
+          required>
+        <span class="card-error" id="errorNombre"></span>
+      </div>
 
-      <input 
-      type="text" 
-      id="portalNombre" 
-      class="card-input" 
-      placeholder="Nombre">
+      <div class="card-field">
+        <input
+          type="text"
+          id="portalApellido"
+          class="card-input"
+          placeholder="Apellido"
+          required>
+        <span class="card-error" id="errorApellido"></span>
+      </div>
 
+      <div class="card-field">
+        <input
+          type="email"
+          id="portalEmail"
+          class="card-input"
+          placeholder="Correo electrónico"
+          required>
+        <span class="card-error" id="errorEmail"></span>
+      </div>
 
-      <input 
-      type="text" 
-      id="portalApellido" 
-      class="card-input" 
-      placeholder="Apellido">
-
-
-      <input 
-      type="email" 
-      id="portalEmail" 
-      class="card-input" 
-      placeholder="Correo electrónico">
-
-
-      <button 
-      id="portalIngresar" 
-      class="card-btn">
-
-        <strong>Crear memanejo ID</strong>
-
+      <button
+        id="portalIngresar"
+        class="card-btn">
+        <strong>Comenzar Quiz de Nivelación</strong>
       </button>
 
-
       <div class="card-sub-text">
-
-        Recibirás un correo de bienvenida con tu código personal de acceso.
-
+        Al finalizar verás tu resultado al instante.
       </div>
 
-
-      <div 
-      id="portalVolver" 
-      class="card-back" 
-      style="cursor:pointer;">
-
+      <div
+        id="portalVolver"
+        class="card-back"
+        style="cursor:pointer;">
         <i class="fas fa-arrow-left"></i> Volver
-
       </div>
-
 
     </div>
 
   </div>
   `;
+
 
 
 

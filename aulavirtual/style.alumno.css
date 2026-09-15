@@ -804,7 +804,7 @@ body.onboarding-activo {
 .pill-nav {
   position: fixed;
   bottom: 20px;
-  left: 40%;
+  left: 38%;
   transform: translateX(-50%);
   display: flex;
   flex-direction: row;
@@ -836,22 +836,18 @@ body.onboarding-activo {
   transition: transform 0.2s ease, color 0.2s ease;
 
 }
-.pill-item span:hover {
-  color: rgb(0, 219, 231);
-  transition: transform 0.3s, background 3s;
-}
 
 .pill-item i.active-effect {
   transform: scale(1.15);
   color: rgb(0, 219, 231);
-  
+
 }
 
 /* Icono estudiante separado */
 .pill-student {
   position: fixed;
   bottom: 17px;
-  right: 30px;
+  right: 5%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1554,31 +1550,88 @@ body.onboarding-activo {
   }
 }
 
-/* MOBILE: oculto por defecto */
 @media (max-width: 768px) {
-  .pill-student {
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity .3s ease;
-  }
 
-  .pill-student.visible {
-    opacity: 1;
-    pointer-events: auto;
-  }
-}
-
-@media (max-width: 768px) {
+  /* ===== NAV OCULTO AL INICIO ===== */
   #pillNav {
     opacity: 0;
     pointer-events: none;
-    transition: opacity .3s ease;
+
+    /* IMPORTANTE: mantiene la posición original */
+    transform: translateX(-50%);
+
+    transition:
+      opacity .35s ease,
+      padding .3s ease;
   }
 
+  /* ===== APARECE AL HACER SCROLL ===== */
   #pillNav.visible {
     opacity: 1;
     pointer-events: auto;
   }
+
+  /* ===== MIENTRAS SE HACE SCROLL: COMPACTO ===== */
+  /* ===== PILL STUDENT COMPACTO DURANTE SCROLL ===== */
+  .pill-student {
+    transition:
+      transform .3s ease,
+      width .3s ease,
+      height .3s ease;
+  }
+
+  .pill-student.scrolling {
+    width: 56px;
+    height: 56px;
+  }
+
+  .pill-student.scrolling i {
+    font-size: 21px;
+    transition: font-size .3s ease;
+  }
+
+  #pillNav.scrolling {
+    padding: 5px 6px;
+  }
+
+  #pillNav.scrolling .pill-item {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  #pillNav.scrolling .pill-item span {
+    font-size: 14px;
+  }
+
+  #pillNav .pill-item span {
+    transition: font-size .3s ease;
+  }
+
+  /* ===== AL DETENERSE: VUELVE A CRECER ===== */
+  #pillNav:not(.scrolling) {
+    padding: 7px 8px;
+  }
+
+  #pillNav:not(.scrolling) .pill-item {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  #pillNav:not(.scrolling) .pill-item i {
+    transform: scale(1);
+  }
+
+  /* Transiciones suaves */
+  #pillNav .pill-item {
+    transition: margin .3s ease;
+  }
+
+  #pillNav .pill-item i {
+    transition:
+      transform .3s ease,
+      color .2s ease;
+  }
+
 }
 
 .login-error-msg {
@@ -1679,13 +1732,26 @@ body.onboarding-activo {
 }
 
 @keyframes zoomIn {
-  from { transform: translate(-50%, -20px) scale(0.8); opacity: 0; }
-  to { transform: translate(-50%, 0) scale(1); opacity: 1; }
+  from {
+    transform: translate(-50%, -20px) scale(0.8);
+    opacity: 0;
+  }
+
+  to {
+    transform: translate(-50%, 0) scale(1);
+    opacity: 1;
+  }
 }
 
 @keyframes fadeOut {
-  from { opacity: 1; }
-  to { opacity: 0; transform: translate(-50%, -20px) scale(0.9); }
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    transform: translate(-50%, -20px) scale(0.9);
+  }
 }
 
 /* ===== Mobile al inicio de Intermedias ===== */
@@ -1726,6 +1792,7 @@ body.onboarding-activo {
   opacity: 0 !important;
   transform: translate(-50%, -160px) !important;
 }
+
 /* Fondo suave detrás */
 .quiz-game-modal {
   position: fixed;
@@ -1757,7 +1824,8 @@ body.onboarding-activo {
   color: #fff;
   opacity: 0;
   transform: translateY(calc(100% + 3rem)) scale(0.94);
-  border: 1px solid rgba(255, 255, 255, 0.22); /* borde leve */
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  /* borde leve */
   border-radius: 25px;
   background: rgba(30, 30, 33, 0.66);
   box-shadow:
@@ -1836,6 +1904,7 @@ body.onboarding-activo {
   line-height: 1;
   cursor: pointer;
 }
+
 @media (max-width: 576px) {
   .quiz-game-modal {
     padding: 0 1.1rem 0.35rem;
@@ -1845,6 +1914,7 @@ body.onboarding-activo {
     width: 100%;
   }
 }
+
 /* ===== FEEDBACK SECTION ===== */
 #alumni-feedback-section {
   padding: 60px 20px;
@@ -2639,7 +2709,7 @@ body.onboarding-activo header {
   align-items: center;
   gap: 6px;
   width: 70px;
-  flex: 0 0 calc(33.333% - 34px);
+  flex: 0 0 calc(33.333% - 64px);
   transition: transform 0.2s ease;
 }
 
@@ -2666,7 +2736,14 @@ body.onboarding-activo header {
   color: #444;
   text-align: center;
   line-height: 1.2;
-  white-space: nowrap;
+  white-space: normal;
+  width: 70px;
+  min-height: calc(0.68rem * 1.2 * 2);
+  max-height: calc(0.68rem * 1.2 * 2);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 /* ===== Botón principal de cada card ===== */
@@ -2844,6 +2921,7 @@ body.onboarding-activo header {
   }
 
 }
+
 @media (min-width: 769px) {
   .section-title {
     text-align: center;
@@ -2979,7 +3057,8 @@ body.onboarding-activo header {
 .benefit-card {
   position: relative;
   background: rgba(255, 255, 255, 0.964);
-  border: 1px solid #ffc800e8;;
+  border: 1px solid #ffc800e8;
+  ;
   border-radius: 20px;
   padding: 28px 22px;
   text-align: center;
@@ -2991,8 +3070,8 @@ body.onboarding-activo header {
   max-width: 420px;
   margin-left: auto;
   margin-right: auto;
-  
-  
+
+
 }
 
 .app-icon {
@@ -3012,6 +3091,7 @@ body.onboarding-activo header {
   font-size: 28px;
   color: #ffffff;
 }
+
 .benefit-card h6 {
   font-size: 1.05rem;
   color: #222;
@@ -3098,7 +3178,7 @@ body.onboarding-activo header {
   padding-top: 20px;
   margin-top: 60px;
   margin-bottom: 30px;
-  
+
 }
 
 .credits-wrapper::before {
@@ -3112,6 +3192,7 @@ body.onboarding-activo header {
   left: 50%;
   transform: translateX(-50%);
 }
+
 .credit-divider {
   display: block;
   width: 189px;

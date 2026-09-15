@@ -216,11 +216,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   // --- Título rotativo ---
   const frases = [
-    ["SERVICIOS", "AUTOMOTRICES"],
-    ["ENTRENAMIENTO", "VIAL"],
-    ["AULA", "VIRTUAL"],
-    ["PLATAFORMA", "DE ESTUDIO"],
-    ["MANTENCIÓN", "PREVENTIVA"]
+    ["Servicios", "Automotrices"],
+    ["Entrenamiento", "Vial"],
+    ["Aula", "Virtual"],
+    ["Plataforma", "de estudio"],
+    ["Mantención", "preventiva"]
   ];
   const colores = [
     ["blanco", "gris"],
@@ -486,126 +486,130 @@ document.addEventListener('DOMContentLoaded', () => {
     rotarTexto();
     setInterval(rotarTexto, 3000); // rota cada 4s
   });
-// ===== Kit por Vehículo =====
-{
-  const catalogo = {
-    Suzuki:   { Swift:  {2025:36900, 2024:35900, 2023:34900, 2022:33900, 2021:32900} },
-    Chevrolet:{ Sail:   {2025:38900, 2024:37900, 2023:36900, 2022:35900, 2021:34900} },
-    Hyundai:  { Accent: {2025:41900, 2024:40900, 2023:39900, 2022:38900, 2021:37900} },
-    Toyota:   { Yaris:  {2025:42900, 2024:41900, 2023:40900, 2022:39900, 2021:38900} },
-    Nissan:   { Versa:  {2025:40900, 2024:39900, 2023:38900, 2022:37900, 2021:36900} }
-  };
+  // ===== Kit por Vehículo =====
+  {
+    const catalogo = {
+      Suzuki: { Swift: { 2025: 36900, 2024: 35900, 2023: 34900, 2022: 33900, 2021: 32900 } },
+      Chevrolet: { Sail: { 2025: 38900, 2024: 37900, 2023: 36900, 2022: 35900, 2021: 34900 } },
+      Hyundai: { Accent: { 2025: 41900, 2024: 40900, 2023: 39900, 2022: 38900, 2021: 37900 } },
+      Toyota: { Yaris: { 2025: 42900, 2024: 41900, 2023: 40900, 2022: 39900, 2021: 38900 } },
+      Nissan: { Versa: { 2025: 40900, 2024: 39900, 2023: 38900, 2022: 37900, 2021: 36900 } }
+    };
 
-  const marcaSelect  = document.getElementById("kitMarca");
-  const modeloSelect = document.getElementById("kitModelo");
-  const anioSelect   = document.getElementById("kitAnio");
-  const calcularBtn  = document.getElementById("kitBtn");
-  const resultado    = document.getElementById("kitResult");
-  const autoLabel    = document.getElementById("kitAutoLabel");
-  const precioEl     = document.getElementById("kitPrice");
+    const marcaSelect = document.getElementById("kitMarca");
+    const modeloSelect = document.getElementById("kitModelo");
+    const anioSelect = document.getElementById("kitAnio");
+    const calcularBtn = document.getElementById("kitBtn");
+    const resultado = document.getElementById("kitResult");
+    const autoLabel = document.getElementById("kitAutoLabel");
+    const precioEl = document.getElementById("kitPrice");
 
-  if (marcaSelect) {
-    function crearOpciones(select, opciones){
-      select.innerHTML = "";
-      opciones.forEach(op=>{
-        const o = document.createElement("option");
-        o.value = op; o.textContent = op;
-        select.appendChild(o);
-      });
-    }
-    function cargarModelos(){
-      const modelos = Object.keys(catalogo[marcaSelect.value]);
-      crearOpciones(modeloSelect, modelos);
-      cargarAnios();
-    }
-    function cargarAnios(){
-      const anios = Object.keys(catalogo[marcaSelect.value][modeloSelect.value]).sort((a,b)=>b-a);
-      crearOpciones(anioSelect, anios);
-    }
-    function formatoPrecio(p){
-      return new Intl.NumberFormat("es-CL",{style:"currency",currency:"CLP",maximumFractionDigits:0}).format(p);
-    }
-    function calcularKit(){
-      const marca = marcaSelect.value, modelo = modeloSelect.value, anio = anioSelect.value;
-      const precio = catalogo[marca][modelo][anio];
-      autoLabel.textContent = `${marca} ${modelo} ${anio}`;
-      precioEl.textContent = formatoPrecio(precio);
-      resultado.classList.remove("is-visible");
-      requestAnimationFrame(()=> resultado.classList.add("is-visible"));
-    }
+    if (marcaSelect) {
+      function crearOpciones(select, opciones) {
+        select.innerHTML = "";
+        opciones.forEach(op => {
+          const o = document.createElement("option");
+          o.value = op; o.textContent = op;
+          select.appendChild(o);
+        });
+      }
+      function cargarModelos() {
+        const modelos = Object.keys(catalogo[marcaSelect.value]);
+        crearOpciones(modeloSelect, modelos);
+        cargarAnios();
+      }
+      function cargarAnios() {
+        const anios = Object.keys(catalogo[marcaSelect.value][modeloSelect.value]).sort((a, b) => b - a);
+        crearOpciones(anioSelect, anios);
+      }
+      function formatoPrecio(p) {
+        return new Intl.NumberFormat("es-CL", { style: "currency", currency: "CLP", maximumFractionDigits: 0 }).format(p);
+      }
+      function calcularKit() {
+        const marca = marcaSelect.value, modelo = modeloSelect.value, anio = anioSelect.value;
+        const precio = catalogo[marca][modelo][anio];
+        autoLabel.textContent = `${marca} ${modelo} ${anio}`;
+        precioEl.textContent = formatoPrecio(precio);
+        resultado.classList.remove("is-visible");
+        requestAnimationFrame(() => resultado.classList.add("is-visible"));
+      }
 
-    crearOpciones(marcaSelect, Object.keys(catalogo));
-    cargarModelos();
+      crearOpciones(marcaSelect, Object.keys(catalogo));
+      cargarModelos();
 
-    marcaSelect.addEventListener("change", cargarModelos);
-    modeloSelect.addEventListener("change", cargarAnios);
-    calcularBtn.addEventListener("click", calcularKit);
-    calcularKit();
+      marcaSelect.addEventListener("change", cargarModelos);
+      modeloSelect.addEventListener("change", cargarAnios);
+      calcularBtn.addEventListener("click", calcularKit);
+      calcularKit();
+    }
   }
-}
-// ===== off canvas =====
-const WHATS_NUMBER = "56946914558";
-const DEMO_EMAIL = "memanejo@memanejo.cl";
-const DEMO_PASS  = "memanejo";
+  // ===== off canvas =====
+  const WHATS_NUMBER = "56946914558";
+  const DEMO_EMAIL = "memanejo@memanejo.cl";
+  const DEMO_PASS = "memanejo";
 
-const overlay   = document.getElementById('driverOverlay');
-const btn       = document.getElementById('menuButton');
-const closeBtn  = document.getElementById('driverClose');
-const loginView = document.getElementById('dv-login');
-const dashView  = document.getElementById('dv-dash');
-const form      = document.getElementById('dvForm');
-const errorBox  = document.getElementById('dvError');
-const logoutBtn = document.getElementById('dvLogout');
+  const overlay = document.getElementById('driverOverlay');
+  const btn = document.getElementById('menuButton');
+  const closeBtn = document.getElementById('driverClose');
+  const loginView = document.getElementById('dv-login');
+  const dashView = document.getElementById('dv-dash');
+  const form = document.getElementById('dvForm');
+  const errorBox = document.getElementById('dvError');
+  const logoutBtn = document.getElementById('dvLogout');
 
-let scrollY = 0; // guarda la posición de scroll al abrir
+  let scrollY = 0;
 
-function openSheet(){
-  scrollY = window.scrollY;
-  document.body.style.position = 'fixed';
-  document.body.style.top = `-${scrollY}px`;
-  document.body.style.left = '0';
-  document.body.style.right = '0';
-  document.body.style.width = '100%';
-  overlay.classList.add('open');
-}
+  // ===== ABRIR SHEET =====
+  function openSheet() {
+    scrollY = window.scrollY;
 
-function closeSheet(){
-  overlay.classList.remove('open');
-  document.body.style.position = '';
-  document.body.style.top = '';
-  document.body.style.left = '';
-  document.body.style.right = '';
-  document.body.style.width = '';
-  window.scrollTo(0, scrollY);
-}
+    document.body.classList.add('driver-body-lock');
+    document.body.style.top = `-${scrollY}px`;
 
-btn.addEventListener('click', openSheet);
-closeBtn.addEventListener('click', closeSheet);
-overlay.addEventListener('click', (e)=>{ if(e.target === overlay) closeSheet(); });
+    overlay.classList.add('open');
+  }
 
-form.addEventListener('submit', (e)=>{
-  e.preventDefault();
-  const email = document.getElementById('dvEmail').value.trim().toLowerCase();
-  const pass  = document.getElementById('dvPass').value;
-  if(email === DEMO_EMAIL && pass === DEMO_PASS){
+  // ===== CERRAR SHEET =====
+  function closeSheet() {
+    overlay.classList.remove('open');
+
+    document.body.classList.remove('driver-body-lock');
+
+    document.body.style.top = '';
+
+    window.scrollTo({
+      top: scrollY,
+      behavior: 'instant'
+    });
+  }
+
+  btn.addEventListener('click', openSheet);
+  closeBtn.addEventListener('click', closeSheet);
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeSheet(); });
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const email = document.getElementById('dvEmail').value.trim().toLowerCase();
+    const pass = document.getElementById('dvPass').value;
+    if (email === DEMO_EMAIL && pass === DEMO_PASS) {
+      errorBox.classList.remove('show');
+      loginView.style.display = 'none';
+      dashView.classList.add('show');
+    } else {
+      errorBox.classList.add('show');
+    }
+  });
+
+  logoutBtn.addEventListener('click', () => {
+    dashView.classList.remove('show');
+    loginView.style.display = 'block';
+    form.reset();
     errorBox.classList.remove('show');
-    loginView.style.display = 'none';
-    dashView.classList.add('show');
-  } else {
-    errorBox.classList.add('show');
-  }
-});
+  });
 
-logoutBtn.addEventListener('click', ()=>{
-  dashView.classList.remove('show');
-  loginView.style.display = 'block';
-  form.reset();
-  errorBox.classList.remove('show');
-});
-
-document.getElementById('dvAgendar').addEventListener('click', ()=>{
-  closeSheet();
-});
+  document.getElementById('dvAgendar').addEventListener('click', () => {
+    closeSheet();
+  });
 
   // ===== Slider Mobile QA =====
   const slider = document.getElementById("sliderMobileQA");
