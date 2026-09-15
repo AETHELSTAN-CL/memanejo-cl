@@ -82,157 +82,308 @@
       font-size: 16px;
       line-height: 1.65;
     }
+/* ===== CARDS ===== */
 
-    /* ===== CARDS ===== */
-    .services-list {
-      display: grid;
-      gap: 12px;
-    }
+.services-list {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 60px;
+}
 
-    .service-card {
-      position: relative;
-      display: grid;
-      grid-template-columns: 72px 1fr 46px;
-      align-items: center;
-      min-height: 108px;
-      padding: 16px 20px 16px 16px;
-      background: var(--white);
-      border: 1px solid var(--blue);
-      border-radius: 20px;
-      text-decoration: none;
-      color: inherit;
-      overflow: hidden;
-      transition:
-        transform .25s ease,
-        border-color .25s ease,
-        box-shadow .25s ease;
-    }
+.service-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr) 46px;
+  align-items: center;
+  min-height: 108px;
+  padding: 16px 42px 16px 42px;
+  background: var(--white);
+  border: 1px solid var(--muted);
+  border-radius: 999px;
 
-    .service-card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 14px 35px rgba(0, 9, 104, .08);
-    }
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
 
-    .service-card:hover::after {
-      transform: scaleY(1);
-    }
+  transition:
+    transform .25s ease,
+    border-color .25s ease,
+    box-shadow .25s ease;
+}
 
-    .service-icon {
-      width: 58px;
-      height: 58px;
+.service-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 14px 35px rgba(0, 9, 104, .08);
+  border: 1px solid var(--blue);
+}
+
+/* ===== LOGO ===== */
+
+.service-icon {
+  width: 58px;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid #000;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.service-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 6px;
+  display: block;
+}
+
+
+/* ===== CONTENIDO ===== */
+
+.service-content {
+  min-width: 0;
+  padding: 0 8px;
+}
+
+.service-content h2 {
+  margin: 0 0 2px;
+  font-size: 18px;
+  font-weight: 750;
+  letter-spacing: -.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.service-content p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+  overflow-wrap: break-word;
+}
+
+/* ===== FLECHA ===== */
+
+.service-arrow {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  background: var(--navy);
+  border-radius: 50%;
+  color: var(--line);
+  font-size: 18px;
+  transition: transform .25s ease;
+}
+
+/* La flecha avanza hacia la derecha */
+.service-card:hover .service-arrow {
+  transform: scale(1.2);
+  transform: translateX(12px);
+}
+
+@media (min-width: 850px) {
+  .services-list {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 850px) {
+
+  .service-card {
+    grid-template-columns: 62px minmax(0, 1fr) 42px;
+
+    min-height: 96px;
+
+    padding: 14px 18px 14px 28px;
+  }
+
+  .service-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 15px;
+  }
+
+  .service-icon img {
+    padding: 5px;
+  }
+
+  .service-content {
+    padding: 0 10px;
+  }
+
+  .service-content h2 {
+    font-size: 17px;
+    margin-bottom: 4px;
+  }
+
+  .service-content p {
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  .service-arrow {
+    width: 40px;
+    height: 40px;
+    font-size: 13px;
+  }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+  .page {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .services-list {
+    gap: 10px;
+    margin-bottom: 38px;
+  }
+
+  .service-card {
+    grid-template-columns: 52px minmax(0, 1fr) 36px;
+    min-height: 82px;
+    padding: 11px 12px 11px 18px;
+    border-radius: 999px;
+  }
+
+  .service-icon {
+    width: 46px;
+    height: 46px;
+
+    border-radius: 13px;
+  }
+
+  .service-icon img {
+    padding: 4px;
+  }
+
+  .service-content {
+    padding: 0 8px;
+  }
+
+  .service-content h2 {
+    margin: 0 0 2px;
+
+    font-size: 14px;
+    line-height: 1.2;
+  }
+
+  .service-content p {
+    font-size: 10px;
+    line-height: 1.35;
+  }
+
+  .service-arrow {
+    width: 32px;
+    height: 32px;
+
+    font-size: 11px;
+  }
+
+  .service-card:hover {
+    transform: scale(1.02);
+  }
+
+  .service-card:hover .service-arrow {
+    transform: translateX(3px);
+  }
+}
+
+
+/* =========================================
+   MOBILE PEQUEÑO
+========================================= */
+
+@media (max-width: 400px) {
+
+  .service-card {
+    grid-template-columns: 48px minmax(0, 1fr) 34px;
+    padding-left: 15px;
+    padding-right: 10px;
+  }
+
+  .service-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+  }
+
+  .service-content {
+    padding: 0 6px;
+  }
+
+  .service-content h2 {
+    font-size: 13px;
+  }
+
+  .service-content p {
+    font-size: 9px;
+  }
+
+  .service-arrow {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+    /* =========================
+   FOOTER DEL MODAL
+========================= */
+
+    .footer-bottom {
+      width: 100%;
+      margin-top: 18px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(0, 0, 0, 0.08);
       display: flex;
       align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
+      justify-content: space-between;
+      font-size: 11px;
+      color: #6e6d6d;
     }
 
-    .service-icon img {
-      width: 58px;
-      height: 58px;
-      object-fit: contain;
-      border: 1px solid #000;
-      border-radius: 15px;
-      padding: 6px;
-      display: block;
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
 
-    .service-content {
-      padding: 0 20px;
+    .footer-brand a {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
     }
 
-    .service-content h2 {
-      margin: 0 0 6px;
-      font-size: 18px;
-      font-weight: 750;
-      letter-spacing: -.02em;
-    }
-
-    .service-content p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.45;
-    }
-
-    .service-arrow {
-      width: 42px;
-      height: 42px;
-      display: grid;
-      place-items: center;
-      background: var(--navy);
+    .footer-brand img {
+      width: 24px;
+      height: 24px;
+      object-fit: cover;
       border-radius: 50%;
-      color: var(--line);
-      font-size: 14px;
-      transition: all .25s ease;
     }
 
-    .service-card:hover .service-arrow {
-      transform: translateX(-2px);
+    .footer-brand small,
+    .footer-brand .text-secondary {
+      color: #999;
     }
 
-    /* ===== RESPONSIVE ===== */
-    @media (min-width: 850px) {
-      .services-header {
-        width: 55%;
-      }
-
-      .services-list {
-        width: 78%;
-        margin-left: 8%;
-      }
-    }
-
-    @media (max-width: 650px) {
-      .page {
-        padding: 42px 18px 60px;
-      }
-
-      .services-header {
-        margin-bottom: 30px;
-      }
-
-      h1 {
-        font-size: clamp(42px, 13vw, 62px);
-      }
-
-      .intro {
-        font-size: 14px;
-        margin-top: 15px;
-      }
-
-      .service-card {
-        grid-template-columns: 58px 1fr 38px;
-        min-height: 94px;
-        padding: 13px 13px 13px 11px;
-        border-radius: 17px;
-      }
-
-      .service-icon {
-        width: 49px;
-        height: 49px;
-        border-radius: 14px;
-        font-size: 19px;
-      }
-
-      .service-content {
-        padding: 0 12px;
-      }
-
-      .service-content h2 {
-        font-size: 15px;
-        margin-bottom: 4px;
-        margin: 0 0 2px;
-      }
-
-      .service-content p {
-        font-size: 10px;
-      }
-
-      .service-arrow {
-        width: 34px;
-        height: 34px;
-        font-size: 12px;
-      }
+    .footer-chile {
+      color: #777;
+      font-size: 11px;
+      white-space: nowrap;
     }
   </style>
 </head>
@@ -247,19 +398,19 @@
         <h1>¿Qué necesitas<br>hoy?</h1>
         <p class="intro">
           Selecciona el servicio que buscas y continúa directamente
-          con la opción que necesites resolver.
+          con lo que necesites resolver.
         </p>
       </header>
 
       <div class="services-list">
-        
+
         <a href="/paginas/quiz/quiz-nivelacion/" class="service-card">
           <div class="service-icon">
             <img src="/img/logopngicon.png" alt="Servicio">
           </div>
           <div class="service-content">
-            <h2>Preparación licencia Clase B</h2>
-            <p>Realiza quiz de conducción que simulan el examen municipal real.</p>
+            <h2>Nivelación Licencia Clase B</h2>
+            <p>Realiza el quiz de nivelación y comprueba tu nivel. <small><em>(20 preguntas)</em></small></p>
           </div>
           <div class="service-arrow">
             <i class="fa-solid fa-arrow-right"></i>
@@ -291,7 +442,7 @@
             <i class="fa-solid fa-arrow-right"></i>
           </div>
         </a>
-        <a href="/appweb/aulavirtual/index.html" class="service-card">
+        <a href="/aulavirtual/" class="service-card">
           <div class="service-icon">
             <img src="/img/logopngicon.png" alt="Servicio">
           </div>
@@ -306,6 +457,21 @@
 
       </div>
     </section>
+    <!-- Footer pequeño del modal -->
+    <div class="footer-bottom">
+      <span class="footer-brand">
+        <a href="https://memanejo.cl" title="Ir a memanejo.cl">
+          <img src="/img/newnewlogo.jpg" alt="Logo memanejo.cl">
+        </a>
+        <span>memanejo.cl</span>
+        <span class="text-secondary">·</span>
+        <small class="text-secondary">2026</small>
+      </span>
+
+      <span class="footer-chile">
+        Chile 🇨🇱
+      </span>
+    </div>
   </main>
 
 </body>

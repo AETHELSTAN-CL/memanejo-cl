@@ -59,16 +59,92 @@ document.addEventListener("DOMContentLoaded", () => {
   /* =========================
      CONTADOR
   ========================= */
-  /* NUEVO */
   const tiempoElemento = document.getElementById('tiempo-restante');
+
+  /* =========================
+     SI VIENE DEL ONBOARDING → mostrar pantalla intermedia
+  ========================= */
+  const pantallaLista = document.getElementById('pantalla-lista');
+  const nombreListo = document.getElementById('nombreListo');
+  const btnComenzarQuiz = document.getElementById('btnComenzarQuiz');
+
+  if (localStorage.getItem('memanejo_desde_onboarding') === 'true') {
+    localStorage.removeItem('memanejo_desde_onboarding');
+
+    pantallaBienvenida.style.display = 'none';
+    pantallaLista.style.display = 'flex';
+
+    const nombreGuardado = localStorage.getItem('nombre') || 'estudiante';
+    nombreListo.textContent = nombreGuardado.split(' ')[0];
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const inputNombre = document.getElementById('nombre');
+      const inputApellido = document.getElementById('apellido');
+      const inputCorreo = document.getElementById('correo');
+
+      const errorNombre = document.getElementById('errorNombreQuiz');
+      const errorApellido = document.getElementById('errorApellidoQuiz');
+      const errorCorreo = document.getElementById('errorCorreoQuiz');
+
+      const nombre = inputNombre?.value.trim();
+      const apellido = inputApellido?.value.trim();
+      const correo = inputCorreo?.value.trim();
+      const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      // Limpiar errores anteriores
+      errorNombre.textContent = '';
+      errorApellido.textContent = '';
+      errorCorreo.textContent = '';
+
+      inputNombre?.classList.remove('input-error');
+      inputApellido?.classList.remove('input-error');
+      inputCorreo?.classList.remove('input-error');
+
+      let valido = true;
+
+      if (!nombre) {
+        errorNombre.textContent = 'Ingresa tu nombre.';
+        inputNombre?.classList.add('input-error');
+        valido = false;
+      }
+
+      if (!apellido) {
+        errorApellido.textContent = 'Ingresa tu apellido.';
+        inputApellido?.classList.add('input-error');
+        valido = false;
+      }
+
+      if (!correo) {
+        errorCorreo.textContent = 'Ingresa tu correo electrónico.';
+        inputCorreo?.classList.add('input-error');
+        valido = false;
+      } else if (!regexEmail.test(correo)) {
+        errorCorreo.textContent = 'Ingresa un correo válido.';
+        inputCorreo?.classList.add('input-error');
+        valido = false;
+      }
+
+      if (!valido) {
+        return;
+      }
+
+      iniciarQuiz();
+    });
+  }
 
   /* =========================
      INICIAR QUIZ
   ========================= */
   function iniciarQuiz() {
-    localStorage.setItem("nombre", document.getElementById("nombre")?.value || "Invitado");
-    localStorage.setItem("correo", document.getElementById("correo")?.value || "sin_correo");
-    localStorage.setItem("telefono", document.getElementById("telefono")?.value || "sin_telefono");
+    const nombreInput = document.getElementById("nombre")?.value.trim();
+    const apellidoInput = document.getElementById("apellido")?.value.trim();
+    const nombreCompleto = nombreInput ? `${nombreInput} ${apellidoInput || ""}`.trim() : null;
+
+    localStorage.setItem("nombre", nombreCompleto || localStorage.getItem("nombre") || "Invitado");
+    localStorage.setItem("correo", document.getElementById("correo")?.value || localStorage.getItem("correo") || "sin_correo");
+    localStorage.setItem("telefono", localStorage.getItem("telefono") || "sin_telefono");
 
     pantallaBienvenida.style.display = 'none';
     quizContainer.style.display = 'flex';
@@ -237,7 +313,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const mensajeWhatsapp = encodeURIComponent(
         `Hola, hice el quiz de nivelación en memanejo.cl y obtuve ${score}/${puntajeTotal} puntos. Quiero revisar mis errores.`
       );
-      const numeroWhatsapp = "56912345678"; // 👈 reemplaza por tu número real
+      const numeroWhatsapp = "56946914558";
 
       incentivo.innerHTML = `
     <p style="font-size:14px; color:#6e6d6d; margin-bottom:12px;">
@@ -264,7 +340,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-
     emailjs.send("service_ujyq6hg", "template_o43bfnj", {
       nombre: localStorage.getItem("nombre") || "Invitado",
       correo: localStorage.getItem("correo") || "sin_correo",
@@ -273,26 +348,22 @@ document.addEventListener("DOMContentLoaded", () => {
       total: puntajeTotal,
       porcentaje: porcentaje.toFixed(0),
       estado: aprobado ? "Aprobado" : "No aprobado",
+      correctas: correctasCount,
+      erradas: erradasCount,
+      tiempo: `${min}:${seg.toString().padStart(2, '0')}`,
       errores: errores.join('\n\n')
-    }).then(() => {
-      console.log("Resultado enviado por correo correctamente");
-    }).catch(err => {
-      console.error("Error enviando resultado:", err);
-    });
-
-
-
-    // Modal
+    })
 
     modal.classList.remove('oculto');
     tiempoElemento.classList.remove('visible');
 
     const textoParaCompartir = encodeURIComponent(
-      `Obtuve ${score} puntos (${porcentaje.toFixed(0)}%) en el quiz de Nivelación 🚗 en www.memanejo.cl`
+      `Obtuve ${score} puntos (${porcentaje.toFixed(0)}%) en el quiz de Nivelación en www.memanejo.cl`
     );
     btnCompartir.href = `https://twitter.com/intent/tweet?text=${textoParaCompartir}`;
   }
   window.mostrarResultado = mostrarResultado;
+
   btnCompartir.addEventListener('click', (e) => {
     e.preventDefault();
     window.open(btnCompartir.href, '_blank', 'noopener,noreferrer');
@@ -304,30 +375,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const captura = document.getElementById('captura');
       const precio = captura.querySelector('.btn-incentivo-precio');
-      const texto = `Obtuve ${score}/${calcularPuntajeTotal()} puntos en el quiz de memanejo.cl 🚗`;
+      const texto = `Obtuve ${score}/${calcularPuntajeTotal()} puntos en el quiz de memanejo.cl`;
 
-      // Guardar estilos originales para restaurar después
       const estiloOriginal = {
         maxHeight: captura.style.maxHeight,
         overflow: captura.style.overflow,
         height: captura.style.height
       };
 
-      // Expandir el contenedor para que quepa TODO (incluye footer)
       captura.style.maxHeight = 'none';
       captura.style.overflow = 'visible';
       captura.style.height = 'auto';
 
-      // Ocultar solo el precio antes de capturar
       if (precio) precio.style.visibility = 'hidden';
 
       try {
-        // Genera la imagen del resultado
         const canvas = await html2canvas(captura, { backgroundColor: '#121212', scale: 2 });
         const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
         const archivo = new File([blob], 'resultado-quiz-memanejo.png', { type: 'image/png' });
 
-        // Si el navegador soporta compartir archivos (mayoría de celulares)
         if (navigator.canShare && navigator.canShare({ files: [archivo] })) {
           await navigator.share({
             files: [archivo],
@@ -337,7 +403,6 @@ document.addEventListener("DOMContentLoaded", () => {
           return;
         }
 
-        // Si soporta compartir pero no archivos (algunos navegadores)
         if (navigator.share) {
           await navigator.share({
             title: 'Mi resultado en memanejo.cl',
@@ -347,12 +412,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
       } catch (err) {
-        // El usuario canceló el share, o hubo un error real
         if (err.name !== 'AbortError') {
           console.error("Error al compartir:", err);
         }
       } finally {
-        // Restaurar todo a como estaba, pase lo que pase
         captura.style.maxHeight = estiloOriginal.maxHeight;
         captura.style.overflow = estiloOriginal.overflow;
         captura.style.height = estiloOriginal.height;
@@ -360,7 +423,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
-  // Al final de tu DOMContentLoaded, junto a las otras inicializaciones
+
   if (btnInstagram && !navigator.share) {
     btnInstagram.style.display = 'none';
   }
@@ -378,21 +441,17 @@ document.addEventListener("DOMContentLoaded", () => {
   btnDescargar.addEventListener('click', () => {
     const captura = document.getElementById('captura');
     const precio = captura.querySelector('.btn-incentivo-precio');
-    const linkIncentivo = captura.querySelector('#bloque-incentivo a.btn-incentivo');
 
-    // Guardar estilos originales para restaurar después
     const estiloOriginal = {
       maxHeight: captura.style.maxHeight,
       overflow: captura.style.overflow,
       height: captura.style.height
     };
 
-    // Expandir el contenedor para que quepa TODO (incluye footer)
     captura.style.maxHeight = 'none';
     captura.style.overflow = 'visible';
     captura.style.height = 'auto';
 
-    // Ocultar solo el precio antes de capturar
     if (precio) precio.style.visibility = 'hidden';
 
     html2canvas(captura, { backgroundColor: null, scale: 2 }).then(canvas => {
@@ -401,7 +460,6 @@ document.addEventListener("DOMContentLoaded", () => {
       link.href = canvas.toDataURL('image/png');
       link.click();
 
-      // Restaurar todo a como estaba
       captura.style.maxHeight = estiloOriginal.maxHeight;
       captura.style.overflow = estiloOriginal.overflow;
       captura.style.height = estiloOriginal.height;

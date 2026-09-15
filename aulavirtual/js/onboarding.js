@@ -117,20 +117,37 @@ function entrarComoVisitante() {
 // =====================
 // PRIMER ACCESO (Crear memanejo ID)
 // =====================
-function mostrarPortalAlumno() {
+function mostrarPortalAlumno(modo = 'quiz') {
+  const solicitarId = modo === 'solicitar-id';
+
+  const titulo = solicitarId
+    ? 'Solicita tu memanejo ID'
+    : '¡Nos encanta conocerte!';
+
+  const texto = solicitarId
+    ? 'Completa tus datos y te enviaremos tu <strong>memanejo ID</strong> al correo electrónico.'
+    : 'Completa tus datos y haz nuestro <strong>Quiz de Nivelación gratis</strong> y conoce qué tan preparado estás para tu examen de conducción.';
+
+  const textoBoton = solicitarId
+    ? 'Solicitar memanejo ID'
+    : 'Comenzar Quiz de Nivelación';
+
+  const textoLegal = solicitarId
+    ? 'Usaremos tus datos para identificarte como estudiante y enviar tu <strong>memanejo ID</strong> al correo electrónico. No compartimos tus datos con terceros.'
+    : 'Usaremos tus datos para registrar tu participación y enviarte información relacionada con tu resultado. No compartimos tus datos con terceros.';
 
   loginCardGlass.innerHTML = `
   <div class="card-plus">
 
     <div class="title-wrapper portal-title">
       <div class="card-title card-plus-title">
-        <strong>¡Nos encanta conocerte!</strong>
+        <strong>${titulo}</strong>
       </div>
     </div>
 
     <div class="card-subblock portal-intro">
       <div class="card-text card-plus-text">
-        Completa tus datos y haz nuestro <strong>Quiz de Nivelación gratis</strong> para saber qué tan preparado estás para tu examen de conducción.
+        ${texto}
       </div>
     </div>
 
@@ -169,12 +186,12 @@ function mostrarPortalAlumno() {
       <button
         id="portalIngresar"
         class="card-btn">
-        <strong>Comenzar Quiz de Nivelación</strong>
+        <strong>${textoBoton}</strong>
       </button>
 
       <div class="card-sub-text">
-        Al finalizar verás tu resultado al instante.
-      </div>
+  ${textoLegal}
+</div>
 
       <div
         id="portalVolver"
@@ -187,242 +204,160 @@ function mostrarPortalAlumno() {
 
   </div>
   `;
-
-
-
-
-  document
-    .getElementById('portalIngresar')
-    ?.addEventListener('click', () => {
-
-
-      const nombre =
-        document
-          .getElementById('portalNombre')
-          ?.value.trim();
-
-
-
-      const apellido =
-        document
-          .getElementById('portalApellido')
-          ?.value.trim();
-
-
-
-      const email =
-        document
-          .getElementById('portalEmail')
-          ?.value.trim();
-
-
-
-      if (!nombre || !email) {
-
-        showError("Completa todos los campos");
-        return;
-
-      }
-
-
-
-      const emailValido =
-        /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-
-
-      if (!emailValido.test(email)) {
-
-        showError("Ingresa un correo válido");
-        return;
-
-      }
-
-
-
-      // Genera código único
-      const memanejoId =
-        generarMemanejoId(nombre, apellido);
-
-
-
-      const nuevoUsuario = {
-
-
-        memanejoId,
-
-
-        nombre:
-          `${nombre} ${apellido || ""}`
-            .trim(),
-
-
-        email,
-
-
-        desbloqueado: {
-
-          quiz180: false,
-
-          quiz500: false,
-
-          quiz800: false,
-
-          clasesEnVivo: false,
-
-          resumenes: false,
-
-          full: false
-
-        },
-
-
-        referidoPor: null,
-
-
-        fechaRegistro:
-          new Date()
-            .toISOString()
-            .split('T')[0]
-
-      };
-
-
-
-      // Guarda usuario MVP local
-      const registrados =
-        JSON.parse(
-          localStorage.getItem('usuariosRegistrados') || '[]'
-        );
-
-
-
-      registrados.push(nuevoUsuario);
-
-
-
-      localStorage.setItem(
-        'usuariosRegistrados',
-        JSON.stringify(registrados)
-      );
-
-
-
-      // Login automático
-      setSession({
-
-        nombre: nuevoUsuario.nombre,
-
-        email: nuevoUsuario.email,
-
-        memanejoId: nuevoUsuario.memanejoId,
-
-        desbloqueado: nuevoUsuario.desbloqueado
-
-      });
-
-
-
-      // Envía correo bienvenida
-      enviarMemanejoIdPorCorreo(
-        nombre,
-        email,
-        memanejoId
-      );
-
-      const correoAcceso = "estudiante@memanejo.cl";
-
-      loginCardGlass.innerHTML = `
-
+  document.getElementById('portalIngresar')?.addEventListener('click', () => {
+
+    if (modo === 'solicitar-id') {
+      // AQUÍ reutilizas el mismo flujo que ya tienes
+      // para guardar los datos + enviar memanejo ID
+      solicitarMemanejoId();
+      return;
+    }
+
+    // Flujo actual del Quiz
+    iniciarQuizDesdePortal();
+  });
+
+
+
+  document.getElementById('portalIngresar')?.addEventListener('click', () => {
+
+    const inputNombre = document.getElementById('portalNombre');
+    const inputApellido = document.getElementById('portalApellido');
+    const inputEmail = document.getElementById('portalEmail');
+
+    const nombre = inputNombre?.value.trim();
+    const apellido = inputApellido?.value.trim();
+    const email = inputEmail?.value.trim();
+
+    const errorNombre = document.getElementById('errorNombre');
+    const errorApellido = document.getElementById('errorApellido');
+    const errorEmail = document.getElementById('errorEmail');
+
+    // Limpiar errores anteriores
+    errorNombre.textContent = '';
+    errorApellido.textContent = '';
+    errorEmail.textContent = '';
+
+    inputNombre?.classList.remove('input-error');
+    inputApellido?.classList.remove('input-error');
+    inputEmail?.classList.remove('input-error');
+
+    let valido = true;
+
+    if (!nombre) {
+      errorNombre.textContent = 'Ingresa tu nombre.';
+      inputNombre?.classList.add('input-error');
+      valido = false;
+    }
+
+    if (!apellido) {
+      errorApellido.textContent = 'Ingresa tu apellido.';
+      inputApellido?.classList.add('input-error');
+      valido = false;
+    }
+
+    if (!email) {
+      errorEmail.textContent = 'Ingresa tu correo electrónico.';
+      inputEmail?.classList.add('input-error');
+      valido = false;
+    }
+
+    if (!valido) {
+      return;
+    }
+
+    // =========================
+    // RAMA 1: PRIMER ACCESO → va directo al Quiz de Nivelación
+    // =========================
+    if (modo !== 'solicitar-id') {
+      localStorage.setItem('nombre', `${nombre} ${apellido}`.trim());
+      localStorage.setItem('correo', email);
+      localStorage.setItem('telefono', 'sin_telefono');
+      localStorage.setItem('memanejo_desde_onboarding', 'true');
+
+      window.location.href = '/paginas/quiz/quiz-nivelacion/';
+      return;
+    }
+
+    // =========================
+    // RAMA 2: SOLICITAR MEMANEJO ID (flujo completo, sin cambios)
+    // =========================
+
+    const memanejoId = generarMemanejoId(nombre, apellido);
+
+    const nuevoUsuario = {
+      memanejoId,
+      nombre: `${nombre} ${apellido || ""}`.trim(),
+      email,
+      desbloqueado: {
+        quiz180: false,
+        quiz500: false,
+        quiz800: false,
+        clasesEnVivo: false,
+        resumenes: false,
+        full: false
+      },
+      referidoPor: null,
+      fechaRegistro: new Date().toISOString().split('T')[0]
+    };
+
+    const registrados = JSON.parse(localStorage.getItem('usuariosRegistrados') || '[]');
+    registrados.push(nuevoUsuario);
+    localStorage.setItem('usuariosRegistrados', JSON.stringify(registrados));
+
+    setSession({
+      nombre: nuevoUsuario.nombre,
+      email: nuevoUsuario.email,
+      memanejoId: nuevoUsuario.memanejoId,
+      desbloqueado: nuevoUsuario.desbloqueado
+    });
+
+    // Envía correo bienvenida
+    enviarMemanejoIdPorCorreo(
+      nuevoUsuario.nombre,
+      email,
+      memanejoId
+    );
+
+    const correoAcceso = email;
+
+    loginCardGlass.innerHTML = `
     <div class="card-plus">
-
-
       <div class="card-title card-plus-title">
-
         <strong>¡Bienvenido a memanejo!</strong>
-
       </div>
-
-
-
       <div class="card-text card-plus-text" style="margin-top:14px;">
-
         Tu acceso fue creado correctamente.
-
         <br><br>
-
         Enviamos tu <strong>memanejo ID</strong> a:
-
         <br>
-
         <strong>${correoAcceso}</strong>
-
-
         <br><br>
-
-        Guarda este código para ingresar nuevamente a la plataforma.
-
+        Guarda este código para ingresar a la plataforma. Estamos en fase de pruebas operativas. Entreganos tu feedback y recibe beneficios. Gracias por tu apoyo.
       </div>
-
       <button 
       id="btnEntrarPlataforma"
       class="card-btn card-btn-wide"
       style="margin-top:16px;">
-
        Ingresar
-
       </button>
-
-
     </div>
-
     `;
 
-
-
-      document
-        .getElementById('btnEntrarPlataforma')
-        ?.addEventListener('click', () => {
-
-
-          cerrarOnboarding();
-
-
-
-          const pillStudent =
-            document.querySelector('.pill-student');
-
-
-          pillStudent
-            ?.classList.add('visible');
-
-
-
-          requestAnimationFrame(() => {
-
-            openStudentMenu();
-
-          });
-
-
-        });
-
-
-
+    document.getElementById('btnEntrarPlataforma')?.addEventListener('click', () => {
+      cerrarOnboarding();
+      const pillStudent = document.querySelector('.pill-student');
+      pillStudent?.classList.add('visible');
+      requestAnimationFrame(() => {
+        openStudentMenu();
+      });
     });
 
+  });
 
-
-  document
-    .getElementById('portalVolver')
-    ?.addEventListener(
-      'click',
-      restoreOnboarding
-    );
-
+  document.getElementById('portalVolver')?.addEventListener('click', restoreOnboarding);
 
 }
-
 /* ===== Generador de memanejo ID =====
 function generarMemanejoId(nombre, apellido) {
   const inicialNombre = nombre.charAt(0).toUpperCase();
@@ -455,13 +390,13 @@ function mostrarNuevoEstudiante() {
 
     <div class="title-wrapper portal-title">
       <div class="card-title-visitante">
-        <strong>memanejo +</strong>
+        <strong>memanejo+</strong>
       </div>
     </div>
 
     <div class="card-subblock portal-intro">
       <div class="card-text">
-        Ingresa con tu correo y tu <strong>memanejo ID</strong>.
+        Ingresa a tu cuenta estudiante con tu correo y tu <strong>memanejo ID</strong>.
       </div>
     </div>
 
@@ -485,6 +420,15 @@ function mostrarNuevoEstudiante() {
         <strong>Ingresar</strong>
       </button>
 
+      <div class="card-sub-text">
+  ¿No tienes tu memanejo ID?
+  <a
+    href="#"
+    id="solicitarMemanejoId">
+    Solicítalo aquí.
+  </a>
+</div>
+
 
       <div id="loginVolver" class="card-back" style="cursor:pointer;">
         <i class="fas fa-arrow-left"></i> Volver
@@ -495,7 +439,11 @@ function mostrarNuevoEstudiante() {
   </div>
   `;
 
+  document.getElementById('solicitarMemanejoId')?.addEventListener('click', (e) => {
+    e.preventDefault();
 
+    mostrarPortalAlumno('solicitar-id');
+  });
   document.getElementById('loginIngresar')
     ?.addEventListener('click', async () => {
 
