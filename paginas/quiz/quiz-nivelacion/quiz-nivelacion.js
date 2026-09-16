@@ -13,22 +13,34 @@ document.addEventListener("DOMContentLoaded", () => {
   let timerInterval = null;
   let errores = [];
 
-  /* =========================
-     SORTEO — usa bancoExamenMunicipal de preguntas.js
-  ========================= */
-  function mezclarArray(array) {
-    const copia = [...array];
-    for (let i = copia.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [copia[i], copia[j]] = [copia[j], copia[i]];
-    }
-    return copia;
-  }
+function armarQuizNivelacion() {
 
-  function armarQuizNivelacion() {
-    const generales = bancoExamenMunicipal.filter(p => p.categoria === "general");
-    return mezclarArray(generales).slice(0, 20).map(p => ({ ...p, puntos: 1 }));
-  }
+  const especiales = bancoExamenMunicipal.filter(p =>
+    ["alcohol", "cinturon", "retencion_infantil"].includes(p.categoria)
+  );
+
+  const generales = bancoExamenMunicipal.filter(
+    p => p.categoria === "general"
+  );
+
+  const preguntasEspeciales = mezclarArray(especiales).slice(0, 12);
+
+  const faltantes = 12 - preguntasEspeciales.length;
+
+  const preguntasGenerales = mezclarArray(generales).slice(
+    0,
+    8 + faltantes
+  );
+
+  return mezclarArray([
+    ...preguntasEspeciales,
+    ...preguntasGenerales
+  ]).slice(0, 20).map(p => ({
+    ...p,
+    respuestas: mezclarArray(p.respuestas),
+    puntos: 1
+  }));
+}
 
   /* =========================
      ELEMENTOS DOM

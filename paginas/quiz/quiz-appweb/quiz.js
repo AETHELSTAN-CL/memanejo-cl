@@ -513,7 +513,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const textoParaCompartir = encodeURIComponent(
       `Obtuve ${score} puntos (${porcentaje.toFixed(0)}%) ` +
-      "en el quiz Clase B 🚗 en www.memanejo.cl"
+      "en el quiz Clase B en www.memanejo.cl"
     );
 
     btnCompartir.href =
@@ -533,7 +533,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const captura = document.getElementById('captura');
     const precio = captura.querySelector('.btn-incentivo-precio');
-    const texto = `Obtuve ${score}/${calcularPuntajeTotal()} puntos en el quiz Clase B 🚗 en memanejo.cl`;
+    const texto = `Obtuve ${score}/${calcularPuntajeTotal()} puntos en el quiz Clase B en memanejo.cl`;
 
     // Guardar estilos originales para restaurar después
     const estiloOriginal = {

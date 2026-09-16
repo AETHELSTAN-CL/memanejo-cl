@@ -452,33 +452,24 @@ function mostrarNuevoEstudiante() {
         .getElementById('loginEmail')
         ?.value.trim();
 
-
       const id = document
         .getElementById('loginId')
         ?.value.trim();
-
-
 
       if (!email || !id) {
         showError("Completa todos los campos");
         return;
       }
 
-
-
       // carga JSON si aún no existe
       if (usuariosDB.length === 0) {
         await cargarUsuarios();
       }
 
-
-
       const usuariosLocal =
         JSON.parse(
           localStorage.getItem('usuariosRegistrados') || '[]'
         );
-
-
 
       const todosLosUsuarios = [
         ...usuariosDB,
@@ -503,38 +494,26 @@ function mostrarNuevoEstudiante() {
 
       }
 
-
-
       setSession({
 
         nombre: usuario.nombre,
-
         email: usuario.email,
-
         memanejoId: usuario.memanejoId,
-
         desbloqueado: usuario.desbloqueado || {}
 
       });
 
-
-
       cerrarOnboarding();
-
 
 
       const pillStudent =
         document.querySelector('.pill-student');
 
-
       pillStudent?.classList.add('visible');
-
-
 
       requestAnimationFrame(() => {
         openStudentMenu();
       });
-
 
     });
 
@@ -652,6 +631,7 @@ function showError(msg) {
 document.addEventListener('click', (e) => {
   const menu = document.querySelector('.student-menu');
   const boton = document.querySelector('.pill-student');
+
 
   if (!menu || !menu.classList.contains('show')) return;
 

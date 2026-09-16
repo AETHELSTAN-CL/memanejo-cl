@@ -10,6 +10,7 @@
   --text: #111111;
   --text-dim: #888888;
   --border: #eeeeee;
+  --palido: #d0d0d0;
 
   --accent: #2261ff;
   --accent-text: #ffffff;
@@ -415,7 +416,7 @@ a { color: var(--accent); text-decoration: none; }
   display: flex;
   align-items: center;
   justify-content: center;
-  background: conic-gradient(var(--accent) var(--progreso), var(--text-dim) 0);
+  background: conic-gradient(var(--accent) var(--progreso), var(--palido) 0);
 }
 
 .score-ring-inner {

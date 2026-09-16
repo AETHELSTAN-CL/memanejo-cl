@@ -170,13 +170,48 @@ document.addEventListener("scroll", () => {
     });
   });
 
-  // ===== HAMBURGER =====
-  const hamburger = document.querySelector('.hamburger');
-  const nav = document.querySelector('header nav');
-  hamburger?.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    nav?.classList.toggle('show');
+// ===== HAMBURGER =====
+// ===== HAMBURGER =====
+const hamburger = document.querySelector('.hamburger');
+const nav = document.querySelector('header nav');
+const studentMenu = document.querySelector('.student-menu');
+
+function cerrarMenu() {
+  hamburger?.classList.remove('active');
+  nav?.classList.remove('show');
+}
+
+// Abrir / cerrar hamburger
+hamburger?.addEventListener('click', (e) => {
+  e.stopPropagation();
+
+  // Si está abierto el menú estudiante, cerrarlo
+  studentMenu?.classList.remove('show');
+
+  hamburger.classList.toggle('active');
+  nav?.classList.toggle('show');
+});
+
+// Cerrar al presionar cualquier elemento del menú
+nav?.querySelectorAll('a, button').forEach(item => {
+  item.addEventListener('click', () => {
+    cerrarMenu();
   });
+});
+
+// Cerrar al presionar fuera del menú
+document.addEventListener('click', (e) => {
+
+  // Cerrar hamburger al hacer click fuera
+  if (
+    nav?.classList.contains('show') &&
+    !nav.contains(e.target) &&
+    !hamburger?.contains(e.target)
+  ) {
+    cerrarMenu();
+  }
+
+});
 
   // ===== LIKE COUNT =====
   document.querySelectorAll('.heart-btn').forEach(btn => {
