@@ -23,7 +23,543 @@ body {
     -webkit-font-smoothing: antialiased;
 
 }
+/* ------------------ Lubricentros Asociados ------------------ */
+/* =====================================================================
+   TÍTULO / MENSAJE — grande, a la izquierda, con subtítulo gris y botones
+===================================================================== */
+.titulo-portada {
+    max-width: 720px;
+    margin: 0 5px 10px;
+    padding: 0 15px;
+    text-align: left;
+}
 
+.titulo-portada h1 {
+    font-family: 'Avenir', sans-serif;
+    font-weight: 800;
+    font-size: 41px;
+    line-height: 1.05;
+    margin: 0;
+    color: #fff;
+}
+
+.titulo-portada .lp-sub {
+    color: #999;
+    font-size: 14.5px;
+    line-height: 1.6;
+    margin-top: 16px;
+}
+
+.lp-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 24px;
+    flex-wrap: wrap;
+}
+
+.lp-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 240px;
+    box-sizing: border-box;
+    padding: 12px 24px;
+    border-radius: 40px;
+    font-weight: 700;
+    font-size: 14px;
+    border: 1px solid #888;
+    transition: .25s ease;
+    white-space: nowrap;
+    text-decoration: none;
+    color: #d9d9d9;
+    margin-bottom: 20px;
+}
+
+.lp-btn-whats {
+    background: #000;
+    color: #fff;
+    border-color: #06ba48;
+    
+}
+
+.lp-btn-whats:hover {
+    background: #fff;
+    color: #06ba48;
+
+}
+
+.lp-btn-whats i {
+    transition: .25s ease;
+    color: #06ba48;
+}
+
+.lp-btn-whats:hover i {
+    transform: scale(1.15);
+    color: #000;
+}
+
+.lp-btn-ghost:hover {
+    border-color: #fff;
+}
+
+.lp-btn-ghost i {
+    transition: .3s ease;
+}
+
+.lp-btn-ghost:hover i {
+    transform: translateY(6px);
+
+}
+/* =====================================================================
+   SLIDER — estructura y clases originales (mm-*), con mejoras agregadas
+===================================================================== */
+.mm-slider-wrapper {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.mm-slider-track {
+    display: flex;
+    gap: 20px;
+    padding: 0 20px;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+}
+
+.mm-fondo-blur {
+    display: flex;
+    justify-content: center;
+    flex: 0 0 70%;
+    max-width: 320px;
+    width: 100%;
+    scroll-snap-align: center;
+    border-radius: 1rem;
+    border: 1px solid rgb(255, 255, 255);
+    overflow: hidden;
+}
+
+.mm-tarjeta {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-radius: 1rem;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+
+.mm-tarjeta .card-img-wrap {
+    position: relative;
+}
+
+.mm-tarjeta .card-img-top {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    display: block;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    transition: transform 0.4s ease;
+}
+
+.mm-tarjeta:hover .card-img-top {
+    transform: scale(1.05);
+}
+/* =========================================================
+   CARD QUIZ DE NIVELACIÓN
+   ========================================================= */
+
+
+.mm-card-nivelacion .mm-tag {
+  background: #0026ff;
+  color: #fff;
+}
+
+.mm-card-nivelacion .mm-cta {
+  background: #0026ff;
+  color: #fff;
+  
+}
+
+.mm-card-nivelacion .mm-cta:hover {
+  background: #0026ff;
+  color: #fff;
+  
+}
+/* ---- NUEVO: tag sobre la imagen ---- */
+.mm-tag {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    z-index: 2;
+    background: rgba(0, 0, 0, .55);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255, 255, 255, 0.305);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 6px 20px;
+    border-radius: 40px;
+    letter-spacing: .02em;
+}
+
+.mm-tag.hot {
+    background: #dc143c;
+    border-color: #dc143c;
+}
+
+.mm-cuerpo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: center;
+    padding: 1rem;
+    font-size: .9rem;
+    line-height: 1.3;
+    color: #fff;
+    background: rgba(0, 0, 0, .35);
+    backdrop-filter: blur(10px);
+    border-radius: 0 0 1rem 1rem;
+}
+
+.mm-cuerpo h5 {
+    color: #fff;
+    font-weight: 700;
+    margin: 0 0 4px;
+    text-decoration: none;
+}
+
+.mm-cuerpo h5 small {
+    font-size: .7em;
+    color: #ccc;
+}
+
+.mm-cuerpo p {
+    color: #ddd;
+    margin: .8rem 0 0;
+}
+
+/* ---- NUEVO: botón con flecha animada, debajo del texto ---- */
+.mm-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 16px;
+    padding: 11px 22px;
+    border-radius: 40px;
+    font-weight: 700;
+    font-size: 13.5px;
+    color: #000;
+    background: #f4f4f4;
+    transition: .25s ease;
+    align-self: center;
+    text-decoration: none;
+}
+
+.mm-cta i {
+    transition: transform .4s ease;
+}
+
+.mm-cta:hover i {
+    transform: translateX(6px);
+}
+.lp-actions {
+    margin-bottom: 15px;
+    gap: 30px;
+}
+@media (max-width:539px) {
+    .lp-actions {
+    gap: 5px;
+}
+
+}
+@media (min-width:540px) and (max-width:1023px) {
+    .titulo-portada {
+        max-width: 650px;
+    }
+
+    .titulo-portada h1 {
+        font-size: 70px;
+    }
+
+    .titulo-portada .lp-sub {
+        font-size: 20px;
+    }
+
+    .lp-actions {
+        gap: 20px;
+        flex-wrap: nowrap;
+        /* fuerza que queden uno al lado del otro */
+    }
+
+    .lp-btn {
+        font-size: 13px;
+    }
+}
+
+@media (min-width:1024px) and (max-width:1439px) {
+    .titulo-portada {
+        max-width: 820px;
+    }
+
+    .titulo-portada h1 {
+        font-size: 90px;
+    }
+
+    .titulo-portada .lp-sub {
+        font-size: 20px;
+    }
+
+    .lp-actions {
+        gap: 40px;
+    }
+}
+
+@media (min-width:1440px) {
+    .titulo-portada {
+        max-width: 820px;
+    }
+
+    .titulo-portada h1 {
+        font-size: 94px;
+    }
+
+    .titulo-portada .lp-sub {
+        font-size: 20px;
+    }
+
+}
+
+.hero-tags {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    margin: 6px 0 30px;
+    padding: 0;
+
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+
+    scrollbar-width: none;
+}
+
+.hero-tags::-webkit-scrollbar {
+    display: none;
+}
+
+.hero-tag {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex: 0 0 240px;
+    min-height: 42px;
+    box-sizing: border-box;
+    padding: 6px 50px;
+
+    font-size: 16px;
+    text-align: center;
+    white-space: nowrap;
+    scroll-snap-align: center;
+}
+
+.hero-tag i {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #f9f9fb;
+    margin: 0;
+}
+
+/* En móvil: muestra un tag completo y una parte del siguiente. */
+@media (max-width: 767px) {
+    .hero-tags {
+        justify-content: flex-start;
+        padding: 0 20px;
+    }
+
+    .hero-tag {
+        flex-basis: min(78vw, 240px);
+    }
+}
+/* =======================
+   Slider card cuadrado
+======================= */
+.modern-slider-section {
+    padding: 10px 0;
+    overflow-x: auto;
+    margin-left: 15px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.slider-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+}
+
+.slider-track {
+    display: flex;
+    gap: 24px;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    width: max-content;
+    padding-bottom: 10px;
+}
+
+.slider-card p {
+    font-family: 'Avenir', Verdana, Geneva, Tahoma, sans-serif;
+    font-size: clamp(1rem, 1.1vw, 3rem);
+    margin: 10px 10px;
+    font-weight: bold;
+}
+
+.slider-card {
+    flex: 0 0 auto;
+    width: 450px;
+    border-radius: 20px;
+    overflow: hidden;
+    scroll-snap-align: start;
+    position: relative;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    border: 1px solid #fff;
+}
+
+/* Contenedor de imagen y overlay */
+.card-img-slider {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    /* Proporción más grande que antes */
+    overflow: hidden;
+    border-radius: 16px;
+}
+
+/* Imagenes normales */
+.card-img-slider img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* cubre todo el contenedor */
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.card-img-slider:hover img {
+    transform: scale(1.05);
+}
+
+/* Primera tarjeta: rotación de imágenes */
+.slider-card.first .card-img-slider img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 1s ease, transform 0.5s ease;
+}
+
+.slider-card.first .card-img-slider img.active {
+    opacity: 1;
+}
+
+
+
+/* =======================
+   Botón inferior pill
+======================= */
+.overlay-btn {
+    position: absolute;
+    bottom: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Todos los botones dentro del slider */
+.slider-card .btn-slide-pill {
+    background: #000;
+    color: #fff;
+    border: 1px solid #b5b4b4;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    width: 320px;
+    padding: 14px 0;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+
+/* Rotador centrado y animado */
+.slider-card .btn-slide-pill .rotator {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 100%) scale(1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.9s ease, opacity 0.1s ease;
+    opacity: 0;
+    white-space: nowrap;
+}
+
+.slider-card .btn-slide-pill .rotator.enter {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 1;
+}
+
+.slider-card .btn-slide-pill .rotator.exit {
+    transform: translate(-50%, -150%) scale(1);
+    opacity: 0;
+}
+
+/* =======================
+   Estilos adicionales opcionales
+======================= */
+@media (max-width: 768px) {
+    .modern-slider-section {
+        margin-top: 10px;
+    }
+    .slider-container {
+        padding: 0 20px;
+    }
+
+    .slider-card {
+        width: 320px;
+    }
+
+    .card-img-slider {
+        height: 320px;
+    }
+}
+
+.slider-card:hover {
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
+}
 
 /* Tooltip estilo burbuja */
 .tooltip-bubble {
@@ -935,39 +1471,6 @@ body {
     }
 }
 
-/* ===== Botón Instagram centrado ===== */
-.btn-instagram-follow {
-    position: absolute;
-    bottom: 75px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #fff;
-    color: #000;
-    border: 1px solid #E1306C;
-    /* color Instagram */
-    border-radius: 36px;
-    padding: 6px 28px;
-    font-size: 15px;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    z-index: 10;
-    text-decoration: none;
-}
-
-.btn-instagram-follow i {
-    color: #E1306C;
-    font-size: 18px;
-}
-
-.btn-instagram-follow:hover {
-    background: #f7f7f7;
-    transform: translateX(-50%) scale(1.05);
-}
-
 /* SLIDER PRINCIPAL MOBILE  */
 .slide-movil {
     position: relative;
@@ -1024,164 +1527,6 @@ body {
     scroll-snap-align: center;
 }
 
-/* =======================
-   Slider card cuadrado
-======================= */
-.modern-slider-section {
-    padding: 10px 8px;
-    overflow-x: auto;
-    margin-top: 40px;
-    margin-bottom: 40px;
-}
-
-.slider-container {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scroll-snap-type: x mandatory;
-}
-
-.slider-track {
-    display: flex;
-    gap: 24px;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    width: max-content;
-    padding-bottom: 10px;
-}
-
-.slider-card p {
-    font-family: 'Avenir', Verdana, Geneva, Tahoma, sans-serif;
-    font-size: clamp(1rem, 1.1vw, 3rem);
-    margin: 10px 10px;
-    font-weight: bold;
-}
-
-.slider-card {
-    flex: 0 0 auto;
-    width: 450px;
-    border-radius: 20px;
-    overflow: hidden;
-    scroll-snap-align: start;
-    position: relative;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-    border: 1px solid #fff;
-}
-
-/* Contenedor de imagen y overlay */
-.card-img-slider {
-    position: relative;
-    width: 100%;
-    height: 400px;
-    /* Proporción más grande que antes */
-    overflow: hidden;
-    border-radius: 16px;
-}
-
-/* Imagenes normales */
-.card-img-slider img {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    /* cubre todo el contenedor */
-    display: block;
-    transition: transform 0.5s ease;
-}
-
-.card-img-slider:hover img {
-    transform: scale(1.05);
-}
-
-/* Primera tarjeta: rotación de imágenes */
-.slider-card.first .card-img-slider img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    transition: opacity 1s ease, transform 0.5s ease;
-}
-
-.slider-card.first .card-img-slider img.active {
-    opacity: 1;
-}
-
-
-
-/* =======================
-   Botón inferior pill
-======================= */
-.overlay-btn {
-    position: absolute;
-    bottom: 6px;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-/* Todos los botones dentro del slider */
-.slider-card .btn-slide-pill {
-    background: #000;
-    color: #fff;
-    border: 1px solid #b5b4b4;
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    width: 320px;
-    padding: 14px 0;
-    border-radius: 50px;
-    font-weight: 700;
-    font-size: 12px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-align: center;
-}
-
-
-/* Rotador centrado y animado */
-.slider-card .btn-slide-pill .rotator {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, 100%) scale(1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.9s ease, opacity 0.1s ease;
-    opacity: 0;
-    white-space: nowrap;
-}
-
-.slider-card .btn-slide-pill .rotator.enter {
-    transform: translate(-50%, -50%) scale(1.2);
-    opacity: 1;
-}
-
-.slider-card .btn-slide-pill .rotator.exit {
-    transform: translate(-50%, -150%) scale(1);
-    opacity: 0;
-}
-
-/* =======================
-   Estilos adicionales opcionales
-======================= */
-@media (max-width: 768px) {
-    .slider-container {
-        padding: 15px;
-    }
-
-    .slider-card {
-        width: 320px;
-    }
-
-    .card-img-slider {
-        height: 320px;
-    }
-}
-
-.slider-card:hover {
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
-}
 
 /* Invisible en escritorio, visibles si pasas el mouse (opcional) */
 .carousel-control-prev,
@@ -2166,487 +2511,6 @@ body {
 }
 
 
-/* Contenedor de botones */
-.button-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.8rem;
-    justify-content: center;
-}
-
-/* Botones generales y botón de pago */
-.button-grid a.btn-modern {
-    flex: 1 1 auto;
-    /* más flexible */
-    min-width: 180px;
-    max-width: 280px;
-    padding: 0.9rem 1.5rem;
-    margin: 0.5rem 0;
-
-    border-radius: 40px;
-    font-weight: 600;
-    color: white !important;
-    text-decoration: none !important;
-    display: flex;
-    /* centrado perfecto */
-    justify-content: center;
-    /* horizontal */
-    align-items: center;
-    /* vertical */
-    text-align: center;
-    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-    background: linear-gradient(135deg, #007bff, #00bcd4);
-    white-space: normal;
-    /* deja que baje a 2 líneas */
-    word-wrap: break-word;
-    /* quiebra bonito si es largo */
-}
-
-.button-grid a.btn-modern {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-}
-
-/* Botón de pago */
-.button-grid a.btn-modern.pay {
-    background: linear-gradient(135deg, #ff416c, #ff4b2b);
-}
-
-/* Hover */
-.button-grid a.btn-modern:hover,
-.button-grid a.btn-modern.pay:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(0, 123, 255, 0.3);
-}
-
-/* Mobile */
-@media (max-width: 768px) {
-    .button-grid a.btn-modern {
-        flex: 1 1 100%;
-        max-width: 90%;
-        min-width: 0;
-        padding: 0.9rem 1rem;
-        margin: 0 auto;
-        font-size: 1rem;
-    }
-}
-
-/* Contenidos del Curso */
-#contenidos h3 {
-    font-weight: 600;
-    color: #111;
-    margin-bottom: 5rem;
-    position: relative;
-    margin-top: 4rem;
-    font-size: 2rem;
-}
-
-#contenidos h3::after {
-    content: "";
-    display: block;
-    width: 160px;
-    height: 3px;
-    background-color: #2261ff;
-    /* acento azul */
-    margin: 10px auto 0;
-    border-radius: 2px;
-}
-
-#contenidos .card {
-    border: none;
-    border-radius: 1rem;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s, box-shadow 0.3s;
-    background-color: #fff;
-}
-
-#contenidos .card:hover {
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-}
-
-#contenidos .card-body {
-    padding: 2rem 1.5rem;
-    display: flex;
-    flex-direction: column;
-}
-
-#contenidos .card-title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: 2rem;
-    color: #111;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-#contenidos .card-title i {
-    color: #2261ff;
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-}
-
-#contenidos .card-text {
-    font-size: 0.95rem;
-    color: #555;
-    line-height: 1.6;
-    padding: 0 1rem;
-    margin-bottom: 16px;
-}
-
-/* Cards gris */
-.card-gris {
-    background: #e0e0e0;
-}
-
-/* Ajuste de la fila de cards para más espacio respecto a los bordes */
-#contenidos .row {
-    padding-left: 1rem;
-    /* espacio interno izquierdo */
-    padding-right: 1rem;
-    /* espacio interno derecho */
-}
-
-/* Aumentar el gutter horizontal de Bootstrap */
-#contenidos .row.g-4 {
-    margin-left: -0.5rem;
-    /* compensa el padding de columnas */
-    margin-right: -0.5rem;
-}
-
-#contenidos .col-md-4 {
-    padding-left: 0.5rem;
-    /* separación interna de cada columna */
-    padding-right: 0.5rem;
-}
-
-/* Separación vertical entre filas */
-#contenidos .col-md-4 {
-    margin-bottom: 2rem;
-}
-
-.d-flex .btn {
-    display: inline-block;
-    transition: transform .22s ease;
-}
-
-.d-flex .btn:hover {
-    transform: scale(1.05);
-}
-
-.linea-divide {
-    width: 100%;
-    height: 2px;
-    background-color: #2261ff;
-    margin-bottom: 5px;
-}
-
-/* BOTONES BASE */
-.d-flex .btn {
-    transition: transform .25s ease, box-shadow .25s ease, background .25s ease, color .25s ease;
-}
-
-.d-flex button.btn:hover {
-    transform: scale(1.04);
-    box-shadow: 0 6px 18px rgba(255, 255, 255, .08);
-    background-color: #000000;
-}
-
-.acceso-text {
-    font-size: .68rem;
-    opacity: .75;
-    letter-spacing: .2px;
-}
-
-/* Responsive tweaks */
-@media (max-width: 768px) {
-    #contenidos .card-body {
-        padding: 1.5rem 1rem;
-    }
-
-}
-
-/* Pantallas intermedias tipo tablet: 1 card por fila, más ancha */
-@media (max-width: 980px) and (min-width: 769px) {
-    #contenidos .col-md-4 {
-        flex: 0 0 90%;
-        /* Cada card ocupa casi todo el ancho */
-        max-width: 90%;
-        margin-left: auto;
-        margin-right: auto;
-        /* Centrar la card */
-        margin-bottom: 2rem;
-        /* Separación vertical */
-    }
-
-    #contenidos .card-body {
-        padding-left: 2rem;
-        padding-right: 2rem;
-        /* Más espacio interno */
-    }
-}
-
-/* Pantallas intermedias tipo iPad: 3 cards en fila, más anchas */
-@media (max-width: 1200px) and (min-width: 980px) {
-    #contenidos .row.g-4 {
-        margin-left: -0.5rem;
-        /* compensa padding de columnas */
-        margin-right: -0.5rem;
-    }
-
-    #contenidos .col-md-4 {
-        flex: 0 0 33.33%;
-        /* cada card 1/3 del contenedor */
-        max-width: 33.33%;
-        padding-left: 0.5rem;
-        /* gutter horizontal */
-        padding-right: 0.5rem;
-    }
-
-    #contenidos .card-body {
-        padding-left: 2rem;
-        /* más espacio interno */
-        padding-right: 2rem;
-    }
-}
-
-@media (min-width: 1024px) and (max-width: 1366px) {
-    #contenidos .container {
-        max-width: 1100px;
-        /* ocupa más espacio que el container normal */
-        padding-left: 1rem;
-        padding-right: 1rem;
-    }
-
-    #contenidos .col-md-4 {
-        flex: 0 0 33.33%;
-        max-width: 33.33%;
-        padding-left: 0.5rem;
-        padding-right: 0.5rem;
-    }
-}
-
-.precios-toggle i {
-    display: inline-block;
-    transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
-    transform-origin: center;
-    will-change: transform;
-}
-
-.precios-toggle i.rotated {
-    transform: rotate(180deg);
-}
-
-.row-cursos {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 25px;
-}
-
-
-/* Formulario memanejoChat */
-.form-agenda {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-}
-
-.form-agenda label {
-    font-weight: 200;
-    color: #ffffff;
-    font-size: 14px;
-    margin-bottom: -25px;
-}
-
-.form-agenda input,
-.form-agenda select {
-    width: 100%;
-    padding: 8px 10px;
-    border: none;
-    border-bottom: 1px solid #ffffff;
-    background: transparent;
-    color: #ffffff;
-    font-size: 16px;
-    box-sizing: border-box;
-}
-
-.form-agenda input:focus,
-.form-agenda select:focus {
-    outline: none;
-    border-bottom: 2px solid #2261ff;
-}
-
-/* Select Bloque y Horario */
-/* Select Bloque y Horario */
-.form-agenda select {
-    width: 100%;
-    padding: 8px 12px;
-
-    border: 1px solid #ffffff;
-    border-radius: 8px;
-
-    background-color: rgba(35, 35, 35, 0.9);
-
-    color: #ffffff;
-
-    font-size: 16px;
-    box-sizing: border-box;
-    cursor: pointer;
-
-    transition: all .25s ease;
-}
-
-/* Focus */
-.form-agenda select:focus {
-    outline: none;
-    background: rgba(255, 255, 255, 0.1);
-}
-
-/* Botón enviar */
-.form-agenda button {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-    background-color: transparent;
-    color: #ffffff;
-    border: 1px solid #0047fc;
-    border-radius: 36px;
-    cursor: pointer;
-    text-align: center;
-    transition: all 0.3s ease;
-    font-size: 14px;
-}
-
-.form-agenda button:hover {
-    border: 1px solid #ffffff;
-    transform: scale(1.05);
-}
-
-/* Campo fecha estilo moderno */
-input[type="date"] {
-    -webkit-appearance: none;
-    appearance: none;
-    border: 1px solid #ffffff;
-    /* borde completo */
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.05);
-    /* leve translúcido */
-    color: #ffffff;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-/* Focus */
-input[type="date"]:focus {
-    outline: none;
-    background: rgba(255, 255, 255, 0.1);
-}
-
-/* Calendario indicador invertido en blanco */
-input[type="date"]::-webkit-calendar-picker-indicator {
-    filter: invert(1);
-    cursor: pointer;
-}
-
-/* Ajuste específico para móviles: ancho 350px */
-@media (max-width: 420px) {
-    .modal-wrapper {
-        width: 350px;
-    }
-}
-
-
-/* ------------------ Lubricentros Asociados ------------------ */
-/* =====================================================================
-   TÍTULO / MENSAJE — grande, a la izquierda, con subtítulo gris y botones
-===================================================================== */
-.titulo-portada {
-    max-width: 720px;
-    margin: 0 5px 10px;
-    padding: 0 15px;
-    text-align: left;
-}
-
-.titulo-portada h1 {
-    font-family: 'Avenir', sans-serif;
-    font-weight: 800;
-    font-size: 41px;
-    line-height: 1.05;
-    margin: 0;
-    color: #fff;
-}
-
-.titulo-portada .lp-sub {
-    color: #999;
-    font-size: 14.5px;
-    line-height: 1.6;
-    margin-top: 16px;
-}
-
-.lp-actions {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 24px;
-    flex-wrap: wrap;
-}
-
-.lp-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    width: 240px;
-    box-sizing: border-box;
-    padding: 12px 24px;
-    border-radius: 40px;
-    font-weight: 700;
-    font-size: 14px;
-    border: 1px solid #888;
-    transition: .25s ease;
-    white-space: nowrap;
-    text-decoration: none;
-    color: #d9d9d9;
-    margin-bottom: 20px;
-}
-
-.lp-btn-whats {
-    background: #fff;
-    color: #06210F;
-}
-
-.lp-btn-whats:hover {
-    background: #000;
-    color: #fff;
-    border-color: #06ba48;
-
-}
-
-.lp-btn-whats i {
-    transition: .25s ease;
-}
-
-.lp-btn-whats:hover i {
-    transform: scale(1.15);
-}
-
-.lp-btn-ghost:hover {
-    border-color: #fff;
-}
-
-.lp-btn-ghost i {
-    transition: .3s ease;
-}
-
-.lp-btn-ghost:hover i {
-    transform: translateY(6px);
-
-}
-
 /* =========================================================
    ROTADOR — debajo del slider
    ========================================================= */
@@ -2690,11 +2554,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 @media (max-width:568px) {
     .titulo-rotativo-box {
         width: auto;
-        margin: 5px 25px 0;
         display: flex;
         align-items: flex-start;
         justify-content: flex-start;
         text-align: left;
+        margin: 0 15px 0;
     }
 
     #titulo-rotativo {
@@ -2706,318 +2570,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 
-/* =====================================================================
-   SLIDER — estructura y clases originales (mm-*), con mejoras agregadas
-===================================================================== */
-.mm-slider-wrapper {
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    margin: 0 auto;
-}
 
-.mm-slider-track {
-    display: flex;
-    gap: 20px;
-    padding: 0 20px;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-}
-
-.mm-fondo-blur {
-    display: flex;
-    justify-content: center;
-    flex: 0 0 70%;
-    max-width: 320px;
-    width: 100%;
-    scroll-snap-align: center;
-    border-radius: 1rem;
-    border: 1px solid rgb(255, 255, 255);
-    overflow: hidden;
-}
-.mm-fondo-blur.mm-card-nivelacion {
-    border: 1px solid #0026ff;
-}
-
-.mm-tarjeta {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    border-radius: 1rem;
-    overflow: hidden;
-    transition: transform 0.3s ease;
-}
-
-
-.mm-tarjeta .card-img-wrap {
-    position: relative;
-}
-
-.mm-tarjeta .card-img-top {
-    width: 100%;
-    height: 280px;
-    object-fit: cover;
-    display: block;
-    border-top-left-radius: 1rem;
-    border-top-right-radius: 1rem;
-    transition: transform 0.4s ease;
-}
-
-.mm-tarjeta:hover .card-img-top {
-    transform: scale(1.05);
-}
-/* =========================================================
-   CARD QUIZ DE NIVELACIÓN
-   ========================================================= */
-
-
-.mm-card-nivelacion .mm-tag {
-  background: #0026ff;
-  color: #fff;
-}
-
-.mm-card-nivelacion .mm-cta {
-  background: #00dbe7;
-  color: #000968;
-  border-color: #00dbe7;
-}
-
-.mm-card-nivelacion .mm-cta:hover {
-  background: #0026ff;
-  color: #fff;
-  border-color: #000968;
-}
-/* ---- NUEVO: tag sobre la imagen ---- */
-.mm-tag {
-    position: absolute;
-    top: 14px;
-    left: 14px;
-    z-index: 2;
-    background: rgba(0, 0, 0, .55);
-    backdrop-filter: blur(6px);
-    border: 1px solid rgba(255, 255, 255, .18);
-    color: #fff;
-    font-size: 11px;
-    font-weight: 700;
-    padding: 6px 20px;
-    border-radius: 40px;
-    letter-spacing: .02em;
-}
-
-.mm-tag.hot {
-    background: #dc143c;
-    border-color: #dc143c;
-}
-
-.mm-cuerpo {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    text-align: center;
-    padding: 1rem;
-    font-size: .9rem;
-    line-height: 1.3;
-    color: #fff;
-    background: rgba(0, 0, 0, .35);
-    backdrop-filter: blur(10px);
-    border-radius: 0 0 1rem 1rem;
-}
-
-.mm-cuerpo h5 {
-    color: #fff;
-    font-weight: 700;
-    margin: 0 0 4px;
-    text-decoration: none;
-}
-
-.mm-cuerpo h5 small {
-    font-size: .7em;
-    color: #ccc;
-}
-
-.mm-cuerpo p {
-    color: #ddd;
-    margin: .8rem 0 0;
-}
-
-/* ---- NUEVO: botón con flecha animada, debajo del texto ---- */
-.mm-cta {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 16px;
-    padding: 11px 22px;
-    border: 1px solid #fff;
-    border-radius: 40px;
-    font-weight: 700;
-    font-size: 13.5px;
-    color: #000;
-    background: #f4f4f4;
-    transition: .25s ease;
-    align-self: center;
-    text-decoration: none;
-}
-
-.mm-cta i {
-    transition: transform .4s ease;
-}
-
-.mm-cta:hover i {
-    transform: translateX(6px);
-}
-
-@media (min-width:540px) and (max-width:1023px) {
-    .titulo-portada {
-        max-width: 650px;
-    }
-
-    .titulo-portada h1 {
-        font-size: 70px;
-    }
-
-    .titulo-portada .lp-sub {
-        font-size: 20px;
-    }
-
-    .mm-fondo-blur {
-        flex: 0 0 60%;
-        max-width: 450px;
-    }
-
-    .mm-tarjeta .card-img-top {
-        height: 400px;
-    }
-
-    .lp-actions {
-        gap: 20px;
-        flex-wrap: nowrap;
-        /* fuerza que queden uno al lado del otro */
-    }
-
-    .lp-btn {
-        padding: 12px 18px;
-        font-size: 13px;
-    }
-}
-
-@media (min-width:1024px) and (max-width:1439px) {
-    .titulo-portada {
-        max-width: 820px;
-    }
-
-    .titulo-portada h1 {
-        font-size: 90px;
-    }
-
-    .titulo-portada .lp-sub {
-        font-size: 20px;
-    }
-
-    .lp-actions {
-        gap: 40px;
-    }
-
-    .mm-fondo-blur {
-        flex: 0 0 60%;
-        max-width: 550px;
-    }
-
-    .mm-tarjeta .card-img-top {
-        height: 550px;
-    }
-}
-
-@media (min-width:1440px) {
-    .titulo-portada {
-        max-width: 820px;
-    }
-
-    .titulo-portada h1 {
-        font-size: 94px;
-    }
-
-    .titulo-portada .lp-sub {
-        font-size: 20px;
-    }
-
-    .lp-actions {
-        gap: 40px;
-    }
-
-    .mm-fondo-blur {
-        flex: 0 0 60%;
-        max-width: 620px;
-    }
-
-    .mm-tarjeta .card-img-top {
-        height: 550px;
-    }
-}
-
-.hero-tags {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-
-    margin: 6px 0 30px;
-    padding: 0;
-
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-
-    scrollbar-width: none;
-}
-
-.hero-tags::-webkit-scrollbar {
-    display: none;
-}
-
-.hero-tag {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    flex: 0 0 240px;
-    min-height: 42px;
-    box-sizing: border-box;
-    padding: 6px 50px;
-
-    font-size: 16px;
-    text-align: center;
-    white-space: nowrap;
-    scroll-snap-align: center;
-}
-
-.hero-tag i {
-    position: absolute;
-    left: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #f9f9fb;
-    margin: 0;
-}
-
-/* En móvil: muestra un tag completo y una parte del siguiente. */
-@media (max-width: 767px) {
-    .hero-tags {
-        justify-content: flex-start;
-        padding: 0 20px;
-    }
-
-    .hero-tag {
-        flex-basis: min(78vw, 240px);
-    }
-}
 
 /* ============ TÍTULO Y ESPACIADO DE SERVICIOS ============ */
 #servicios .wrap {
@@ -3066,11 +2619,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     line-height: 1.6;
 }
 
-/* Las cards se alinean con el título */
-#servicios .svc-slider {
-    padding-right: 4px;
-    padding-left: 4px;
-}
 
 /* Pantallas intermedias */
 @media (max-width: 900px) {
@@ -3086,10 +2634,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 /* Móvil */
 @media (max-width: 600px) {
-    #servicios .wrap {
-        padding-right: 14px;
-        padding-left: 14px;
-    }
 
     #servicios .section-head h2 {
         font-size: 34px;
@@ -3109,14 +2653,18 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 /* ============ SERVICIOS: slider con hover-card ============ */
+/* ============ SERVICIOS: slider con hover-card ============ */
 .svc-slider {
     display: flex;
     align-items: flex-start;
     gap: 14px;
     overflow-x: auto;
-    padding: 8px 4px 22px;
+    /* separación propia del slider */
+    margin-left: calc(-1 * clamp(10px, 2vw, 30px));
+    margin-right: calc(-1 * clamp(20px, 5vw, 44px));
     scroll-snap-type: x proximity;
     min-height: 250px;
+    box-sizing: border-box;
 }
 
 .svc-chip {
