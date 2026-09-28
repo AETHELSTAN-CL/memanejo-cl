@@ -477,72 +477,98 @@ a { color: var(--accent); text-decoration: none; }
 .modal-buttons {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  align-items: center;
+  gap: 14px;
 }
 
-.modal-buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.modal-btn {
-  display: flex;
+/* Botón principal: píldora, con flecha animada a la derecha */
+#btn-next-quiz,
+.modal-btn-principal {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
+  width: 100%;
   padding: 13px 16px;
-  border-radius: var(--radius-btn);
+  border-radius: var(--radius-btn, 999px);
+  background: #020202;
+  color: #fff;
   font-size: 13.5px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font);
+  transition: transform .25s ease;
+}
+
+.btn-next-arrow {
+  transition: transform .25s ease;
+}
+
+#btn-next-quiz:hover .btn-next-arrow,
+.modal-btn-principal:hover .btn-next-arrow {
+  transform: translateX(4px);
+}
+
+/* Fila de 3 tarjetas, centradas */
+.modal-actions-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 12px;
+}
+
+/* Tarjetas tipo app: ícono arriba, texto abajo */
+.modal-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 84px;
+  height: 84px;
+  padding: 12px 8px;
+  border-radius: 18px;
+  font-size: 11.5px;
   font-weight: 600;
   cursor: pointer;
   border: none;
   font-family: var(--font);
-}
-
-.modal-btn-principal {
-  background: #020202;
-  color: #fff;
-  transition: transform .25s ease;
-}
-
-.modal-btn-secundario {
-  background: #020202;
-  color: #fff;
-  transition: transform .25s ease;
-}
-
-.modal-btn-instagram {
-  background: #020202;
-  color: #fff;
-  transition: transform .25s ease;
-}
-
-.modal-btn-reintentar {
-  background: var(--surface-alt);
+  background: var(--surface-alt, #f2f2f2);
   color: var(--text);
-  transition: transform .25s ease;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  transition: transform .2s ease, box-shadow .2s ease;
+  text-align: center;
 }
 
-.modal-btn-reintentar:hover i{
-  transform: scale(1.2);
-}
-.modal-btn-instagram:hover i{
-  transform: scale(1.2);
-}
-.modal-btn-principal:hover i{
-  transform: translateY(2px);
-}
-.modal-btn-secundario:hover i{
-  transform: scale(1.2);
+.modal-btn i {
+  font-size: 20px;
 }
 
-#btn-compartir i {
-  color: #1DA1F2;
+.modal-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.12);
 }
 
-#btn-instagram i {
-  color: #E1306C;
+.modal-btn span {
+  line-height: 1.1;
+}
+
+/* Colores por acción */
+.modal-btn-compartir i {
+  color: #2261ff;
+}
+
+.modal-btn-descargar i {
+  color: #16a34a;
+}
+
+.modal-btn-reintentar i {
+  color: #6b7280;
+}
+
+.modal-btn-reintentar:hover i {
+  transform: scale(1.15);
 }
 /* Bloque de incentivo */
 #bloque-incentivo {
