@@ -1,4 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
+
+  /* =========================
+      CONFIG
+  ========================= */
+  const NEXT_QUIZ_URL = "/aulavirtual"; // ← confirma esta ruta
+
   let preguntasActuales = [];
   let indice = 0;
   let score = 0;
@@ -31,17 +37,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const modal = document.getElementById("modal-memanejo");
   const textoPuntaje = document.getElementById("texto-puntaje");
+  const btnNextQuiz = document.getElementById("btn-next-quiz");
   const btnDescargar = document.getElementById("btn-descargar-img");
   const btnCompartir = document.getElementById("btn-compartir");
-  const btnInstagram = document.getElementById("btn-instagram");
   const btnReintentar = document.getElementById("btn-reintentar");
   const btnVolver = document.getElementById("btn-volver");
+
   // ===== Toggle de estilos (Oficial / memanejo) =====
   const temaToggle = document.getElementById("temaToggle");
   const temaLabelOff = document.getElementById("temaLabelOff");
   const temaLabelOn = document.getElementById("temaLabelOn");
-
-
 
   const scoreRing = document.getElementById("scoreRing");
   const scorePuntos = document.getElementById("scorePuntos");
@@ -89,7 +94,6 @@ document.addEventListener("DOMContentLoaded", () => {
     return copia;
   }
 
-
   // ===== Carga de usuarios desde JSON =====
   let usuariosDB = [];
 
@@ -116,6 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
       errorElemento.style.display = "none";
     }, 4000);
   }
+
   function aplicarModo(modo) {
     document.body.classList.toggle("modo-activado", modo === "activado");
     temaToggle?.setAttribute("aria-pressed", modo === "activado" ? "true" : "false");
@@ -148,6 +153,7 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem("memanejo_identidad", JSON.stringify(identidad));
     return identidad;
   }
+
   // ===== Inicio desde el formulario (con login) =====
   formulario.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -168,10 +174,10 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    const identidadReal = obtenerIdentidadReal(); // ← nuevo
+    const identidadReal = obtenerIdentidadReal();
 
     datosUsuario = {
-      nombre: identidadReal.nombre,       // ← usa el nombre real, no usuariosDB.nombre
+      nombre: identidadReal.nombre,
       correo: usuarioValido.email,
       telefono: usuarioValido.telefono || ""
     };
@@ -292,18 +298,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     if (esCorrecta) {
-      // =========================
-      // RESPUESTA CORRECTA
-      // =========================
       score += preguntaActual.puntos;
       correctasCount++;
 
       seleccion.classList.add("correct");
 
     } else {
-      // =========================
-      // RESPUESTA INCORRECTA
-      // =========================
       erradasCount++;
 
       seleccion.classList.add("selected-wrong");
@@ -318,7 +318,6 @@ document.addEventListener("DOMContentLoaded", () => {
         `Respuesta correcta: ${respuestaCorrecta?.texto || "No disponible"}`
       );
 
-      // Buscar y marcar la respuesta correcta
       const botonCorrecto = botones.find(
         (boton) => boton.dataset.correcta === "true"
       );
@@ -328,10 +327,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    // ========================================
-    // OCULTAR LAS OTRAS RESPUESTAS INCORRECTAS
-    // ========================================
-
+    // Ocultar las otras respuestas incorrectas
     botones.forEach((boton) => {
       const esSeleccionada = boton === seleccion;
       const esRespuestaCorrecta = boton.dataset.correcta === "true";
@@ -341,16 +337,10 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    // Mostrar botón siguiente
     btnSiguiente.style.display = "inline-block";
 
-    // ========================================
-    // DESPUÉS DE 6 SEGUNDOS
-    // ========================================
-
+    // Después de 6 segundos, tapar el texto de la seleccionada y la correcta
     setTimeout(() => {
-      // Oscurecer/tapar el texto de la respuesta seleccionada
-      // y de la respuesta correcta.
       seleccion.classList.add("feedback-final");
 
       const botonCorrecto = botones.find(
@@ -360,10 +350,8 @@ document.addEventListener("DOMContentLoaded", () => {
       if (botonCorrecto) {
         botonCorrecto.classList.add("feedback-final");
       }
-
     }, 6000);
   }
-
 
   btnSiguiente.addEventListener("click", () => {
     indice++;
@@ -374,7 +362,6 @@ document.addEventListener("DOMContentLoaded", () => {
       mostrarResultado();
     }
   });
-
 
   function calcularPuntajeTotal() {
     return preguntasActuales.reduce(
@@ -417,7 +404,10 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
     badgeEstado.classList.toggle("reprobado", !aprobado);
-    badgeTexto.innerText = aprobado ? "Aprobado" : "Reprobado";
+
+    badgeTexto.innerText = aprobado
+      ? "Aprobado"
+      : "Reprobado";
 
     badgeEstado.querySelector("i").className = aprobado
       ? "fas fa-check"
@@ -427,66 +417,134 @@ document.addEventListener("DOMContentLoaded", () => {
     statErradas.innerText = erradasCount;
     statTiempo.innerText = tiempoUsadoTexto;
 
+
+    // Texto pequeño debajo de Aprobado / Reprobado.
     textoPuntaje.innerText = aprobado
       ? "¡Aprobaste el Quiz!"
       : "No alcanzaste el puntaje mínimo para aprobar.";
 
-    // Elimina un incentivo anterior, antes de crear uno nuevo.
+
+    // ==========================================
+    // ELIMINAR CTA ANTERIOR
+    // ==========================================
     const incentivoAnterior = document.getElementById("bloque-incentivo");
 
     if (incentivoAnterior) {
       incentivoAnterior.remove();
     }
 
-    // Incentivo solo para quien no aprueba.
-    if (!aprobado) {
-      const incentivo = document.createElement("div");
 
-      incentivo.id = "bloque-incentivo";
-      incentivo.style.textAlign = "center";
-      incentivo.style.marginTop = "20px";
+    // ==========================================
+    // CTA SEGÚN RESULTADO
+    // ==========================================
+    const incentivo = document.createElement("div");
 
-      const mensajeWhatsapp = encodeURIComponent(
-        `Hola, hice el quiz en memanejo.cl y obtuve ${score}/${puntajeTotal} puntos. Quiero revisar mis errores.`
-      );
+    incentivo.id = "bloque-incentivo";
 
-      const numeroWhatsapp = "56946914558";
+
+    // ==========================================
+    // APROBADO
+    // ==========================================
+    if (aprobado) {
 
       incentivo.innerHTML = `
-  <p class="texto-incentivo">
-    ¿Quieres saber en qué preguntas fallaste y por qué?
-  </p>
+
+    <p class="texto-incentivo">
+
+      <strong>Gana $5.000</strong>
+
+    </p>
+
+    <p class="texto-incentivo-secundario">
+
+      Invita a un amigo a prepararse en memanejo.cl
+
+    </p>
+
+    <a
+
+      href="#"
+
+      id="btn-compartir-resultado"
+
+      class="btn-incentivo"
+
+    >
+
+      Compartir mi resultado
+
+    </a>
+
+    <p class="texto-incentivo-precio">
+
+      Por cada nuevo alumno que active su acceso con tu recomendación.
+
+    </p>
+
+  `;
+
+    } else {
+
+      // ==========================================
+      // REPROBADO
+      // ==========================================
+
+      incentivo.innerHTML = `
+    <p class="texto-incentivo">
+      ¿Quieres mejorar tu resultado?
+    </p>
+
+    <p class="texto-incentivo-secundario">
+      Refuerza el teórico con nuestros cursos.
+    </p>
 
 
-        <a
-          href="https://wa.me/${numeroWhatsapp}?text=${mensajeWhatsapp}"
-          target="_blank"
-          rel="noopener"
-          class="btn-incentivo">
-          Revisa tus errores por solo
-          <span class="btn-incentivo-precio">$1.990</span>
-        </a>
-
-        <small class="acceso-text">
-  Te contactaremos por
-  <i class="fab fa-whatsapp" style="color:#25D366;"></i> WhatsApp
-</small>
-
-      `;
-
-      const captura = document.getElementById('captura');
-      const footer = captura.querySelector('.footer-bottom');
-
-      if (footer) {
-        captura.insertBefore(incentivo, footer);
-      } else {
-        captura.appendChild(incentivo);
-      }
+    <a
+      href="/aulavirtual/"
+      class="btn-incentivo"
+    >
+      Ver cursos
+    </a>
+    <p class="texto-incentivo-precio">
+      Desde $9.990
+    </p>
+  `;
     }
 
+
+    // ==========================================
+    // INSERTAR CTA ANTES DEL FOOTER
+    // ==========================================
+    const captura = document.getElementById("captura");
+    const footer = captura.querySelector(".footer-bottom");
+
+    if (footer) {
+      captura.insertBefore(incentivo, footer);
+    } else {
+      captura.appendChild(incentivo);
+    }
+
+
+    // ==========================================
+    // BOTÓN COMPARTIR DEL CTA APROBADO
+    // ==========================================
+    if (aprobado) {
+      const btnCompartirResultado = document.getElementById(
+        "btn-compartir-resultado"
+      );
+
+      btnCompartirResultado?.addEventListener("click", (e) => {
+        e.preventDefault();
+        btnCompartir?.click();
+      });
+    }
+
+
+    // ==========================================
+    // MOSTRAR MODAL
+    // ==========================================
     modal.classList.remove("oculto");
     tiempoElemento.classList.remove("visible");
-
 
     // Correo para el administrador mediante EmailJS.
     emailjs.send("service_ujyq6hg", "template_o43bfnj", {
@@ -510,134 +568,127 @@ document.addEventListener("DOMContentLoaded", () => {
       .catch((error) => {
         console.error("Error enviando resultado:", error);
       });
-
-    const textoParaCompartir = encodeURIComponent(
-      `Obtuve ${score} puntos (${porcentaje.toFixed(0)}%) ` +
-      "en el quiz Clase B en www.memanejo.cl"
-    );
-
-    btnCompartir.href =
-      `https://twitter.com/intent/tweet?text=${textoParaCompartir}`;
   }
 
   window.mostrarResultado = mostrarResultado;
 
-  // ===== Botones del resultado =====
-  btnCompartir.addEventListener("click", (e) => {
-    e.preventDefault();
-    window.open(btnCompartir.href, "_blank", "noopener,noreferrer");
-  });
-
-  btnInstagram.addEventListener('click', async (e) => {
-    e.preventDefault();
-
+  /* =========================
+     CAPTURA DE IMAGEN (usada por Descargar y Compartir)
+  ========================= */
+  async function capturarResultado(backgroundColor) {
     const captura = document.getElementById('captura');
     const precio = captura.querySelector('.btn-incentivo-precio');
-    const texto = `Obtuve ${score}/${calcularPuntajeTotal()} puntos en el quiz Clase B en memanejo.cl`;
 
-    // Guardar estilos originales para restaurar después
     const estiloOriginal = {
       maxHeight: captura.style.maxHeight,
       overflow: captura.style.overflow,
       height: captura.style.height
     };
 
-    // Expandir el contenedor para que quepa TODO (incluye footer)
     captura.style.maxHeight = 'none';
     captura.style.overflow = 'visible';
     captura.style.height = 'auto';
 
-    // Ocultar solo el precio antes de capturar
     if (precio) precio.style.visibility = 'hidden';
 
     try {
-      const canvas = await html2canvas(captura, {
-        scale: 2,
-        backgroundColor: null
-      });
-
-      const blob = await new Promise((resolve) => {
-        canvas.toBlob(resolve, "image/png");
-      });
-
-      const imagen = new File(
-        [blob],
-        "resultado-quiz-memanejo.png",
-        { type: "image/png" }
-      );
-
-      if (navigator.canShare && navigator.canShare({ files: [imagen] })) {
-        await navigator.share({
-          title: "Mi resultado en memanejo.cl",
-          text: texto,
-          files: [imagen]
-        });
-      } else {
-        const link = document.createElement("a");
-        link.href = URL.createObjectURL(blob);
-        link.download = "resultado-quiz-manejo.png";
-        link.click();
-        URL.revokeObjectURL(link.href);
-        alert("La imagen fue descargada. Ahora puedes compartirla.");
-      }
-    } catch (error) {
-      if (error.name !== "AbortError") {
-        console.error("No se pudo compartir la imagen:", error);
-      }
+      return await html2canvas(captura, { backgroundColor, scale: 2 });
     } finally {
-      // Restaurar todo a como estaba, pase lo que pase
       captura.style.maxHeight = estiloOriginal.maxHeight;
       captura.style.overflow = estiloOriginal.overflow;
       captura.style.height = estiloOriginal.height;
       if (precio) precio.style.visibility = 'visible';
     }
-  });
+  }
 
-  btnReintentar.addEventListener("click", () => {
-    clearInterval(timerInterval);
-    document.getElementById("tiempo-restante").classList.remove("visible");
+  /* =========================
+     COMPARTIR (unificado: menú nativo o Twitter/X)
+  ========================= */
+  if (btnCompartir) {
+    btnCompartir.addEventListener("click", async () => {
+      const puntajeTotal = calcularPuntajeTotal() || 1;
+      const porcentaje = (score / puntajeTotal) * 100;
+      const texto = `Obtuve ${score}/${puntajeTotal} puntos (${porcentaje.toFixed(0)}%) en el quiz Clase B en www.memanejo.cl`;
 
-    modal.classList.add("oculto");
-    quizContainer.style.display = "none";
-    pantallaBienvenida.style.display = "flex";
+      try {
+        if (navigator.share) {
+          try {
+            const canvas = await capturarResultado(null);
+            const blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/png"));
+            const imagen = new File([blob], "resultado-quiz-memanejo.png", { type: "image/png" });
 
-    formulario.reset();
-    resetearEstado();
-  });
+            if (navigator.canShare && navigator.canShare({ files: [imagen] })) {
+              await navigator.share({
+                title: "Mi resultado en memanejo.cl",
+                text: texto,
+                files: [imagen]
+              });
+              return;
+            }
+          } catch (err) {
+            if (err.name === "AbortError") return;
+          }
 
-  btnDescargar.addEventListener('click', () => {
-    const captura = document.getElementById('captura');
-    const precio = captura.querySelector('.btn-incentivo-precio');
-    const linkIncentivo = captura.querySelector('#bloque-incentivo a.btn-incentivo');
+          await navigator.share({
+            title: "Mi resultado en memanejo.cl",
+            text: texto
+          });
+          return;
+        }
 
-    // Guardar estilos originales para restaurar después
-    const estiloOriginal = {
-      maxHeight: captura.style.maxHeight,
-      overflow: captura.style.overflow,
-      height: captura.style.height
-    };
+        // Escritorio sin Web Share: Twitter / X
+        window.open(
+          `https://twitter.com/intent/tweet?text=${encodeURIComponent(texto)}`,
+          "_blank",
+          "noopener,noreferrer"
+        );
 
-    // Expandir el contenedor para que quepa TODO (incluye footer)
-    captura.style.maxHeight = 'none';
-    captura.style.overflow = 'visible';
-    captura.style.height = 'auto';
-
-    // Ocultar solo el precio antes de capturar
-    if (precio) precio.style.visibility = 'hidden';
-
-    html2canvas(captura, { backgroundColor: null, scale: 2 }).then(canvas => {
-      const link = document.createElement('a');
-      link.download = 'resultado-quiz-memanejo.png';
-      link.href = canvas.toDataURL('image/png');
-      link.click();
-
-      // Restaurar todo a como estaba
-      captura.style.maxHeight = estiloOriginal.maxHeight;
-      captura.style.overflow = estiloOriginal.overflow;
-      captura.style.height = estiloOriginal.height;
-      if (precio) precio.style.visibility = 'visible';
+      } catch (error) {
+        if (error.name !== "AbortError") {
+          console.error("No se pudo compartir:", error);
+        }
+      }
     });
-  });
+  }
+
+  /* =========================
+     DESCARGAR IMAGEN
+  ========================= */
+  if (btnDescargar) {
+    btnDescargar.addEventListener("click", async () => {
+      const canvas = await capturarResultado(null);
+      const link = document.createElement("a");
+      link.download = "resultado-quiz-memanejo.png";
+      link.href = canvas.toDataURL("image/png");
+      link.click();
+    });
+  }
+
+  /* =========================
+     SIGUIENTE QUIZ
+  ========================= */
+  if (btnNextQuiz) {
+    btnNextQuiz.addEventListener("click", () => {
+      window.location.href = NEXT_QUIZ_URL;
+    });
+  }
+
+  /* =========================
+     REINTENTAR / VOLVER
+  ========================= */
+  if (btnReintentar) {
+    btnReintentar.addEventListener("click", () => {
+      clearInterval(timerInterval);
+      document.getElementById("tiempo-restante").classList.remove("visible");
+
+      modal.classList.add("oculto");
+      quizContainer.style.display = "none";
+      pantallaBienvenida.style.display = "flex";
+
+      formulario.reset();
+      resetearEstado();
+    });
+  }
 
   btnVolver.addEventListener("click", () => {
     clearInterval(timerInterval);
@@ -650,6 +701,8 @@ document.addEventListener("DOMContentLoaded", () => {
     formulario.reset();
     resetearEstado();
   });
+
+  // Solo para pruebas: escribe testResultado() en la consola
   window.testResultado = function () {
     score = 33;
     correctasCount = 30;

@@ -377,7 +377,52 @@ a { color: var(--accent); text-decoration: none; }
   color: var(--accent);
   transform: translateX(-6px);
 }
+/* =========================
+   ESCRITORIO: textos del quiz más grandes
+========================= */
+@media (min-width: 768px) {
 
+  /* Contenedor del quiz más ancho (solo las preguntas) */
+  #quiz-container {
+    max-width: 780px;
+    padding: 24px;
+  }
+
+  #question {
+    font-size: 30px;
+    line-height: 1.4;
+    margin-bottom: 28px;
+  }
+
+  .btn-container {
+    gap: 14px;
+  }
+
+  .btn-container .btn {
+    font-size: 19px;
+    line-height: 1.35;
+    padding: 18px 28px;
+  }
+
+  #progress {
+    font-size: 16px;
+    margin-top: 24px;
+  }
+
+  .next-btn {
+    font-size: 17px;
+    padding: 16px 34px;
+  }
+
+  .btn-volver {
+    font-size: 16px;
+  }
+
+  .barra-tiempo {
+    font-size: 15px;
+    padding: 10px 22px;
+  }
+}
 /* === MODAL RESULTADO === */
 .modal-memanejo {
   position: fixed;
@@ -481,9 +526,8 @@ a { color: var(--accent); text-decoration: none; }
   gap: 14px;
 }
 
-/* Botón principal: píldora, con flecha animada a la derecha */
-#btn-next-quiz,
-.modal-btn-principal {
+/* Botón principal: píldora con flecha animada */
+#btn-next-quiz {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -498,19 +542,18 @@ a { color: var(--accent); text-decoration: none; }
   border: none;
   cursor: pointer;
   font-family: var(--font);
-  transition: transform .25s ease;
 }
 
 .btn-next-arrow {
+  display: inline-block;
   transition: transform .25s ease;
 }
 
-#btn-next-quiz:hover .btn-next-arrow,
-.modal-btn-principal:hover .btn-next-arrow {
+#btn-next-quiz:hover .btn-next-arrow {
   transform: translateX(4px);
 }
 
-/* Fila de 3 tarjetas, centradas */
+/* Fila de 3 tarjetas centradas */
 .modal-actions-row {
   display: flex;
   flex-direction: row;
@@ -543,6 +586,11 @@ a { color: var(--accent); text-decoration: none; }
 
 .modal-btn i {
   font-size: 20px;
+  transition: transform .2s ease;
+}
+
+.modal-btn span {
+  line-height: 1.1;
 }
 
 .modal-btn:hover {
@@ -550,26 +598,14 @@ a { color: var(--accent); text-decoration: none; }
   box-shadow: 0 4px 10px rgba(0,0,0,0.12);
 }
 
-.modal-btn span {
-  line-height: 1.1;
+.modal-btn:hover i {
+  transform: scale(1.15);
 }
 
 /* Colores por acción */
-.modal-btn-compartir i {
-  color: #2261ff;
-}
-
-.modal-btn-descargar i {
-  color: #16a34a;
-}
-
-.modal-btn-reintentar i {
-  color: #6b7280;
-}
-
-.modal-btn-reintentar:hover i {
-  transform: scale(1.15);
-}
+.modal-btn-compartir i { color: #2261ff; }
+.modal-btn-descargar i { color: #16a34a; }
+.modal-btn-reintentar i { color: #6b7280; }
 /* Bloque de incentivo */
 #bloque-incentivo {
   margin-top: 6px;
@@ -635,14 +671,7 @@ a { color: var(--accent); text-decoration: none; }
   padding-left: 4px;
   min-height: 14px;
 }
-@media (hover: none) and (pointer: coarse) {
-  .modal-btn-instagram { display: flex; }
-}
 
-.modal-btn-reintentar {
-  background: var(--surface-alt);
-  color: var(--text);
-}
 /* =========================
    FOOTER DEL MODAL
 ========================= */

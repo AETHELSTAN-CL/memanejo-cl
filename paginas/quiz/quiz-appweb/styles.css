@@ -336,7 +336,8 @@ body.modo-activado .panel-form .contenido {
 }
 
 .texto-privacidad {
-  margin-top: 16px;
+  text-align: center;
+  margin-top: 4px;
   font-size: 11.5px;
   line-height: 1.6;
   color: var(--text-dim);
@@ -376,7 +377,8 @@ body.modo-activado .panel-form .contenido {
   font-size: 13px;
   color: var(--text);
   box-shadow: var(--shadow);
-  white-space: nowrap;   /* ← agregar */
+  white-space: nowrap;
+  /* ← agregar */
   max-width: calc(100vw - 24px);
 }
 
@@ -548,6 +550,53 @@ body.modo-activado .panel-form .contenido {
   transform: translateX(-6px);
 }
 
+/* =========================
+   ESCRITORIO: textos del quiz más grandes
+========================= */
+@media (min-width: 768px) {
+
+  /* Contenedor del quiz más ancho (solo las preguntas) */
+  #quiz-container {
+    max-width: 780px;
+    padding: 24px;
+  }
+
+  #question {
+    font-size: 30px;
+    line-height: 1.4;
+    margin-bottom: 28px;
+  }
+
+  .btn-container {
+    gap: 14px;
+  }
+
+  .btn-container .btn {
+    font-size: 19px;
+    line-height: 1.35;
+    padding: 18px 28px;
+  }
+
+  #progress {
+    font-size: 16px;
+    margin-top: 24px;
+  }
+
+  .next-btn {
+    font-size: 17px;
+    padding: 16px 34px;
+  }
+
+  .btn-volver {
+    font-size: 16px;
+  }
+
+  .barra-tiempo {
+    font-size: 15px;
+    padding: 10px 22px;
+  }
+}
+
 /* ===================== MODAL DE RESULTADO ===================== */
 .modal-memanejo {
   position: fixed;
@@ -643,7 +692,7 @@ body.modo-activado .panel-form .contenido {
 }
 
 .texto-puntaje-modal {
-  margin: 0 0 6px;
+  margin: 12px 0 12px;
   font-size: 14px;
   color: var(--text-dim);
 }
@@ -680,120 +729,218 @@ body.modo-activado .panel-form .contenido {
 .modal-buttons {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  align-items: center;
+  gap: 14px;
 }
 
-.modal-btn {
-  display: flex;
+/* Botón principal: píldora con flecha animada */
+#btn-next-quiz {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
+  width: 100%;
   padding: 13px 16px;
-  border-radius: var(--radius-btn);
+  border-radius: var(--radius-btn, 999px);
+  background: #020202;
+  color: #fff;
   font-size: 13.5px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font);
+}
+
+.btn-next-arrow {
+  display: inline-block;
+  transition: transform .25s ease;
+}
+
+#btn-next-quiz:hover .btn-next-arrow {
+  transform: translateX(4px);
+}
+
+/* Fila de 3 tarjetas centradas */
+.modal-actions-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 12px;
+}
+
+/* Tarjetas tipo app: ícono arriba, texto abajo */
+.modal-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 84px;
+  height: 84px;
+  padding: 12px 8px;
+  border-radius: 18px;
+  font-size: 11.5px;
   font-weight: 600;
   cursor: pointer;
   border: none;
   font-family: var(--font);
-}
-
-.modal-btn-principal,
-.modal-btn-secundario,
-.modal-btn-instagram,
-.modal-btn-reintentar {
-  transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
-}
-
-
-.modal-btn-principal {
-  background: #020202;
-  color: #fff;
-  border: 1px solid transparent;
-}
-
-.modal-btn-principal:hover {
-  border-color: var(--accent);
-  transform: scale(1.05);
-}
-
-
-.modal-btn-secundario {
-  background: #020202;
-  color: #fff;
-  border: 1px solid transparent;
-}
-
-.modal-btn-secundario:hover {
-  border-color: var(--accent);
-  transform: scale(1.05);
-}
-
-
-.modal-btn-instagram {
-  background: #020202;
-  color: #fff;
-  border: 1px solid transparent;
-}
-
-.modal-btn-instagram:hover {
-  border-color: var(--accent);
-  transform: scale(1.05);
-}
-
-
-.modal-btn-reintentar {
-  background: var(--surface-alt);
+  background: var(--surface-alt, #f2f2f2);
   color: var(--text);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: transform .2s ease, box-shadow .2s ease;
+  text-align: center;
 }
 
-.modal-btn-reintentar:hover {
-  color: var(--accent);
-  transform: scale(1.05);
+.modal-btn i {
+  font-size: 20px;
+  transition: transform .2s ease;
 }
 
-#btn-compartir i {
-  color: #1DA1F2;
+.modal-btn span {
+  line-height: 1.1;
 }
 
-#btn-instagram i {
-  color: #E1306C;
+.modal-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
 }
 
+.modal-btn:hover i {
+  transform: scale(1.15);
+}
 
-/* Bloque de incentivo */
+/* Colores por acción */
+.modal-btn-compartir i {
+  color: #2261ff;
+}
+
+.modal-btn-descargar i {
+  color: #16a34a;
+}
+
+.modal-btn-reintentar i {
+  color: #6b7280;
+}
+
+/* ==========================================
+   CTA CURSOS — USUARIO REPROBADO
+========================================== */
+
 #bloque-incentivo {
-  margin-top: 6px;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 22px auto 0;
+  padding: 18px 16px 20px;
+  border: 1px solid color-mix(in srgb, currentColor 18%, transparent);
+  border-radius: 18px;
+  text-align: center;
 }
 
-.btn-incentivo {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: var(--accent);
-  color: #fff;
-  padding: 12px 18px;
-  border-radius: var(--radius-btn);
-  font-size: 13.5px;
+
+/* Título */
+#bloque-incentivo .texto-incentivo {
+  margin: 0;
+  font-size: 15px;
   font-weight: 700;
+  line-height: 1.3;
 }
 
-.btn-incentivo-precio {
+
+/* Descripción */
+#bloque-incentivo .texto-incentivo-secundario {
+  margin: 5px 0 0;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+
+/* Precio */
+#bloque-incentivo .texto-incentivo-precio {
+  margin: 8px 0 14px;
+  font-size: 13px;
+  line-height: 1.3;
+}
+
+#bloque-incentivo .texto-incentivo-precio strong {
+  font-size: 16px;
   font-weight: 800;
 }
 
-.acceso-text {
-  display: block;
-  margin-top: 8px;
-  font-size: 11.5px;
-  color: var(--text-dim);
-}
 
-.texto-incentivo {
+#bloque-incentivo .btn-incentivo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 150px;
+  min-height: 42px;
+  padding: 0 40px;
+  box-sizing: border-box;
+
+  border: 1px solid #2261ff;
+  border-radius: 24px;
+
+  background: transparent;
+  color: inherit;
+
+  text-decoration: none;
+
   font-size: 14px;
-  color: #6e6d6d;
-  margin-bottom: 12px;
+  font-weight: 700;
+  font-family: inherit;
+
+  cursor: pointer;
+
+  appearance: none;
+  -webkit-appearance: none;
+
+  transition: transform 0.2s ease;
 }
 
+#bloque-incentivo .btn-incentivo:hover {
+  transform: translateY(-1px);
+  background: rgba(128, 128, 128, 0.10);
+
+  border: 1px solid currentColor;
+}
+
+
+/* Mobile */
+@media (max-width: 480px) {
+
+  #bloque-incentivo {
+    margin-top: 18px;
+    padding: 16px 14px 18px;
+    border-radius: 16px;
+  }
+
+  #bloque-incentivo .texto-incentivo {
+    font-size: 14px;
+  }
+
+  #bloque-incentivo .texto-incentivo-secundario {
+    font-size: 12.5px;
+  }
+
+  #bloque-incentivo .btn-incentivo {
+    margin-top: 10px;
+  }
+
+  #bloque-incentivo .texto-incentivo-precio {
+    margin: 4px 0 0;
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 1.35;
+    opacity: 0.65;
+  }
+
+  #bloque-incentivo .texto-incentivo-precio strong {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+
+
+}
 
 /* =========================
    FOOTER DEL MODAL

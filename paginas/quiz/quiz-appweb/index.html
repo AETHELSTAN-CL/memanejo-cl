@@ -111,50 +111,72 @@
   </div>
 
   <!-- Modal de resultado -->
-  <div id="modal-memanejo" class="modal-memanejo oculto">
-    <div class="contenido-modal" id="captura">
-      <h2 class="titulo-modal">Resultado del Quiz</h2>
-      <p id="texto-puntaje" class="texto-puntaje-modal"></p>
-      <div class="score-ring" id="scoreRing">
-        <div class="score-ring-inner">
-          <span id="scorePuntos" class="score-numero">0/0</span>
-          <span class="score-label">puntos</span>
-        </div>
+<div id="modal-memanejo" class="modal-memanejo oculto">
+  <div class="contenido-modal" id="captura">
+
+    <h2 class="titulo-modal">Resultado del Quiz</h2>
+
+    <!-- Estado: Aprobado / Reprobado -->
+    <div id="badgeEstado" class="badge-estado">
+      <i class="fas fa-check"></i>
+      <span id="badgeTexto">Aprobado</span>
+    </div>
+
+    <div class="score-ring" id="scoreRing">
+      <div class="score-ring-inner">
+        <span id="scorePuntos" class="score-numero">0/0</span>
+        <span class="score-label">puntos</span>
+      </div>
+    </div>
+     <!-- Mensaje secundario -->
+    <p id="texto-puntaje" class="texto-puntaje-modal"></p>
+
+    <div class="stats-grid">
+      <div class="stat-item">
+        <p id="statCorrectas" class="stat-valor">0</p>
+        <p class="stat-label">correctas</p>
       </div>
 
-      <div id="badgeEstado" class="badge-estado">
-        <i class="fas fa-check"></i>
-        <span id="badgeTexto">Aprobado</span>
+      <div class="stat-item">
+        <p id="statErradas" class="stat-valor">0</p>
+        <p class="stat-label">erradas</p>
       </div>
 
-      <div class="stats-grid">
-        <div class="stat-item">
-          <p id="statCorrectas" class="stat-valor">0</p>
-          <p class="stat-label">correctas</p>
-        </div>
-        <div class="stat-item">
-          <p id="statErradas" class="stat-valor">0</p>
-          <p class="stat-label">erradas</p>
-        </div>
-        <div class="stat-item">
-          <p id="statTiempo" class="stat-valor">0:00</p>
-          <p class="stat-label">tiempo</p>
-        </div>
+      <div class="stat-item">
+        <p id="statTiempo" class="stat-valor">0:00</p>
+        <p class="stat-label">tiempo</p>
       </div>
+    </div>
 
+      <!-- Botones modal final -->
       <div class="modal-buttons">
-        <button id="btn-descargar-img" class="modal-btn modal-btn-principal">
-          <i class="fas fa-download"></i> Descargar Imagen
+
+        <!-- Botón principal: píldora + flecha -->
+        <button id="btn-next-quiz" class="modal-btn-principal" type="button">
+          <span>Ir a página principal</span>
+          <i class="fa-solid fa-arrow-right btn-next-arrow"></i>
         </button>
-        <a id="btn-compartir" class="modal-btn modal-btn-secundario" target="_blank">
-          <i class="fab fa-twitter"></i> Compartir en Twitter
-        </a>
-        <a id="btn-instagram" class="modal-btn modal-btn-instagram" target="_blank">
-          <i class="fab fa-instagram"></i> Compartir en Instagram
-        </a>
-        <button id="btn-reintentar" class="modal-btn modal-btn-reintentar">
-          <i class="fas fa-redo"></i> Reintentar
-        </button>
+
+        <!-- 3 tarjetas tipo app -->
+        <div class="modal-actions-row">
+
+          <button id="btn-compartir" class="modal-btn modal-btn-compartir" type="button">
+            <i class="fa-solid fa-share-nodes"></i>
+            <span>Compartir</span>
+          </button>
+
+          <button id="btn-descargar-img" class="modal-btn modal-btn-descargar" type="button">
+            <i class="fa-solid fa-download"></i>
+            <span>Descargar</span>
+          </button>
+
+          <button id="btn-reintentar" class="modal-btn modal-btn-reintentar" type="button">
+            <i class="fa-solid fa-rotate-right"></i>
+            <span>Reintentar</span>
+          </button>
+
+        </div>
+
       </div>
       <!-- Footer pequeño del modal -->
     <div class="footer-bottom">
