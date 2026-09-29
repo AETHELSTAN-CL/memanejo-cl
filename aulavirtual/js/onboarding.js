@@ -45,7 +45,7 @@ let originalCardHTML = null;
 // INIT ONBOARDING
 // =====================
 function initOnboarding() {
-  // ⚠️ BYPASS DE DESARROLLO
+  // BYPASS DE DESARROLLO
   if (localStorage.getItem('skipOnboarding') === 'true') {
     cerrarOnboarding();
     return;
@@ -134,7 +134,7 @@ function mostrarPortalAlumno(modo = 'quiz') {
 
   const textoLegal = solicitarId
     ? 'Usaremos tus datos para identificarte como estudiante y enviar tu <strong>memanejo ID</strong> al correo electrónico. No compartimos tus datos con terceros.'
-    : 'Usaremos tus datos para registrar tu participación y enviarte información relacionada con tu resultado. No compartimos tus datos con terceros.';
+    : 'Usaremos tus datos para registrar y enviar información relacionada con tu resultado. No compartimos tus datos con terceros.';
 
   loginCardGlass.innerHTML = `
   <div class="card-plus">

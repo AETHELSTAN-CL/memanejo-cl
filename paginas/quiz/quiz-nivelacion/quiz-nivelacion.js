@@ -519,4 +519,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!validarFormulario()) return;
     iniciarQuiz();
   });
+ // Solo para pruebas: escribe testResultado() en la consola
+  window.testResultado = function () {
+    score = 20;
+    correctasCount = 19;
+    erradasCount = 1;
+    mostrarResultado();
+  };
 });

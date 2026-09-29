@@ -499,7 +499,7 @@ a { color: var(--accent); text-decoration: none; }
 }
 
 .titulo-modal { margin: 0 0 6px; font-size: 20px; color: var(--text); }
-.texto-puntaje-modal { margin: 0 0 6px; font-size: 14px; color: var(--text-dim); }
+.texto-puntaje-modal { margin: 12px 0 12px; font-size: 14px; color: var(--text-dim); }
 
 .stats-grid {
   display: flex;

@@ -33,49 +33,49 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
- // === SHOW PILL NAV ON SCROLL (MOBILE ONLY) ===
-let scrollTimer;
+  // === SHOW PILL NAV ON SCROLL (MOBILE ONLY) ===
+  let scrollTimer;
 
-document.addEventListener("scroll", () => {
-  const pill = document.getElementById("pillNav");
-  const studentPill = document.querySelector(".pill-student");
+  document.addEventListener("scroll", () => {
+    const pill = document.getElementById("pillNav");
+    const studentPill = document.querySelector(".pill-student");
 
-  if (!pill) return;
+    if (!pill) return;
 
-  if (window.innerWidth > 768) {
-    pill.classList.remove("visible", "scrolling");
-    studentPill?.classList.remove("scrolling");
-    clearTimeout(scrollTimer);
-    return;
-  }
-
-  if (window.scrollY > 50) {
-
-    // Aparece suavemente
-    pill.classList.add("visible");
-
-    // Mientras hay movimiento: ambos se compactan
-    pill.classList.add("scrolling");
-    studentPill?.classList.add("scrolling");
-
-    // Reinicia el temporizador con cada movimiento
-    clearTimeout(scrollTimer);
-
-    // Cuando se detiene el scroll: ambos vuelven a tamaño normal
-    scrollTimer = setTimeout(() => {
-      pill.classList.remove("scrolling");
+    if (window.innerWidth > 768) {
+      pill.classList.remove("visible", "scrolling");
       studentPill?.classList.remove("scrolling");
-    }, 220);
+      clearTimeout(scrollTimer);
+      return;
+    }
 
-  } else {
+    if (window.scrollY > 50) {
 
-    // Volver arriba: desaparece el nav
-    clearTimeout(scrollTimer);
+      // Aparece suavemente
+      pill.classList.add("visible");
 
-    pill.classList.remove("visible", "scrolling");
-    studentPill?.classList.remove("scrolling");
-  }
-});
+      // Mientras hay movimiento: ambos se compactan
+      pill.classList.add("scrolling");
+      studentPill?.classList.add("scrolling");
+
+      // Reinicia el temporizador con cada movimiento
+      clearTimeout(scrollTimer);
+
+      // Cuando se detiene el scroll: ambos vuelven a tamaño normal
+      scrollTimer = setTimeout(() => {
+        pill.classList.remove("scrolling");
+        studentPill?.classList.remove("scrolling");
+      }, 220);
+
+    } else {
+
+      // Volver arriba: desaparece el nav
+      clearTimeout(scrollTimer);
+
+      pill.classList.remove("visible", "scrolling");
+      studentPill?.classList.remove("scrolling");
+    }
+  });
 
   // === Icon select scale + blue + auto-reset ===
   pillItems.forEach(item => {
@@ -170,48 +170,48 @@ document.addEventListener("scroll", () => {
     });
   });
 
-// ===== HAMBURGER =====
-// ===== HAMBURGER =====
-const hamburger = document.querySelector('.hamburger');
-const nav = document.querySelector('header nav');
-const studentMenu = document.querySelector('.student-menu');
+  // ===== HAMBURGER =====
+  // ===== HAMBURGER =====
+  const hamburger = document.querySelector('.hamburger');
+  const nav = document.querySelector('header nav');
+  const studentMenu = document.querySelector('.student-menu');
 
-function cerrarMenu() {
-  hamburger?.classList.remove('active');
-  nav?.classList.remove('show');
-}
-
-// Abrir / cerrar hamburger
-hamburger?.addEventListener('click', (e) => {
-  e.stopPropagation();
-
-  // Si está abierto el menú estudiante, cerrarlo
-  studentMenu?.classList.remove('show');
-
-  hamburger.classList.toggle('active');
-  nav?.classList.toggle('show');
-});
-
-// Cerrar al presionar cualquier elemento del menú
-nav?.querySelectorAll('a, button').forEach(item => {
-  item.addEventListener('click', () => {
-    cerrarMenu();
-  });
-});
-
-// Cerrar al presionar fuera del menú
-document.addEventListener('click', (e) => {
-
-  // Cerrar hamburger al hacer click fuera
-  if (
-    nav?.classList.contains('show') &&
-    !nav.contains(e.target) &&
-    !hamburger?.contains(e.target)
-  ) {
-    cerrarMenu();
+  function cerrarMenu() {
+    hamburger?.classList.remove('active');
+    nav?.classList.remove('show');
   }
 
-});
+  // Abrir / cerrar hamburger
+  hamburger?.addEventListener('click', (e) => {
+    e.stopPropagation();
+
+    // Si está abierto el menú estudiante, cerrarlo
+    studentMenu?.classList.remove('show');
+
+    hamburger.classList.toggle('active');
+    nav?.classList.toggle('show');
+  });
+
+  // Cerrar al presionar cualquier elemento del menú
+  nav?.querySelectorAll('a, button').forEach(item => {
+    item.addEventListener('click', () => {
+      cerrarMenu();
+    });
+  });
+
+  // Cerrar al presionar fuera del menú
+  document.addEventListener('click', (e) => {
+
+    // Cerrar hamburger al hacer click fuera
+    if (
+      nav?.classList.contains('show') &&
+      !nav.contains(e.target) &&
+      !hamburger?.contains(e.target)
+    ) {
+      cerrarMenu();
+    }
+
+  });
 
   // ===== LIKE COUNT =====
   document.querySelectorAll('.heart-btn').forEach(btn => {
@@ -333,7 +333,7 @@ if (notif) {
       notif.classList.add("hide");
       setTimeout(() => notif.classList.remove("show"), 300);
     } else {
-      notif.style.top = "25px";
+      notif.style.top = "";
       notif.style.opacity = "1";
     }
   });

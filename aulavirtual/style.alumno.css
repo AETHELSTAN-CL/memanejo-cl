@@ -435,7 +435,7 @@ body.onboarding-activo {
   border: 1px solid #001089;
   background: #001089;
   color: #fff;
-  font-size: 12px;
+  font-size: 13px;
   cursor: pointer;
   margin: 20px auto 0 auto;
   display: block;
@@ -1690,9 +1690,9 @@ body.onboarding-activo {
 
 #ios-notificacion {
   position: fixed;
-  top: 0;
+  top: -160px;
   left: 50%;
-  transform: translate(-50%, -160px);
+  transform: translateX(-50%);
   width: 95vw;
   max-width: 720px;
   background: rgba(0, 0, 0, 0.528);
@@ -1709,12 +1709,12 @@ body.onboarding-activo {
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
   z-index: 9999;
   opacity: 0;
-  will-change: transform, opacity;
-  transition: transform 0.5s ease, opacity 0.5s ease;
+  will-change: top, opacity;
+  transition: top 0.5s ease, opacity 0.5s ease;
 }
 
 #ios-notificacion.show {
-  transform: translate(-50%, var(--notif-shown-y));
+  top: var(--notif-shown-y);
   opacity: 1;
 }
 
@@ -2607,6 +2607,7 @@ body.onboarding-activo header {
   display: flex;
   align-items: flex-end;
   min-height: 100vh;
+  min-height: 100dvh;
   max-width: 480px;
 }
 
@@ -2614,6 +2615,7 @@ body.onboarding-activo header {
   .modal-dialog-bottom {
     align-items: center;
     min-height: calc(100vh - 3.5rem);
+    min-height: calc(100dvh - 3.5rem);
   }
 }
 
@@ -2623,11 +2625,17 @@ body.onboarding-activo header {
   overflow: hidden;
   background: #fff;
   box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.25);
+
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-height: calc(100dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
 }
 
 @media (min-width: 576px) {
   .modern-modal {
     border-radius: 24px;
+    max-height: calc(100dvh - 3.5rem - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
   }
 }
 
@@ -2640,6 +2648,7 @@ body.onboarding-activo header {
   background: #111;
   color: #fff;
   overflow: visible;
+  flex-shrink: 0; /* nunca se comprime ni queda fuera de vista */
 }
 
 .topbar-left {
@@ -2680,8 +2689,10 @@ body.onboarding-activo header {
 /* ===== BODY con cards ===== */
 .modal-body {
   background: #f5f6f8;
-  max-height: 100vh;
+  flex: 1 1 auto;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
 }
 
 /* ===== CARD individual dentro del modal ===== */
