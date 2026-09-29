@@ -181,26 +181,461 @@ document.addEventListener('DOMContentLoaded', () => {
       segundoBtn.innerHTML = `<i class="fa-solid fa-gift" style="margin-right:6px;"></i>Descubre un beneficio exclusivo`;
     }
   }
+  /* =========================================================
+     ENVIAR MEMANEJO CHAT A WHATSAPP
+     ========================================================= */
 
-  // --- PLACEHOLDER ANIMADO ---
-  const frasesInput = ["Escribe aquí tu mensaje", "Ej: Necesito pastillas de freno para Mazda 3", "Dime qué auto tienes y qué buscas...", "Estamos para ayudarte 😉", "¿Consulta técnica o de repuesto?"];
-  let idxFrase = 0, idxLetra = 0;
-  const inputAnimado = document.querySelector('[data-animar="true"]');
-  function escribirFrase() {
-    if (!inputAnimado) return;
-    if (idxLetra <= frasesInput[idxFrase].length) {
-      inputAnimado.placeholder = frasesInput[idxFrase].substring(0, idxLetra++);
-      setTimeout(escribirFrase, 50);
-    } else setTimeout(borrarFrase, 1000);
+  function sendwhatsapp() {
+
+    const formAgenda = document.getElementById("formAgenda");
+
+    if (!formAgenda) return;
+
+    const nombre = formAgenda.querySelector(".name")?.value.trim();
+    const correo = formAgenda.querySelector(".email")?.value.trim();
+    const numero = formAgenda.querySelector(".numero")?.value.trim();
+    const mensaje = formAgenda.querySelector(".message")?.value.trim();
+
+    if (!nombre || !correo || !numero || !mensaje) {
+      console.error("Faltan datos para enviar el mensaje.");
+      return;
+    }
+
+    const texto =
+      `Hola memanejo
+
+Nombre: ${nombre}
+Correo: ${correo}
+Número: ${numero}
+
+Mensaje:
+${mensaje}`;
+
+    const numeroWhatsApp = "56946914558";
+
+    const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(texto)}`;
+
+    window.open(url, "_blank");
   }
-  function borrarFrase() {
-    if (!inputAnimado) return;
-    if (idxLetra >= 0) {
-      inputAnimado.placeholder = frasesInput[idxFrase].substring(0, idxLetra--);
-      setTimeout(borrarFrase, 30);
-    } else { idxFrase = (idxFrase + 1) % frasesInput.length; setTimeout(escribirFrase, 300); }
+  /* =========================================================
+     memanejoChat
+     ========================================================= */
+
+  const chatInput = document.getElementById("chatInput");
+  const chatSend = document.getElementById("chatSend");
+  const chatMessages = document.getElementById("chatMessages");
+  const questionText = document.getElementById("questionText");
+
+  const formAgenda = document.getElementById("formAgenda");
+
+  if (
+    chatInput &&
+    chatSend &&
+    chatMessages &&
+    questionText &&
+    formAgenda
+  ) {
+
+    const nameInput = formAgenda.querySelector(".name");
+    const emailInput = formAgenda.querySelector(".email");
+    const numeroInput = formAgenda.querySelector(".numero");
+    const messageInput = formAgenda.querySelector(".message");
+
+
+    /* =======================================================
+       PASOS DEL CHAT
+       ======================================================= */
+
+    let pasoActual = 0;
+
+    const pasos = [
+      {
+        campo: "name",
+        pregunta: "¿Cuál es tu nombre?",
+        placeholder: "Escribe aquí tu nombre..."
+      },
+      {
+        campo: "email",
+        pregunta: "¿Cuál es tu correo electrónico?",
+        placeholder: "Escribe aquí tu correo..."
+      },
+      {
+        campo: "numero",
+        pregunta: "¿Cuál es tu número de contacto?",
+        placeholder: "Escribe aquí tu número..."
+      },
+      {
+        campo: "message",
+        pregunta: "Perfecto. Ahora cuéntanos, ¿en qué podemos ayudarte?",
+        ayuda: "Ej: pastillas de freno para Mazda, realizar mantención, una consulta técnica o si buscas un repuesto.",
+        placeholder: "Escribe aquí tu mensaje..."
+      }
+    ];
+
+
+    /* =======================================================
+       MOSTRAR RESPUESTA DEL USUARIO
+       ======================================================= */
+
+    function agregarRespuesta(texto) {
+
+      const row = document.createElement("div");
+      row.className = "chat-row sent";
+
+      const bubble = document.createElement("div");
+      bubble.className = "chat-bubble";
+
+      const p = document.createElement("p");
+      p.textContent = texto;
+
+      const small = document.createElement("small");
+      small.textContent = "Ahora";
+
+      bubble.appendChild(p);
+      bubble.appendChild(small);
+
+      row.appendChild(bubble);
+      chatMessages.appendChild(row);
+
+      chatMessages.scrollTo({
+        top: chatMessages.scrollHeight,
+        behavior: "smooth"
+      });
+    }
+
+
+    /* =======================================================
+       MENSAJE DE MEMANEJO
+       ======================================================= */
+
+    function agregarMensajeMemanejo(texto) {
+
+      const row = document.createElement("div");
+      row.className = "chat-row received";
+
+      const bubble = document.createElement("div");
+      bubble.className = "chat-bubble";
+
+      const name = document.createElement("span");
+      name.className = "chat-name";
+      name.textContent = "memanejo";
+
+      const p = document.createElement("p");
+      p.textContent = texto;
+
+      const small = document.createElement("small");
+      small.textContent = "Ahora";
+
+      bubble.appendChild(name);
+      bubble.appendChild(p);
+      bubble.appendChild(small);
+
+      row.appendChild(bubble);
+      chatMessages.appendChild(row);
+
+      chatMessages.scrollTo({
+        top: chatMessages.scrollHeight,
+        behavior: "smooth"
+      });
+    }
+
+
+    /* =======================================================
+       VALIDACIONES
+       ======================================================= */
+
+    function correoValido(valor) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(valor);
+    }
+
+    function telefonoValido(valor) {
+
+      const numero = valor.replace(/\D/g, "");
+
+      // Formato nacional: 9XXXXXXXX
+      if (/^9\d{8}$/.test(numero)) {
+        return true;
+      }
+
+      // Formato internacional: 569XXXXXXXX
+      if (/^569\d{8}$/.test(numero)) {
+        return true;
+      }
+
+      return false;
+    }
+
+
+    /* =======================================================
+       MOSTRAR SIGUIENTE PREGUNTA
+       ======================================================= */
+
+    function mostrarSiguientePregunta() {
+
+      const paso = pasos[pasoActual];
+
+      const row = document.createElement("div");
+      row.className = "chat-row received";
+
+      const bubble = document.createElement("div");
+      bubble.className = "chat-bubble";
+
+      const name = document.createElement("span");
+      name.className = "chat-name";
+      name.textContent = "memanejo";
+
+      const p = document.createElement("p");
+      p.textContent = paso.pregunta;
+
+      const small = document.createElement("small");
+      small.textContent = "Ahora";
+
+      bubble.appendChild(name);
+      bubble.appendChild(p);
+      bubble.appendChild(small);
+
+      row.appendChild(bubble);
+      chatMessages.appendChild(row);
+
+
+      /* MENSAJE DE AYUDA SEPARADO */
+
+      if (paso.ayuda) {
+
+        setTimeout(() => {
+
+          agregarMensajeMemanejo(paso.ayuda);
+
+        }, 350);
+
+      }
+
+
+      chatMessages.scrollTo({
+        top: chatMessages.scrollHeight,
+        behavior: "smooth"
+      });
+
+      chatInput.placeholder = paso.placeholder;
+      chatInput.value = "";
+      chatInput.focus();
+    }
+
+    /* =======================================================
+       PROCESAR RESPUESTA
+       ======================================================= */
+
+    function procesarRespuesta() {
+
+      const valor = chatInput.value.trim();
+
+      if (!valor) {
+        chatInput.focus();
+        return;
+      }
+
+      const paso = pasos[pasoActual];
+
+
+      /* NOMBRE */
+
+      if (paso.campo === "name") {
+
+        if (valor.length < 2) {
+
+          agregarMensajeMemanejo(
+            "Escribe tu nombre para continuar 🙂"
+          );
+
+          return;
+        }
+
+        nameInput.value = valor;
+      }
+
+
+      /* CORREO */
+
+      if (paso.campo === "email") {
+
+        if (!correoValido(valor)) {
+
+          agregarMensajeMemanejo(
+            "Revisa tu correo electrónico e inténtalo nuevamente."
+          );
+
+          return;
+        }
+
+        emailInput.value = valor;
+      }
+
+
+      /* NÚMERO */
+
+      if (paso.campo === "numero") {
+
+        if (!telefonoValido(valor)) {
+
+          agregarMensajeMemanejo(
+            "Necesitamos un número de contacto válido para continuar."
+          );
+
+          return;
+        }
+
+        numeroInput.value = valor;
+      }
+
+
+      /* MENSAJE */
+
+      if (paso.campo === "message") {
+
+        if (valor.length < 3) {
+
+          agregarMensajeMemanejo(
+            "Cuéntanos un poco más para poder ayudarte."
+          );
+
+          return;
+        }
+
+        messageInput.value = valor;
+      }
+
+
+      /* MOSTRAR LA RESPUESTA EN EL CHAT */
+
+      agregarRespuesta(valor);
+
+
+      /* ÚLTIMO PASO */
+
+      if (pasoActual === pasos.length - 1) {
+
+        finalizarChat();
+
+        return;
+      }
+
+      /* SIGUIENTE PASO */
+
+      pasoActual++;
+
+      setTimeout(() => {
+        mostrarSiguientePregunta();
+      }, 450);
+    }
+
+
+    /* =======================================================
+       FINALIZAR CHAT
+       ======================================================= */
+
+    function finalizarChat() {
+
+      chatInput.value = "";
+      chatInput.disabled = true;
+      chatInput.placeholder = "Todo listo";
+
+
+      chatSend.innerHTML = `
+      <span>Enviar</span> <i class="fa-solid fa-arrow-right"></i>
+    `;
+
+      chatSend.classList.add("chat-send-final");
+
+      const footer = document.getElementById("chatFooter");
+
+      if (footer) {
+
+        footer.innerHTML = `
+        <small>
+          Presiona
+          <strong>Enviar</strong>
+          para recibir tu mensaje por
+          <span class="wa-inline">
+            <i class="fa-brands fa-whatsapp"></i>
+            WhatsApp.
+          </span>
+        </small>
+      `;
+      }
+
+
+      setTimeout(() => {
+
+        agregarMensajeMemanejo(
+          "¡Perfecto! 💚 Ya tenemos todo. Presiona Enviar para contactarnos por WhatsApp."
+        );
+
+      }, 450);
+    }
+
+
+    /* =======================================================
+       BOTÓN
+       ======================================================= */
+
+    chatSend.addEventListener("click", () => {
+
+      /* Todavía estamos recopilando datos */
+
+      if (!chatInput.disabled) {
+
+        procesarRespuesta();
+
+        return;
+      }
+
+
+      /* Ya están todos los datos */
+
+      if (
+        nameInput.value.trim() &&
+        emailInput.value.trim() &&
+        numeroInput.value.trim() &&
+        messageInput.value.trim()
+      ) {
+
+        if (typeof sendwhatsapp === "function") {
+
+          sendwhatsapp();
+
+        } else {
+
+          console.error(
+            "sendwhatsapp() no está definida."
+          );
+        }
+      }
+
+    });
+
+
+    /* =======================================================
+       ENTER = ENVIAR RESPUESTA
+       ======================================================= */
+
+    chatInput.addEventListener("keydown", (event) => {
+
+      if (event.key !== "Enter") return;
+
+      event.preventDefault();
+
+      procesarRespuesta();
+    });
+
+
+    /* =======================================================
+       INICIO
+       ======================================================= */
+
+    chatInput.placeholder = pasos[0].placeholder;
+    chatInput.focus();
+
   }
-  escribirFrase();
 
   // --- ROTADOR CURSOS ---
   const rotador = document.getElementById("rotadorCursos");

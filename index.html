@@ -1197,7 +1197,9 @@
 
   <!-- Espacio Publicitario Talleres -->
   <section id="mm-espacio-publicidad" class="text-center bg-light">
-    <div class="mm-publicidad-wrapper mx-auto" data-aos="fade-down"> <!-- Botón --> <button
+    <div class="mm-publicidad-wrapper mx-auto" data-aos="fade-down"> 
+      <!-- Botón -->
+       <button
         class="btn btn-warning btn-sm rounded-pill mb-3 px-4" type="button" data-bs-toggle="collapse"
         data-bs-target="#contenidoPublicidad" aria-expanded="false" aria-controls="contenidoPublicidad"> Descubre un
         beneficio exclusivo</button> <!-- Contenido desplegable -->
@@ -1223,35 +1225,121 @@
 
 
 
-  <!-- Contact Section Start -->
-  <section id="contact">
-    <div class="contact-container" data-bg="dark"> <!-- Lado izquierdo: formulario -->
-      <div class="contact-right" data-bg="dark">
-        <form id="formAgenda">
-          <div class="form-header text-center mb-3"> <i class="fa-solid fa-headset"
-              style="font-size: 48px; color:#25d366;"></i>
-            <h1 style="margin-top: 0.5rem;">memanejoChat</h1> <span>En línea</span>
-          </div> <input type="text" class="name" placeholder="Escribe aquí tu nombre" required> <input type="email"
-            class="email" placeholder="Escribe aquí tu correo electrónico" required> <input type="tel" class="numero"
-            placeholder="Escribe aquí tu número de contacto" required> <textarea class="message" data-animar="true"
-            placeholder="Escribe aquí tu mensaje..." required></textarea> <button type="button"
-            onclick="sendwhatsapp();"> <i class="fa-brands fa-whatsapp"></i>&nbsp; Enviar mensaje</button>
-          <p class="contactowhatsapp">
-            <small>
-              Al presionar el botón se enviará automáticamente tu mensaje por
-              <span class="wa-inline">
-                <i class="fa-brands fa-whatsapp" style="color:#25d366;"></i>
-                WhatsApp.
-              </span> <br>
-              Uno de nuestros humanos favoritos te ayudará.
-            </small>
-          </p>
-        </form>
-      </div>
-  </section>
+<section id="contacto">
+  <div class="contact-container" data-bg="dark">
+      <form id="formAgenda" class="memanejo-chat" data-bg="light">
+
+        <!-- CABECERA -->
+        <div class="chat-header">
+
+          <div class="chat-avatar">
+            <i class="fa-solid fa-headset"></i>
+          </div>
+
+          <div class="chat-header-info">
+            <h1>memanejoChat</h1>
+
+            <span>
+              <i class="fa-solid fa-circle"></i>
+              En línea
+            </span>
+          </div>
+
+        </div>
 
 
-  <div class="go-top-icon" data-bg="dark"> <i class="fa-solid fa-circle-arrow-up" id="goTop" title="Volver arriba"></i>
+        <!-- CAMPOS REALES, Se mantienen ocultos para sendwhatsapp() -->
+        <input type="hidden" class="name">
+        <input type="hidden" class="email">
+        <input type="hidden" class="numero">
+        <input type="hidden" class="message">
+
+
+        <!-- CONVERSACIÓN -->
+        <div class="chat-messages" id="chatMessages">
+
+          <!-- MENSAJE INICIAL -->
+          <div class="chat-row received">
+
+            <div class="chat-bubble">
+
+              <span class="chat-name">memanejo</span>
+
+              <p>
+                ¡Hola! 👋<br>
+                Ponte en contacto con uno de nuestros humanos favoritos.
+              </p>
+
+              <small>Ahora</small>
+
+            </div>
+
+          </div>
+
+
+          <!-- PREGUNTA ACTUAL -->
+          <div class="chat-row received" id="questionRow">
+
+            <div class="chat-bubble">
+
+              <span class="chat-name">memanejo</span>
+
+              <p id="questionText">
+                ¿Cuál es tu nombre?
+              </p>
+              <small>Ahora</small>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- COMPOSITOR -->
+        <div class="chat-composer">
+
+          <div class="composer-box">
+
+            <i class="fa-regular fa-face-smile"></i>
+
+            <input
+              type="text"
+              id="chatInput"
+              autocomplete="off"
+              placeholder="Escribe aquí tu respuesta..."
+              aria-label="Escribe aquí tu respuesta">
+
+          </div>
+
+          <button
+            type="button"
+            class="chat-send"
+            id="chatSend"
+            aria-label="Enviar">
+
+            <i class="fa-solid fa-arrow-up"></i>
+
+          </button>
+
+        </div>
+
+
+        <!-- AVISO -->
+        <p class="contactowhatsapp" id="chatFooter">
+
+          <small>
+            Responde las preguntas para continuar.
+          </small>
+
+        </p>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</section>
+
+  <div class="go-top-icon" data-bg="dark"> <i class="fa-solid fa-circle-chevron-up" id="goTop" title="Volver arriba"></i>
   </div>
   <script> document.getElementById('goTop').addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); }); </script>
   <div class="footer" data-bg="dark">
