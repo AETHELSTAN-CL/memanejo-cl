@@ -1130,14 +1130,14 @@ body {
     color: #06210F;
 }
 
-@media (min-width:1024px) {
+@media (min-width: 620px) {
     .driver-sheet {
         left: 50%;
         right: auto;
         bottom: auto;
         top: 50%;
-        width: 440px;
-        max-height: min(660px, 86vh);
+        width: 650px;
+        max-height: min(750px, 120vh);
         border-radius: 26px;
         transform: translate(-50%, -42%) scale(.94);
         opacity: 0;
@@ -3135,7 +3135,7 @@ body {
     }
 }
 
-/* modal card promo */
+ /* modal card promo */
 .modal-dialog.modal-custom {
     display: flex;
     align-items: center;
@@ -3160,71 +3160,165 @@ body {
     display: flex;
     flex-direction: column;
     position: relative;
+    border-radius: 1rem;
 }
 
 /* Imagen vertical */
 .modal-image {
     width: 100%;
-    height: auto;
+    height: 480px;
     display: block;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
+    border-radius: 0;
 }
 
 /* X sobre la imagen */
 .close-x {
     position: absolute;
-    top: 12px;
-    right: 5%;
-    transform: translateX(-50%);
-    z-index: 100;
-    font-size: 1.6rem;
-    color: #000000;
-    cursor: pointer;
-    margin: 0;
-    padding: 0;
-    line-height: 1;
+        top: 16px;
+        right: 20px;
+        z-index: 50;
+        width: 38px;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        font-size: 1.35rem;
+        color: #000;
 }
 
 
+/* Contenedor general */
 .modal-content-buttons {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
+    position: relative;
+    width: 100%;
+    display: block;
     text-align: center;
 }
 
 .modal-btn {
+    position: absolute;
+    top: 120px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0 !important;
+    z-index: 30;
+    white-space: nowrap;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
     font-size: 0.9rem !important;
     font-weight: 700;
 }
 
 .modal-conditions {
-    font-size: 0.6rem;
-    /* fuente pequeña */
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 82%;
+    margin: 0;
+    padding: 10px 14px;
     color: #cacaca;
-    line-height: 1.4;
+    font-size: 8px;
+    line-height: 1.09;
     text-align: center;
+    z-index: 30;
 }
 
-@media (min-width: 768px) {
+
+/* =========================
+   ESCRITORIO
+   ========================= */
+
+@media (min-width: 1120px) {
+
     .modal-dialog.modal-custom {
-        max-width: 600px;
+        max-width: 550px;
     }
 
     .modal-bubble {
         width: 620px;
         max-width: 620px;
-        min-height: 550px;
+        min-height: 0;
+        position: relative;
+        overflow: hidden;
+        background: transparent;
+        border-radius: 2rem;
     }
 
+    /* Contenedor general */
+    .modal-content-buttons {
+        position: relative;
+        width: 100%;
+        display: block;
+    }
+
+    /* Imagen vertical */
     .modal-image {
-        height: 720px;
+        width: 100%;
+        height: auto;
+        display: block;
         object-fit: cover;
+        border-radius: 2rem;
+    }
+
+    /* X */
+    .close-x {
+        position: absolute;
+        top: 16px;
+        right: 20px;
+        z-index: 50;
+        width: 38px;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        font-size: 1.35rem;
+        color: #000;
+    }
+
+    /* Botón sobre la imagen */
+    .modal-btn {
+        position: absolute;
+        top: 300px;
+        left: 50%;
+        transform: translateX(-50%);
+        margin: 0 !important;
+        z-index: 30;
+        white-space: nowrap;
+        background: rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+    }
+
+    /* Condiciones sobre la parte inferior */
+    .modal-conditions {
+        position: absolute;
+        bottom: 95px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 82%;
+        margin: 0;
+        padding: 12px 16px;
+        color: #fff;
+        font-size: 0.65rem;
+        line-height: 1.1;
+        text-align: center;
+        z-index: 30;
     }
 }
-
 
 /*start sobre mi section*/
 .sobre-mi-section {
