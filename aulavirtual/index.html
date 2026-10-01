@@ -112,12 +112,6 @@
 
   <!-- CONTENIDO -->
   <div class="onboard-content">
-
-    <!-- Columna izquierda: solo visible en desktop -->
-    <div class="onboard-left">
-      <h1 class="onboard-welcome">¡Hola!</h1>
-    </div>
-
     <!-- Columna derecha: card glass (mobile y desktop) -->
     <div class="onboard-right">
       <div class="login-card-glass">
@@ -189,8 +183,8 @@
           </div>
           <div class="texto-derecha">
             <span class="nivel">
-              <i class="fas fa-user-graduate me-1"></i>
-              <strong>Nivel Practicante</strong>
+              <i class="fas fa-trophy me-1"></i>
+              <strong>Ranking nacional</strong>
             </span>
 
             <div class="progreso">
@@ -219,8 +213,8 @@
           </div>
           <div class="texto-derecha">
             <span class="nivel">
-              <i class="fas fa-user-graduate me-1"></i>
-              <strong>Nivel Practicante</strong>
+              <i class="fas fa-trophy me-1"></i>
+              <strong>Ranking nacional</strong>
             </span>
 
             <div class="progreso">
@@ -249,8 +243,8 @@
           </div>
           <div class="texto-derecha">
             <span class="nivel">
-              <i class="fas fa-user-graduate me-1"></i>
-              <strong>Nivel Practicante</strong>
+              <i class="fas fa-trophy me-1"></i>
+              <strong>Ranking nacional</strong>
             </span>
 
             <div class="progreso">
@@ -310,14 +304,11 @@
 
           <div>
             <p class="sd-greeting" id="welcomeName">Usuario</p>
-            <p class="sd-id" id="welcomeId">memanejo ID: ---</p>
+            <p class="sd-id" id="welcomeId">memanejo ID: PREPRODUCCIÓN</p>
           </div>
         </div>
 
         <div class="sd-header-actions">
-          <!------ <button id="btnActualizarEstado" class="btn-actualizar-estado" title="Actualizar estado">
-        <i class="fas fa-rotate"></i>
-      </button>---->
           <button id="btnCerrarSesion" class="btn-cerrar-sesion">
             Cerrar sesión <i class="fas fa-sign-out-alt"></i>
           </button>
@@ -380,36 +371,33 @@
         </div>
 
       </div>
-      <p class="sd-section-label">Preparación teórica <br>memanejo + <br><em>(beta)</em></p>
 
-      <div class="sd-hero-stat">
+      <a href="/links/ranking-nacional-memanejo.html" class="sd-hero-stat sd-hero-stat-link"
+        aria-label="Ver tu mejor puntaje: 33 de 38 puntos, aprobado. Toca para repetir el quiz.">
         <div class="sd-hero-icon">
-          <i class="fas fa-trophy"></i>
+          <i class="fas fa-trophy" aria-hidden="true"></i>
         </div>
         <div class="sd-hero-content">
           <p class="sd-hero-value">33<span>/38</span></p>
-          <p class="sd-hero-label">Mejor puntaje · Aprobado</p>
-          <div class="sd-bar">
+          <p class="sd-hero-label">Mejor puntaje · Ranking nacional · Aprobado</p>
+          <div class="sd-bar" role="progressbar" aria-valuenow="87" aria-valuemin="0" aria-valuemax="100">
             <div class="sd-bar-fill" style="width: 87%;"></div>
           </div>
         </div>
-      </div>
+      </a>
 
       <div class="sd-stats-grid">
         <div class="sd-stat-card">
           <i class="fas fa-rotate"></i>
-          <p class="sd-stat-value">7</p>
+          <p class="sd-stat-value">12</p>
           <p class="sd-stat-label">Intentos</p>
         </div>
         <div class="sd-stat-card">
           <i class="fas fa-stopwatch"></i>
-          <p class="sd-stat-value">23:09</p>
+          <p class="sd-stat-value">3:09</p>
           <p class="sd-stat-label">Mejor tiempo</p>
         </div>
       </div>
-
-
-      <p class="sd-section-label">Preparación práctica <br>memanejo manejando <br><em>(Beta)</em></p>
 
       <div class="sd-empty-state">
         <i class="fas fa-car sd-empty-icon"></i>
@@ -419,6 +407,14 @@
           class="sd-btn-agendar">
           <i class="far fa-calendar-check me-2"></i>
           Agendar
+        </a>
+      </div>
+      <div class="sd-empty-state">
+        <i class="fas fa-clipboard-question sd-empty-icon"></i>
+        <p class="sd-empty-title">Simulador de Examen Municipal</p>
+        <a href="/paginas/quiz/quiz-appweb/index.html" target="_blank" class="sd-btn-agendar">
+          <i class="fas fa-chevron-right me-2"></i>
+          Realizar
         </a>
       </div>
 
@@ -955,7 +951,7 @@
                   class="btn btn-primary btn-sm rounded-pill mt-2">Suscribirse <span
                     class="d-block text-light fw-bold fs-6">$39.900</span></a>
                 <small class="d-block text-center text-secondary mt-1 acceso-text">
-                  Incluye todo lo anterior por 30 días más simulación de examen municipal.
+                  2 clases individuales y 2 clases grupales con simulación de examen municipal y explicación de errores.
                 </small>
 
               </div>
@@ -985,7 +981,7 @@
               </button>
             </div>
             <small class="d-block text-center text-secondary mt-1 acceso-text">
-              Debes contar con una cuenta <strong>memanejo+</strong> para agendar.
+              Clases prácticas de entrenamiento y seguridad vial.
             </small>
 
             <div id="precioNivel1" class="collapse precios-burbuja mt-2">
@@ -1099,9 +1095,12 @@
         <div class="card card-gris">
           <div class="card-body d-flex flex-column">
             <h5 class="card-title"><i class="fas fa-tools me-2"></i>Plan 1.000km</h5>
-            <p class="card-text"><strong>TUTORÍA PARTICULAR</strong> <br>
-              Refuerza tu preparación con conocimientos de mecánica básica, normas viales aplicadas y conducción
-              en diferentes tipos de terreno.</p>
+            <p class="card-text">
+              <strong>TUTORÍA PARTICULAR</strong><br>
+              Clases adicionales personalizadas:
+              mecánica básica para resolver imprevistos, normas viales aplicadas a situaciones reales
+              y práctica en distintos tipos de terreno.
+            </p>
             <div class="d-flex gap-2 flex-wrap mt-auto">
               <a class="btn w-100" href="https://www.memanejo.cl/paginas/quiz/quiz-appweb/index.html" target="_blank">
                 <strong>Realizar examen municipal
@@ -1204,7 +1203,7 @@
   <!-- Modal Suscripción -->
   <div class="modal fade" id="modalStudentSubscription" tabindex="-1" aria-labelledby="modalStudentSubscriptionLabel"
     aria-hidden="true">
-    <div class="modal-dialog modal-dialog-bottom modal-fullscreen-sm-down">
+    <div class="modal-dialog modal-fullscreen-sm-down">
       <div class="modal-content modern-modal">
 
         <div class="modal-topbar">
@@ -1634,7 +1633,7 @@
 
               <div class="mb-2" id="emailGroup">
                 <label for="reviewEmail" class="form-label">Correo</label>
-                <input type="email" id="reviewEmail" class="form-control" placeholder="mercedes@benz.cl ">
+                <input type="email" id="reviewEmail" class="form-control" placeholder="mercedes.benz@ejemplo.cl ">
               </div>
 
               <div class="mb-2">
@@ -1662,9 +1661,8 @@
   <!-- ===== Sección Conoce Más ===== -->
   <section id="conoce-mas" class="py-5">
     <div class="container" data-aos="fade-up">
-      <h3 class="section-title section-title-conoce">Conoce más</h3>
-      <p class="text-center">En <strong>memanejo.cl</strong> encuentras todo lo que tu auto necesita.<strong><br>
-          Manejamos tu tranquilidad.</strong></p>
+      <h3 class="section-title section-title-conoce">Nuestros servicios</h3>
+      <p class="text-center"><strong>memanejo.cl</strong> todo lo que tu auto necesita.</p>
 
 
       <div class="action-btns">
@@ -1674,11 +1672,14 @@
           <p>Servicios Automotrices</p>
         </a>
 
-        <a href="https://www.memanejo.cl/Catalogo" class="btn-icon" target="_blank">
+        <a href="https://www.memanejo.cl/Catalogo" class="btn-icon" target="_blank" rel="noopener noreferrer">
           <img src="/img/logo-filtro.PNG" alt="Catálogo de Repuestos">
           <span class="divider"></span>
           <p>Catálogo de Repuestos</p>
         </a>
+      </div>
+      <div class="text-center">
+        <span class="tranquilidad-badge">Manejamos tu tranquilidad</span>
       </div>
     </div>
 
@@ -1696,7 +1697,7 @@
         <div class="benefit-card">
 
           <div class="app-icon">
-            <i class="fas fa-id-card"></i>
+            <i class="fas fa-circle-check"></i>
           </div>
 
           <h6>
@@ -1704,7 +1705,7 @@
           </h6>
 
           <p>
-            Prueba gratis durante <strong>24 horas</strong> tu plataforma de estudio.
+            Prueba gratis durante <strong>24 horas</strong> tu plataforma de estudio favorita.
           </p>
 
 

@@ -125,7 +125,7 @@ function mostrarPortalAlumno(modo = 'quiz') {
     : '¡Nos encanta conocerte!';
 
   const texto = solicitarId
-    ? 'Completa tus datos y te enviaremos tu <strong>memanejo ID</strong> al correo electrónico.'
+    ? 'Completa tus datos y te enviaremos tu <br><strong>memanejo ID</strong> al correo electrónico.'
     : 'Completa tus datos y haz nuestro <strong>Quiz de Nivelación gratis</strong> y conoce qué tan preparado estás para tu examen de conducción.';
 
   const textoBoton = solicitarId
@@ -133,8 +133,8 @@ function mostrarPortalAlumno(modo = 'quiz') {
     : 'Comenzar Quiz de Nivelación';
 
   const textoLegal = solicitarId
-    ? 'Usaremos tus datos para identificarte como estudiante y enviar tu <strong>memanejo ID</strong> al correo electrónico. No compartimos tus datos con terceros.'
-    : 'Usaremos tus datos para registrar y enviar información relacionada con tu resultado. No compartimos tus datos con terceros.';
+    ? 'Usaremos tus datos para identificarte como estudiante y enviar tu <strong>memanejo ID</strong> al correo electrónico. <br>No compartimos tus datos con terceros.'
+    : 'Usaremos tus datos para registrar y enviar información relacionada con tu resultado. <br>No compartimos tus datos con terceros.';
 
   loginCardGlass.innerHTML = `
   <div class="card-plus">
@@ -421,7 +421,7 @@ function mostrarNuevoEstudiante() {
       </button>
 
       <div class="card-sub-text">
-  ¿No tienes tu memanejo ID?
+  ¿No tienes tu memanejo ID?.
   <a
     href="#"
     id="solicitarMemanejoId">
@@ -545,11 +545,20 @@ reviewForm?.addEventListener('submit', (e) => {
   }
 
   const finalName = anon ? "Anónimo" : (name || email);
+  const finalEmail = anon ? "sin correo (anónimo)" : email;
 
-  emailjs.send("service_ujyq6hg", "template_s6jxj1h", {
+  emailjs.send("service_ujyq6hg", "template_o43bfnj", {
     nombre: finalName,
-    correo: email || "sin correo (anónimo)",
-    mensaje_soporte: text
+    correo: finalEmail,
+    telefono: "No aplica",
+    puntaje: "-",
+    total: "-",
+    porcentaje: "-",
+    estado: "Mensaje de Soporte",
+    correctas: "-",
+    erradas: "-",
+    tiempo: "-",
+    errores: text
   }).catch(err => console.error("Error enviando soporte:", err));
 
   submittedEmail.textContent = finalName;
@@ -557,6 +566,7 @@ reviewForm?.addEventListener('submit', (e) => {
   reviewForm.reset();
   actualizarModoReview();
 });
+
 const reviewNormalRadio = document.getElementById('reviewNormal');
 const reviewAnonRadio = document.getElementById('reviewAnon');
 
