@@ -396,7 +396,7 @@ function mostrarNuevoEstudiante() {
 
     <div class="card-subblock portal-intro">
       <div class="card-text">
-        Ingresa a tu cuenta estudiante con tu correo y tu <strong>memanejo ID</strong>.
+        Ingresa a tu cuenta estudiante con tu correo y tu <br> <strong>memanejo ID</strong>.
       </div>
     </div>
 
