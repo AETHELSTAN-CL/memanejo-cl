@@ -147,61 +147,49 @@
       background: var(--white);
       border-radius: 22px;
       box-shadow: var(--shadow);
-      padding: 18px 22px;
+      padding: 26px 22px;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: space-between;
-      gap: 20px;
+      text-align: center;
+      gap: 16px;
       margin-bottom: 28px;
       border: 1px solid rgba(0, 9, 104, .05);
     }
 
-    .rules-text {
+    .rules-header {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 13px;
+      gap: 10px;
     }
 
-    .rules-icon {
-      width: 42px;
-      height: 42px;
-      flex: 0 0 42px;
-      display: grid;
-      place-items: center;
-      border-radius: 10px;
-      border: 1px solid var(--gray);
-      background: #eef6ff;
-      color: var(--blue);
-    }
-
-    .rules-icon {
-      font-size: 24px;
-      place-items: center;
-    }
-
-    .rules-text strong {
+    .rules-logo {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 24px;
       display: block;
-      font-size: 14px;
-      margin-bottom: 3px;
     }
 
-    .rules-text span {
-      color: var(--gray);
-      font-size: 12px;
+    .rules-title {
+      font-size: clamp(20px, 2vw, 30px);
+      font-weight: 800;
+      color: var(--black);
     }
 
     .quiz-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 9px;
+      gap: clamp(7px, 0.6vw, 9px);
       white-space: nowrap;
       text-decoration: none;
       background: var(--yellow);
       color: var(--black);
-      font-size: 13px;
+      font-size: clamp(13px, 1vw, 24px);
       font-weight: 800;
-      padding: 13px 18px;
+      padding: clamp(10px, 2vw, 12px) clamp(10px, 11vw, 90px);
       border-radius: 24px;
       transition: transform .2s ease, box-shadow .2s ease;
     }
@@ -213,6 +201,13 @@
 
     .quiz-btn:hover i {
       transform: scale(1.05);
+    }
+
+    .rules-conditions {
+      color: var(--gray);
+      font-size: clamp(8px, 1vw, 24px);
+      margin: 0;
+      max-width: 550px;
     }
 
     /* ==========================
@@ -468,7 +463,7 @@
 
     }
 
-    .status{
+    .status {
 
       display: inline-flex;
 
@@ -598,294 +593,293 @@
       color: #aaa;
     }
 
-@media (max-width: 580px) {
+    @media (max-width: 580px) {
 
-  .ranking-header {
-    padding: 22px 16px 80px;
-  }
+      .ranking-header {
+        padding: 22px 16px 80px;
+      }
 
-  .hero {
-    margin-top: 48px;
-  }
+      .hero {
+        margin-top: 48px;
+      }
 
-  main {
-    width: min(100% - 20px, 1080px);
-    margin-top: -45px;
-  }
+      main {
+        width: min(100% - 20px, 1080px);
+        margin-top: -45px;
+      }
 
-  .rules-card {
-    align-items: stretch;
-    flex-direction: column;
-    padding: 17px;
-  }
+      .rules-card {
+        align-items: stretch;
+        flex-direction: column;
+        padding: 17px;
+      }
 
-  .quiz-btn {
-    width: 100%;
-  }
+      .quiz-btn {
+        width: 100%;
+      }
 
-  .podium {
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
+      .podium {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
 
-  .podium-card,
-  .podium-card.first {
-    transform: none;
-  }
+      .podium-card,
+      .podium-card.first {
+        transform: none;
+      }
 
-  .podium-card.first {
-    order: -1;
-  }
+      .podium-card.first {
+        order: -1;
+      }
 
-  .ranking-top {
-    padding: 18px;
-  }
+      .ranking-top {
+        padding: 18px;
+      }
 
-  th,
-  td {
-    padding-left: 14px;
-    padding-right: 14px;
-  }
+      th,
+      td {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
 
 
-  /* =========================
+      /* =========================
      TABLA MOBILE
   ========================= */
 
-  .table-wrap {
-    overflow-x: visible;
-  }
+      .table-wrap {
+        overflow-x: visible;
+      }
 
-  table {
-    min-width: 0;
-    width: 100%;
-  }
+      table {
+        min-width: 0;
+        width: 100%;
+      }
 
-  thead {
-    display: none;
-  }
+      thead {
+        display: none;
+      }
 
-  tbody {
-    display: block;
-    width: 100%;
-  }
+      tbody {
+        display: block;
+        width: 100%;
+      }
 
 
-  /* =========================
+      /* =========================
      FILA
   ========================= */
 
-  tbody tr {
-    display: grid;
+      tbody tr {
+        display: grid;
 
-    /*
+        /*
        #1 | persona              | puntaje
           | tiempo + aprobado   | puntaje
     */
 
-    grid-template-columns: 42px minmax(0, 1fr) auto;
+        grid-template-columns: 42px minmax(0, 1fr) auto;
 
-    grid-template-rows: auto auto;
+        grid-template-rows: auto auto;
 
-    grid-template-areas:
-      "pos student score"
-      "pos meta    score";
+        grid-template-areas:
+          "pos student score"
+          "pos meta    score";
 
-    align-items: center;
+        align-items: center;
 
-    column-gap: 10px;
-    row-gap: 3px;
+        column-gap: 10px;
+        row-gap: 3px;
 
-    padding: 13px 14px;
+        padding: 13px 14px;
 
-    border-top: 1px solid var(--border);
-  }
+        border-top: 1px solid var(--border);
+      }
 
 
-  /* =========================
+      /* =========================
      CELDAS
   ========================= */
 
-  tbody td {
-    border: 0;
-    padding: 0;
-  }
+      tbody td {
+        border: 0;
+        padding: 0;
+      }
 
 
-  /* POSICIÓN */
+      /* POSICIÓN */
 
-  tbody td:nth-child(1) {
-    grid-area: pos;
+      tbody td:nth-child(1) {
+        grid-area: pos;
 
-    width: auto;
+        width: auto;
 
-    align-self: center;
-  }
-
-
-  /* PERSONA */
-
-  tbody td:nth-child(2) {
-    grid-area: student;
-
-    min-width: 0;
-  }
+        align-self: center;
+      }
 
 
-  /* PUNTAJE */
+      /* PERSONA */
 
-  tbody td:nth-child(3) {
-    grid-area: score;
+      tbody td:nth-child(2) {
+        grid-area: student;
 
-    align-self: center;
-    justify-self: end;
-
-    text-align: right;
-
-    white-space: nowrap;
-  }
+        min-width: 0;
+      }
 
 
-  /*
+      /* PUNTAJE */
+
+      tbody td:nth-child(3) {
+        grid-area: score;
+
+        align-self: center;
+        justify-self: end;
+
+        text-align: right;
+
+        white-space: nowrap;
+      }
+
+
+      /*
      TIEMPO + APROBADO
 
      Los dos se colocan en la misma
      posición "meta".
   */
 
-  tbody td:nth-child(4) {
-    grid-area: meta;
+      tbody td:nth-child(4) {
+        grid-area: meta;
 
-    width: max-content;
+        width: max-content;
 
-    justify-self: start;
+        justify-self: start;
 
-    font-size: 11px;
-  }
+        font-size: 11px;
+      }
 
-  tbody td:nth-child(5) {
-    grid-area: meta;
+      tbody td:nth-child(5) {
+        grid-area: meta;
 
-    width: max-content;
+        width: max-content;
 
-    justify-self: start;
+        justify-self: start;
 
-    /*
+        /*
       El estado se coloca a continuación
       del tiempo.
     */
-    margin-left: 75px;
+        margin-left: 75px;
 
-    font-size: 11px;
-  }
+        font-size: 11px;
+      }
 
 
-  /* =========================
+      /* =========================
      PERSONA
   ========================= */
 
-  .student {
-    display: flex;
+      .student {
+        display: flex;
 
-    align-items: center;
+        align-items: center;
 
-    gap: 9px;
+        gap: 9px;
 
-    min-width: 0;
-  }
+        min-width: 0;
+      }
 
-  .avatar {
-    width: 32px;
-    height: 32px;
+      .avatar {
+        width: 32px;
+        height: 32px;
 
-    flex-shrink: 0;
-  }
+        flex-shrink: 0;
+      }
 
 
-  /* =========================
+      /* =========================
      NOMBRE
   ========================= */
 
-  .student {
-    font-size: 14px;
-  }
+      .student {
+        font-size: 14px;
+      }
 
 
-  /* =========================
+      /* =========================
      PUNTAJE
   ========================= */
 
-  .score-cell {
-    font-size: 14px;
+      .score-cell {
+        font-size: 14px;
 
-    text-align: right;
+        text-align: right;
 
-    white-space: nowrap;
-  }
+        white-space: nowrap;
+      }
 
 
-  /* =========================
+      /* =========================
      TIEMPO
   ========================= */
 
-  .time-cell {
-    color: var(--gray);
+      .time-cell {
+        color: var(--gray);
 
-    font-size: 11px;
+        font-size: 11px;
 
-    white-space: nowrap;
-  }
+        white-space: nowrap;
+      }
 
-  .time-cell i {
-    margin-right: 4px;
-  }
+      .time-cell i {
+        margin-right: 4px;
+      }
 
 
-  /* =========================
+      /* =========================
      APROBADO
   ========================= */
 
-  .status {
-    display: inline-flex;
+      .status {
+        display: inline-flex;
 
-    align-items: center;
+        align-items: center;
 
-    gap: 4px;
+        gap: 4px;
 
-    font-size: 11px;
+        font-size: 11px;
 
-    white-space: nowrap;
-  }
+        white-space: nowrap;
+      }
 
 
-  /* =========================
+      /* =========================
      FOOTER
   ========================= */
 
-  .footer-bottom {
-    flex-direction: row;
+      .footer-bottom {
+        flex-direction: row;
 
-    align-items: center;
+        align-items: center;
 
-    justify-content: space-between;
+        justify-content: space-between;
 
-    gap: 12px;
+        gap: 12px;
 
-    width: 100%;
-  }
+        width: 100%;
+      }
 
-  .footer-brand {
-    white-space: nowrap;
-  }
+      .footer-brand {
+        white-space: nowrap;
+      }
 
-  .footer-chile {
-    white-space: nowrap;
+      .footer-chile {
+        white-space: nowrap;
 
-    flex-shrink: 0;
-  }
+        flex-shrink: 0;
+      }
 
-}
-
+    }
   </style>
 </head>
 
@@ -911,21 +905,21 @@
   <main>
 
     <section class="rules-card">
-      <div class="rules-text">
-        <div class="rules-icon">
-          <i class="fas fa-id-card"></i>
-        </div>
-        <div>
-          <strong>Quiz de conducción Clase B</strong>
-          <span>· Máximo 38 puntos <br>· Aprueba desde 33 puntos <br>· Desempate por menor tiempo.</span>
-        </div>
+
+      <div class="rules-header">
+        <img src="/img/newnewlogo.jpg" alt="Logo memanejo" class="rules-logo">
+        <strong class="rules-title">Quiz de conducción Clase B</strong>
       </div>
 
-      <!--  -->
       <a class="quiz-btn" href="/paginas/quiz/quiz-nivelacion/index.html">
         <i class="fas fa-bolt"></i>
         HACER QUIZ
       </a>
+
+      <p class="rules-conditions">
+        Máximo 38 puntos · Aprueba desde 33 puntos · Desempate por menor tiempo
+      </p>
+
     </section>
 
     <div class="section-heading">
