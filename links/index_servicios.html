@@ -2,13 +2,31 @@
 <html lang="es">
 
 <head>
+
   <meta charset="UTF-8">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>memanejo servicios</title>
+
+
+  <!-- =========================
+       FUENTES
+  ========================== -->
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
+
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+
+  <!-- =========================
+       FONT AWESOME
+  ========================== -->
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
 
   <style>
     :root {
@@ -21,458 +39,1007 @@
       --white: #ffffff;
     }
 
+
     * {
       box-sizing: border-box;
     }
 
+
+    html,
     body {
       margin: 0;
+      padding: 0;
+      width: 100%;
+    }
+
+
+    body {
       font-family: "Inter", sans-serif;
+
       color: var(--text);
+
       background: var(--bg);
     }
 
+
+    /* =========================================================
+       PÁGINA
+    ========================================================= */
+
     .page {
+      width: 100%;
       min-height: 100vh;
-      padding: 70px 7vw 90px;
+
+      padding: 56px 20px 30px;
     }
 
+
     .services-shell {
+      width: 100%;
       max-width: 1180px;
+
       margin: 0 auto;
     }
 
-    /* ===== ENCABEZADO ===== */
+
+    /* =========================================================
+       ENCABEZADO
+    ========================================================= */
+
     .services-header {
-      margin-bottom: 42px;
+      margin-bottom: 38px;
     }
+
 
     .eyebrow {
       display: flex;
       align-items: center;
+
       gap: 9px;
+
       margin: 0 0 13px;
+
       color: var(--blue);
+
       font-size: 12px;
       font-weight: 800;
+
       letter-spacing: .12em;
     }
 
+
     .eyebrow::before {
       content: "";
-      width: 28px;
+      width: 26px;
       height: 2px;
-      background: var(--blue);
       border-radius: 10px;
+      background: var(--blue);
     }
+
 
     h1 {
       max-width: 650px;
       margin: 0;
-      font-size: clamp(52px, 6vw, 78px);
-      line-height: .98;
-      letter-spacing: -0.055em;
+      font-size: clamp(48px, 13vw, 76px);
+      line-height: .96;
+      letter-spacing: -.055em;
       font-weight: 800;
     }
 
+
     .intro {
-      max-width: 570px;
-      margin: 19px 0 0;
+      max-width: 540px;
+
+      margin: 18px 0 0;
+
       color: var(--muted);
-      font-size: 16px;
-      line-height: 1.65;
+
+      font-size: 15px;
+
+      line-height: 1.6;
     }
-/* ===== CARDS ===== */
-
-.services-list {
-  display: grid;
-  gap: 12px;
-  margin-bottom: 60px;
-}
-
-.service-card {
-  position: relative;
-  display: grid;
-  grid-template-columns: 72px minmax(0, 1fr) 46px;
-  align-items: center;
-  min-height: 108px;
-  padding: 16px 42px 16px 42px;
-  background: var(--white);
-  border: 1px solid var(--muted);
-  border-radius: 999px;
-
-  text-decoration: none;
-  color: inherit;
-  overflow: hidden;
-
-  transition:
-    transform .25s ease,
-    border-color .25s ease,
-    box-shadow .25s ease;
-}
-
-.service-card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 14px 35px rgba(0, 9, 104, .08);
-  border: 1px solid var(--blue);
-}
-
-/* ===== LOGO ===== */
-
-.service-icon {
-  width: 58px;
-  height: 58px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  border: 1px solid #000;
-  border-radius: 16px;
-  overflow: hidden;
-}
-
-.service-icon img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  padding: 6px;
-  display: block;
-}
 
 
-/* ===== CONTENIDO ===== */
+    /* =========================================================
+       CONTENEDOR DE LA ESCALERA
+    ========================================================= */
 
-.service-content {
-  min-width: 0;
-  padding: 0 8px;
-}
+    .services-stack {
+      width: 100%;
+      max-width: 430px;
 
-.service-content h2 {
-  margin: 0 0 2px;
-  font-size: 18px;
-  font-weight: 750;
-  letter-spacing: -.02em;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.service-content p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.45;
-  overflow-wrap: break-word;
-}
-
-/* ===== FLECHA ===== */
-
-.service-arrow {
-  width: 42px;
-  height: 42px;
-  display: grid;
-  place-items: center;
-  background: var(--navy);
-  border-radius: 50%;
-  color: var(--line);
-  font-size: 18px;
-  transition: transform .25s ease;
-}
-
-/* La flecha avanza hacia la derecha */
-.service-card:hover .service-arrow {
-  transform: scale(1.2);
-  transform: translateX(12px);
-}
-
-@media (min-width: 850px) {
-  .services-list {
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-/* =========================================
-   TABLET
-========================================= */
-
-@media (max-width: 850px) {
-
-  .service-card {
-    grid-template-columns: 62px minmax(0, 1fr) 42px;
-
-    min-height: 96px;
-
-    padding: 14px 18px 14px 28px;
-  }
-
-  .service-icon {
-    width: 52px;
-    height: 52px;
-    border-radius: 15px;
-  }
-
-  .service-icon img {
-    padding: 5px;
-  }
-
-  .service-content {
-    padding: 0 10px;
-  }
-
-  .service-content h2 {
-    font-size: 17px;
-    margin-bottom: 4px;
-  }
-
-  .service-content p {
-    font-size: 12px;
-    line-height: 1.4;
-  }
-
-  .service-arrow {
-    width: 40px;
-    height: 40px;
-    font-size: 13px;
-  }
-}
+      margin: 0 auto;
+    }
 
 
-/* =========================================
-   MOBILE
-========================================= */
+    /*
+     * El alto ahora considera:
+     *
+     * 4 cabeceras visibles
+     * +
+     * contenido de la card frontal
+     */
 
-@media (max-width: 600px) {
-  .page {
-    padding-left: 10px;
-    padding-right: 10px;
-  }
+    .cards {
+      position: relative;
 
-  .services-list {
-    gap: 10px;
-    margin-bottom: 38px;
-  }
+      width: 100%;
 
-  .service-card {
-    grid-template-columns: 52px minmax(0, 1fr) 36px;
-    min-height: 82px;
-    padding: 11px 12px 11px 18px;
-    border-radius: 999px;
-  }
-
-  .service-icon {
-    width: 46px;
-    height: 46px;
-
-    border-radius: 13px;
-  }
-
-  .service-icon img {
-    padding: 4px;
-  }
-
-  .service-content {
-    padding: 0 8px;
-  }
-
-  .service-content h2 {
-    margin: 0 0 2px;
-
-    font-size: 14px;
-    line-height: 1.2;
-  }
-
-  .service-content p {
-    font-size: 10px;
-    line-height: 1.35;
-  }
-
-  .service-arrow {
-    width: 32px;
-    height: 32px;
-
-    font-size: 11px;
-  }
-
-  .service-card:hover {
-    transform: scale(1.02);
-  }
-
-  .service-card:hover .service-arrow {
-    transform: translateX(3px);
-  }
-}
+      height: 430px;
+    }
 
 
-/* =========================================
-   MOBILE PEQUEÑO
-========================================= */
+    /* =========================================================
+       CARD
+    ========================================================= */
 
-@media (max-width: 400px) {
+    .service-card {
+      position: absolute;
+      left: 0;
+      right: 0;
 
-  .service-card {
-    grid-template-columns: 48px minmax(0, 1fr) 34px;
-    padding-left: 15px;
-    padding-right: 10px;
-  }
+      /*
+   * Cada card se hace progresivamente más angosta
+   * hacia atrás, de forma simétrica.
+   */
+      margin-left: calc(var(--step) * 9px);
+      margin-right: calc(var(--step) * 9px);
 
-  .service-icon {
-    width: 42px;
-    height: 42px;
-    border-radius: 12px;
-  }
+      width: auto;
 
-  .service-content {
-    padding: 0 6px;
-  }
+      background: var(--white);
+      border: 1px solid #1738ff;
+      border-radius: 26px;
 
-  .service-content h2 {
-    font-size: 13px;
-  }
+      box-shadow:
+        0 7px 22px rgba(0, 9, 104, .07);
 
-  .service-content p {
-    font-size: 9px;
-  }
+      overflow: hidden;
 
-  .service-arrow {
-    width: 30px;
-    height: 30px;
-  }
-}
+      /*
+   * 0 = frente
+   * 1 = detrás
+   * 2 = detrás
+   * 3 = fondo
+   */
+      top:
+        calc(164px - (var(--step) * 55px));
 
-    /* =========================
-   FOOTER DEL MODAL
-========================= */
+      /*
+   * Cada card hacia atrás aumenta
+   * progresivamente su altura.
+   */
+      min-height:
+        calc(260px + (var(--step) * 12px));
+
+      /*
+   * Sin scale ni translateX.
+   * El centrado lo hacen los márgenes
+   * laterales iguales.
+   */
+      transform: none;
+
+      transform-origin: center bottom;
+
+      transition:
+        top .55s cubic-bezier(.22, 1, .36, 1),
+        margin-left .55s cubic-bezier(.22, 1, .36, 1),
+        margin-right .55s cubic-bezier(.22, 1, .36, 1),
+        min-height .55s cubic-bezier(.22, 1, .36, 1),
+        box-shadow .4s ease;
+
+      cursor: pointer;
+    }
+
+
+    /*
+ * Card frontal
+ */
+    .service-card[data-front="true"] {
+      min-height: 260px;
+
+      box-shadow:
+        0 18px 42px rgba(0, 9, 104, .14);
+    }
+
+
+    /* =========================================================
+       CABECERA
+    ========================================================= */
+
+    .service-header {
+      display: flex;
+      align-items: center;
+
+      gap: 13px;
+
+      min-height: 76px;
+
+      padding: 14px 17px;
+
+      cursor: pointer;
+    }
+
+
+    .service-icon {
+      width: 46px;
+      height: 46px;
+
+      flex: 0 0 46px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      overflow: hidden;
+
+      background: #fff;
+
+      border: 1px solid #111;
+
+      border-radius: 14px;
+    }
+
+
+    .service-icon img {
+      width: 100%;
+      height: 100%;
+
+      padding: 6px;
+
+      object-fit: contain;
+    }
+
+
+    .service-title {
+      margin: 0;
+      color: var(--text);
+      font-size: 18px;
+      line-height: 1.25;
+      font-weight: 800;
+      letter-spacing: -.02em;
+    }
+
+
+    /* =========================================================
+       CONTENIDO
+    ========================================================= */
+
+    .service-content {
+      max-height: 0;
+      padding: 0 22px;
+      overflow: hidden;
+
+      opacity: 0;
+
+      transform: translateY(8px);
+
+      transition:
+        max-height .45s ease,
+        padding .45s ease,
+        opacity .25s ease,
+        transform .35s ease;
+    }
+
+
+    /*
+     * SOLAMENTE la card frontal
+     * despliega el contenido.
+     */
+
+    .service-card[data-front="true"] .service-content {
+      max-height: 190px;
+      padding: 35px 22px 24px;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+
+    .service-description {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+
+    /* =========================================================
+       BOTÓN
+    ========================================================= */
+
+    .service-button {
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      gap: 8px;
+
+      width: fit-content;
+
+      margin: 0 auto;
+
+      padding: 12px 60px;
+
+      color: #fff;
+
+      background: var(--navy);
+
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+      transition:
+        transform .6s ease;
+    }
+
+
+    .service-button:hover {
+      background: var(--blue);
+
+    }
+    .service-button:hover i{
+      transform: translateX(6px);
+    }
+
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
 
     .footer-bottom {
       width: 100%;
-      margin-top: 18px;
+
+      margin-top: 32px;
+
       padding-top: 12px;
-      border-top: 1px solid rgba(0, 0, 0, 0.08);
+
+      border-top:
+        1px solid rgba(0, 0, 0, .08);
+
       display: flex;
+
       align-items: center;
+
       justify-content: space-between;
+
+      color: #777;
+
       font-size: 11px;
-      color: #6e6d6d;
     }
+
 
     .footer-brand {
       display: flex;
+
       align-items: center;
+
       gap: 5px;
     }
 
+
     .footer-brand a {
       display: flex;
+
       align-items: center;
+
       text-decoration: none;
     }
+
 
     .footer-brand img {
       width: 24px;
       height: 24px;
+
       object-fit: cover;
+
       border-radius: 50%;
     }
 
-    .footer-brand small,
-    .footer-brand .text-secondary {
+
+    .footer-brand small {
       color: #999;
     }
 
+
     .footer-chile {
-      color: #777;
-      font-size: 11px;
       white-space: nowrap;
     }
+
+
+    /* =========================================================
+       DESKTOP
+    ========================================================= */
+
+    @media (min-width: 850px) {
+
+      .page {
+        padding: 70px 7vw 40px;
+      }
+
+
+      .services-stack {
+        max-width: 560px;
+      }
+
+
+      .cards {
+        height: 500px;
+      }
+
+
+      .service-card {
+        top:
+          calc(210px - (var(--step) * 68px));
+
+        border-radius: 30px;
+
+        transform:
+          scale(calc(1 - (var(--step) * .02)));
+      }
+
+
+      .service-header {
+        min-height: 92px;
+
+        padding: 17px 24px;
+
+        gap: 16px;
+      }
+
+
+      .service-icon {
+        width: 58px;
+        height: 58px;
+
+        flex-basis: 58px;
+
+        border-radius: 17px;
+      }
+
+
+      .service-title {
+        font-size: 1.4rem;
+      }
+
+
+      .service-card[data-front="true"] .service-content {
+        padding: 0 32px 32px;
+      }
+
+
+      .service-description {
+        max-width: 390px;
+
+        margin: 0 auto 22px;
+
+        font-size: 14px;
+      }
+
+
+      .service-button {
+        padding: 13px 30px;
+
+        font-size: 14px;
+      }
+
+    }
+
+
+    /* =========================================================
+       MOBILE PEQUEÑO
+    ========================================================= */
+
+    @media (max-width: 380px) {
+
+      .page {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+
+      .service-header {
+        padding-left: 14px;
+        padding-right: 14px;
+
+        gap: 10px;
+      }
+
+
+      .service-icon {
+        width: 42px;
+        height: 42px;
+
+        flex-basis: 42px;
+
+        border-radius: 13px;
+      }
+
+
+      .service-title {
+        font-size: 18px;
+      }
+
+
+      .cards {
+        height: 410px;
+      }
+
+
+      .service-card {
+        top:
+          calc(124px - (var(--step) * 51px));
+      }
+
+    }
   </style>
+
 </head>
+
 
 <body>
 
+
   <main class="page">
+
+
     <section class="services-shell">
 
+
+      <!-- =====================================================
+           ENCABEZADO
+      ====================================================== -->
+
       <header class="services-header">
-        <p class="eyebrow">memanejo.cl</p>
-        <h1>¿Qué necesitas<br>hoy?</h1>
+
+        <p class="eyebrow">
+          memanejo.cl
+        </p>
+
+
+        <h1>
+          ¿Qué necesitas<br>
+          hoy?
+        </h1>
+
+
         <p class="intro">
           Selecciona el servicio que buscas y continúa directamente
           con lo que necesites resolver.
         </p>
+
       </header>
 
-      <div class="services-list">
 
-        <a href="/paginas/quiz/quiz-nivelacion/" class="service-card">
-          <div class="service-icon">
-            <img src="/img/logopngicon.png" alt="Servicio">
-          </div>
-          <div class="service-content">
-            <h2>Nivelación Licencia Clase B</h2>
-            <p>Realiza el quiz de nivelación y comprueba tu nivel. <small><em>(20 preguntas)</em></small></p>
-          </div>
-          <div class="service-arrow">
-            <i class="fa-solid fa-arrow-right"></i>
-          </div>
-        </a>
+      <!-- =====================================================
+           ESCALERA DE SERVICIOS
+      ====================================================== -->
 
-        <a href="/index.html" class="service-card">
-          <div class="service-icon">
-            <img src="/img/newnewlogo.jpg" alt="Servicio">
-          </div>
-          <div class="service-content">
-            <h2>Mantención automotriz</h2>
-            <p>Encuentra soluciones y servicios para el cuidado de tu vehículo.</p>
-          </div>
-          <div class="service-arrow">
-            <i class="fa-solid fa-arrow-right"></i>
-          </div>
-        </a>
+      <div class="services-stack">
 
-        <a href="/Catalogo/index.html" class="service-card">
-          <div class="service-icon">
-            <img src="/img/logo-filtro.PNG" alt="Servicio">
-          </div>
-          <div class="service-content">
-            <h2>Repuestos</h2>
-            <p>Busca repuestos y encuentra la alternativa adecuada para tu vehículo.</p>
-          </div>
-          <div class="service-arrow">
-            <i class="fa-solid fa-arrow-right"></i>
-          </div>
-        </a>
-        <a href="/aulavirtual/" class="service-card">
-          <div class="service-icon">
-            <img src="/img/logopngicon.png" alt="Servicio">
-          </div>
-          <div class="service-content">
-            <h2>Clases de conducción</h2>
-            <p>Aprende, practica y mejora tus habilidades al volante.</p>
-          </div>
-          <div class="service-arrow">
-            <i class="fa-solid fa-arrow-right"></i>
-          </div>
-        </a>
+        <div class="cards" id="serviceCards">
+
+
+          <!-- =================================================
+               CARD 1
+          ================================================== -->
+
+          <article class="service-card">
+            <div class="service-header">
+              <div class="service-icon">
+                <img src="/img/logopngicon.png" alt="">
+              </div>
+
+              <h2 class="service-title">
+                Nivelación Licencia Clase B
+              </h2>
+
+            </div>
+
+
+            <div class="service-content">
+
+              <p class="service-description">
+                Realiza el quiz de nivelación y comprueba tu nivel
+                <br><em>(20 preguntas)</em>.
+              </p>
+
+
+              <a href="/paginas/quiz/quiz-nivelacion/" class="service-button">
+
+                Ir al quiz
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+              </a>
+
+            </div>
+
+          </article>
+
+
+          <!-- =================================================
+               CARD 2
+          ================================================== -->
+
+          <article class="service-card">
+
+            <div class="service-header">
+
+              <div class="service-icon">
+
+                <img src="/img/newnewlogo.jpg" alt="">
+
+              </div>
+
+
+              <h2 class="service-title">
+                Mantención automotriz
+              </h2>
+
+            </div>
+
+
+            <div class="service-content">
+
+              <p class="service-description">
+                Encuentra soluciones y servicios para el cuidado
+                de tu vehículo.
+              </p>
+
+
+              <a href="/index.html" class="service-button">
+
+                Agendar mantención
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+              </a>
+
+            </div>
+
+          </article>
+
+
+          <!-- =================================================
+               CARD 3
+          ================================================== -->
+
+          <article class="service-card">
+
+            <div class="service-header">
+
+              <div class="service-icon">
+
+                <img src="/img/logo-filtro.PNG" alt="">
+
+              </div>
+
+
+              <h2 class="service-title">
+                Repuestos
+              </h2>
+
+            </div>
+
+
+            <div class="service-content">
+
+              <p class="service-description">
+                Busca repuestos y encuentra la alternativa adecuada
+                para tu vehículo.
+              </p>
+
+
+              <a href="/Catalogo/index.html" class="service-button">
+
+                Ir a catálogo de repuestos
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+              </a>
+
+            </div>
+
+          </article>
+
+
+          <!-- =================================================
+               CARD 4
+          ================================================== -->
+
+          <article class="service-card">
+
+            <div class="service-header">
+
+              <div class="service-icon">
+
+                <img src="/img/logopngicon.png" alt="">
+
+              </div>
+
+
+              <h2 class="service-title">
+                Clases de conducción
+              </h2>
+
+            </div>
+
+
+            <div class="service-content">
+
+              <p class="service-description">
+                Aprende, practica y mejora tus habilidades
+                al volante.
+              </p>
+
+
+              <a href="/aulavirtual/" class="service-button">
+
+                Conocer Aula Virtual
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+              </a>
+
+            </div>
+
+          </article>
+
+
+        </div>
 
       </div>
+
     </section>
-    <!-- Footer pequeño del modal -->
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
     <div class="footer-bottom">
+
+
       <span class="footer-brand">
+
+
         <a href="https://memanejo.cl" title="Ir a memanejo.cl">
+
           <img src="/img/newnewlogo.jpg" alt="Logo memanejo.cl">
+
         </a>
-        <span>memanejo.cl</span>
-        <span class="text-secondary">·</span>
-        <small class="text-secondary">2026</small>
+
+
+        <span>
+          memanejo.cl
+        </span>
+
+
+        <span>
+          ·
+        </span>
+
+
+        <small>
+          2026
+        </small>
+
+
       </span>
+
 
       <span class="footer-chile">
         Chile 🇨🇱
       </span>
+
+
     </div>
+
+
   </main>
+
+
+  <!-- =======================================================
+       JAVASCRIPT
+  ======================================================== -->
+
+  <script>
+
+    (() => {
+
+
+      const cards = [
+        ...document.querySelectorAll(".service-card")
+      ];
+
+
+      if (!cards.length) {
+        return;
+      }
+
+
+      /*
+       * ORDEN INICIAL
+       *
+       * El último elemento del array
+       * es la card frontal.
+       *
+       * 3 = fondo
+       * 2 = atrás
+       * 1 = atrás
+       * 0 = FRENTE
+       */
+
+      let order = [
+        3,
+        2,
+        1,
+        0
+      ];
+
+
+      /* =====================================================
+         RENDER
+      ====================================================== */
+
+      function render() {
+
+
+        const total =
+          order.length;
+
+
+        order.forEach(
+          (cardIndex, position) => {
+
+
+            /*
+             * Convertimos la posición
+             * en profundidad.
+             *
+             * depth 0 = frente
+             * depth 1 = atrás
+             * depth 2 = atrás
+             * depth 3 = fondo
+             */
+
+            const depth =
+              total - 1 - position;
+
+
+            const card =
+              cards[cardIndex];
+
+
+            /*
+             * La posición vertical
+             * la controla CSS.
+             */
+
+            card.style.setProperty(
+              "--step",
+              depth
+            );
+
+
+            /*
+             * La card frontal siempre
+             * queda por encima.
+             */
+
+            card.style.zIndex =
+              String(
+                100 - depth
+              );
+
+
+            /*
+             * Solo la frontal muestra
+             * contenido y botón.
+             */
+
+            card.dataset.front =
+              depth === 0
+                ? "true"
+                : "false";
+
+          }
+        );
+
+      }
+
+
+      /* =====================================================
+         LLEVAR CARD AL FRENTE
+      ====================================================== */
+
+      function bringToFront(index) {
+
+
+        /*
+         * Si ya está adelante,
+         * no hacemos nada.
+         */
+
+        if (
+          order[
+          order.length - 1
+          ] === index
+        ) {
+
+          return;
+
+        }
+
+
+        /*
+         * Eliminamos la card
+         * de su posición actual.
+         */
+
+        order =
+          order.filter(
+            item => item !== index
+          );
+
+
+        /*
+         * La ponemos al frente.
+         */
+
+        order.push(index);
+
+
+        render();
+
+      }
+
+
+      /* =====================================================
+         CLICK SOLO EN CABECERA
+      ====================================================== */
+
+      cards.forEach(
+        (card, index) => {
+
+
+          const header =
+            card.querySelector(
+              ".service-header"
+            );
+
+
+          if (!header) {
+            return;
+          }
+
+
+          header.addEventListener(
+            "click",
+            () => {
+
+              bringToFront(index);
+
+            }
+          );
+
+        }
+      );
+
+
+      /*
+       * Estado inicial.
+       */
+
+      render();
+
+
+    })();
+
+  </script>
+
 
 </body>
 
