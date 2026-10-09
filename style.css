@@ -218,7 +218,13 @@ body {
     background: #dc143c;
     border-color: #dc143c;
 }
-
+.mm-tag.genuine {
+    border: 1px solid transparent;
+    border-radius: 999px;
+    background:
+        linear-gradient(#111, #111) padding-box,
+        linear-gradient(135deg, #f2ff00, #00e5ff, #1738ff) border-box;
+}
 .mm-cuerpo {
     flex: 1;
     display: flex;

@@ -1,0 +1,19 @@
+[
+    {
+        "vehiculoId": "CV-GM89L-A1",
+        "memanejoId": "CV-GM89L",
+        "alias": "",
+        "patente": "",
+        "marca": "",
+        "modelo": "",
+        "anio": null,
+        "transmision": "",
+        "kilometraje": null,
+        "vencimientos": {
+            "revisionTecnica": null,
+            "permisoCirculacion": null,
+            "soap": null
+        },
+        "fechaRegistro": "2026-10-03"
+    }
+]
