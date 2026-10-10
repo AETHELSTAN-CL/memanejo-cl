@@ -79,15 +79,14 @@ body {
 }
 
 .lp-btn-whats {
-    background: #000;
-    color: #fff;
+    background: #fff;
+    color: #222;
     border-color: #06ba48;
 
 }
 
 .lp-btn-whats:hover {
     background: #fff;
-    color: #06ba48;
 
 }
 
@@ -97,8 +96,7 @@ body {
 }
 
 .lp-btn-whats:hover i {
-    transform: scale(1.15);
-    color: #000;
+    transform: scale(1.25);
 }
 
 .lp-btn-ghost:hover {
@@ -556,7 +554,7 @@ body {
 ======================= */
 @media (max-width: 768px) {
     .modern-slider-section {
-        margin-top: 10px;
+        margin-top: 20px;
     }
 
     .slider-container {
@@ -2544,12 +2542,12 @@ body {
     margin: 0;
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
+    align-items: center;
     gap: 12px;
     font-size: clamp(3rem, 7vw, 6rem);
     font-weight: 800;
     line-height: .95;
-    text-align: left;
+    text-align: center;
 }
 
 #titulo-rotativo span {
@@ -2570,14 +2568,13 @@ body {
     .titulo-rotativo-box {
         width: auto;
         display: flex;
-        align-items: flex-start;
-        justify-content: flex-start;
-        text-align: left;
-        margin: 0 15px 0;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
     }
 
     #titulo-rotativo {
-        font-size: clamp(2.8rem, 8vw, 7rem);
+        font-size: clamp(3rem, 8vw, 7rem);
         flex-direction: column;
         gap: 0;
         line-height: .95;
@@ -2612,7 +2609,6 @@ body {
 .steps-wrap .eyebrow {
     display: inline-block;
     color: var(--crimson);
-    font-size: 12px;
     font-weight: 800;
     text-transform: uppercase;
 }
@@ -2620,10 +2616,10 @@ body {
 #servicios .section-head h2 {
     margin: 0;
     color: #fff;
-    font-size: 58px;
     font-weight: 800;
     line-height: 0.98;
-    letter-spacing: -2.5px;
+    font-size: 46px;
+    letter-spacing: -2px;
 }
 
 #servicios .section-head p {
@@ -2631,35 +2627,12 @@ body {
     margin: 18px 0 0;
     color: var(--text-soft);
     font-size: 16px;
-    line-height: 1.6;
+    line-height: 1.1;
 }
 
-
-/* Pantallas intermedias */
-@media (max-width: 900px) {
-    #servicios .section-head h2 {
-        font-size: 46px;
-        letter-spacing: -2px;
-    }
-
-    #servicios .section-head {
-        margin-bottom: 26px;
-    }
-}
 
 /* Móvil */
 @media (max-width: 600px) {
-
-    #servicios .section-head h2 {
-        font-size: 34px;
-        line-height: 1.05;
-        letter-spacing: -1.2px;
-    }
-
-    #servicios .section-head p {
-        margin-top: 14px;
-        font-size: 14px;
-    }
 
     #servicios .eyebrow {
         margin-bottom: 10px;
