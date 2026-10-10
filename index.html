@@ -51,12 +51,12 @@
   <!-- Estilos -->
   <link rel="stylesheet" href="style.css" />
   <script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    (function (c, l, a, r, i, t, y) {
+      c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
+      t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+      y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
     })(window, document, "clarity", "script", "yrqgen53ql");
-</script>
+  </script>
 </head>
 
 <body>
@@ -110,10 +110,10 @@
               <img src="img/kit-mantencion-VW-web.jpeg" class="card-img-top" alt="Volkswagen 2">
             </div>
             <div class="mm-cuerpo text-center">
-              <h5 class="mt-3">Repuestos Volkswagen<br><small>Desde</small><strong><br>$229.900</strong></h5>
+              <h5 class="mt-3">Comprar<br><small>Desde</small><strong><br>$229.900</strong></h5>
               <a href="https://wa.me/56946914558?text=Hola%21,%20quiero%20reservar%20detailling%20automotriz.%20Mi%20modelo%20es:"
                 class="mm-cta cta-book" target="_blank" rel="noopener noreferrer">
-                Cotizar
+                Seleccionar modelo
                 <i class="fa-solid fa-arrow-right"></i>
               </a>
               <p class="small">
@@ -155,14 +155,14 @@
         <div class="mm-fondo-blur">
           <div class="mm-tarjeta overflow-hidden rounded-4">
             <div class="card-img-wrap">
-              <span class="mm-tag hot">Desde <strong>$149.990</strong></span>
+              <span class="mm-tag marcas">Desde <strong>$149.990</strong></span>
               <img src="img/hd-logo.jpeg" class="card-img-top" alt="Lubricentro 3">
             </div>
             <div class="mm-cuerpo text-center">
               <h5 class="mt-3">Mantención <strong>Hyundai</strong><br><small>Todos los modelos</small></h5>
               <a href="https://wa.me/56946914558?text=Hola%21,%20quiero%20cotizar%20Mantención.%20Mi%20modelo%20es:"
                 class="mm-cta cta-book" target="_blank" rel="noopener noreferrer">
-                Cotizar
+                Seleccionar modelo
                 <i class="fa-solid fa-arrow-right"></i>
               </a>
               <p class="small">
@@ -226,7 +226,7 @@
               <img src="img/kit-mantencion-mazda.jpeg" class="card-img-top" alt="Lubricentro 2">
             </div>
             <div class="mm-cuerpo text-center">
-              <h5 class="mt-3">Repuestos Mazda <br><small>Desde</small><strong><br>$289.900</strong></h5>
+              <h5 class="mt-3">Repuestos Originales <br><small>Desde</small><strong><br>$289.900</strong></h5>
               <a href="https://wa.me/56946914558?text=Hola%21,%20quiero%20reservar%20detailling%20automotriz.%20Mi%20modelo%20es:"
                 class="mm-cta cta-book" target="_blank" rel="noopener noreferrer">
                 Cotizar
@@ -249,7 +249,7 @@
               <img src="img/car-brake.png" class="card-img-top" alt="Lubricentro 3">
             </div>
             <div class="mm-cuerpo text-center">
-              <h5 class="mt-3">Cambio pastillas de frenos<br><small>desde</small><strong><br>$89.900</strong></h5>
+              <h5 class="mt-3">Cambio pastillas de frenos<br><small>Desde</small><strong><br>$89.900</strong></h5>
               <a href="https://wa.me/56946914558?text=Hola%21,%20quiero%20cotizar%20frenos.%20Mi%20modelo%20es:"
                 class="mm-cta cta-book" target="_blank" rel="noopener noreferrer">
                 Cotizar
@@ -557,43 +557,49 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content modal-cursos">
         <div class="modal-header">
-          <h5 class="modal-title" id="modalConoceMasLabel"><i class="fa-regular fa-circle-check"></i> Plan memanejo
-            inicial</h5>
+          <h5 class="modal-title" id="modalConoceMasLabel">Suscripción de estudio <strong>memanejo+</strong></h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
         </div>
+
         <div class="modal-body">
-          <ul>
-            <li>
-              <strong>Guías resumidas</strong><br>
-              - Capítulos <strong>1 y 2</strong><br>
-              - Capítulos <strong>3 y 4</strong><br>
-              <small class="text-white-50">Resúmenes del Libro para la Conducción. Licencia Clase B Chile.</small>
+          <ul class="list-unstyled mb-0">
+            <li class="mb-3">
+              <strong>Incluye ID memanejo</strong>, acceso a nuestra plataforma de estudio con este contenido liberado.
+              <div class="ms-4 mt-1">
+                <div><i class="fa-regular fa-circle-check"></i> Quiz de conducción con 180 preguntas.</div>
+                <div><i class="fa-regular fa-circle-check"></i> Diccionario vial.</div>
+                <div><i class="fa-regular fa-circle-check"></i> Ejercicios para preparar la prueba teórica.</div>
+              </div>
             </li>
 
-            <li>
-              <strong>Incluye memanejo ID</strong> con acceso<strong> GRATIS</strong> a:
-              <br>- Diccionario vial.
-              <br>- Ejercicios para preparar la prueba teórica.
-            </li>
-
-            <li>
-              <strong>Valor del plan</strong><br>
-              <span class="price"><strong>$9.900 /</strong></span> <small>Acceso por 7 días.</small>
+            <li class="mb-3">
+              <strong>Descarga Guías resumidas</strong>
+              <div class="ms-4 mt-1">
+                <div><i class="fa-regular fa-circle-check"></i> Capítulos <strong>1 y 2</strong></div>
+                <div><i class="fa-regular fa-circle-check"></i> Capítulos <strong>3 y 4</strong></div>
+                <small class="text-white-50">Resúmenes del Libro para la Conducción. Licencia Clase B Chile.</small>
+              </div>
             </li>
           </ul>
 
-          <p>
+          <!-- Valor: fuera de la lista, sin punto ni guion -->
+          <div class="text-center mb-3">
+            <strong>Valor de la suscripción memanejo+</strong><br>
+            <span class="price"><strong>$7.900 /</strong></span> <small>Acceso por 7 días.</small>
+          </div>
+
+          <p class="mb-0">
             <small>
               Estudia en menos tiempo con resúmenes claros, ejercicios prácticos y herramientas diseñadas para preparar
               y aprobar el examen teórico.
             </small>
           </p>
         </div>
+
         <div class="modal-footer">
-          <a href="https://wa.me/56946914558?text=Hola,%20quiero%20Suscribirme%20al%20plan%20memanejo%20ID%20resúmenes%20de%20conducción"
-            target="_blank" class="btn btn-success">
-            <i class="fa-brands fa-whatsapp" style="color:#25D366; margin-right:2px;"></i>
-            <span>Comprar</span>
+          <a href="/aulavirtual/index.html" target="_blank" rel="noopener" class="btn btn-success btn-aula-modal">
+            <img src="/aulavirtual/img/semaforo_rotado.png" alt="" class="logo-aula">
+            <span>Ingresar al aula virtual</span>
           </a>
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
         </div>
