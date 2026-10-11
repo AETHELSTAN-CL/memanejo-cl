@@ -202,9 +202,11 @@ body {
     top: 14px;
     left: 14px;
     z-index: 2;
-    background: rgba(187, 186, 186, 0.388);
+    background:
+        linear-gradient(#111, #111) padding-box,
+        linear-gradient(135deg, #123b5d, #d5dde5, #123b5d) border-box;
     backdrop-filter: blur(3px);
-    border: 1px solid rgb(252, 252, 252);
+    border: 1px solid transparent;
     color: #fff;
     font-size: 11px;
     font-weight: 700;
@@ -225,14 +227,14 @@ body {
     border: 1px solid transparent;
     border-radius: 999px;
     background:
-        linear-gradient(#111, #111) padding-box,
+        linear-gradient(#111111fb, #111111bd) padding-box,
         linear-gradient(115deg,
             #7de7ff 0%,
             #b7a1ff 24%,
             #ffd1e8 48%,
             #b8ffe1 72%,
             #907dff 100%) border-box;
-    
+
 }
 
 .mm-tag.marcas {
@@ -298,12 +300,223 @@ body {
 .mm-cta:hover i {
     transform: translateX(6px);
 }
+.mm-cta-metal {
+  border: 1px solid transparent;
+  border-radius: 999px;
+  color: #fff;
+  background:
+    linear-gradient(#111, #111) padding-box,
+    linear-gradient(135deg, #123b5d, #d5dde5, #123b5d) border-box;
+  box-shadow: 0 0 12px rgb(213 221 229 / 18%);
+  text-decoration: none;
+  transition: box-shadow .2s ease, transform .2s ease;
+}
 
+.mm-cta-metal:hover {
+  color: #fff;
+  box-shadow: 0 0 16px rgb(213 221 229 / 32%);
+  transform: translateY(-1px);
+}
 .lp-actions {
     margin-bottom: 15px;
     gap: 30px;
 }
+.autoid-modal[hidden],
+.autoid-content[hidden] {
+  display: none !important;
+}
 
+.autoid-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  overflow-y: auto;
+  background: rgba(4, 8, 13, .68);
+  -webkit-backdrop-filter: blur(12px) saturate(125%);
+  backdrop-filter: blur(12px) saturate(125%);
+}
+
+.autoid-dialog {
+  position: relative;
+  isolation: isolate;
+  width: min(100%, 490px);
+  margin: auto;
+  padding: 1px;
+  border-radius: 25px;
+  background: linear-gradient(
+    135deg,
+    #ebf9ff,
+    #6fc9ff 18%,
+    #ffffff80 38%,
+    #5d84a9 62%,
+    #e2f1fb 82%,
+    #5ab9ef
+  );
+  box-shadow: 0 30px 90px #000b, 0 0 32px #82ceff24;
+}
+
+.autoid-dialog::before {
+  position: absolute;
+  z-index: -1;
+  inset: 1px;
+  border-radius: 24px;
+  content: "";
+  background:
+    radial-gradient(ellipse at 10% 0%, #74ceff2b, transparent 42%),
+    radial-gradient(ellipse at 100% 100%, #d0e8f814, transparent 46%),
+    rgba(13, 20, 28, .84);
+  -webkit-backdrop-filter: blur(28px) saturate(155%);
+  backdrop-filter: blur(28px) saturate(155%);
+}
+
+.autoid-content {
+  position: relative;
+  padding: 30px;
+  color: #f6f8fb;
+  font-family: inherit;
+}
+
+.autoid-close {
+  position: absolute;
+  top: 17px;
+  right: 17px;
+  display: grid;
+  width: 35px;
+  height: 35px;
+  place-items: center;
+  border: 1px solid #ffffff35;
+  border-radius: 50%;
+  color: #eaf4fb;
+  background: #ffffff0d;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.autoid-kicker {
+  display: inline-block;
+  margin-bottom: 12px;
+  color: #9fdcff;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.autoid-content h2 {
+  margin: 0;
+  color: #f6f8fb;
+  font-size: clamp(23px, 5vw, 29px);
+}
+
+.autoid-intro {
+  margin: 9px 0 23px;
+  color: #bac6d0;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.autoid-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 12px;
+}
+
+.autoid-field {
+  display: grid;
+  gap: 7px;
+  min-width: 0;
+}
+
+.autoid-field--full {
+  grid-column: 1 / -1;
+}
+
+.autoid-field label {
+  color: #dbe5ed;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.autoid-field input {
+  width: 100%;
+  min-height: 45px;
+  box-sizing: border-box;
+  padding: 0 13px;
+  border: 1px solid rgba(226, 239, 249, .3);
+  border-radius: 11px;
+  outline: none;
+  color: #fff;
+  background: rgba(4, 9, 14, .55);
+  font: inherit;
+  font-size: 13px;
+}
+
+.autoid-field input::placeholder {
+  color: #81909d;
+}
+
+.autoid-field input:focus {
+  border-color: #8bd7ff;
+  box-shadow: 0 0 0 3px #63c6ff22;
+}
+
+.autoid-submit {
+  display: flex;
+  width: 100%;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 21px;
+  border: 1px solid #e7f7ff;
+  border-radius: 13px;
+  color: #07121b;
+  background: linear-gradient(110deg, #bdeaff, #f4f8fb 48%, #91d7ff);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.autoid-privacy {
+  margin: 12px 0 0;
+  color: #94a2ae;
+  font-size: 10px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.autoid-success {
+  text-align: center;
+}
+
+.autoid-success-mark {
+  display: grid;
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 16px;
+  place-items: center;
+  border: 1px solid #b7edffb3;
+  border-radius: 50%;
+  color: #c9f0ff;
+  background: #58bce51c;
+  font-size: 25px;
+}
+
+.autoid-success p {
+  color: #b9c7d1;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+@media (max-width: 520px) {
+  .autoid-content {
+    padding: 27px 21px 22px;
+  }
+}
 @media (max-width:539px) {
     .lp-actions {
         gap: 5px;

@@ -1,0 +1,271 @@
+<style>
+    :root {
+      color-scheme: dark;
+      --autoid-blue: #69c9ff;
+      --autoid-line: rgba(212, 234, 255, .72);
+      --autoid-text: #f6f8fb;
+      --autoid-muted: #aebdca;
+    }
+    * { box-sizing: border-box; }
+    body {
+      min-height: 100vh;
+      margin: 0;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      color: var(--autoid-text);
+      background: radial-gradient(ellipse at 50% 0%, #183249 0, #0b1118 52%, #070a0e 100%);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    .mm-cuerpo { text-align: center; }
+    .mm-cuerpo h5 { margin: 0 0 20px; font-size: 16px; line-height: 1.35; }
+    .mm-cuerpo small { color: var(--autoid-muted); font-size: 13px; font-weight: 500; }
+    .mm-cuerpo strong { font-size: 26px; }
+    .mm-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      border: 1px solid rgba(220, 241, 255, .7);
+      border-radius: 999px;
+      padding: 12px 20px;
+      color: #fff;
+      background: linear-gradient(145deg, #163951, #0d1b29);
+      font: 700 14px/1 inherit;
+      text-decoration: none;
+      box-shadow: 0 8px 28px #0007, inset 0 1px #ffffff26;
+      transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+      cursor: pointer;
+    }
+    .mm-cta:hover { transform: translateY(-2px); border-color: #a7e2ff; box-shadow: 0 10px 32px #0009, 0 0 18px #61c8ff36; }
+
+    .autoid-modal[hidden] { display: none; }
+    .autoid-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      overflow-y: auto;
+      background: rgba(4, 8, 13, .67);
+      -webkit-backdrop-filter: blur(12px) saturate(125%);
+      backdrop-filter: blur(12px) saturate(125%);
+      animation: veil-in .22s ease both;
+    }
+    .autoid-dialog {
+      position: relative;
+      isolation: isolate;
+      width: min(100%, 490px);
+      margin: auto;
+      padding: 1px;
+      border-radius: 25px;
+      background: linear-gradient(135deg,
+        rgba(235, 249, 255, .98) 0%,
+        rgba(111, 201, 255, .86) 18%,
+        rgba(255, 255, 255, .5) 38%,
+        rgba(93, 132, 169, .88) 62%,
+        rgba(226, 241, 251, .96) 82%,
+        rgba(90, 185, 239, .84) 100%);
+      box-shadow: 0 30px 90px #000b, 0 0 32px #82ceff24;
+      animation: dialog-in .28s cubic-bezier(.2,.8,.2,1) both;
+    }
+    .autoid-dialog::before {
+      position: absolute;
+      z-index: -1;
+      inset: 1px;
+      border-radius: 24px;
+      content: "";
+      background:
+        radial-gradient(ellipse at 10% 0%, rgba(116, 206, 255, .17), transparent 42%),
+        radial-gradient(ellipse at 100% 100%, rgba(208, 232, 248, .08), transparent 46%),
+        rgba(13, 20, 28, .79);
+      -webkit-backdrop-filter: blur(28px) saturate(155%);
+      backdrop-filter: blur(28px) saturate(155%);
+    }
+    .autoid-content { position: relative; padding: 30px; }
+    .autoid-close {
+      position: absolute;
+      top: 17px;
+      right: 17px;
+      display: grid;
+      width: 35px;
+      height: 35px;
+      place-items: center;
+      border: 1px solid #ffffff35;
+      border-radius: 50%;
+      color: #eaf4fb;
+      background: #ffffff0d;
+      font-size: 20px;
+      cursor: pointer;
+    }
+    .autoid-close:hover { background: #ffffff1b; }
+    .autoid-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 12px;
+      color: #9fdcff;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    .autoid-kicker::before { width: 7px; height: 7px; border-radius: 50%; background: #77d4ff; box-shadow: 0 0 12px #77d4ff; content: ""; }
+    .autoid-content h2 { margin: 0; font-size: clamp(23px, 5vw, 29px); letter-spacing: -.035em; }
+    .autoid-intro { margin: 9px 0 23px; color: #bac6d0; font-size: 13px; line-height: 1.55; }
+    .autoid-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 12px; }
+    .autoid-field { display: grid; gap: 7px; min-width: 0; }
+    .autoid-field--full { grid-column: 1 / -1; }
+    .autoid-field label { color: #dbe5ed; font-size: 11px; font-weight: 700; }
+    .autoid-field input {
+      width: 100%;
+      min-height: 45px;
+      padding: 0 13px;
+      border: 1px solid rgba(226, 239, 249, .3);
+      border-radius: 11px;
+      outline: none;
+      color: #fff;
+      background: rgba(4, 9, 14, .43);
+      box-shadow: inset 0 1px 4px #0003;
+      font: inherit;
+      font-size: 13px;
+      transition: border-color .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+    .autoid-field input::placeholder { color: #81909d; }
+    .autoid-field input:focus { border-color: #8bd7ff; background: #07121bba; box-shadow: 0 0 0 3px #63c6ff22; }
+    .autoid-submit {
+      display: flex;
+      width: 100%;
+      min-height: 48px;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 21px;
+      border: 1px solid rgba(231, 247, 255, .85);
+      border-radius: 13px;
+      color: #07121b;
+      background: linear-gradient(110deg, #bdeaff, #f4f8fb 48%, #91d7ff);
+      box-shadow: 0 8px 24px #73caff20, inset 0 1px #fff;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: filter .18s, transform .18s;
+    }
+    .autoid-submit:hover { filter: brightness(1.07); transform: translateY(-1px); }
+    .autoid-privacy { margin: 12px 0 0; color: #94a2ae; font-size: 10px; line-height: 1.5; text-align: center; }
+    .autoid-success { padding: 20px 2px 6px; text-align: center; }
+    .autoid-success-mark { display: grid; width: 52px; height: 52px; margin: 0 auto 16px; place-items: center; border: 1px solid #b7edffb3; border-radius: 50%; color: #c9f0ff; background: #58bce51c; font-size: 25px; }
+    .autoid-success p { color: #b9c7d1; font-size: 13px; line-height: 1.6; }
+    @keyframes veil-in { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes dialog-in { from { opacity: 0; transform: translateY(12px) scale(.985); } to { opacity: 1; transform: translateY(0) scale(1); } }
+    @media (max-width: 520px) {
+      .autoid-content { padding: 27px 21px 22px; }
+      .autoid-dialog { border-radius: 21px; }
+      .autoid-dialog::before { border-radius: 20px; }
+      .autoid-fields { gap: 12px 9px; }
+      .autoid-field input { min-height: 44px; padding-inline: 11px; }
+    }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+  </style>
+  <body>
+  <main>
+    <div class="mm-cuerpo text-center">
+      <h5>Comprar<br><small>Desde</small><strong><br>$229.900</strong></h5>
+      <button type="button" class="mm-cta cta-book" data-autoid-open="">
+        Seleccionar modelo <span aria-hidden="true">→</span>
+      </button>
+    </div>
+  </main>
+
+  <div class="autoid-modal" id="autoid-modal" hidden="">
+    <section class="autoid-dialog" role="dialog" aria-modal="true" aria-labelledby="autoid-title" aria-describedby="autoid-description">
+      <div class="autoid-content" id="autoid-form-view">
+        <button class="autoid-close" type="button" data-autoid-close="" aria-label="Cerrar">×</button>
+        <span class="autoid-kicker">Tu auto, siempre al día</span>
+        <h2 id="autoid-title">Crea tu perfil AUTO ID</h2>
+        <p class="autoid-intro" id="autoid-description">Registra tu vehículo para llevar el control de sus mantenciones y tener tu información automotriz en un solo lugar.</p>
+        <form id="autoid-form">
+          <div class="autoid-fields">
+            <div class="autoid-field">
+              <label for="autoid-name">Nombre</label>
+              <input id="autoid-name" name="nombre" autocomplete="given-name" placeholder="Tu nombre" required="">
+            </div>
+            <div class="autoid-field">
+              <label for="autoid-lastname">Apellido</label>
+              <input id="autoid-lastname" name="apellido" autocomplete="family-name" placeholder="Tu apellido" required="">
+            </div>
+            <div class="autoid-field">
+              <label for="autoid-brand">Marca del vehículo</label>
+              <input id="autoid-brand" name="marca" autocomplete="off" placeholder="Ej. Toyota" required="">
+            </div>
+            <div class="autoid-field">
+              <label for="autoid-model">Modelo</label>
+              <input id="autoid-model" name="modelo" autocomplete="off" placeholder="Ej. Corolla" required="">
+            </div>
+            <div class="autoid-field autoid-field--full">
+              <label for="autoid-email">Correo electrónico</label>
+              <input id="autoid-email" name="correo" type="email" autocomplete="email" placeholder="tu@correo.cl" required="">
+            </div>
+          </div>
+          <button class="autoid-submit" type="submit">Crear mi perfil AUTO ID <span aria-hidden="true">→</span></button>
+          <p class="autoid-privacy">Usaremos estos datos para crear tu perfil de conductor y asociar tu vehículo.</p>
+        </form>
+      </div>
+      <div class="autoid-content autoid-success" id="autoid-success" hidden="" aria-live="polite">
+        <div class="autoid-success-mark" aria-hidden="true">✓</div>
+        <h2>¡Listo para crear tu AUTO ID!</h2>
+        <p id="autoid-success-message"></p>
+        <button class="mm-cta" type="button" data-autoid-close="">Cerrar</button>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    (() => {
+      const modal = document.getElementById('autoid-modal');
+      const formView = document.getElementById('autoid-form-view');
+      const successView = document.getElementById('autoid-success');
+      const successMessage = document.getElementById('autoid-success-message');
+      const form = document.getElementById('autoid-form');
+      let lastFocus = null;
+
+      function openModal() {
+        lastFocus = document.activeElement;
+        modal.hidden = false;
+        document.body.style.overflow = 'hidden';
+        document.getElementById('autoid-name').focus({ preventScroll: true });
+      }
+      function closeModal() {
+        modal.hidden = true;
+        document.body.style.overflow = '';
+        if (lastFocus) lastFocus.focus();
+      }
+      document.querySelector('[data-autoid-open]').addEventListener('click', openModal);
+      modal.querySelectorAll('[data-autoid-close]').forEach(button => button.addEventListener('click', closeModal));
+      modal.addEventListener('click', event => { if (event.target === modal) closeModal(); });
+      document.addEventListener('keydown', event => {
+        if (event.key === 'Escape' && !modal.hidden) closeModal();
+        if (event.key === 'Tab' && !modal.hidden) {
+          const items = [...modal.querySelectorAll('button:not([disabled]), input:not([disabled])')].filter(el => !el.closest('[hidden]'));
+          const first = items[0], last = items[items.length - 1];
+          if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+          else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+        }
+      });
+      form.addEventListener('submit', event => {
+        event.preventDefault();
+        const data = new FormData(form);
+        const nombre = String(data.get('nombre')).trim();
+        const marca = String(data.get('marca')).trim();
+        const modelo = String(data.get('modelo')).trim();
+        successMessage.textContent = `Gracias, ${nombre}. Dejamos ${marca} ${modelo} listo para asociarlo a tu perfil de conductor.`;
+        formView.hidden = true;
+        successView.hidden = false;
+        successView.querySelector('[data-autoid-close]').focus();
+      });
+    })();
+  </script>
+
+
+</body>
