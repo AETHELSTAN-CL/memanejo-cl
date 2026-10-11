@@ -701,6 +701,73 @@ ${mensaje}`;
       icon.style.transform = 'rotate(0deg)';
     });
   });
+(() => {
+  const modal = document.getElementById('autoid-modal');
+  const options = document.getElementById('autoid-options');
+  const formView = document.getElementById('autoid-form-view');
+  const successView = document.getElementById('autoid-success');
+  const catalogLink = document.getElementById('autoid-catalog-link');
+  const catalogLabel = document.getElementById('autoid-catalog-label');
+  const form = document.getElementById('autoid-form');
+  if (!modal || !options || !formView || !successView || !form) return;
+
+  let lastFocus = null;
+
+  function openModal(event) {
+    event.preventDefault();
+    const trigger = event.currentTarget;
+    lastFocus = trigger;
+    const brand = trigger.dataset.brand || 'tu marca';
+    const catalogUrl = trigger.dataset.catalogUrl || '#';
+    catalogLink.href = catalogUrl;
+    catalogLabel.textContent = `Ver catálogo ${brand}`;
+    modal.hidden = false;
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal.hidden = true;
+    document.body.style.overflow = '';
+    options.hidden = false;
+    formView.hidden = true;
+    successView.hidden = true;
+    if (lastFocus) lastFocus.focus();
+  }
+
+  document.querySelectorAll('[data-autoid-open]').forEach(button => {
+    button.addEventListener('click', openModal);
+  });
+  document.querySelector('[data-autoid-form-open]').addEventListener('click', () => {
+    options.hidden = true;
+    formView.hidden = false;
+    document.getElementById('autoid-name').focus();
+  });
+  document.querySelector('[data-autoid-back]').addEventListener('click', () => {
+    formView.hidden = true;
+    options.hidden = false;
+    document.querySelector('[data-autoid-form-open]').focus();
+  });
+  modal.querySelectorAll('[data-autoid-close]').forEach(button => {
+    button.addEventListener('click', closeModal);
+  });
+  modal.addEventListener('click', event => {
+    if (event.target === modal) closeModal();
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && !modal.hidden) closeModal();
+  });
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    const data = new FormData(form);
+    const nombre = String(data.get('nombre') || '').trim();
+    const marca = String(data.get('marca') || '').trim();
+    const modelo = String(data.get('modelo') || '').trim();
+    document.getElementById('autoid-success-message').textContent =
+      `Gracias, ${nombre}. Recibimos los datos de tu ${marca} ${modelo}.`;
+    formView.hidden = true;
+    successView.hidden = false;
+  });
+})();
 
   // --- BOTON GO TOP ---
   const goTop = document.getElementById('goTop');

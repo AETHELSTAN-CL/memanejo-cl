@@ -321,202 +321,166 @@ body {
     margin-bottom: 15px;
     gap: 30px;
 }
-.autoid-modal[hidden],
-.autoid-content[hidden] {
-  display: none !important;
-}
+    .autoid-modal { --autoid-text: #f5f5f3; --autoid-muted: #b9b9b5; }
 
-.autoid-modal {
-  position: fixed;
-  inset: 0;
-  z-index: 99999;
-  display: grid;
-  place-items: center;
-  padding: 20px;
-  overflow-y: auto;
-  background: rgba(4, 8, 13, .68);
-  -webkit-backdrop-filter: blur(12px) saturate(125%);
-  backdrop-filter: blur(12px) saturate(125%);
-}
-
-.autoid-dialog {
-  position: relative;
-  isolation: isolate;
-  width: min(100%, 490px);
-  margin: auto;
-  padding: 1px;
-  border-radius: 25px;
-  background: linear-gradient(
-    135deg,
-    #ebf9ff,
-    #6fc9ff 18%,
-    #ffffff80 38%,
-    #5d84a9 62%,
-    #e2f1fb 82%,
-    #5ab9ef
-  );
-  box-shadow: 0 30px 90px #000b, 0 0 32px #82ceff24;
-}
-
-.autoid-dialog::before {
-  position: absolute;
-  z-index: -1;
-  inset: 1px;
-  border-radius: 24px;
-  content: "";
-  background:
-    radial-gradient(ellipse at 10% 0%, #74ceff2b, transparent 42%),
-    radial-gradient(ellipse at 100% 100%, #d0e8f814, transparent 46%),
-    rgba(13, 20, 28, .84);
-  -webkit-backdrop-filter: blur(28px) saturate(155%);
-  backdrop-filter: blur(28px) saturate(155%);
-}
-
-.autoid-content {
-  position: relative;
-  padding: 30px;
-  color: #f6f8fb;
-  font-family: inherit;
-}
-
-.autoid-close {
-  position: absolute;
-  top: 17px;
-  right: 17px;
-  display: grid;
-  width: 35px;
-  height: 35px;
-  place-items: center;
-  border: 1px solid #ffffff35;
-  border-radius: 50%;
-  color: #eaf4fb;
-  background: #ffffff0d;
-  font-size: 20px;
-  cursor: pointer;
-}
-
-.autoid-kicker {
-  display: inline-block;
-  margin-bottom: 12px;
-  color: #9fdcff;
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-}
-
-.autoid-content h2 {
-  margin: 0;
-  color: #f6f8fb;
-  font-size: clamp(23px, 5vw, 29px);
-}
-
-.autoid-intro {
-  margin: 9px 0 23px;
-  color: #bac6d0;
-  font-size: 13px;
-  line-height: 1.55;
-}
-
-.autoid-fields {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px 12px;
-}
-
-.autoid-field {
-  display: grid;
-  gap: 7px;
-  min-width: 0;
-}
-
-.autoid-field--full {
-  grid-column: 1 / -1;
-}
-
-.autoid-field label {
-  color: #dbe5ed;
-  font-size: 11px;
-  font-weight: 700;
-}
-
-.autoid-field input {
-  width: 100%;
-  min-height: 45px;
-  box-sizing: border-box;
-  padding: 0 13px;
-  border: 1px solid rgba(226, 239, 249, .3);
-  border-radius: 11px;
-  outline: none;
-  color: #fff;
-  background: rgba(4, 9, 14, .55);
-  font: inherit;
-  font-size: 13px;
-}
-
-.autoid-field input::placeholder {
-  color: #81909d;
-}
-
-.autoid-field input:focus {
-  border-color: #8bd7ff;
-  box-shadow: 0 0 0 3px #63c6ff22;
-}
-
-.autoid-submit {
-  display: flex;
-  width: 100%;
-  min-height: 48px;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 21px;
-  border: 1px solid #e7f7ff;
-  border-radius: 13px;
-  color: #07121b;
-  background: linear-gradient(110deg, #bdeaff, #f4f8fb 48%, #91d7ff);
-  font: inherit;
-  font-size: 13px;
-  font-weight: 800;
-  cursor: pointer;
-}
-
-.autoid-privacy {
-  margin: 12px 0 0;
-  color: #94a2ae;
-  font-size: 10px;
-  line-height: 1.5;
-  text-align: center;
-}
-
-.autoid-success {
-  text-align: center;
-}
-
-.autoid-success-mark {
-  display: grid;
-  width: 52px;
-  height: 52px;
-  margin: 0 auto 16px;
-  place-items: center;
-  border: 1px solid #b7edffb3;
-  border-radius: 50%;
-  color: #c9f0ff;
-  background: #58bce51c;
-  font-size: 25px;
-}
-
-.autoid-success p {
-  color: #b9c7d1;
-  font-size: 13px;
-  line-height: 1.6;
-}
-
-@media (max-width: 520px) {
-  .autoid-content {
-    padding: 27px 21px 22px;
-  }
-}
+    .autoid-modal[hidden] { display: none; }
+    .autoid-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      overflow-y: auto;
+      background: rgba(5, 6, 8, .76);
+      -webkit-backdrop-filter: blur(14px) saturate(110%);
+      backdrop-filter: blur(14px) saturate(110%);
+      animation: veil-in .22s ease both;
+    }
+    .autoid-dialog {
+      position: relative;
+      isolation: isolate;
+      width: min(100%, 490px);
+      margin: auto;
+      padding: 1px;
+      border-radius: 25px;
+      background: linear-gradient(135deg, #123b5d, #d5dde5 48%, #123b5d);
+      box-shadow: 0 30px 90px #000c, 0 0 26px #d5dde51c;
+      animation: dialog-in .28s cubic-bezier(.2,.8,.2,1) both;
+    }
+    .autoid-dialog::before {
+      position: absolute;
+      z-index: -1;
+      inset: 1px;
+      border-radius: 24px;
+      content: "";
+      background: rgba(25, 29, 34, .58);
+      -webkit-backdrop-filter: blur(30px) saturate(180%);
+      backdrop-filter: blur(30px) saturate(180%);
+    }
+    .autoid-content { position: relative; padding: 30px; color: var(--autoid-text); font-family: inherit; }
+    .autoid-close {
+      position: absolute;
+      top: 17px;
+      right: 17px;
+      display: grid;
+      width: 35px;
+      height: 35px;
+      place-items: center;
+      border: 1px solid #ffffff35;
+      border-radius: 50%;
+      color: #e5e6e7;
+      background: #ffffff0a;
+      font-size: 20px;
+      cursor: pointer;
+    }
+    .autoid-close:hover { background: #ffffff1b; transform: scale(1.06); }
+    .autoid-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 12px;
+      color: #d5dde5;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    .autoid-kicker::before { width: 7px; height: 7px; border-radius: 50%; background: #d5dde5; box-shadow: 0 0 10px #d5dde580; content: ""; }
+    .autoid-content h2 { margin: 0; font-size: clamp(23px, 5vw, 29px); letter-spacing: -.035em; }
+    .autoid-intro { margin: 9px 0 23px; color: #bac6d0; font-size: 13px; line-height: 1.55; }
+    .autoid-choice {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      gap: 12px;
+      margin-top: 12px;
+      min-height: 52px;
+      padding: 8px 20px;
+      border: 1px solid rgba(213, 221, 229, .52);
+      border-radius: 999px;
+      color: #f6f8fb;
+      background: rgba(255, 255, 255, .07);
+      text-align: left;
+      text-decoration: none;
+      font: inherit;
+      cursor: pointer;
+      transition: background .22s ease, border-color .22s ease, transform .22s ease, box-shadow .22s ease;
+    }
+    .autoid-choice:hover { transform: scale(1.02); border-color: rgba(230, 234, 237, .78); background: rgba(255, 255, 255, .12); box-shadow: 0 8px 24px #0006, 0 0 18px #d5dde51c; }
+    .autoid-choice:active { transform: scale(.99); }
+    .autoid-choice-primary { border-color: rgba(213, 221, 229, .72); background: rgba(213, 221, 229, .12); }
+    .autoid-choice-copy { flex: 1; }
+    .autoid-choice-icon { display: grid; width: 42px; height: 42px; flex: 0 0 42px; place-items: center; border: 1px solid #d5dde550; border-radius: 50%; color: #e1e4e6; background: #d5dde50b; font-size: 16px; }
+    .autoid-choice strong { display: block; font-size: 13px; }
+    .autoid-choice small { display: none; }
+    .autoid-choice-arrow { flex: 0 0 auto; color: #d5dde5; transition: transform .22s ease; }
+    .autoid-choice-primary:hover .fa-arrow-right { transform: translateX(6px); }
+    #autoid-catalog-link:hover .fa-arrow-up-right-from-square { transform: translate(3px, -3px); }
+    .mm-cta .fa-arrow-right { transition: transform .22s ease; }
+    .mm-cta:hover .fa-arrow-right { transform: translateX(5px); }
+    .autoid-submit { border-radius: 999px; transition: filter .2s ease, transform .2s ease, box-shadow .2s ease; }
+    .autoid-submit:hover { transform: scale(1.025); filter: brightness(1.07); box-shadow: 0 10px 26px #73caff38; }
+    .autoid-submit:active { transform: scale(.99); }
+    .autoid-back { position: absolute; top: 17px; left: 20px; display: inline-flex; align-items: center; gap: 7px; padding: 8px 12px; border: 1px solid rgba(213, 221, 229, .58); border-radius: 999px; color: #f2f3f4; background: rgba(20, 23, 27, .48); box-shadow: inset 0 1px #ffffff1c; font: inherit; font-size: 11px; cursor: pointer; transition: transform .2s ease, background .2s ease, border-color .2s ease; }
+    .autoid-back:hover { transform: scale(1.04); border-color: #d5dde5; background: rgba(255, 255, 255, .12); }
+    .autoid-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 12px; }
+    .autoid-field { display: grid; gap: 7px; min-width: 0; }
+    .autoid-field--full { grid-column: 1 / -1; }
+    .autoid-field label { color: #dbe5ed; font-size: 11px; font-weight: 700; }
+    .autoid-field input {
+      width: 100%;
+      min-height: 45px;
+      box-sizing: border-box;
+      padding: 0 13px;
+      border: 1px solid rgba(213, 221, 229, .25);
+      border-radius: 11px;
+      outline: none;
+      color: #fff;
+      background: rgba(4, 9, 14, .43);
+      box-shadow: inset 0 1px 4px #0003;
+      font: inherit;
+      font-size: 13px;
+      transition: border-color .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+    .autoid-field input::placeholder { color: #81909d; }
+    .autoid-field input:focus { border-color: #d5dde5; background: #111; box-shadow: 0 0 0 3px #d5dde51c; }
+    .autoid-submit {
+      display: flex;
+      width: 100%;
+      min-height: 48px;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 21px;
+      border: 1px solid rgba(238, 240, 241, .85);
+      border-radius: 999px;
+      color: #07121b;
+      background: #d5dde5;
+      box-shadow: 0 8px 24px #d5dde51a, inset 0 1px #fff;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: filter .2s ease, transform .2s ease, box-shadow .2s ease;
+    }
+    .autoid-submit:hover { filter: brightness(1.07); transform: scale(1.025); box-shadow: 0 10px 26px #d5dde530; }
+    .autoid-submit:active { transform: scale(.99); }
+    .autoid-choice:focus-visible, .autoid-submit:focus-visible, .autoid-back:focus-visible, .autoid-close:focus-visible { outline: 2px solid #f0f2f3; outline-offset: 3px; }
+    .autoid-privacy { margin: 12px 0 0; color: #94a2ae; font-size: 10px; line-height: 1.5; text-align: center; }
+    .autoid-success { padding: 20px 2px 6px; text-align: center; }
+    .autoid-success-mark { display: grid; width: 52px; height: 52px; margin: 0 auto 16px; place-items: center; border: 1px solid #d5dde5a6; border-radius: 50%; color: #e6e8e9; background: #d5dde512; font-size: 25px; }
+    .autoid-success p { color: #b9c7d1; font-size: 13px; line-height: 1.6; }
+    @keyframes veil-in { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes dialog-in { from { opacity: 0; transform: translateY(12px) scale(.985); } to { opacity: 1; transform: translateY(0) scale(1); } }
+    @media (max-width: 520px) {
+      .autoid-content { padding: 27px 21px 22px; }
+      .autoid-dialog { border-radius: 21px; }
+      .autoid-dialog::before { border-radius: 20px; }
+      .autoid-fields { gap: 12px 9px; }
+      .autoid-field input { min-height: 44px; padding-inline: 11px; }
+    }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
 @media (max-width:539px) {
     .lp-actions {
         gap: 5px;
