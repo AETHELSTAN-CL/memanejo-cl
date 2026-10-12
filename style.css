@@ -81,12 +81,13 @@ body {
 .lp-btn-whats {
     background: #fff;
     color: #222;
-    border-color: #06ba48;
+    
 
 }
 
 .lp-btn-whats:hover {
     background: #fff;
+    transform: scale(1.09);
 
 }
 
@@ -123,6 +124,7 @@ body {
     justify-content: center;
     width: 100%;
     margin: 0 auto;
+    
 }
 
 .mm-slider-track {
@@ -131,6 +133,7 @@ body {
     padding: 0 20px;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
+    
 }
 
 .mm-fondo-blur {
@@ -282,7 +285,7 @@ body {
     justify-content: center;
     gap: 8px;
     margin-top: 16px;
-    padding: 11px 22px;
+    padding: 9px 28px;
     border-radius: 40px;
     font-weight: 700;
     font-size: 13.5px;
@@ -856,19 +859,23 @@ body {
    Slider card cuadrado
 ======================= */
 .modern-slider-section {
-    overflow-x: auto;
     padding-left: 10px;
-    padding-top: 20px;
-    padding-bottom: 40px;
+    padding-bottom: 20px;
 }
 
 .slider-container {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
+    scrollbar-width: none;        /* Firefox */
+    -ms-overflow-style: none;
 
 }
-
+.slider-container::-webkit-scrollbar {
+    display: none;                /* Safari y Chrome */
+    width: 0;
+    height: 0;
+}
 .slider-track {
     display: flex;
     gap: 24px;
@@ -999,10 +1006,6 @@ body {
     .modern-slider-section {
         margin-top: 20px;
         padding-left: 15px;
-    }
-
-    .slider-container {
-        padding: 0 20px;
     }
 
     .slider-card {
@@ -1702,11 +1705,9 @@ body {
 .modal-ruta .btn,
 .modal-cursos .btn {
     border-radius: 36px;
-    padding: 9px 24px;
+    padding: 9px 28px;
     font-size: 0.85rem;
     font-weight: 600;
-    margin-bottom: 2px;
-    margin-top: 2opx;
 }
 
 .modal-ruta .btn-suscribirse,
@@ -1715,7 +1716,7 @@ body {
     align-items: center;
     justify-content: center;
     gap: 9px;
-    padding: 9px 24px;
+    padding: 9px 60px;
     border: 1px solid #25d366;
     border-radius: 999px;
     color: #fff;
@@ -1795,9 +1796,9 @@ body {
 
     border: 1px solid rgba(18, 18, 18, 0.469);
     border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.234);
-    -webkit-backdrop-filter: blur(6px) saturate(150%);
-    backdrop-filter: blur(6px) saturate(150%);
+    background-color: rgba(255, 255, 255, 0.048);
+    -webkit-backdrop-filter: blur(26px) saturate(150%);
+    backdrop-filter: blur(26px) saturate(150%);
 
     filter: invert(1);
     opacity: 1;
@@ -1809,7 +1810,17 @@ body {
     transform: scale(1.08);
 }
 
+.aula-modal-footer > .aula-modal-opcion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin: 0 !important;
+}
 
+.aula-modal-opcion > * {
+    margin: 0 !important;
+}
 .aula-modal-condiciones {
     color: rgba(255, 255, 255, 0.7);
     font-size: 0.7rem;
@@ -1840,22 +1851,13 @@ body {
         font-weight: bold;
     }
 
-    .modal-ruta .modal-body,
-    .modal-cursos .modal-body {
-        padding: 1rem;
-    }
-
     .modal-ruta .modal-footer,
     .modal-cursos .modal-footer {
         flex-direction: column;
-        gap: 0.5rem;
+        gap: 1.5rem;
     }
 
-    .modal-ruta .btn,
-    .modal-cursos .btn {
-        width: 85%;
-        white-space: nowrap;
-    }
+    
 }
 
 /* Alinear botones en el centro solo en escritorio */
@@ -3035,7 +3037,7 @@ body {
 }
 
 #titulo-rotativo {
-    margin: 0;
+    padding-bottom: 30px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -3044,6 +3046,7 @@ body {
     font-weight: 800;
     line-height: .95;
     text-align: center;
+    
 }
 
 #titulo-rotativo span {
@@ -3074,6 +3077,7 @@ body {
         flex-direction: column;
         gap: 0;
         line-height: .95;
+        padding-bottom: 20px;
     }
 }
 
