@@ -3100,7 +3100,7 @@ body {
     display: inline-block;
     margin-bottom: 12px;
     color: var(--crimson);
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 800;
     letter-spacing: 1.6px;
     text-transform: uppercase;
@@ -3111,8 +3111,16 @@ body {
     color: var(--crimson);
     font-weight: 800;
     text-transform: uppercase;
+    font-size: 14px;
 }
-
+.steps-wrap h2 {
+    margin: 0;
+    color: #fff;
+    font-weight: 800;
+    line-height: 0.98;
+    font-size: 46px;
+    letter-spacing: -2px;
+}
 #servicios .section-head h2 {
     margin: 0;
     color: #fff;
