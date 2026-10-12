@@ -111,7 +111,7 @@
             </div>
             <div class="mm-cuerpo text-center">
               <h5 class="mt-3">Comprar<br><small>Desde</small><strong><br>$229.900</strong></h5>
-              <a href="https://wa.me/56946914558?text=Hola%21,%20quiero%20agendar%3A%20Mantenci%C3%B3n%20preventiva%20%28%24229.900%29."
+              <a href="https://wa.me/56946914558?text=Hola%21,%20quiero%20cotizar%3A%20repuestos%20Volkswagen%20%28%24229.900%29."
                 class="mm-cta cta-book mm-cta-metal" target="_blank" rel="noopener noreferrer">
                 Seleccionar modelo
                 <i class="fa-solid fa-arrow-right"></i>
@@ -237,7 +237,7 @@
             </div>
             <div class="mm-cuerpo text-center">
               <h5 class="mt-3">Repuestos Originales <br><small>Desde</small><strong><br>$289.900</strong></h5>
-              <a href="https://wa.me/56946914558?text=Hola%21,%20quiero%20agendar%3A%20Mantenci%C3%B3n%20preventiva%20%28%24289.900%29."
+              <a href="https://wa.me/56946914558?text=Hola%21,%20quiero%20cotizar%3A%20repuestos%20Mazda%20%28%24289.900%29."
                 class="mm-cta cta-book mm-cta-metal" target="_blank" rel="noopener noreferrer">
                 Cotizar
                 <i class="fa-solid fa-arrow-right"></i>
@@ -289,7 +289,7 @@
         <button class="autoid-close" type="button" data-autoid-close aria-label="Cerrar">×</button>
         <span class="autoid-kicker">Tu auto, siempre al día</span>
         <h2 id="autoid-title">
-          ¿Aún no tienes <strong>AUTO ID</strong> para tu vehículo?
+          ¿Aún no tienes <strong>ID AUTO</strong> para tu vehículo?
         </h2>
         <p class="autoid-intro">Crea tu cuenta para registrar tu vehículo y llevar el control de sus mantenciones.
           También puedes ir directo al catálogo de repuestos.</p>
@@ -299,9 +299,9 @@
               administra su información.</small></span>
           <i class="fa-solid fa-arrow-right autoid-choice-arrow" aria-hidden="true"></i>
         </button>
-        <a class="autoid-choice" id="autoid-catalog-link" href="URL_CATALOGO_HYUNDAI">
+        <a class="autoid-choice" id="autoid-catalog-link" href="/Catalogo/index.html">
           <span class="autoid-choice-icon"><i class="fa-solid fa-gears" aria-hidden="true"></i></span>
-          <span class="autoid-choice-copy"><strong id="autoid-catalog-label">Ver catálogo Hyundai</strong><small>Busca
+          <span class="autoid-choice-copy"><strong id="autoid-catalog-label">Ver catálogo</strong><small>Busca
               repuestos y compra directamente.</small></span>
           <i class="fa-solid fa-arrow-up-right-from-square autoid-choice-arrow" aria-hidden="true"></i>
         </a>
@@ -337,15 +337,15 @@
                 required>
             </div>
           </div>
-          <button class="autoid-submit" type="submit">Crear mi perfil AUTO ID <span aria-hidden="true">→</span></button>
+          <button class="autoid-submit" type="submit">Crear mi perfil ID AUTO <span aria-hidden="true">→</span></button>
           <p class="autoid-privacy">Usaremos estos datos para crear tu perfil de conductor y asociar tu vehículo.</p>
         </form>
       </div>
       <div class="autoid-content autoid-success" id="autoid-success" hidden aria-live="polite">
         <div class="autoid-success-mark" aria-hidden="true">✓</div>
-        <h2>¡Listo para crear tu AUTO ID!</h2>
+        <h2>¡Listo para crear tu ID AUTO!</h2>
         <p id="autoid-success-message"></p>
-        <button class="mm-cta" type="button" data-autoid-close>Cerrar</button>
+        <button class="mm-cta-modal" type="button" data-autoid-close>Cerrar</button>
       </div>
     </section>
   </div>
@@ -358,7 +358,7 @@
       const form = document.getElementById("autoid-form");
 
       if (!modal || !formView || !successView || !form) {
-        console.error("AUTO ID: falta el HTML del modal o del formulario.");
+        console.error("ID AUTO: falta el HTML del modal o del formulario.");
         return;
       }
 
@@ -1268,7 +1268,7 @@
 
           <p>
             <span id="rotadorCursos"
-              data-frases="Entrenamiento Vial,Cursos de Conducción Particular,Mantención automotriz,Quiz de conducción,memanejo+,!Suscríbete!, Plataforma de estudio,Licencia clase B, Repuestos automotrices">
+              data-frases="Entrenamiento Vial,Cursos de Conducción Particular,Mantención automotriz,Quiz de conducción,memanejo+,!Suscríbete!, Plataforma de estudio,Licencia Clase B, Repuestos automotrices">
             </span>
           </p>
         </div>
@@ -1400,13 +1400,16 @@
 
 
 
-  <!-- Espacio Publicitario Talleres -->
+  <!-- Espacio Publicitario moderno -->
   <section id="mm-espacio-publicidad" class="text-center bg-light">
     <div class="mm-publicidad-wrapper mx-auto" data-aos="fade-down">
       <!-- Botón -->
       <button class="btn btn-warning btn-sm rounded-pill mb-3 px-4" type="button" data-bs-toggle="collapse"
-        data-bs-target="#contenidoPublicidad" aria-expanded="false" aria-controls="contenidoPublicidad"> Descubre un
-        beneficio exclusivo</button> <!-- Contenido desplegable -->
+        data-bs-target="#contenidoPublicidad" aria-expanded="false" aria-controls="contenidoPublicidad">
+        <i class="fa-solid fa-gift" style="margin-right:6px;"></i>
+        <span class="btn-label">Descubre un beneficio exclusivo</span>
+      </button>
+      <!-- Contenido desplegable -->
       <div class="collapse" id="contenidoPublicidad">
         <div class="mm-publicidad-contenido p-3 rounded-4"> <!-- Imagen vertical -->
           <div class="video-container mb-3"> <img src="img/mecanicorg.jpg" alt="Mecánicos"
@@ -1416,8 +1419,11 @@
               <strong>Sigue en vivo tu mantención</strong>
               <small>Más transparencia y confianza durante todo el proceso.<br></small>
             </p>
-            <a href="#contact" class="btn-publicidad-taller btn btn-warning btn-sm rounded-pill px-4 mt-2">
-              <i class="fa-solid fa-calendar-check me-2"></i>Programar mantención
+            <a href="https://wa.me/56946914558?text=Hola%2C%20mi%20nombre%20es%3A%20%2C%20quiero%20programar%20mi%20mantenci%C3%B3n.%20Mi%20auto%20es.%20Marca%3A%20Modelo%3A"
+              target="_blank" rel="noopener noreferrer"
+              class="btn-publicidad-taller btn btn-warning btn-sm rounded-pill px-4 mt-2">
+              <i class="fa-solid fa-calendar-check me-2"></i>
+              Programar mantención
             </a>
 
             <p class="text-bottom">Sin costo adicional.</p>

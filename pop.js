@@ -159,28 +159,27 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
-  // --- ESPACIO PUBLICITARIO MODERNO ---
-  const segundoBtn = document.querySelector('#mm-espacio-publicidad button[data-bs-target="#contenidoPublicidad"]');
-  const segundoCollapseEl = document.getElementById('contenidoPublicidad');
+ // --- ESPACIO PUBLICITARIO MODERNO ---
+(() => {
+  const btn   = document.querySelector('#mm-espacio-publicidad [data-bs-target="#contenidoPublicidad"]');
+  const panel = document.getElementById('contenidoPublicidad');
+  if (!btn || !panel) return;
 
-  if (segundoBtn && segundoCollapseEl) {
-    // Actualizar texto al abrir
-    segundoCollapseEl.addEventListener('shown.bs.collapse', () => {
-      segundoBtn.textContent = "Cerrar Publicidad";
-    });
+  const TEXTO_CERRADO = '<i class="fa-solid fa-gift" style="margin-right:6px;"></i>Descubre un beneficio exclusivo';
+  const TEXTO_ABIERTO = 'Cerrar Publicidad';
 
-    // Actualizar texto al cerrar
-    segundoCollapseEl.addEventListener('hidden.bs.collapse', () => {
-      segundoBtn.innerHTML = `<i class="fa-solid fa-gift" style="margin-right:6px;"></i>Descubre un beneficio exclusivo`;
-    });
+  btn.innerHTML = TEXTO_CERRADO;
 
-    // Inicializar texto según estado actual
-    if (segundoCollapseEl.classList.contains('show')) {
-      segundoBtn.textContent = "Cerrar Publicidad";
-    } else {
-      segundoBtn.innerHTML = `<i class="fa-solid fa-gift" style="margin-right:6px;"></i>Descubre un beneficio exclusivo`;
-    }
-  }
+  panel.addEventListener('show.bs.collapse', (e) => {
+    if (e.target !== panel) return;
+    btn.textContent = TEXTO_ABIERTO;   // solo texto, sin ícono
+  });
+
+  panel.addEventListener('hide.bs.collapse', (e) => {
+    if (e.target !== panel) return;
+    btn.innerHTML = TEXTO_CERRADO;     // vuelve con ícono
+  });
+})();
   /* =========================================================
      ENVIAR MEMANEJO CHAT A WHATSAPP
      ========================================================= */
