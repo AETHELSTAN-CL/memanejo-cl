@@ -3,17 +3,22 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#111111">
+
+  <!-- iOS / app web -->
   <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <title>Mantención Automotriz, Repuestos y Entrenamiento Vial</title>
+
+  <!-- Título y descripción (los mismos en SEO, Open Graph y Twitter) -->
+  <title>memanejo.cl | Mantención, repuestos y licencia clase B</title>
   <meta name="description"
-    content="En memanejo.cl encuentras mantención para tu vehículo, quiz y clases de conducción, venta de repuestos y alianzas con talleres mecánicos. ¡Confianza y respaldo en todo Chile!">
+    content="Mantención para tu auto, catálogo de repuestos, tu ID AUTO digital y preparación para la licencia clase B. Aula virtual, quiz y talleres aliados en Chile.">
   <meta name="author" content="Leonardo Azo" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.memanejo.cl/" />
+
   <!-- Favicons -->
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32-rounded.png">
@@ -22,27 +27,47 @@
   <link rel="apple-touch-icon" sizes="152x152" href="/img/apple-touch-icon-152.png">
   <link rel="apple-touch-icon" sizes="167x167" href="/img/apple-touch-icon-167.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon-180.png">
-  <link rel="manifest" href="/site.webmanifest"> <!-- Open Graph -->
-  <meta property="og:title" content="Mantención Automotriz, Repuestos y Entrenamiento Vial" />
-  <meta property="og:description"
-    content="Mantención automotriz, quiz y clases de conducción, venta de repuestos, alianzas con talleres y atención personalizada. Todo en un solo sitio: memanejo.cl." />
-  <meta property="og:image" content="https://www.memanejo.cl/img/photo-output_1.jpeg" />
+  <link rel="manifest" href="/site.webmanifest">
+
+  <!-- Open Graph -->
+  <meta property="og:site_name" content="memanejo.cl" />
+  <meta property="og:locale" content="es_CL" />
+  <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.memanejo.cl/" />
-  <meta property="og:type" content="website" /> <!-- Twitter Cards -->
+  <meta property="og:title" content="memanejo.cl | Mantención, repuestos y licencia clase B" />
+  <meta property="og:description"
+    content="Mantención para tu auto, catálogo de repuestos, tu ID AUTO digital y preparación para la licencia clase B. Aula virtual, quiz y talleres aliados en Chile." />
+  <meta property="og:image" content="https://www.memanejo.cl/img/photo-output_1.jpeg" />
+
+  <!-- Twitter Cards -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Mantención Automotriz, Repuestos y Entrenamiento Vial" />
+  <meta name="twitter:title" content="memanejo.cl | Mantención, repuestos y licencia clase B" />
   <meta name="twitter:description"
-    content="Servicios automotrices, clases de conducción y repuestos con respaldo profesional en Chile." />
-  <meta name="twitter:image" content="https://www.memanejo.cl/img/photo-output_1.jpeg" /> <!-- Schema Markup -->
-  <!-- Para iOS Safari -->
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <script
-    type="application/ld+json"> { "@context": "https://schema.org", "@type": "Organization", "name": "memanejo.cl", "url": "https://www.memanejo.cl", "logo": "https://www.memanejo.cl/img/logopngicon.png", "sameAs": ["https://www.memanejo.cl"], "contactPoint": { "@type": "ContactPoint", "contactType": "customer service", "availableLanguage": "Spanish" } } </script>
+    content="Mantención para tu auto, catálogo de repuestos, tu ID AUTO digital y preparación para la licencia clase B. Aula virtual, quiz y talleres aliados en Chile." />
+  <meta name="twitter:image" content="https://www.memanejo.cl/img/photo-output_1.jpeg" />
+
+  <!-- Schema Markup -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "memanejo.cl",
+    "url": "https://www.memanejo.cl",
+    "logo": "https://www.memanejo.cl/img/logopngicon.png",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "customer service",
+      "email": "contacto@memanejo.cl",
+      "availableLanguage": "Spanish"
+    }
+  }
+  </script>
 
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <!-- AOS (animaciones al hacer scroll) -->
-  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" /> <!-- Font Awesome (iconos) -->
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+  <!-- Font Awesome (iconos) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-07XB2NNQ0J"></script>
@@ -50,6 +75,7 @@
   <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700&display=swap" rel="stylesheet">
   <!-- Estilos -->
   <link rel="stylesheet" href="style.css" />
+  <!-- Microsoft Clarity -->
   <script type="text/javascript">
     (function (c, l, a, r, i, t, y) {
       c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
@@ -58,6 +84,7 @@
     })(window, document, "clarity", "script", "yrqgen53ql");
   </script>
 </head>
+
 
 <body>
   <!-- Lubricentros Asociados (Slider Horizontal) -->
@@ -542,37 +569,8 @@
 
         </a>
 
+       
         <!-- CARD 2 -->
-        <a href="/Catalogo/index.html" class="floating-card" target="_blank">
-          <img src="img/logo-alfa-romeo.png" alt="Alfa Romeo">
-          <div class="floating-card-content">
-            <div class="floating-card-title">
-              Alfa Romeo
-            </div>
-            <div class="floating-card-text">
-              Mantención y servicios para tu vehículo
-            </div>
-          </div>
-          <i class="fa-solid fa-arrow-right floating-card-icon"></i>
-        </a>
-
-
-        <!-- CARD 3 -->
-        <a href="/Catalogo/index.html" class="floating-card" target="_blank">
-          <img src="img/volks3.jpeg" alt="Volkswagen">
-          <div class="floating-card-content">
-            <div class="floating-card-title">
-              Volkswagen
-            </div>
-            <div class="floating-card-text">
-              Mantenciones y descuentos
-            </div>
-          </div>
-          <i class="fa-solid fa-arrow-right floating-card-icon"></i>
-        </a>
-
-
-        <!-- CARD 4 -->
 
         <a href="/paginas/quiz/quiz-appweb/index.html" class="floating-card" target="_blank" rel="noopener noreferrer">
           <img src="img/logopngicon.png" alt="logo memanejo quiz">
@@ -587,7 +585,7 @@
           <i class="fa-solid fa-arrow-right floating-card-icon"></i>
         </a>
 
-        <!-- CARD 5 -->
+        <!-- CARD 3 -->
         <a href="/aulavirtual/index.html" class="floating-card" target="_blank">
           <img src="img/logopngicon.png" alt="Quiz nivelación">
           <div class="floating-card-content">
@@ -600,7 +598,7 @@
           </div>
           <i class="fa-solid fa-arrow-right floating-card-icon"></i>
         </a>
-        <!-- CARD 6 -->
+        <!-- CARD 4 -->
         <a href="/Catalogo/index.html" class="floating-card" target="_blank">
           <img src="img/logo_maxus.jpeg" alt="logo maxus">
           <div class="floating-card-content">
@@ -610,6 +608,34 @@
 
             <div class="floating-card-text">
               Todos los modelos <br>Cotiza y recibe una promoción
+            </div>
+          </div>
+          <i class="fa-solid fa-arrow-right floating-card-icon"></i>
+        </a>
+         <!-- CARD 5 -->
+        <a href="/Catalogo/index.html" class="floating-card" target="_blank">
+          <img src="img/logo-alfa-romeo.png" alt="Alfa Romeo">
+          <div class="floating-card-content">
+            <div class="floating-card-title">
+              Alfa Romeo
+            </div>
+            <div class="floating-card-text">
+              Mantención y servicios para tu vehículo
+            </div>
+          </div>
+          <i class="fa-solid fa-arrow-right floating-card-icon"></i>
+        </a>
+
+
+        <!-- CARD 6 -->
+        <a href="/Catalogo/index.html" class="floating-card" target="_blank">
+          <img src="img/volks3.jpeg" alt="Volkswagen">
+          <div class="floating-card-content">
+            <div class="floating-card-title">
+              Volkswagen
+            </div>
+            <div class="floating-card-text">
+              Mantenciones y descuentos
             </div>
           </div>
           <i class="fa-solid fa-arrow-right floating-card-icon"></i>
@@ -826,73 +852,77 @@
     </div>
   </div>
 
-  <!-- Modal Conoce Más -->
+<!-- Modal Conoce Más -->
   <div class="modal fade" id="modalConoceMas" tabindex="-1" aria-labelledby="modalConoceMasLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content modal-cursos">
+
         <div class="modal-header">
-          <h5 class="modal-title" id="modalConoceMasLabel"><strong>memanejo+</strong></h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          <h5 class="modal-title" id="modalConoceMasLabel">
+            <strong>memanejo+</strong><span class="mmplus-badge">Plan Básico</span>
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
         </div>
 
         <div class="modal-body">
-          <p class="mb-0">
-            <small>
-              Estudia en menos tiempo con resúmenes claros, ejercicios prácticos y herramientas diseñadas para preparar
-              y aprobar el examen teórico.
+          <p class="mmplus-intro">
+            Estudia en menos tiempo con resúmenes claros, ejercicios prácticos y herramientas
+            diseñadas para preparar y aprobar el examen teórico de la licencia Clase B.
           </p>
-          <ul class="list-unstyled mb-0">
-            <li class="mb-3">
-              <strong>Incluye</strong> acceso a nuestra plataforma de estudio con tu <strong>ID&nbsp;memanejo</strong>
-              personalizado que
-              libera este contenido.
-              <div class="ms-4 mt-1">
-                <div><i class="fa-regular fa-circle-check"></i> <strong>Quiz de conducción con 180 preguntas.</strong>
-                </div>
-                <div><i class="fa-regular fa-circle-check"></i> <strong>Diccionario vial.</strong></div>
-                <div><i class="fa-regular fa-circle-check"></i> <strong>Ejercicios para preparar la prueba
-                    teórica.</strong></div>
-              </div>
-            </li>
 
-            <li class="mb-3">
-              <strong>Guías resumidas</strong>
-              <div class="ms-4 mt-1">
-                <div><i class="fa-regular fa-circle-check"></i> Capítulos <strong>1 y 2</strong></div>
-                <div><i class="fa-regular fa-circle-check"></i> Capítulos <strong>3 y 4</strong></div>
-                <div><i class="fa-regular fa-circle-check"></i> Capítulos <strong>5 y 6</strong></div>
-                <div><i class="fa-regular fa-circle-check"></i> Capítulos <strong>7 y 8</strong></div>
-                <small class="text-white-50">Descarga resúmenes del Libro para la Conducción. <br>Licencia Clase B
-                  Chile.</small>
-              </div>
+          <div class="mmplus-price">
+            <span class="mmplus-tag">Precio oferta</span>
+            <div class="mmplus-price-row">
+              <strong class="mmplus-now">$7.990</strong>
+              <s class="mmplus-old"><span class="visually-hidden">Precio normal </span>$9.990</s>
+              <span class="mmplus-period">por 30 días de acceso</span>
+            </div>
+          </div>
+
+          <p class="mmplus-subtitle">Con tu suscripción accedes a:</p>
+          <ul class="mmplus-list">
+            <li>
+              <i class="fa-regular fa-circle-check" aria-hidden="true"></i>
+              <span><strong>Quiz de conducción</strong> con 180 preguntas</span>
+            </li>
+            <li>
+              <i class="fa-regular fa-circle-check" aria-hidden="true"></i>
+              <span><strong>Diccionario vial</strong></span>
+            </li>
+            <li>
+              <i class="fa-regular fa-circle-check" aria-hidden="true"></i>
+              <span><strong>Ejercicios</strong> para preparar la prueba teórica</span>
+            </li>
+            <li>
+              <i class="fa-regular fa-circle-check" aria-hidden="true"></i>
+              <span>
+                <strong>Guías resumidas</strong> de los capítulos 1 al 8
+                <small>Resúmenes descargables del Libro para la Conducción. Licencia Clase B, Chile.</small>
+              </span>
             </li>
           </ul>
         </div>
 
-        <div class="modal-footer aula-modal-footer">
-          <div class="aula-modal-opcion">
-            <a href="https://wa.me/56946914558?text=Hola%2C%20quiero%20suscribirme%20a%20ID%20memanejo" target="_blank"
-              rel="noopener noreferrer" class="btn btn-suscribirse">
+        <div class="modal-footer mmplus-footer">
+          <div class="mmplus-opcion">
+            <a href="https://wa.me/56946914558?text=Hola%2C%20quiero%20suscribirme%20a%20memanejo%2B%20Plan%20B%C3%A1sico%20(30%20d%C3%ADas)"
+              target="_blank" rel="noopener noreferrer" class="mmplus-cta">
               <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
-              <span>Suscribirse</span>
+              <span>Suscribirme por $7.990</span>
             </a>
-
-            <small class="aula-modal-condiciones">
-              <strong>memanejo+</strong> desde <strong>$7.990</strong> / 7 días
-            </small>
+            <small class="mmplus-note">La suscripción se realiza por WhatsApp.</small>
           </div>
 
-          <div class="aula-modal-opcion">
-            <a href="/aulavirtual/index.html" target="_blank" rel="noopener" class="btn btn-success btn-aula-modal">
-              <img src="/aulavirtual/img/semaforo_rotado.png" alt="" class="logo-aula">
-              <span>Ingresar Aula Virtual</span>
+          <div class="mmplus-opcion">
+            <a href="/aulavirtual/index.html" target="_blank" rel="noopener" class="mmplus-cta mmplus-cta--ghost">
+              <img src="/aulavirtual/img/semaforo_rotado.png" alt="" class="mmplus-logo"
+                onerror="this.style.display='none'">
+              <span>Ingresar al Aula Virtual</span>
             </a>
-
-            <small class="aula-modal-condiciones">
-              Conoce todos nuestros planes
-            </small>
+            <small class="mmplus-note">Conoce todos nuestros planes</small>
           </div>
         </div>
+
       </div>
     </div>
   </div>
@@ -1433,7 +1463,7 @@
           <div class="video-container mb-3"> <img src="img/mecanicorg.jpg" alt="Mecánicos"
               class="video-vertical shadow rounded-3"> </div> <!-- Tarjeta Promoción -->
           <div class="promo-banner">
-            <p class="promo-text mb-2">
+            <p class="promo-text">
               <strong>Sigue en vivo tu mantención</strong>
               <small>Más transparencia y confianza durante todo el proceso.<br></small>
             </p>
