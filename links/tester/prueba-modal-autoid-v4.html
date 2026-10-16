@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ID AUTO</title>
+
+  <!-- Font Awesome (incluye íconos de marcas como WhatsApp) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    /* ===== SOLO PARA LA PRUEBA (en tu sitio ya lo tienes) ===== */
+    :root {
+      --card: #111;
+      --crimson: #e11d48;
+      --crimson-glow: rgba(225, 29, 72, .35);
+      --text-soft: #b5b5b5;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background: #1a1a1a;
+      color: #f5f5f3;
+      font-family: 'Avenir', Verdana, Geneva, Tahoma, sans-serif;
+    }
+
+    .demo-card {
+      width: min(100%, 340px);
+      padding: 24px;
+      text-align: center;
+      background: var(--card);
+      border: 1px solid #656565;
+      border-radius: 24px;
+    }
+    .demo-card h3 { margin: 0 0 6px; font-size: 18px; }
+    .demo-card p  { margin: 0 0 4px; color: var(--text-soft); font-size: 13px; }
+    .demo-price   { margin: 12px 0 16px; color: var(--crimson); font-size: 24px; font-weight: 800; }
+    .demo-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 44px;
+      border: 1px solid #fff;
+      border-radius: 999px;
+      background: #fff;
+      color: #000;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    /* =====================================================
+       ============  COPIAR DESDE AQUÍ: CSS MODAL  =========
+       ===================================================== */
+    .autoid-modal {
+      --autoid-text: #f5f5f3;
+      --autoid-muted: rgba(255, 255, 255, .72);
+      --autoid-accent: var(--crimson, #e11d48);
+      --autoid-glow: var(--crimson-glow, rgba(225, 29, 72, .35));
+    }
+
+    .autoid-modal[hidden] { display: none; }
+
+    /* Fondo detrás del modal: oscuro, con un poco de color para que el vidrio se vea */
+    .autoid-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      overflow-y: auto;
+      background:
+        radial-gradient(circle at 25% 15%, rgba(225, 29, 72, .22), transparent 45%),
+        radial-gradient(circle at 80% 85%, rgba(130, 150, 185, .20), transparent 50%),
+        rgba(0, 0, 0, .84);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+      animation: veil-in .22s ease both;
+    }
+
+    /* ---- Liquid glass metalizado ---- */
+    .autoid-dialog {
+      position: relative;
+      isolation: isolate;
+      width: min(100%, 490px);
+      margin: auto;
+      border-radius: 28px;
+      background:
+        linear-gradient(140deg,
+          rgba(255, 255, 255, .26) 0%,
+          rgba(255, 255, 255, .06) 28%,
+          rgba(200, 208, 218, .10) 55%,
+          rgba(255, 255, 255, .20) 100%),
+        rgba(28, 30, 34, .55);
+      -webkit-backdrop-filter: blur(34px) saturate(170%) brightness(1.08);
+      backdrop-filter: blur(34px) saturate(170%) brightness(1.08);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, .65),
+        inset 0 -1px 0 rgba(0, 0, 0, .45),
+        inset 0 0 0 1px rgba(255, 255, 255, .08),
+        0 30px 80px -20px #000,
+        0 0 50px -20px var(--autoid-glow);
+      animation: dialog-in .28s cubic-bezier(.2, .8, .2, 1) both;
+    }
+
+    /* Brillo metálico + textura cepillada */
+    .autoid-dialog::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      border-radius: inherit;
+      pointer-events: none;
+      background:
+        repeating-linear-gradient(90deg, rgba(255, 255, 255, .035) 0 1px, transparent 1px 3px),
+        conic-gradient(from 210deg at 30% 0%,
+          rgba(255, 255, 255, 0),
+          rgba(255, 255, 255, .28) 12%,
+          rgba(255, 255, 255, 0) 28%,
+          rgba(255, 255, 255, .14) 55%,
+          rgba(255, 255, 255, 0) 75%,
+          rgba(255, 255, 255, .20) 90%,
+          rgba(255, 255, 255, 0));
+    }
+
+    /* Borde metálico degradado */
+    .autoid-dialog::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      padding: 1px;
+      border-radius: inherit;
+      pointer-events: none;
+      background: linear-gradient(135deg,
+        rgba(255, 255, 255, .9),
+        rgba(255, 255, 255, .15) 30%,
+        rgba(160, 170, 185, .4) 60%,
+        rgba(255, 255, 255, .7));
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+    }
+
+    .autoid-content {
+      position: relative;
+      padding: 30px;
+      color: var(--autoid-text);
+      font-family: inherit;
+    }
+
+    .autoid-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      display: grid;
+      width: 36px;
+      height: 36px;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, .28);
+      border-radius: 50%;
+      color: #fff;
+      background: rgba(0, 0, 0, .35);
+      font-size: 15px;
+      cursor: pointer;
+      transition: transform .2s ease, border-color .2s ease, color .2s ease;
+    }
+    .autoid-close:hover {
+      transform: scale(1.08);
+      color: var(--autoid-accent);
+      border-color: var(--autoid-accent);
+    }
+
+    .autoid-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 6px 0 12px;
+      color: #f0f0f0;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    .autoid-kicker::before {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--autoid-accent);
+      box-shadow: 0 0 10px var(--autoid-glow);
+      content: "";
+    }
+
+    .autoid-content h2 {
+      margin: 0;
+      font-size: clamp(23px, 5vw, 29px);
+      font-weight: 800;
+      letter-spacing: -.035em;
+    }
+
+    .autoid-intro {
+      margin: 6px 0 22px;
+      color: var(--autoid-muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    /* Formulario */
+    .autoid-fields {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px 12px;
+    }
+    .autoid-field { display: grid; gap: 7px; min-width: 0; }
+    .autoid-field--full { grid-column: 1 / -1; }
+    .autoid-field label { color: #fff; font-size: 11px; font-weight: 700; }
+    .autoid-field label small { color: rgba(255, 255, 255, .55); font-weight: 600; }
+
+    .autoid-field input {
+      width: 100%;
+      min-height: 45px;
+      padding: 0 14px;
+      border: 1px solid rgba(255, 255, 255, .18);
+      border-radius: 12px;
+      outline: none;
+      color: #fff;
+      background: rgba(0, 0, 0, .40);
+      box-shadow: inset 0 1px 4px rgba(0, 0, 0, .35);
+      font: inherit;
+      font-size: 13px;
+      transition: border-color .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+    .autoid-field input::placeholder { color: rgba(255, 255, 255, .40); }
+    .autoid-field input:focus {
+      border-color: var(--autoid-accent);
+      background: rgba(0, 0, 0, .55);
+      box-shadow: 0 0 0 3px var(--autoid-glow);
+    }
+    .autoid-field input[name="patente"] { text-transform: uppercase; }
+
+    /* Botón principal metalizado */
+    .autoid-submit,
+    .autoid-btn-primary {
+      color: #0b0b0b;
+      border: 1px solid rgba(255, 255, 255, .9);
+      background: linear-gradient(180deg, #ffffff 0%, #d9dce1 52%, #f3f4f6 100%);
+      box-shadow: inset 0 1px 0 #fff, 0 8px 20px -8px rgba(0, 0, 0, .6);
+    }
+
+    .autoid-submit {
+      display: flex;
+      width: 100%;
+      min-height: 48px;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+      border-radius: 999px;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease;
+    }
+    .autoid-submit i { font-size: 16px; }
+    .autoid-submit:hover { transform: scale(1.025); }
+    .autoid-submit:active { transform: scale(.99); }
+
+    .autoid-privacy {
+      margin: 12px 0 0;
+      color: rgba(255, 255, 255, .55);
+      font-size: 10px;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    /* Vista de éxito */
+    .autoid-success { padding: 38px 30px 28px; text-align: center; }
+    .autoid-success-mark {
+      display: grid;
+      width: 56px;
+      height: 56px;
+      margin: 0 auto 16px;
+      place-items: center;
+      border: 1px solid var(--autoid-accent);
+      border-radius: 50%;
+      color: var(--autoid-accent);
+      background: rgba(0, 0, 0, .45);
+      font-size: 22px;
+      box-shadow: 0 0 24px -6px var(--autoid-glow);
+    }
+    .autoid-success p {
+      margin: 10px 0 0;
+      color: var(--autoid-muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .autoid-actions { display: flex; flex-direction: column; gap: 10px; margin-top: 22px; }
+
+    .autoid-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 48px;
+      padding: 0 24px;
+      border-radius: 999px;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 800;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform .2s ease, background .2s ease, border-color .2s ease;
+    }
+    .autoid-btn i { font-size: 16px; }
+    .autoid-btn:hover { transform: scale(1.025); }
+
+    .autoid-btn-glass {
+      color: #fff;
+      background: rgba(255, 255, 255, .10);
+      border: 1px solid rgba(255, 255, 255, .30);
+    }
+    .autoid-btn-glass:hover { background: rgba(255, 255, 255, .16); border-color: rgba(255, 255, 255, .55); }
+
+    .autoid-btn-ghost {
+      color: rgba(255, 255, 255, .8);
+      background: transparent;
+      border: 1px solid transparent;
+    }
+    .autoid-btn-ghost:hover { color: #fff; }
+
+    /* Opciones de la primera pantalla */
+    .autoid-choice {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      width: 100%;
+      min-height: 66px;
+      margin-top: 12px;
+      padding: 10px 18px 10px 12px;
+      border: 1px solid rgba(255, 255, 255, .30);
+      border-radius: 24px;
+      color: #fff;
+      background: rgba(255, 255, 255, .10);
+      text-align: left;
+      text-decoration: none;
+      font: inherit;
+      cursor: pointer;
+      transition: transform .22s ease, background .22s ease, border-color .22s ease;
+    }
+    .autoid-choice:hover {
+      transform: scale(1.02);
+      background: rgba(255, 255, 255, .16);
+      border-color: rgba(255, 255, 255, .55);
+    }
+    .autoid-choice:active { transform: scale(.99); }
+
+    .autoid-choice-primary,
+    .autoid-choice-primary:hover {
+      color: #0b0b0b;
+      border-color: rgba(255, 255, 255, .9);
+      background: linear-gradient(180deg, #ffffff 0%, #d9dce1 52%, #f3f4f6 100%);
+      box-shadow: inset 0 1px 0 #fff, 0 8px 20px -8px rgba(0, 0, 0, .6);
+    }
+
+    .autoid-choice-icon {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      flex: 0 0 42px;
+      border-radius: 50%;
+      color: #fff;
+      background: #0b0b0b;
+      font-size: 16px;
+    }
+    .autoid-choice-copy { flex: 1; min-width: 0; }
+    .autoid-choice-copy strong { display: block; font-size: 13.5px; }
+    .autoid-choice-copy small {
+      display: block;
+      margin-top: 2px;
+      color: rgba(255, 255, 255, .65);
+      font-size: 11px;
+      font-weight: 600;
+      line-height: 1.35;
+    }
+    .autoid-choice-primary .autoid-choice-copy small { color: rgba(0, 0, 0, .62); }
+
+    .autoid-choice-arrow { flex: 0 0 auto; font-size: 14px; transition: transform .22s ease; }
+    .autoid-choice-primary:hover .autoid-choice-arrow { transform: translateX(5px); }
+    .autoid-choice:hover .fa-arrow-up-right-from-square { transform: translate(3px, -3px); }
+
+    /* Imagen con forma de App */
+    .autoid-app-icon {
+      display: block;
+      width: 42px;
+      height: 42px;
+      flex: 0 0 42px;
+      object-fit: cover;
+      border-radius: 22.4%; /* proporción del ícono de app iOS */
+      border: 1px solid rgba(255, 255, 255, .25);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, .45);
+    }
+
+    /* Botón Volver */
+    .autoid-content.autoid-content--back { padding-top: 64px; }
+    .autoid-back {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 36px;
+      padding: 0 14px;
+      border: 1px solid rgba(255, 255, 255, .28);
+      border-radius: 999px;
+      color: #fff;
+      background: rgba(0, 0, 0, .35);
+      font: inherit;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform .2s ease, border-color .2s ease;
+    }
+    .autoid-back:hover { transform: scale(1.04); border-color: rgba(255, 255, 255, .6); }
+
+    .autoid-submit:focus-visible,
+    .autoid-btn:focus-visible,
+    .autoid-choice:focus-visible,
+    .autoid-back:focus-visible,
+    .autoid-close:focus-visible {
+      outline: 2px solid #f0f2f3;
+      outline-offset: 3px;
+    }
+
+    @keyframes veil-in   { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes dialog-in {
+      from { opacity: 0; transform: translateY(12px) scale(.985); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @media (max-width: 520px) {
+      .autoid-content { padding: 26px 20px 22px; }
+      .autoid-success { padding: 34px 20px 24px; }
+      .autoid-dialog  { border-radius: 22px; }
+      .autoid-fields  { gap: 12px 9px; }
+      .autoid-field input { min-height: 44px; padding-inline: 12px; font-size: 16px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+      }
+    }
+    /* ============  HASTA AQUÍ: CSS MODAL  ============ */
+  </style>
+</head>
+<body>
+
+  <!-- ===== SOLO PRUEBA: card con el botón que abre el modal ===== -->
+  <article class="demo-card">
+    <h3>Mantención Hyundai</h3>
+    <p>Desde</p>
+    <div class="demo-price">$159.900</div>
+    <a href="#autoid-modal" class="demo-btn"
+      data-autoid-open
+      data-marca="Hyundai"
+      data-servicio="Mantención Hyundai desde $159.900">
+      Seleccionar modelo <i class="fa-solid fa-arrow-right"></i>
+    </a>
+  </article>
+
+  <!-- =====================================================
+       ============  COPIAR DESDE AQUÍ: HTML MODAL  ========
+       ===================================================== -->
+  <div class="autoid-modal" id="autoid-modal" hidden>
+    <section class="autoid-dialog" role="dialog" aria-modal="true"
+      aria-labelledby="autoid-title" aria-describedby="autoid-description">
+
+      <!-- Pantalla 1: elegir -->
+      <div class="autoid-content" id="autoid-options">
+        <button class="autoid-close" type="button" data-autoid-close aria-label="Cerrar">
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+
+        <span class="autoid-kicker" id="autoid-kicker">Tu auto, siempre al día</span>
+        <h2 id="autoid-title">Inscribe tu vehículo con ID AUTO?</h2>
+        <p class="autoid-intro" id="autoid-description">
+          ID AUTO es el reporte digital de tu vehículo, siempre al día. Créalo para cotizar, para llevar tus mantenciones al dia o para garantias de repuestos originales.
+        </p>
+
+        <button class="autoid-choice autoid-choice-primary" type="button" data-autoid-form-open>
+          <span class="autoid-choice-icon"><i class="fa-regular fa-id-card" aria-hidden="true"></i></span>
+          <span class="autoid-choice-copy">
+            <strong>Crear mi ID AUTO y cotizar</strong>
+            <small>Registra tu vehículo</small>
+          </span>
+          <i class="fa-solid fa-arrow-right autoid-choice-arrow" aria-hidden="true"></i>
+        </button>
+
+        <!-- Cambia el src por tu imagen (ícono cuadrado, ej. 256x256 PNG) -->
+        <a class="autoid-choice" href="https://www.memanejo.cl/Catalogo/index.html" data-autoid-catalog>
+          <img class="autoid-app-icon" alt=""
+            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Crect width='120' height='120' fill='%23e11d48'/%3E%3Ctext x='60' y='78' font-family='Arial' font-size='56' font-weight='800' fill='white' text-anchor='middle'%3Emm%3C/text%3E%3C/svg%3E">
+          <span class="autoid-choice-copy">
+            <strong>Ver catálogo de repuestos</strong>
+            <small>Busca repuestos y compra directamente.</small>
+          </span>
+          <i class="fa-solid fa-arrow-up-right-from-square autoid-choice-arrow" aria-hidden="true"></i>
+        </a>
+      </div>
+
+      <!-- Pantalla 2: formulario -->
+      <div class="autoid-content autoid-content--back" id="autoid-form-view" hidden>
+        <button class="autoid-back" type="button" data-autoid-back>
+          <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Volver
+        </button>
+        <button class="autoid-close" type="button" data-autoid-close aria-label="Cerrar">
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+
+        <span class="autoid-kicker">Tu auto, siempre al día</span>
+        <h2>Registra tu vehículo</h2>
+        <p class="autoid-intro">
+          Con estos datos creamos tu ID AUTO y preparamos tu cotización de mantención.
+        </p>
+
+        <form id="autoid-form">
+          <input type="hidden" name="servicio" id="autoid-service">
+
+          <div class="autoid-fields">
+            <div class="autoid-field">
+              <label for="autoid-name">Nombre</label>
+              <input id="autoid-name" name="nombre" autocomplete="given-name" placeholder="Tu nombre" required>
+            </div>
+            <div class="autoid-field">
+              <label for="autoid-lastname">Apellido</label>
+              <input id="autoid-lastname" name="apellido" autocomplete="family-name" placeholder="Tu apellido" required>
+            </div>
+            <div class="autoid-field">
+              <label for="autoid-brand">Marca</label>
+              <input id="autoid-brand" name="marca" autocomplete="off" placeholder="Ej. Hyundai" required>
+            </div>
+            <div class="autoid-field">
+              <label for="autoid-model">Modelo</label>
+              <input id="autoid-model" name="modelo" autocomplete="off" placeholder="Ej. Accent" required>
+            </div>
+            <div class="autoid-field">
+              <label for="autoid-year">Año</label>
+              <input id="autoid-year" name="anio" type="number" inputmode="numeric"
+                min="1990" max="2030" placeholder="Ej. 2019" required>
+            </div>
+            <div class="autoid-field">
+              <label for="autoid-plate">Patente <small>(opcional)</small></label>
+              <input id="autoid-plate" name="patente" autocomplete="off" maxlength="8" placeholder="Ej. ABCD12">
+            </div>
+          </div>
+
+          <button class="autoid-submit" type="submit">
+            <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+            <span>Crear ID AUTO y cotizar</span>
+          </button>
+          <p class="autoid-privacy">Usamos estos datos solo para crear el ID AUTO de tu vehículo y preparar tu cotización.</p>
+        </form>
+      </div>
+
+      <!-- Pantalla 3: éxito -->
+      <div class="autoid-content autoid-success" id="autoid-success" hidden aria-live="polite">
+        <button class="autoid-close" type="button" data-autoid-close aria-label="Cerrar">
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+        <div class="autoid-success-mark" aria-hidden="true">
+          <i class="fa-solid fa-check"></i>
+        </div>
+        <h2>¡Ya casi está!</h2>
+        <p id="autoid-success-message"></p>
+
+        <div class="autoid-actions">
+          <a class="autoid-btn autoid-btn-primary" id="autoid-wa-link" href="#" target="_blank" rel="noopener">
+            <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Abrir WhatsApp
+          </a>
+          <button class="autoid-btn autoid-btn-ghost" type="button" data-autoid-close>Cerrar</button>
+        </div>
+      </div>
+
+    </section>
+  </div>
+  <!-- ============  HASTA AQUÍ: HTML MODAL  ============ -->
+
+  <!-- =====================================================
+       ============  COPIAR DESDE AQUÍ: JS MODAL  ==========
+       ===================================================== -->
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+
+    // ---- CONFIGURACIÓN ----
+    const WHATSAPP_NUMERO = "56900000000"; // código país + número, sin "+" ni espacios (Chile: 569XXXXXXXX)
+    const CATALOGO_URL    = "https://www.memanejo.cl/Catalogo/index.html";
+    const KICKER_DEFECTO  = "Tu auto, siempre al día";
+
+    const modal          = document.getElementById("autoid-modal");
+    const optionsView    = document.getElementById("autoid-options");
+    const formView       = document.getElementById("autoid-form-view");
+    const successView    = document.getElementById("autoid-success");
+    const successMessage = document.getElementById("autoid-success-message");
+    const form           = document.getElementById("autoid-form");
+    const kicker         = document.getElementById("autoid-kicker");
+    const brandInput     = document.getElementById("autoid-brand");
+    const modelInput     = document.getElementById("autoid-model");
+    const nameInput      = document.getElementById("autoid-name");
+    const serviceInput   = document.getElementById("autoid-service");
+    const waLink         = document.getElementById("autoid-wa-link");
+
+    if (!modal || !optionsView || !formView || !successView || !form) {
+      console.error("ID AUTO: falta el HTML del modal.");
+      return;
+    }
+
+    if (WHATSAPP_NUMERO === "56900000000") {
+      console.warn("ID AUTO: falta poner tu número real en WHATSAPP_NUMERO.");
+    }
+    modal.querySelectorAll("[data-autoid-catalog]").forEach(function (a) {
+      a.setAttribute("href", CATALOGO_URL);
+    });
+
+    const views = { options: optionsView, form: formView, success: successView };
+    let lastFocus = null;
+
+    function showView(name) {
+      Object.keys(views).forEach(function (key) {
+        views[key].hidden = key !== name;
+      });
+    }
+
+    function currentView() {
+      return [optionsView, formView, successView].find(function (v) { return !v.hidden; });
+    }
+
+    function openModal(trigger) {
+      lastFocus = trigger;
+      form.reset();
+
+      brandInput.value   = trigger.dataset.marca || "";
+      serviceInput.value = trigger.dataset.servicio || "";
+      kicker.textContent = trigger.dataset.servicio || KICKER_DEFECTO;
+
+      showView("options");
+      modal.hidden = false;
+      document.body.style.overflow = "hidden";
+
+      optionsView.querySelector(".autoid-choice").focus();
+    }
+
+    function closeModal() {
+      modal.hidden = true;
+      document.body.style.overflow = "";
+      if (lastFocus) lastFocus.focus();
+    }
+
+    // Abrir: cualquier botón o enlace con data-autoid-open
+    document.addEventListener("click", function (event) {
+      const trigger = event.target.closest("[data-autoid-open]");
+      if (!trigger) return;
+      event.preventDefault();
+      openModal(trigger);
+    });
+
+    // Clics dentro del modal
+    modal.addEventListener("click", function (event) {
+      // Catálogo: navegación explícita (no depende de otros scripts de la página)
+      if (event.target.closest("[data-autoid-catalog]")) {
+        event.preventDefault();
+        window.location.assign(CATALOGO_URL);
+        return;
+      }
+
+      // Ir al formulario
+      if (event.target.closest("[data-autoid-form-open]")) {
+        showView("form");
+        (brandInput.value ? modelInput : nameInput).focus();
+        return;
+      }
+
+      // Volver a las opciones
+      if (event.target.closest("[data-autoid-back]")) {
+        showView("options");
+        optionsView.querySelector(".autoid-choice").focus();
+        return;
+      }
+
+      // Cerrar: botón X, botón Cerrar o clic en el fondo
+      if (event.target === modal || event.target.closest("[data-autoid-close]")) {
+        closeModal();
+      }
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (modal.hidden) return;
+
+      if (event.key === "Escape") {
+        closeModal();
+        return;
+      }
+
+      // Mantener el foco dentro del modal
+      if (event.key === "Tab") {
+        const focusables = currentView().querySelectorAll("button, a[href], input");
+        if (!focusables.length) return;
+        const first = focusables[0];
+        const last  = focusables[focusables.length - 1];
+
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
+    });
+
+    // Enviar: arma el mensaje y abre WhatsApp
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const data = new FormData(form);
+      const d = {};
+      data.forEach(function (value, key) {
+        d[key] = String(value).trim();
+      });
+
+      const lineas = [
+        "Hola, quiero crear el ID AUTO de mi vehículo y cotizar: " + (d.servicio || "mantención"),
+        "",
+        "Nombre: " + d.nombre + " " + d.apellido,
+        "Vehículo: " + d.marca + " " + d.modelo + " " + d.anio
+      ];
+      if (d.patente) lineas.push("Patente: " + d.patente.toUpperCase());
+
+      const url = "https://wa.me/" + WHATSAPP_NUMERO +
+        "?text=" + encodeURIComponent(lineas.join("\n"));
+
+      waLink.href = url;
+      successMessage.textContent =
+        "Gracias, " + d.nombre + ". Te abrimos WhatsApp con los datos de tu " +
+        d.marca + " " + d.modelo + " para armar tu cotización y registrar tu ID AUTO. " +
+        "Si no se abrió, toca el botón de abajo.";
+
+      showView("success");
+      window.open(url, "_blank", "noopener");
+      waLink.focus();
+    });
+  });
+  </script>
+  <!-- ============  HASTA AQUÍ: JS MODAL  ============ -->
+</body>
+</html>

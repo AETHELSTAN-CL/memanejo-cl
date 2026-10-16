@@ -281,39 +281,64 @@
       <span class="hero-tag"><i class="fa-solid fa-screwdriver-wrench"></i>Talleres asociados</span>
     </div>
   </section>
-  <!--- Modal ID AUTO -->
+  <!-- =====================================================
+       ============  COPIAR DESDE AQUÍ: HTML MODAL  ========
+       ===================================================== -->
   <div class="autoid-modal" id="autoid-modal" hidden>
-    <section class="autoid-dialog" role="dialog" aria-modal="true" aria-labelledby="autoid-title"
-      aria-describedby="autoid-description">
+    <section class="autoid-dialog" role="dialog" aria-modal="true"
+      aria-labelledby="autoid-title" aria-describedby="autoid-description">
+
+      <!-- Pantalla 1: elegir -->
       <div class="autoid-content" id="autoid-options">
-        <button class="autoid-close" type="button" data-autoid-close aria-label="Cerrar">×</button>
-        <span class="autoid-kicker">Tu auto, siempre al día</span>
-        <h2 id="autoid-title">
-          ¿Aún no tienes <strong>ID AUTO</strong> para tu vehículo?
-        </h2>
-        <p class="autoid-intro">Crea tu cuenta para registrar tu vehículo y llevar el control de sus mantenciones.
-          También puedes ir directo al catálogo de repuestos.</p>
+        <button class="autoid-close" type="button" data-autoid-close aria-label="Cerrar">
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+
+        <span class="autoid-kicker" id="autoid-kicker">Tu auto, siempre al día</span>
+        <h2 id="autoid-title">¿Aún no tienes ID AUTO?</h2>
+        <p class="autoid-intro" id="autoid-description">
+          Tu ID AUTO es el reporte digital de tu vehículo, siempre al día. Créalo para cotizar
+          tu mantención por WhatsApp, o revisa primero el catálogo de repuestos.
+        </p>
+
         <button class="autoid-choice autoid-choice-primary" type="button" data-autoid-form-open>
-          <span class="autoid-choice-icon"><i class="fa-regular fa-id-card" aria-hidden="true"></i></span>
-          <span class="autoid-choice-copy"><strong>Crear mi cuenta ID AUTO</strong><small>Registra tu vehículo y
-              administra su información.</small></span>
+          <span class="autoid-tile autoid-tile-icon"><i class="fa-regular fa-id-card" aria-hidden="true"></i></span>
+          <span class="autoid-choice-copy">
+            <strong>Crear mi ID AUTO y cotizar</strong>
+            <small>Registra tu vehículo y recibe tu cotización por WhatsApp.</small>
+          </span>
           <i class="fa-solid fa-arrow-right autoid-choice-arrow" aria-hidden="true"></i>
         </button>
-        <a class="autoid-choice" id="autoid-catalog-link" href="/Catalogo/index.html">
-          <span class="autoid-choice-icon"><i class="fa-solid fa-gears" aria-hidden="true"></i></span>
-          <span class="autoid-choice-copy"><strong id="autoid-catalog-label">Ver catálogo</strong><small>Busca
-              repuestos y compra directamente.</small></span>
+
+        <!-- En tu sitio usa:  src="img/icono-catalogo.svg"  (o una foto cuadrada de un repuesto) -->
+        <a class="autoid-choice" href="https://www.memanejo.cl/Catalogo/index.html" data-autoid-catalog>
+          <span class="autoid-tile"><img alt="" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20256%20256%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22bg%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%2334343a%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%230c0c0e%22/%3E%3C/linearGradient%3E%3CradialGradient%20id%3D%22metal%22%20cx%3D%2235%25%22%20cy%3D%2230%25%22%20r%3D%2280%25%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23ffffff%22/%3E%3Cstop%20offset%3D%22.55%22%20stop-color%3D%22%23b9bec6%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%236b7078%22/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect%20width%3D%22256%22%20height%3D%22256%22%20fill%3D%22url%28%23bg%29%22/%3E%3Ccircle%20cx%3D%22128%22%20cy%3D%22128%22%20r%3D%2284%22%20fill%3D%22url%28%23metal%29%22/%3E%3Ccircle%20cx%3D%22128%22%20cy%3D%22128%22%20r%3D%2244%22%20fill%3D%22%231b1b1f%22/%3E%3Ccircle%20cx%3D%22190.0%22%20cy%3D%22128.0%22%20r%3D%226%22%20fill%3D%22%231b1b1f%22/%3E%3Ccircle%20cx%3D%22178.2%22%20cy%3D%22164.4%22%20r%3D%226%22%20fill%3D%22%231b1b1f%22/%3E%3Ccircle%20cx%3D%22147.2%22%20cy%3D%22187.0%22%20r%3D%226%22%20fill%3D%22%231b1b1f%22/%3E%3Ccircle%20cx%3D%22108.8%22%20cy%3D%22187.0%22%20r%3D%226%22%20fill%3D%22%231b1b1f%22/%3E%3Ccircle%20cx%3D%2277.8%22%20cy%3D%22164.4%22%20r%3D%226%22%20fill%3D%22%231b1b1f%22/%3E%3Ccircle%20cx%3D%2266.0%22%20cy%3D%22128.0%22%20r%3D%226%22%20fill%3D%22%231b1b1f%22/%3E%3Ccircle%20cx%3D%2277.8%22%20cy%3D%2291.6%22%20r%3D%226%22%20fill%3D%22%231b1b1f%22/%3E%3Ccircle%20cx%3D%22108.8%22%20cy%3D%2269.0%22%20r%3D%226%22%20fill%3D%22%231b1b1f%22/%3E%3Ccircle%20cx%3D%22147.2%22%20cy%3D%2269.0%22%20r%3D%226%22%20fill%3D%22%231b1b1f%22/%3E%3Ccircle%20cx%3D%22178.2%22%20cy%3D%2291.6%22%20r%3D%226%22%20fill%3D%22%231b1b1f%22/%3E%3Ccircle%20cx%3D%22128%22%20cy%3D%22128%22%20r%3D%2234%22%20fill%3D%22url%28%23metal%29%22/%3E%3Ccircle%20cx%3D%22128.0%22%20cy%3D%22110.0%22%20r%3D%224%22%20fill%3D%22%233a3d43%22/%3E%3Ccircle%20cx%3D%22145.1%22%20cy%3D%22122.4%22%20r%3D%224%22%20fill%3D%22%233a3d43%22/%3E%3Ccircle%20cx%3D%22138.6%22%20cy%3D%22142.6%22%20r%3D%224%22%20fill%3D%22%233a3d43%22/%3E%3Ccircle%20cx%3D%22117.4%22%20cy%3D%22142.6%22%20r%3D%224%22%20fill%3D%22%233a3d43%22/%3E%3Ccircle%20cx%3D%22110.9%22%20cy%3D%22122.4%22%20r%3D%224%22%20fill%3D%22%233a3d43%22/%3E%3Cpath%20d%3D%22M203.4%2075.2%20A92%2092%200%200%201%20203.4%20180.8%22%20fill%3D%22none%22%20stroke%3D%22%23e11d48%22%20stroke-width%3D%2226%22%20stroke-linecap%3D%22round%22/%3E%3C/svg%3E"></span>
+          <span class="autoid-choice-copy">
+            <strong>Ver catálogo de repuestos</strong>
+            <small>Busca repuestos y compra directamente.</small>
+          </span>
           <i class="fa-solid fa-arrow-up-right-from-square autoid-choice-arrow" aria-hidden="true"></i>
         </a>
       </div>
-      <div class="autoid-content" id="autoid-form-view" hidden>
-        <button class="autoid-back" type="button" data-autoid-back>← Volver</button>
-        <button class="autoid-close" type="button" data-autoid-close aria-label="Cerrar">×</button>
+
+      <!-- Pantalla 2: formulario -->
+      <div class="autoid-content autoid-content--back" id="autoid-form-view" hidden>
+        <button class="autoid-back" type="button" data-autoid-back>
+          <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Volver
+        </button>
+        <button class="autoid-close" type="button" data-autoid-close aria-label="Cerrar">
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+
         <span class="autoid-kicker">Tu auto, siempre al día</span>
-        <h2>Crea tu cuenta ID AUTO</h2>
-        <p class="autoid-intro" id="autoid-description">Registra tu vehículo para llevar el control de sus mantenciones
-          y tener tu información automotriz en un solo lugar.</p>
+        <h2>Registra tu vehículo</h2>
+        <p class="autoid-intro">
+          Con estos datos creamos tu ID AUTO y preparamos tu cotización de mantención.
+        </p>
+
         <form id="autoid-form">
+          <input type="hidden" name="servicio" id="autoid-service">
+
           <div class="autoid-fields">
             <div class="autoid-field">
               <label for="autoid-name">Nombre</label>
@@ -324,29 +349,51 @@
               <input id="autoid-lastname" name="apellido" autocomplete="family-name" placeholder="Tu apellido" required>
             </div>
             <div class="autoid-field">
-              <label for="autoid-brand">Marca del vehículo</label>
-              <input id="autoid-brand" name="marca" autocomplete="off" placeholder="Ej. Toyota" required>
+              <label for="autoid-brand">Marca</label>
+              <input id="autoid-brand" name="marca" autocomplete="off" placeholder="Ej. Hyundai" required>
             </div>
             <div class="autoid-field">
               <label for="autoid-model">Modelo</label>
-              <input id="autoid-model" name="modelo" autocomplete="off" placeholder="Ej. Corolla" required>
+              <input id="autoid-model" name="modelo" autocomplete="off" placeholder="Ej. Accent" required>
             </div>
-            <div class="autoid-field autoid-field--full">
-              <label for="autoid-email">Correo electrónico</label>
-              <input id="autoid-email" name="correo" type="email" autocomplete="email" placeholder="tu@correo.cl"
-                required>
+            <div class="autoid-field">
+              <label for="autoid-year">Año</label>
+              <input id="autoid-year" name="anio" type="number" inputmode="numeric"
+                min="1990" max="2030" placeholder="Ej. 2019" required>
+            </div>
+            <div class="autoid-field">
+              <label for="autoid-plate">Patente <small>(opcional)</small></label>
+              <input id="autoid-plate" name="patente" autocomplete="off" maxlength="8" placeholder="Ej. ABCD12">
             </div>
           </div>
-          <button class="autoid-submit" type="submit">Crear mi perfil ID AUTO <span aria-hidden="true">→</span></button>
-          <p class="autoid-privacy">Usaremos estos datos para crear tu perfil de conductor y asociar tu vehículo.</p>
+
+          <button class="autoid-submit" type="submit">
+            <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+            <span>Crear ID AUTO y cotizar</span>
+          </button>
+          <p class="autoid-privacy">Usamos estos datos solo para crear el ID AUTO de tu vehículo y preparar tu cotización.</p>
         </form>
       </div>
+
+      <!-- Pantalla 3: éxito -->
       <div class="autoid-content autoid-success" id="autoid-success" hidden aria-live="polite">
-        <div class="autoid-success-mark" aria-hidden="true">✓</div>
-        <h2>¡Listo para crear tu ID AUTO!</h2>
+        <button class="autoid-close" type="button" data-autoid-close aria-label="Cerrar">
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+        <div class="autoid-success-mark" aria-hidden="true">
+          <i class="fa-solid fa-check"></i>
+        </div>
+        <h2>¡Ya casi está!</h2>
         <p id="autoid-success-message"></p>
-        <button class="mm-cta-modal" type="button" data-autoid-close>Cerrar</button>
+
+        <div class="autoid-actions">
+          <a class="autoid-btn autoid-btn-primary" id="autoid-wa-link" href="#" target="_blank" rel="noopener">
+            <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Abrir WhatsApp
+          </a>
+          <button class="autoid-btn autoid-btn-ghost" type="button" data-autoid-close>Cerrar</button>
+        </div>
       </div>
+
     </section>
   </div>
   <script>
@@ -452,50 +499,126 @@
   </section>
   <script> function setupScroll(wrapperSelector, direction) { const wrapper = document.querySelector(wrapperSelector); const originalTrack = wrapper.querySelector('.logo-track'); const clone = originalTrack.cloneNode(true); wrapper.appendChild(clone); let pos = 0; const speed = 0.5; function animate() { pos += (direction === 'left' ? -speed : speed); originalTrack.style.transform = `translateX(${pos}px)`; clone.style.transform = `translateX(${pos + (direction === 'left' ? originalTrack.scrollWidth : -originalTrack.scrollWidth)}px)`; if (Math.abs(pos) >= originalTrack.scrollWidth) { pos = 0; } requestAnimationFrame(animate); } animate(); } document.addEventListener("DOMContentLoaded", () => { setupScroll(".scroll-left", "left"); setupScroll(".scroll-right", "right"); }); </script>
 
+  <!-- ================================
+     CONTENIDOS ADICIONALES
+     ================================ -->
 
-
-  <!-- ============ KIT POR VEHÍCULO ============ -->
-  <section class="section" id="kit" data-bg="dark">
-    <div class="wrap">
-      <div class="section-head">
-        <span class="eyebrow">Cotización instantánea</span>
-        <span><em>En fase de prueba (Beta)</em></span>
-        <h2>Tu kit de mantención, según tu auto exacto</h2>
-        <p>Selecciona marca, modelo y año: te mostramos el kit de repuestos recomendado para tu mantención, igual que si
-          lo hablaras con el asesor por WhatsApp.<br>No incluye mano de obra técnica.</p>
+  <section id="contenidos" class="bg-light">
+    <div class="container-fluid">
+      <!-- Título divisor -->
+      <div class="titulo-divisor mb-4" data-bg="dark">
+        <div class="titulo-divisor-inner">
+          <img src="img/newnewlogo.jpg" alt="Logo" class="logo-divisor">
+          <p>
+            <span id="rotadorCursos"
+              data-frases="Entrenamiento Vial,Cursos de Conducción Particular,Mantención automotriz,Quiz de conducción,memanejo+,!Suscríbete!, Plataforma de estudio,Licencia Clase B, Repuestos automotrices">
+            </span>
+          </p>
+        </div>
       </div>
 
-      <div class="kit-panel">
-        <div class="kit-grid">
-          <div class="field-group">
-            <label>Marca</label>
-            <select id="kitMarca"></select>
-          </div>
-          <div class="field-group">
-            <label>Modelo</label>
-            <select id="kitModelo"></select>
-          </div>
-          <div class="field-group">
-            <label>Año</label>
-            <select id="kitAnio"></select>
-          </div>
-          <button class="btn btn--solid" id="kitBtn" type="button"><i class="fa-solid fa-calculator me-2"></i>Calcular
-            kit</button>
-        </div>
 
-        <div class="kit-result" id="kitResult">
-          <div class="r-left">
-            <b>Kit Mantención Básica — <span id="kitAutoLabel"></span></b>
-            <span>Cambio de aceite + filtros + inspección de 20 puntos · Disponible en tu comuna</span>
+      <!-- ================================
+         CARDS FLOTANTES
+         ================================ -->
+
+      <div class="floating-cards">
+
+        <!-- CARD 1 -->
+        <a href="/paginas/quiz/quiz-nivelacion/index.html" class="floating-card" target="_blank">
+          <img src="img/logopngicon.png" alt="Quiz nivelación">
+
+          <div class="floating-card-content">
+            <div class="floating-card-title">
+              Quiz de nivelación
+            </div>
+            <div class="floating-card-text">
+              ¡Suscríbete! y recibe tu puntaje y errores explicados
+            </div>
+
           </div>
-          <div class="r-price">
-            <b class="mono" id="kitPrice"></b>
-            <span>precio cerrado · retiro y entrega sin costo</span>
+
+          <i class="fa-solid fa-arrow-right floating-card-icon"></i>
+
+        </a>
+
+        <!-- CARD 2 -->
+        <a href="/Catalogo/index.html" class="floating-card" target="_blank">
+          <img src="img/logo-alfa-romeo.png" alt="Alfa Romeo">
+          <div class="floating-card-content">
+            <div class="floating-card-title">
+              Alfa Romeo
+            </div>
+            <div class="floating-card-text">
+              Mantención y servicios para tu vehículo
+            </div>
           </div>
-        </div>
+          <i class="fa-solid fa-arrow-right floating-card-icon"></i>
+        </a>
+
+
+        <!-- CARD 3 -->
+        <a href="/Catalogo/index.html" class="floating-card" target="_blank">
+          <img src="img/volks3.jpeg" alt="Volkswagen">
+          <div class="floating-card-content">
+            <div class="floating-card-title">
+              Volkswagen
+            </div>
+            <div class="floating-card-text">
+              Mantenciones y descuentos
+            </div>
+          </div>
+          <i class="fa-solid fa-arrow-right floating-card-icon"></i>
+        </a>
+
+
+        <!-- CARD 4 -->
+
+        <a href="/paginas/quiz/quiz-appweb/index.html" class="floating-card" target="_blank" rel="noopener noreferrer">
+          <img src="img/logopngicon.png" alt="logo memanejo quiz">
+          <div class="floating-card-content">
+            <div class="floating-card-title">
+              Simulador Examen Municipal
+            </div>
+            <div class="floating-card-text">
+              Accede a más de 800 preguntas
+            </div>
+          </div>
+          <i class="fa-solid fa-arrow-right floating-card-icon"></i>
+        </a>
+
+        <!-- CARD 5 -->
+        <a href="/aulavirtual/index.html" class="floating-card" target="_blank">
+          <img src="img/logopngicon.png" alt="Quiz nivelación">
+          <div class="floating-card-content">
+            <div class="floating-card-title">
+              Aula Virtual
+            </div>
+            <div class="floating-card-text">
+              Conoce nuestra plataforma de estudio y prepárate para sacar licencia de conducir clase B
+            </div>
+          </div>
+          <i class="fa-solid fa-arrow-right floating-card-icon"></i>
+        </a>
+        <!-- CARD 6 -->
+        <a href="/Catalogo/index.html" class="floating-card" target="_blank">
+          <img src="img/logo_maxus.jpeg" alt="logo maxus">
+          <div class="floating-card-content">
+            <div class="floating-card-title">
+              Kit mantención Maxus
+            </div>
+
+            <div class="floating-card-text">
+              Todos los modelos <br>Cotiza y recibe una promoción
+            </div>
+          </div>
+          <i class="fa-solid fa-arrow-right floating-card-icon"></i>
+        </a>
       </div>
     </div>
   </section>
+
+
   <!-- Rotador: ahora debajo del slider -->
   <div class="titulo-rotativo-box text-center" data-bg="dark">
     <h2 id="titulo-rotativo">
@@ -526,7 +649,7 @@
         <div class="slider-card">
           <p class="text-center">Plataforma de estudio</p>
           <div class="card-img-slider"> <img src="img/alfared1.JPG" alt="Marca 1" class="slide-img">
-            <div class="overlay-btn"> <a href="https://www.memanejomanejando.cl" target="_blank" class="btn-slide-pill">
+            <div class="overlay-btn"> <a href="/aulavirtual/index.html" target="_blank" class="btn-slide-pill">
                 Ingresa aquí / Aula Virtual / Ingresa aquí / memanejo+ </a> </div>
           </div>
         </div> <!-- Tarjeta 4 -->
@@ -708,7 +831,7 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content modal-cursos">
         <div class="modal-header">
-          <h5 class="modal-title" id="modalConoceMasLabel">Suscripción de estudio <strong>memanejo+</strong></h5>
+          <h5 class="modal-title" id="modalConoceMasLabel"><strong>memanejo+</strong></h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
         </div>
 
@@ -776,7 +899,7 @@
 
   <!-- ============ BOTÓN FLOTANTE ============ -->
   <button id="menuButton" class="rounded-circle glass-btn" type="button">
-    <img src="img/logopng.png" alt="Abrir panel del conductor">
+    <img src="img/logopng.png" alt="Abrir perfil del conductor">
     <span id="tooltipText" class="tooltip-bubble">Inicia aquí</span>
   </button>
 
@@ -793,7 +916,7 @@
       <div id="dv-login">
         <div class="dv-login-head">
           <div class="dv-login-icon"><i class="fa-solid fa-user"></i></div>
-          <h3>Panel del conductor</h3>
+          <h3>Perfil del conductor</h3>
           <p>Ingresa para ver el estado de mantención de tu vehículo.</p>
         </div>
 
@@ -1252,156 +1375,51 @@
       </div>
     </div>
   </div>
-  <!-- ================================
-     CONTENIDOS ADICIONALES
-     ================================ -->
 
-  <section id="contenidos" class="bg-light">
-
-    <div class="container-fluid">
-
-      <!-- Título divisor -->
-      <div class="titulo-divisor mb-4" data-bg="dark">
-        <div class="titulo-divisor-inner">
-
-          <img src="img/newnewlogo.jpg" alt="Logo" class="logo-divisor">
-
-          <p>
-            <span id="rotadorCursos"
-              data-frases="Entrenamiento Vial,Cursos de Conducción Particular,Mantención automotriz,Quiz de conducción,memanejo+,!Suscríbete!, Plataforma de estudio,Licencia Clase B, Repuestos automotrices">
-            </span>
-          </p>
-        </div>
+  <!-- ============ KIT POR VEHÍCULO ============ -->
+  <section class="section" id="kit" data-bg="dark">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Cotización instantánea</span>
+        <span><em>En fase de prueba (Beta)</em></span>
+        <h2>Tu kit de mantención, según tu auto exacto</h2>
+        <p>Selecciona marca, modelo y año: te mostramos el kit de repuestos recomendado para tu mantención, igual que si
+          lo hablaras con el asesor por WhatsApp.<br>No incluye mano de obra técnica.</p>
       </div>
 
-
-      <!-- ================================
-         CARDS FLOTANTES
-         ================================ -->
-
-      <div class="floating-cards">
-
-        <!-- CARD 1 -->
-        <a href="/paginas/quiz/quiz-nivelacion/index.html" class="floating-card" target="_blank">
-          <img src="img/logopngicon.png" alt="Quiz nivelación">
-
-          <div class="floating-card-content">
-            <div class="floating-card-title">
-              Quiz de nivelación
-            </div>
-            <div class="floating-card-text">
-              ¡Suscríbete! y recibe tu puntaje y errores explicados
-            </div>
-
+      <div class="kit-panel">
+        <div class="kit-grid">
+          <div class="field-group">
+            <label>Marca</label>
+            <select id="kitMarca"></select>
           </div>
-
-          <i class="fa-solid fa-arrow-right floating-card-icon"></i>
-
-        </a>
-
-        <!-- CARD 2 -->
-        <a href="/Catalogo/index.html" class="floating-card" target="_blank">
-
-          <img src="img/logo-alfa-romeo.png" alt="Alfa Romeo">
-
-          <div class="floating-card-content">
-
-            <div class="floating-card-title">
-              Alfa Romeo
-            </div>
-
-            <div class="floating-card-text">
-              Mantención y servicios para tu vehículo
-            </div>
-
+          <div class="field-group">
+            <label>Modelo</label>
+            <select id="kitModelo"></select>
           </div>
-
-          <i class="fa-solid fa-arrow-right floating-card-icon"></i>
-
-        </a>
-
-
-        <!-- CARD 3 -->
-        <a href="/Catalogo/index.html" class="floating-card" target="_blank">
-
-          <img src="img/volks3.jpeg" alt="Volkswagen">
-
-          <div class="floating-card-content">
-
-            <div class="floating-card-title">
-              Volkswagen
-            </div>
-
-            <div class="floating-card-text">
-              Mantenciones y descuentos
-            </div>
-
+          <div class="field-group">
+            <label>Año</label>
+            <select id="kitAnio"></select>
           </div>
+          <button class="btn btn--solid" id="kitBtn" type="button"><i class="fa-solid fa-calculator me-2"></i>Calcular
+            kit</button>
+        </div>
 
-          <i class="fa-solid fa-arrow-right floating-card-icon"></i>
-
-        </a>
-
-
-        <!-- CARD 4 -->
-
-        <a href="/paginas/quiz/quiz-appweb/index.html" class="floating-card" target="_blank" rel="noopener noreferrer">
-
-          <img src="img/logopngicon.png" alt="logo memanejo quiz">
-
-          <div class="floating-card-content">
-
-            <div class="floating-card-title">
-              Simulador Examen Municipal
-            </div>
-
-            <div class="floating-card-text">
-              Accede a más de 800 preguntas
-            </div>
-
+        <div class="kit-result" id="kitResult">
+          <div class="r-left">
+            <b>Kit Mantención Básica — <span id="kitAutoLabel"></span></b>
+            <span>Cambio de aceite + filtros + inspección de 20 puntos · Disponible en tu comuna</span>
           </div>
-
-          <i class="fa-solid fa-arrow-right floating-card-icon"></i>
-
-        </a>
-
-        <!-- CARD 5 -->
-        <a href="/aulavirtual/index.html" class="floating-card" target="_blank">
-          <img src="img/logopngicon.png" alt="Quiz nivelación">
-
-          <div class="floating-card-content">
-            <div class="floating-card-title">
-              Aula Virtual
-            </div>
-
-            <div class="floating-card-text">
-              Conoce nuestra plataforma de estudio y prepárate para sacar licencia de conducir clase B
-            </div>
+          <div class="r-price">
+            <b class="mono" id="kitPrice"></b>
+            <span>precio cerrado · retiro y entrega sin costo</span>
           </div>
-          <i class="fa-solid fa-arrow-right floating-card-icon"></i>
-        </a>
-        <!-- CARD 6 -->
-        <a href="/Catalogo/index.html" class="floating-card" target="_blank">
-          <img src="img/logo_maxus.jpeg" alt="logo maxus">
-          <div class="floating-card-content">
-            <div class="floating-card-title">
-              Kit mantención Maxus
-            </div>
-
-            <div class="floating-card-text">
-              Todos los modelos <br>Cotiza y recibe una promoción
-            </div>
-          </div>
-          <i class="fa-solid fa-arrow-right floating-card-icon"></i>
-        </a>
+        </div>
       </div>
     </div>
   </section>
-
-
-
   <!-- Espacio Publicitario moderno -->
-  <section id="mm-espacio-publicidad" class="text-center bg-light">
+  <section id="mm-espacio-publicidad" class="text-center">
     <div class="mm-publicidad-wrapper mx-auto" data-aos="fade-down">
       <!-- Botón -->
       <button class="btn btn-warning btn-sm rounded-pill mb-3 px-4" type="button" data-bs-toggle="collapse"
@@ -1544,7 +1562,6 @@
   <div class="go-top-icon" data-bg="dark"> <i class="fa-solid fa-circle-chevron-up" id="goTop"
       title="Volver arriba"></i>
   </div>
-  <script> document.getElementById('goTop').addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); }); </script>
   <div class="footer" data-bg="dark">
     <footer>
       <button class="accordion-condiciones-servicio">

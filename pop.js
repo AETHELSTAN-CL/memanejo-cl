@@ -768,29 +768,56 @@ ${mensaje}`;
   });
 })();
 
-  // --- BOTON GO TOP ---
+// --- BOTON GO TOP ---
   const goTop = document.getElementById('goTop');
   if (goTop) goTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-  // --- ACTUALIZAR LOGO SEGÚN SECCIÓN ---
+// --- ACTUALIZAR LOGO SEGÚN SECCIÓN ---
+  const menuBtnLogo = document.getElementById("menuButton");
+  const offcanvasLogoEl = document.getElementById("offcanvasWithBothOptions");
+  let logoTicking = false;
+
   function actualizarLogoPorSeccion() {
+    logoTicking = false;
+
+    const btn = menuBtnLogo;
     const btnImg = document.querySelector("#menuButton img");
-    const btn = document.getElementById("menuButton");
-    const sections = document.querySelectorAll("[data-bg]");
-    if (!btnImg || !btn || sections.length === 0) return;
-    const btnY = btn.getBoundingClientRect().top + btn.getBoundingClientRect().height / 2;
-    let logo = "img/logopng.png";
-    sections.forEach(sec => {
-      const rect = sec.getBoundingClientRect();
-      if (btnY >= rect.top && btnY <= rect.bottom) {
-        logo = sec.dataset.bg === "dark" ? "img/logopngwhite.png" : "img/logopng.png";
-      }
-    });
-    btnImg.src = logo;
+    if (!btn || !btnImg) return;
+
+    const rect = btn.getBoundingClientRect();
+    if (rect.width === 0) return; // botón oculto (menú abierto)
+
+    // Punto central del botón, en horizontal y en vertical
+    const x = rect.left + rect.width / 2;
+    const y = rect.top + rect.height / 2;
+
+    // Primer elemento bajo ese punto que pertenezca a una zona data-bg
+    const zone = document.elementsFromPoint(x, y)
+      .filter(el => !btn.contains(el))
+      .map(el => el.closest("[data-bg]"))
+      .find(Boolean);
+
+    const logo = zone && zone.dataset.bg === "dark"
+      ? "img/logopngwhite.png"
+      : "img/logopng.png";
+
+    if (btnImg.getAttribute("src") !== logo) btnImg.setAttribute("src", logo);
   }
-  window.addEventListener('scroll', actualizarLogoPorSeccion);
-  window.addEventListener('resize', actualizarLogoPorSeccion);
+
+  function pedirActualizarLogo() {
+    if (logoTicking) return;
+    logoTicking = true;
+    requestAnimationFrame(actualizarLogoPorSeccion);
+  }
+
+  window.addEventListener('scroll', pedirActualizarLogo, { passive: true });
+  window.addEventListener('resize', pedirActualizarLogo);
+  if (offcanvasLogoEl) {
+    // al cerrar el menú el botón reaparece: recalcular el logo
+    offcanvasLogoEl.addEventListener('hidden.bs.offcanvas', pedirActualizarLogo);
+  }
   actualizarLogoPorSeccion();
+
   const tooltipEl = document.getElementById("tooltipText");
   if (tooltipEl) {
     const textosTooltip = [
