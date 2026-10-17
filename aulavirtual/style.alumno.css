@@ -1793,7 +1793,7 @@ body.onboarding-activo {
 /* ===== Mobile al inicio de Intermedias ===== */
 @media (max-width: 556px) {
   :root {
-    --notif-shown-y: calc(10px + env(safe-area-inset-top, 0px));
+    --notif-shown-y: calc(25px + env(safe-area-inset-top, 0px));
   }
 
   #ios-notificacion {
@@ -1831,7 +1831,7 @@ body.onboarding-activo {
 @media (max-width: 556px) {
   @media (display-mode: standalone) {
     :root {
-      --notif-shown-y: calc(90px + env(safe-area-inset-top, 0px));
+      --notif-shown-y: calc(40px + env(safe-area-inset-top, 0px));
     }
   }
 }
