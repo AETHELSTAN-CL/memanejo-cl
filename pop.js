@@ -632,7 +632,6 @@ ${mensaje}`;
        ======================================================= */
 
     chatInput.placeholder = pasos[0].placeholder;
-    chatInput.focus();
 
   }
 
