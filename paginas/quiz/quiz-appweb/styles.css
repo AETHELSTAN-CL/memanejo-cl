@@ -82,12 +82,11 @@ a {
 
 /* ===================== BIENVENIDA / LOGIN (2 columnas) ===================== */
 .bienvenida-grid {
-  max-width: 1220px;
+  max-width: 1400px;
   margin: 0 auto;
   min-height: calc(100dvh - 48px);
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
-  gap: 40px;
   align-items: center;
 }
 
@@ -100,17 +99,17 @@ a {
   height: 76px;
   border-radius: 14px;
   object-fit: cover;
-  margin-bottom: 20px;
   box-shadow: 0 3px 10px rgba(34, 97, 255, .25);
 }
 
 .hero-titulo {
-  font-size: clamp(40px, 10vw, 52px);
+  font-size: clamp(52px, 10vw, 62px);
   line-height: 1.2;
   font-weight: 800;
-  margin: 0 0 14px;
+  margin-bottom: 6px;
   color: var(--text);
   white-space: normal;
+  text-align: left;
 }
 
 .hero-titulo span {
@@ -120,34 +119,27 @@ a {
 }
 
 body.modo-activado .hero-titulo {
-  font-size: clamp(40px, 10vw, 52px);
+  font-size: clamp(52px, 10vw, 62px);
+  margin-bottom: 2px;
 }
 
-/* Pantallas muy angostas (300–400px): letra más chica para que
-   "examen de conducción" quepa en una sola línea sin partirse */
-@media (max-width: 400px) {
-  .hero-titulo {
-    font-size: 21px;
-  }
 
-  body.modo-activado .hero-titulo {
-    font-size: 21px;
-  }
-}
+
 
 .hero-sub {
   font-size: 15px;
   color: var(--text-dim);
   max-width: 420px;
   line-height: 1.6;
-  margin: 0 0 28px;
+  margin-top: 0px;
+  margin-bottom: 20px;
 }
 
 /* Toggle de estilos */
 .tema-switch-wrap {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 20px;
 }
 
 .tema-switch-label {
@@ -385,7 +377,12 @@ body.modo-activado .panel-form .contenido {
 .barra-tiempo.visible {
   display: block;
 }
-
+/* Solo cuando la web se abre como app instalada */
+@media (display-mode: standalone) {
+  .barra-tiempo {
+    top: calc(env(safe-area-inset-top, 0px) + 80px);
+  }
+}
 #progress {
   text-align: center;
   font-size: 13px;
@@ -994,7 +991,7 @@ body.modo-activado .panel-form .contenido {
    RESPONSIVE — PANTALLA DE INICIO
    ===================================================== */
 
-@media (max-width: 1099px) {
+@media (max-width: 1399px) {
 
   .bienvenida-grid {
     width: 100%;
@@ -1003,7 +1000,7 @@ body.modo-activado .panel-form .contenido {
     gap: 24px;
     min-height: auto;
     margin: 0 auto;
-    padding-top: 12px;
+    padding-top: 21px;
     box-sizing: border-box;
   }
 
@@ -1027,10 +1024,6 @@ body.modo-activado .panel-form .contenido {
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
-  }
-
-  .hero-logo {
-    margin: 0 auto 16px;
   }
 
   .hero-titulo {
@@ -1164,7 +1157,11 @@ body.modo-activado .panel-form .contenido {
     max-width: 100%;
     overflow-wrap: break-word;
   }
-
+@media (max-width: 640px) and (display-mode: standalone) {
+  #pantalla-bienvenida {
+    padding-top: calc(env(safe-area-inset-top, 0px) + 60px);
+  }
+}
   /* ===== QUIZ ===== */
 
   body.modo-activado #quiz-container {

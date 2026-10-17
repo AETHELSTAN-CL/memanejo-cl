@@ -2393,11 +2393,11 @@ body.onboarding-activo {
   color: #fff;
   padding: 6px 10px;
   border-radius: 6px;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   line-height: 1.2;
   white-space: normal;
   width: max-content;
-  max-width: 200px;
+  max-width: 150px;
   text-align: center;
   opacity: 0;
   pointer-events: none;
@@ -2513,19 +2513,19 @@ body.onboarding-activo header {
   box-sizing: border-box;
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 1300px) {
   .row-cursos {
     grid-template-columns: repeat(3, 1fr);
     gap: 8px;
     max-width: 1600px;
-    padding: 0 1rem;
+    padding: 1rem 1rem;
   }
 }
 
-@media (min-width: 550px) and (max-width: 999px) {
+@media (min-width: 550px) and (max-width: 1299px) {
   .row-cursos {
     max-width: 600px;
-    padding: 0 1.5rem;
+    padding: 0 0.75rem;
   }
 }
 
@@ -2551,7 +2551,7 @@ body.onboarding-activo header {
 }
 
 #contenidos .card-body {
-  padding: 2rem 1.5rem;
+  padding: 1.5rem 0.75rem;
   display: flex;
   flex-direction: column;
 }
@@ -2568,8 +2568,17 @@ body.onboarding-activo header {
   color: #111;
   text-align: center;
 }
-
-#contenidos .card-title i {
+#contenidos .card-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  color: #111;
+  text-align: center;
+}
+#contenidos .card-title-row i {
   color: #2261ff;
   font-size: 1.5rem;
 }
@@ -2578,6 +2587,7 @@ body.onboarding-activo header {
   font-size: 0.95rem;
   color: #555;
   line-height: 1.6;
+  
 }
 
 .linea-divide {
@@ -2607,6 +2617,91 @@ body.onboarding-activo header {
   transform: scale(1.04);
   box-shadow: 0 6px 18px rgba(255, 255, 255, 0.08);
   background-color: #000000;
+}
+
+/* ===== Burbuja de precios (la card que se expande) ===== */
+/* Va al final a propósito. Quita lo gris y deja los íconos SIEMPRE de a 3 por fila.
+   El layout de textos y botones (flex en columna, padding) queda como lo tenías. */
+#contenidos .precios-burbuja .card {
+  border: 0;
+  /* sin el borde gris que Bootstrap pone a toda .card */
+  box-shadow: none !important;
+  /* sin la sombra gris de la clase shadow-sm */
+}
+
+/* ----- Íconos: 3 por fila, ocupando todo el ancho de la burbuja ----- */
+/* Está escrito con #contenidos para que gane sobre cualquier regla anterior de
+   .sub-icons / .sub-icon-item (por ejemplo los 70px fijos del CSS viejo). */
+#contenidos .precios-burbuja .sub-icons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px 0;
+  width: 100%;
+  max-width: none;
+  margin-left: 0;
+  margin-right: 0;
+  box-sizing: border-box;
+}
+
+#contenidos .precios-burbuja .sub-icon-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex: 0 0 33.333%;
+  /* cada ícono ocupa un tercio exacto: 3 por fila en cualquier pantalla */
+  width: 33.333%;
+  max-width: 33.333%;
+  min-width: 0;
+  margin: 0;
+  padding: 0 2px;
+  box-sizing: border-box;
+}
+
+#contenidos .precios-burbuja .sub-icon-label {
+  width: 100%;
+}
+
+/* En pantallas muy angostas la etiqueta baja un poco para no partir palabras */
+@media (max-width: 360px) {
+  #contenidos .precios-burbuja .sub-icon-label {
+    font-size: 0.62rem;
+  }
+}
+.km-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+}
+
+.km-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: clamp(1rem, 0.65rem + 0.75vw, 1.05rem);
+  white-space: nowrap;
+  
+}
+.km-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: clamp(3px, 0.4vw, 5px) clamp(8px, 1vw, 12px);
+  border: 1px solid #0026ff;
+  border-radius: 999px;
+  color: #0026ff;
+  background-color: rgba(0, 38, 255, 0.1);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  line-height: 1.3;
+  flex-shrink: 0;
+  font-size: 12px;
+}
+.km-objective {
+  margin: 16px 0;
+  line-height: 1.5;
 }
 
 /* ===== Triángulo / chevron que abre-cierra el collapse ===== */
@@ -2645,20 +2740,45 @@ body.onboarding-activo header {
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-height: calc(100dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
 }
 
+/* ===== MÓVIL: pantalla completa real, hasta el borde inferior ===== */
+@media (max-width: 575.98px) {
+  #modalStudentSubscription .modal-dialog {
+    position: fixed;
+    inset: 0;
+    /* arriba, abajo y lados en 0: llega hasta el borde de la pantalla */
+    display: flex;
+    width: auto;
+    max-width: none;
+    height: auto;
+    margin: 0;
+  }
+
+  #modalStudentSubscription .modern-modal {
+    flex: 1 1 auto;
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    /* antes restaba el safe-area y dejaba un hueco abajo */
+    border: 0;
+    border-radius: 0;
+  }
+}
+
+/* ===== TABLET / ESCRITORIO: tarjeta centrada ===== */
 @media (min-width: 576px) {
   .modern-modal {
     border-radius: 24px;
     max-height: calc(100dvh - 3.5rem - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
   }
+
   .topbar-logo {
-  width: 32px;
-  height: 32px;
-  border-radius: 20px;
-  object-fit: contain;
-}
+    width: 32px;
+    height: 32px;
+    border-radius: 20px;
+    object-fit: contain;
+  }
 }
 
 /* ===== TOP BAR estilo iOS ===== */
@@ -2666,7 +2786,12 @@ body.onboarding-activo header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: calc(14px + env(safe-area-inset-top, 0px)) 22px 14px 18px;
+  /* arriba: deja espacio para la barra de estado / blur de iOS */
+  padding:
+    calc(14px + env(safe-area-inset-top, 0px))
+    calc(22px + env(safe-area-inset-right, 0px))
+    14px
+    calc(18px + env(safe-area-inset-left, 0px));
   background: #111;
   color: #fff;
   overflow: visible;
@@ -2709,13 +2834,20 @@ body.onboarding-activo header {
   transform: translateX(4px);
 }
 
-/* ===== BODY con cards ===== */
-.modal-body {
+/* ===== BODY con cards (solo de este modal) ===== */
+.modern-modal .modal-body {
   background: #f5f6f8;
   flex: 1 1 auto;
+  min-height: 0;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+  overscroll-behavior: contain;
+  /* el !important vence a la clase p-3 de Bootstrap, que anulaba el espacio inferior */
+  padding:
+    1rem
+    calc(1rem + env(safe-area-inset-right, 0px))
+    calc(1rem + env(safe-area-inset-bottom, 0px))
+    calc(1rem + env(safe-area-inset-left, 0px)) !important;
 }
 
 /* ===== CARD individual dentro del modal ===== */
@@ -2820,7 +2952,6 @@ body.onboarding-activo header {
 .sub-btn:hover {
   background: #1a4fd6;
   transform: scale(1.02);
-
 }
 
 .sub-btn-text {
@@ -2841,6 +2972,7 @@ body.onboarding-activo header {
   margin-bottom: 0;
   line-height: 1.09;
 }
+
 
 /* ===== Secciones: Recursos, Soporte, Conoce Más ===== */
 #recursos,
