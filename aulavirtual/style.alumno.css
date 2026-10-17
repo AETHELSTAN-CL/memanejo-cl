@@ -1828,7 +1828,13 @@ body.onboarding-activo {
   opacity: 0 !important;
   transform: translate(-50%, -160px) !important;
 }
-
+@media (max-width: 556px) {
+  @media (display-mode: standalone) {
+    :root {
+      --notif-shown-y: calc(90px + env(safe-area-inset-top, 0px));
+    }
+  }
+}
 /* Fondo suave detrás */
 .quiz-game-modal {
   position: fixed;
@@ -2960,8 +2966,11 @@ body.onboarding-activo header {
   margin-bottom: 0;
   line-height: 1.09;
 }
-
-
+@media (display-mode: standalone) {
+  .modal-topbar {
+    padding-top: calc(env(safe-area-inset-top, 0px) + 30px);
+  }
+}
 /* ===== Secciones: Recursos, Soporte, Conoce Más ===== */
 #recursos,
 #soporte,
