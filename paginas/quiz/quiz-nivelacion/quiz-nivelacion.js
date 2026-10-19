@@ -395,7 +395,45 @@ document.addEventListener("DOMContentLoaded", () => {
   /* =========================
      CAPTURA DE IMAGEN (usada por Descargar y Compartir)
   ========================= */
-  async function capturarResultado(backgroundColor) {
+  // Convierte colores modernos (color-mix, color(), oklch, lab...) a rgba
+  // solo en la copia que se fotografía. html2canvas 1.4.1 no los entiende.
+  function convertirColoresModernos(docClonado) {
+    const lienzo = docClonado.createElement('canvas');
+    lienzo.width = lienzo.height = 1;
+    const ctx = lienzo.getContext('2d', { willReadFrequently: true });
+
+    const aRgba = (color) => {
+      ctx.clearRect(0, 0, 1, 1);
+      ctx.fillStyle = '#000';
+      ctx.fillStyle = color;
+      ctx.fillRect(0, 0, 1, 1);
+      const d = ctx.getImageData(0, 0, 1, 1).data;
+      return `rgba(${d[0]}, ${d[1]}, ${d[2]}, ${(d[3] / 255).toFixed(3)})`;
+    };
+
+    const moderno = /\b(?:color|oklch|oklab|lab|lch)\([^()]*\)/g;
+    const propiedades = [
+      'color', 'background-color', 'background-image',
+      'border-top-color', 'border-right-color', 'border-bottom-color', 'border-left-color',
+      'outline-color', 'text-decoration-color', 'box-shadow', 'text-shadow',
+      'fill', 'stroke', 'caret-color'
+    ];
+    const vista = docClonado.defaultView;
+
+    docClonado.querySelectorAll('*').forEach((el) => {
+      const estilos = vista.getComputedStyle(el);
+      propiedades.forEach((prop) => {
+        const valor = estilos.getPropertyValue(prop);
+        moderno.lastIndex = 0;
+        if (valor && moderno.test(valor)) {
+          moderno.lastIndex = 0;
+          el.style.setProperty(prop, valor.replace(moderno, aRgba), 'important');
+        }
+      });
+    });
+  }
+
+  async function capturarResultado(backgroundColor, esquinasCuadradas = false) {
     const captura = document.getElementById('captura');
     const precio = captura.querySelector('.btn-incentivo-precio');
 
@@ -412,7 +450,20 @@ document.addEventListener("DOMContentLoaded", () => {
     if (precio) precio.style.visibility = 'hidden';
 
     try {
-      return await html2canvas(captura, { backgroundColor, scale: 2 });
+      return await html2canvas(captura, {
+        backgroundColor,
+        scale: 2,
+        onclone: (docClonado) => {
+          // 1) evita el error "unsupported color function"
+          convertirColoresModernos(docClonado);
+
+          // 2) esquinas cuadradas solo en la copia que se descarga
+          if (esquinasCuadradas) {
+            const copia = docClonado.getElementById('captura');
+            if (copia) copia.style.setProperty('border-radius', '0', 'important');
+          }
+        }
+      });
     } finally {
       captura.style.maxHeight = estiloOriginal.maxHeight;
       captura.style.overflow = estiloOriginal.overflow;
@@ -473,7 +524,7 @@ document.addEventListener("DOMContentLoaded", () => {
      DESCARGAR IMAGEN
   ========================= */
   btnDescargar.addEventListener('click', async () => {
-    const canvas = await capturarResultado(null);
+    const canvas = await capturarResultado(null, true);
     const link = document.createElement('a');
     link.download = 'resultado-quiz-memanejo.png';
     link.href = canvas.toDataURL('image/png');
