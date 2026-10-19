@@ -373,22 +373,22 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-// emailjs.send("service_ujyq6hg", "template_o43bfnj", {
-//   nombre: localStorage.getItem("nombre") || "Invitado",
-//   correo: localStorage.getItem("correo") || "sin_correo",
-//   telefono: localStorage.getItem("telefono") || "sin_telefono",
-//   puntaje: score,
-//   total: puntajeTotal,
-//   porcentaje: porcentaje.toFixed(0),
-//   estado: aprobado ? "Aprobado" : "No aprobado",
-//   correctas: correctasCount,
-//   erradas: erradasCount,
-//   tiempo: `${min}:${seg.toString().padStart(2, '0')}`,
-//   errores: errores.join('\n\n')
-// });
+    emailjs.send("service_ujyq6hg", "template_o43bfnj", {
+      nombre: localStorage.getItem("nombre") || "Invitado",
+      correo: localStorage.getItem("correo") || "sin_correo",
+      telefono: localStorage.getItem("telefono") || "sin_telefono",
+      puntaje: score,
+      total: puntajeTotal,
+      porcentaje: porcentaje.toFixed(0),
+      estado: aprobado ? "Aprobado" : "No aprobado",
+      correctas: correctasCount,
+      erradas: erradasCount,
+      tiempo: `${min}:${seg.toString().padStart(2, '0')}`,
+      errores: errores.join('\n\n')
+    });
 
-modal.classList.remove('oculto');
-tiempoElemento.classList.remove('visible');
+    modal.classList.remove('oculto');
+    tiempoElemento.classList.remove('visible');
   }
   window.mostrarResultado = mostrarResultado;
 
@@ -570,7 +570,7 @@ tiempoElemento.classList.remove('visible');
     if (!validarFormulario()) return;
     iniciarQuiz();
   });
- // Solo para pruebas: escribe testResultado() en la consola
+  // Solo para pruebas: escribe testResultado() en la consola
   window.testResultado = function () {
     score = 20;
     correctasCount = 19;
