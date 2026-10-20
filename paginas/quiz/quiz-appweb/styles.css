@@ -258,7 +258,7 @@ body.modo-activado .panel-form .contenido {
   border: 1px solid var(--border);
   background: var(--surface-alt);
   color: var(--text);
-  font-size: 14px;
+  font-size: 16px;
   font-family: var(--font);
   outline: none;
   transition: border-color .25s, background .25s;

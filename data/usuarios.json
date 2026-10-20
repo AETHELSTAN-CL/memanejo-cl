@@ -49,6 +49,22 @@
     },
     {
         "memanejoId": "2026",
+        "nombre": "Estudiante Referido",
+        "email": "referidos@memanejo.cl",
+        "desbloqueado": {
+            "quiz180": false,
+            "quiz500": false,
+            "quiz800": false,
+            "clasesEnVivo": false,
+            "resumenes": false,
+            "full": true
+        },
+        "referidoPor": null,
+        "codigoReferido": "TST",
+        "fechaRegistro": "2026-07-28"
+    },
+    {
+        "memanejoId": "2026",
         "nombre": "Hola Estudiante",
         "email": "estudiante@memanejo.cl",
         "desbloqueado": {
