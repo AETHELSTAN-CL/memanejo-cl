@@ -230,432 +230,609 @@ body.onboarding-activo {
   z-index: 80;
 }
 
-/* ===== CONTENIDO SOBRE EL VIDEO/IMAGEN ===== */
+
+/* =========================================================
+   ONBOARDING · AULA VIRTUAL memanejo
+   Pantalla de entrada: card de vidrio sobre video/imagen.
+   Incluye la pantalla principal y las pantallas que arma el JS
+   (primer acceso, solicitar ID, login memanejo+ y bienvenida).
+   ========================================================= */
+
+
+/* ---------- Contenedor sobre video/imagen ---------- */
 .onboard-content {
   position: fixed;
-  top: 0;
-  left: 0;
+  inset: 0;
+  z-index: 90;
+  display: flex;
   width: 100%;
   height: 100vh;
   height: 100dvh;
-  display: flex;
-  flex-direction: column;
-  justify-content: safe center;
-  align-items: center;
-  text-align: center;
-  color: #fff;
-  z-index: 90;
+  padding:
+    max(20px, env(safe-area-inset-top))
+    max(16px, env(safe-area-inset-right))
+    max(20px, env(safe-area-inset-bottom))
+    max(16px, env(safe-area-inset-left));
   box-sizing: border-box;
   overflow-y: auto;
-}
-
-.onboard-left {
-  display: none;
+  overscroll-behavior: contain;
 }
 
 .onboard-right {
+  position: relative;
+  z-index: 1;
   width: 100%;
-  max-width: 450px;
-  margin: 0 auto;
+  margin: auto;            /* centra la card y, si es más alta que la pantalla, deja hacer scroll */
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
-/* ===== CARD GLASS (mobile y desktop) ===== */
+
+/* ---------- Card de vidrio ---------- */
 .login-card-glass {
-  width: 100%;
-  max-width: 720px;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 24px;
-  padding: 68px 20px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  --accent: #2261ff;       /* azul memanejo */
+  --ink: #111113;          /* texto principal */
+  --muted: #4b5260;        /* texto secundario */
+  --danger: #c5221f;       /* errores */
+  --logo-bg: #ffffff;      /* fondo del logo (si tu logo es blanco, usa #111113) */
+
   box-sizing: border-box;
+  width: min(100%, 620px);
+  padding: 26px 18px 18px;
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, sans-serif;
+  background: rgba(255, 255, 255, 0.46);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 28px;
+  -webkit-backdrop-filter: blur(6px) saturate(180%);
+  backdrop-filter: blur(16px) saturate(180%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 30px 80px -24px rgba(0, 0, 0, 0.5),
+    0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.login-card-glass *,
+.login-card-glass *::before,
+.login-card-glass *::after {
+  box-sizing: border-box;
+}
+
+
+/* ---------- Encabezado: logo · Aula Virtual · burbuja (mismo eje) ---------- */
+.title-wrapper {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: center;
+  align-items: center;       /* los tres quedan centrados en el mismo eje horizontal */
+  gap: 12px;
+  width: 100%;
+  margin: 0 0 24px;
+}
+
+.title-brand {
+  flex: 0 0 auto;
+  line-height: 0;
+}
+
+.title-brand img {
+  display: block;
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  background: var(--logo-bg);
+  border-radius: 22.4%;      /* esquinas tipo ícono de app */
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 20px -6px rgba(0, 0, 0, 0.35);
+}
+
+.title-text {
   text-align: center;
 }
 
-/* ===== FORMULARIOS DENTRO DEL CARD (portal alumno / nuevo estudiante) ===== */
-.portal-form {
-  max-width: 720px;
-  margin: 1rem 1rem;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
+.title-endorse {
+  display: block;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  color: var(--ink);
+}
+/*
+.memanejo-bubble {
+  flex: 0 0 auto;
+  align-self: center;
+  padding: 4px 18px;
+  font-size: 12.5px;
+  font-weight: 800;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  background: rgba(0, 0, 0, 0.09);
+  border: 1px solid rgb(254, 254, 254);
+  border-radius: 999px;
+}
+*/
+
+/* ---------- Título y bajada ---------- */
+.card-subblock {
+  margin: 0 0 8px;
+}
+
+.card-subtitle {
+  margin: 0;
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.card-selector {
+  margin: 0 0 20px;
+}
+
+.card-selector .card-text {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
+
+/* ---------- Opciones ----------
+   Fila 1: ícono (izquierda) y etiqueta (derecha), en el mismo eje.
+   Fila 2: texto (izquierda) y círculo de selección (derecha).      */
+.card-icons {
+  display: grid;
+  gap: 12px;
+}
+
+.icon-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "icono pill"
+    "texto selector";
+  column-gap: 14px;
+  row-gap: 10px;
   align-items: center;
-  justify-content: center;
+  padding: 14px 14px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1.5px solid rgba(0, 0, 0, 0.08);
+  border-radius: 22px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.2s ease, background 0.2s ease,
+              border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.icon-item:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 10px 24px -14px rgba(0, 0, 0, 0.35);
+}
+
+.icon-item:active {
+  transform: scale(0.985);
+}
+
+.icon-item > i {
+  grid-area: icono;
+  justify-self: start;
+  align-self: center;
+  font-size: 28px;
+  line-height: 1;
+  color: var(--ink);
+}
+
+.icon-item .pill {
+  padding: 4px 12px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  color: var(--accent);
+  background: rgba(34, 97, 255, 0.1);
+  border: 1px solid rgba(34, 97, 255, 0.25);
+  border-radius: 999px;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.icon-item[data-role="new"] .pill {
+  color: #15803d;
+  background: rgba(22, 163, 74, 0.1);
+  border-color: rgba(22, 163, 74, 0.3);
+}
+
+.icon-item-text {
+  grid-area: texto;
+  align-self: center;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+.icon-item-text strong {
+  font-weight: 650;
+  color: var(--ink);
+}
+
+/* Círculo de selección */
+.icon-item::after {
+  content: "";
+  grid-area: selector;
+  justify-self: end;
+  align-self: center;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+/* Opción seleccionada */
+.icon-item.selected,
+.icon-item[aria-checked="true"] {
+  background: rgba(255, 255, 255, 0.98);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(34, 97, 255, 0.14);
+}
+
+.icon-item.selected::after,
+.icon-item[aria-checked="true"]::after {
+  border-color: var(--accent);
+  background: radial-gradient(circle, var(--accent) 0 42%, transparent 46%);
+}
+
+.icon-item.selected .pill,
+.icon-item[aria-checked="true"] .pill {
+  color: #fff;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.icon-item[data-role="new"].selected .pill,
+.icon-item[data-role="new"][aria-checked="true"] .pill {
+  background: #15803d;
+  border-color: #15803d;
+}
+
+.icon-item:focus-visible {
+  outline: 3px solid rgba(34, 97, 255, 0.45);
+  outline-offset: 2px;
+}
+
+
+/* ---------- Botón principal ---------- */
+.card-btn {
+  display: block;
+  width: 100%;
+  min-height: 52px;
+  margin: 20px 0 0;
+  padding: 0 24px;
+  font-family: inherit;
+  font-size: 16px;           /* 16px evita el zoom de Safari en iPhone */
+  font-weight: 650;
+  color: #fff;
+  background: var(--ink);
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: 0 12px 26px -12px rgba(0, 0, 0, 0.6);
+  transition: transform 0.2s ease, opacity 0.2s ease, background 0.2s ease;
+}
+
+.card-btn strong {
+  font-weight: inherit;
+}
+
+.card-btn:hover {
+  transform: scale(1.015);
+  background: #000;
+}
+
+.card-btn:active {
+  transform: scale(0.985);
+}
+
+.card-btn:focus-visible {
+  outline: 3px solid rgba(34, 97, 255, 0.5);
+  outline-offset: 3px;
+}
+
+.card-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+
+/* ---------- Texto legal ---------- */
+.card-legal-text {
+  display: block;
+  margin: 8px 0 0;
+  font-size: 11.5px;
+  line-height: 1.4;
   text-align: center;
+  color: var(--muted);
+}
+
+
+/* ---------- Mensaje de error general ---------- */
+.error-msg {
+  margin: 12px 0 0;
+  padding: 10px 14px;
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.35;
+  text-align: center;
+  color: var(--danger);
+  background: rgba(217, 48, 37, 0.1);
+  border: 1px solid rgba(217, 48, 37, 0.25);
+  border-radius: 14px;
+}
+
+
+/* =========================================================
+   PANTALLAS QUE ARMA EL JS (formularios y bienvenida)
+   ========================================================= */
+.card-plus {
+  animation: cardIn 0.28s ease both;
+}
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.card-title,
+.card-title-visitante {
+  margin: 0 0 8px;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.card-plus .card-text {
+  margin: 0 0 18px;
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+.card-plus .card-text strong {
+  font-weight: 650;
+  color: var(--ink);
+}
+
+
+/* ---------- Formulario ---------- */
+.portal-form {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+}
+
+.portal-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.card-field {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
 }
 
 .card-input {
   width: 100%;
-  max-width: 300px;
-  margin: 0.5rem auto 0 auto;
-  padding: 9px 36px;
-  border-radius: 20px;
-  border: none;
+  min-height: 52px;
+  padding: 0 16px;
+  font-family: inherit;
+  font-size: 16px;           /* evita el zoom de Safari en iPhone */
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.8);
+  border: 1.5px solid rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
   outline: none;
-  font-size: 1rem;
-  text-align: center;
-  box-sizing: border-box;
-  display: block;
+  transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* ===== Título ordenado (logo izquierda, texto derecha) ===== */
-.title-wrapper {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
+.card-input::placeholder {
+  color: #6f7785;
+  opacity: 1;
 }
 
-.title-wrapper img {
-  width: 90px;
-  height: 90px;
-  border-radius: 22px;
-  object-fit: cover;
-}
-
-.card-title {
-  display: flex;
-  flex-direction: column;
-  font-size: 24px;
-  
-}
-
-.card-title-visitante {
-  display: flex;
-  flex-direction: column;
-  font-size: 36px;
-}
-
-.card-title-line1,
-.card-title-line2 {
-  line-height: 1.1;
-  text-align: center;
-}
-
-/* Textos */
-
-.card-subtitle {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-top: 50px;
-  line-height: 1.2;
-}
-
-.card-text {
-  opacity: 0.85;
-  font-size: 16px;
-}
-
-.card-plus {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.card-plus-title strong {
-  font-size: 36px;
-}
-
-.card-plus-text {
-  font-size: 16px;
-  max-width: 480px;
-  line-height: 1.5;
-}
-
-.card-icons {
-  display: flex;
-  justify-content: center;
-  gap: 60px;
-}
-
-.icon-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: pointer;
-  text-align: center;
-}
-
-.icon-item .pill {
-  white-space: nowrap; /* el pill (texto corto) sigue sin cortarse */
-}
-
-.icon-item i {
-  font-size: 3rem;
-  margin-bottom: 20px;
-}
-/* ===== Texto propio de cada botón ===== */
-.icon-item-text {
-  font-size: 10px;
-  color: rgba(255, 255, 255, 0.75);
-  line-height: 1.3;
-  margin: 8px 0 0;
-  max-width: 160px;
-  white-space: normal; /* permite salto de línea dentro del texto */
-}
-.pill {
-  display: inline-block;
-  padding: 3px 36px;
-  border-radius: 22px;
-  background: #eeeded;
-  border: 1px solid #0026ff;
-  font-weight: 600;
-  font-size: 1rem;
-  color: #090909;
-  transition: background 0.4s ease, color 0.2s ease, transform 0.2s ease;
-}
-
-.pill:hover {
-  transform: scale(1.1);
-  transition: transform 0.4s ease, color 0.3s ease;
-}
-
-/* Solo el pill seleccionado se pinta; nada más cambia */
-.pill.selected {
-  background: #001089;
-  color: #fff;
-  border: 1px solid #f0f0f0;
-  transform: scale(1.1);
-
-}
-
-/* ===== Botón ===== */
-.card-btn {
-  width: auto;
-  padding: 9px 36px;
-  border-radius: 30px;
-  border: 1px solid #001089;
-  background: #001089;
-  color: #fff;
-  font-size: 13px;
-  cursor: pointer;
-  margin: 20px auto 0 auto;
-  display: block;
-  transition: transform 0.3s ease, color 0.3s ease;
-}
-
-.card-btn:hover {
-  color: #f0f0f0;
-  border: 1px solid #f0f0f0;
-  transform: scale(1.1);
-
-}
-.card-legal-text {
-  display: block;
-  margin-top: 14px;
-  font-size: 10px;
-  color: rgba(255, 255, 255, 0.55);
-  line-height: 1.3;
-  max-width: 320px;
-  text-align: center;
-}
-
-.card-sub-text {
-  font-size: 10px;
-  margin-top: 8px;
-}
-
-.card-sub-text-login {
-  font-size: 10px;
-  margin-bottom: 8px;
-
-}
-
-.card-sub-text a {
-  color: rgba(0, 219, 231, 0.562);
-  font-size: 12px;
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.card-sub-text a:hover {
-  color: #c3c2c2;
-  text-decoration: none;
-}
-
-.card-error {
-  display: block;
-  color: #ffb4b4;
-  font-size: 11px;
-  font-weight: 700;
-  margin-top: 4px;
+.card-input:focus {
+  background: #fff;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(34, 97, 255, 0.16);
 }
 
 .card-input.input-error {
-  border: 1px solid #d92d20;
+  border-color: var(--danger);
+  box-shadow: 0 0 0 4px rgba(217, 48, 37, 0.12);
 }
 
-/* ===== Botón "Volver" — unificado para AMBOS portales (alumno y nuevo estudiante) ===== */
-#portalVolver,
-#loginVolver {
-  margin-top: 20px;
-  margin-bottom: 40px;
-  display: flex;
+.card-error {
+  padding-left: 4px;
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--danger);
+}
+
+.card-error:empty {
+  display: none;
+}
+
+.portal-form .card-btn {
+  margin-top: 6px;
+}
+
+.card-sub-text {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--muted);
+}
+
+.card-sub-text a {
+  font-weight: 650;
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.card-back {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
+  justify-self: center;
+  padding: 8px 14px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted);
+  background: none;
+  border: 0;
+  border-radius: 999px;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
-#portalVolver:hover i,
-#loginVolver:hover i{
-  transform: translateX(-6px);
-  opacity: 0.8;
-  transition: transform 0.3s ease, color 0.3s ease;
+.card-back:hover {
+  color: var(--ink);
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.card-back:focus-visible,
+.card-sub-text a:focus-visible {
+  outline: 3px solid rgba(34, 97, 255, 0.45);
+  outline-offset: 2px;
+}
+
+
+/* ---------- Bienvenida ---------- */
+.welcome-mark {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  margin: 0 0 14px;
+  font-size: 22px;
+  color: #fff;
+  background: var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 10px 24px -8px rgba(34, 97, 255, 0.7);
 }
 
 .card-btn-wide {
   width: 100%;
-  max-width: 320px;
-  padding: 10px 20px;
-  white-space: normal;
-  box-sizing: border-box;
-  text-align: center;
-  line-height: 1.3;
 }
 
-@media (max-width: 499px) {
-  .title-wrapper img {
-    width: 70px;
-    height: 70px;
-    border-radius: 20px;
-    object-fit: cover;
+
+/* ---------- Footer de la card: marca a la izquierda, bandera a la derecha ---------- */
+.card-brand-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 16px 0 0;
+  padding: 14px 2px 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11.5px;
+  letter-spacing: -0.01em;
+  color: var(--muted);
+}
+.footer-brand strong {
+  letter-spacing: -0.07em;;
+}
+.footer-brand img {
+  display: block;
+  width: 22px;
+  height: 22px;
+  object-fit: cover;
+  background: var(--logo-bg);
+  border-radius: 22.4%;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+/*
+.footer-flag {
+  display: block;
+  flex: 0 0 auto;
+  width: 24px;
+  height: 16px;
+  border-radius: 3px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12);
+}
+*/
+
+/* ---------- Pantallas angostas ---------- */
+@media (max-width: 420px) {
+  .onboard-content {
+    padding-left: max(8px, env(safe-area-inset-left));
+    padding-right: max(8px, env(safe-area-inset-right));
   }
 
-  .icon-item i {
-    font-size: 2rem;
-  }
-
-  .card-title {
-    font-size: 18px;
+  .login-card-glass {
+    width: 100%;
+    padding-left: 18px;
+    padding-right: 18px;
   }
 
   .card-subtitle {
-    font-size: 1.5rem;
-    font-weight: 600;
-    font-family: 'Avenir', sans-serif;
-    margin-top: 40px;
-  }
-
-  .card-text {
-    font-size: 0.9rem;
-  }
-
-  .onboard-right {
-    max-width: 350px;
-  }
-
-  .card-plus-text {
-    font-size: 0.7rem;
-    max-width: 350px;
-    line-height: 1.2;
-  }
-
-  .card-plus-title strong {
     font-size: 28px;
-    white-space: nowrap;
   }
 
-  .login-card-glass {
-    padding: 2rem 1.5rem;
+  .icon-item {
+    column-gap: 4px;
   }
 
-  .card-icons {
-    margin-top: 12px;
-    gap: 20px;
+
+  .title-brand img {
+    width: 52px;
+    height: 52px;
   }
 
-  .portal-form {
-    width: 100%;
+  .title-endorse {
+    font-size: 28px;
+    white-space: normal;   /* en pantallas muy angostas puede partirse en 2 líneas */
   }
 
-  .card-input {
-    max-width: 280px;
-  }
+}
 
-  .pill {
-    padding: 3px 18px;
-  }
-
-  .card-btn {
-    margin-top: 30px;
-    padding: 6px 52px;
-    font-size: 12px;
+@media (max-width: 360px) {
+  .portal-row {
+    grid-template-columns: 1fr;
   }
 }
 
-@media (min-width: 500px) and (max-width: 1400px) {
-  .card-plus-title strong {
-    font-size: 36px;
-    white-space: nowrap;
-  }
-
-  .card-subtitle {
-    font-size: 2rem;
-    font-weight: 700;
-    font-family: 'Avenir', sans-serif;
-    margin-top: 40px;
-    line-height: 1.3;
-  }
-
-  .card-text {
-    font-size: 0.8rem;
-  }
-
-  .onboard-right {
-    max-width: 500px;
-  }
-
-  .login-card-glass {
-    padding: 3rem 2rem;
-  }
-
-  .card-icons {
-    margin-top: 20px;
-  }
-
-  .portal-form {
-    width: 100%;
-  }
-
-  .card-input {
-    max-width: 320px;
-  }
-}
-
-/* ===== DESKTOP: SPLIT SCREEN ===== */
-@media (min-width: 1400px) {
-  .card-subtitle {
-    font-size: 3rem;
-    line-height: 1.3;
-  }
-  .card-text {
-    font-size: 1.3rem;
-  }
-
-  .onboard-right {
-    max-width: 1440px;
-    justify-content: center;
-    margin: 0;
-  }
-
-  .card-icons {
-    margin-top: 22px;
-  }
-
-  .portal-overlay-aula {
-    bottom: auto;
+@media (prefers-reduced-motion: reduce) {
+  .icon-item,
+  .card-btn,
+  .card-plus {
+    transition: none;
+    animation: none;
   }
 }
 
@@ -1082,7 +1259,7 @@ body.onboarding-activo {
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
   margin-bottom: 20px;
-  
+
 }
 
 .sd-stat-card {
@@ -1828,6 +2005,7 @@ body.onboarding-activo {
   opacity: 0 !important;
   transform: translate(-50%, -160px) !important;
 }
+
 @media (max-width: 556px) {
   @media (display-mode: standalone) {
     :root {
@@ -1835,6 +2013,7 @@ body.onboarding-activo {
     }
   }
 }
+
 /* Fondo suave detrás */
 .quiz-game-modal {
   position: fixed;
@@ -2562,6 +2741,7 @@ body.onboarding-activo header {
   color: #111;
   text-align: center;
 }
+
 #contenidos .card-title-row {
   display: flex;
   align-items: center;
@@ -2572,6 +2752,7 @@ body.onboarding-activo header {
   color: #111;
   text-align: center;
 }
+
 #contenidos .card-title-row i {
   color: #2261ff;
   font-size: 1.5rem;
@@ -2581,7 +2762,7 @@ body.onboarding-activo header {
   font-size: 0.95rem;
   color: #555;
   line-height: 1.6;
-  
+
 }
 
 .linea-divide {
@@ -2663,6 +2844,7 @@ body.onboarding-activo header {
     font-size: 0.62rem;
   }
 }
+
 .km-header {
   display: flex;
   align-items: center;
@@ -2677,8 +2859,9 @@ body.onboarding-activo header {
   gap: 8px;
   font-size: clamp(1rem, 0.65rem + 0.75vw, 1.05rem);
   white-space: nowrap;
-  
+
 }
+
 .km-pill {
   display: inline-flex;
   align-items: center;
@@ -2693,6 +2876,7 @@ body.onboarding-activo header {
   flex-shrink: 0;
   font-size: 12px;
 }
+
 .km-objective {
   margin: 16px 0;
   line-height: 1.5;
@@ -2782,10 +2966,7 @@ body.onboarding-activo header {
   justify-content: space-between;
   /* arriba: deja espacio para la barra de estado / blur de iOS */
   padding:
-    calc(14px + env(safe-area-inset-top, 0px))
-    calc(22px + env(safe-area-inset-right, 0px))
-    14px
-    calc(18px + env(safe-area-inset-left, 0px));
+    calc(14px + env(safe-area-inset-top, 0px)) calc(22px + env(safe-area-inset-right, 0px)) 14px calc(18px + env(safe-area-inset-left, 0px));
   background: #111;
   color: #fff;
   overflow: visible;
@@ -2838,10 +3019,7 @@ body.onboarding-activo header {
   overscroll-behavior: contain;
   /* el !important vence a la clase p-3 de Bootstrap, que anulaba el espacio inferior */
   padding:
-    1rem
-    calc(1rem + env(safe-area-inset-right, 0px))
-    calc(1rem + env(safe-area-inset-bottom, 0px))
-    calc(1rem + env(safe-area-inset-left, 0px)) !important;
+    1rem calc(1rem + env(safe-area-inset-right, 0px)) calc(1rem + env(safe-area-inset-bottom, 0px)) calc(1rem + env(safe-area-inset-left, 0px)) !important;
 }
 
 /* ===== CARD individual dentro del modal ===== */
@@ -2966,11 +3144,13 @@ body.onboarding-activo header {
   margin-bottom: 0;
   line-height: 1.09;
 }
+
 @media (display-mode: standalone) {
   .modal-topbar {
     padding-top: calc(env(safe-area-inset-top, 0px) + 30px);
   }
 }
+
 /* ===== Secciones: Recursos, Soporte, Conoce Más ===== */
 #recursos,
 #soporte,
@@ -2979,6 +3159,7 @@ body.onboarding-activo header {
   position: relative;
   z-index: 1;
 }
+
 .tranquilidad-badge {
   display: inline-block;
   margin: 10px 0 24px;
@@ -2991,6 +3172,7 @@ body.onboarding-activo header {
   font-weight: 700;
   letter-spacing: 0.2px;
 }
+
 /* ===== Título base compartido ===== */
 .section-title {
   font-size: 50px;
@@ -3346,14 +3528,15 @@ body.onboarding-activo header {
   background-color: #0026ff;
   border: 1px solid #0026ff;
 }
+
 .benefit-action:hover {
   background-color: #000;
   border: 1px solid #0026ff;
 }
 
-.benefit-action:hover i{
+.benefit-action:hover i {
   transform: translateX(6px);
-  
+
 }
 
 /* Animación apertura */

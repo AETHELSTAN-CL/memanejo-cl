@@ -117,59 +117,77 @@
   <!-- CAPA OSCURA SOBRE EL VIDEO/IMAGEN -->
   <div class="onboard-dim-overlay"></div>
 
-  <!-- CONTENIDO -->
-  <div class="onboard-content">
-    <!-- Columna derecha: card glass (mobile y desktop) -->
-    <div class="onboard-right">
-      <div class="login-card-glass">
+<!-- CONTENIDO -->
+<div class="onboard-content">
+  <div class="onboard-right">
+    <div class="login-card-glass">
 
-        <!-- TÍTULO + LOGO EN FILA -->
-        <div class="title-wrapper">
-          <img src="img/logopngicon.png" alt="Logo">
-          <div class="card-title">
-            <span class="card-title-line1"><strong>Aula Virtual</strong></span>
-            <span class="card-title-line2"><strong>memanejo</strong></span>
-          </div>
+      <!-- ENCABEZADO -->
+      <div class="title-wrapper">
+        <div class="title-brand">
+          <img src="img/logopngicon.png" alt="memanejo.cl">
+        </div>
+        <div class="title-text">
+          <span class="title-endorse">Aula Virtual</span>
+        </div>
+  
+      </div>
+
+      <!-- TÍTULO Y BAJADA -->
+      <div class="card-subblock">
+        <div class="card-subtitle">Prepárate para obtener tu Licencia de Conducir</div>
+      </div>
+      <div class="card-selector">
+        <div class="card-text">Aquí comienza tu camino</div>
+      </div>
+
+      <!-- OPCIONES -->
+      <div class="card-icons" role="radiogroup" aria-label="¿Cómo quieres comenzar?">
+
+        <div class="icon-item" data-role="alumno" role="radio" aria-checked="false" tabindex="0">
+          <i class="fas fa-id-card" aria-hidden="true"></i>
+          <span class="pill">memanejo+</span>
+          <p class="icon-item-text">
+            Ingresa con tu <strong>memanejo ID</strong> o solicita uno como estudiante.
+          </p>
         </div>
 
-        <div class="card-subblock">
-          <div class="card-subtitle">Prepárate para obtener tu <br> Licencia de Conducir</div>
+        <div class="icon-item" data-role="new" role="radio" aria-checked="false" tabindex="0">
+          <i class="fas fa-clipboard-question" aria-hidden="true"></i>
+          <span class="pill">Quiz gratis</span>
+          <p class="icon-item-text">
+            Si es tu primera vez, comienza con el <strong>quiz de nivelación</strong>.
+          </p>
         </div>
-        <div class="card-selector">
-          <div class="card-text mb-3">
-            Aqui comienza tu camino
-          </div>
-        </div>
-        <!-- ICONOS EN COLUMNA -->
-        <div class="card-icons">
-
-          <div class="icon-item" data-role="alumno">
-            <i class="fas fa-id-card"></i>
-            <span class="pill">memanejo+</span>
-            <p class="icon-item-text">
-              Ingresa con tu <strong>ID memanejo</strong> o solicita uno como estudiante.
-            </p>
-          </div>
-
-          <div class="icon-item" data-role="new">
-            <i class="fas fa-clipboard-question"></i>
-            <span class="pill">Quiz gratis</span>
-            <p class="icon-item-text">
-              Si es tu primera vez, comienza con el <strong>quiz de nivelación</strong>.
-            </p>
-          </div>
-
-        </div>
-        <button id="btnContinuar" class="card-btn">Continuar</button>
-        <small class="card-legal-text">
-          Cursos y exámenes conforme a Ley de Tránsito N.º 18.290.
-        </small>
 
       </div>
+
+      <button id="btnContinuar" class="card-btn">Continuar</button>
+
+      <small class="card-legal-text">
+        Cursos y exámenes conforme a Ley de Tránsito N.º 18.290.
+      </small>
+
+      <!-- FOOTER -->
+      <div class="card-brand-footer">
+        <span class="footer-brand">
+          Powered by
+          <img src="/img/inifinitelogoimg.PNG" alt="">
+          <strong>ÆROO Studio</strong>
+        </span>
+        <!---
+        <svg class="footer-flag" viewBox="0 0 60 40" role="img" aria-label="Chile" xmlns="http://www.w3.org/2000/svg">
+          <rect width="60" height="40" fill="#ffffff"/>
+          <rect y="20" width="60" height="20" fill="#D52B1E"/>
+          <rect width="20" height="20" fill="#0039A6"/>
+          <polygon fill="#ffffff" points="10.0,4.2 11.4,8.4 15.9,8.5 12.3,11.2 13.6,15.4 10.0,12.9 6.4,15.4 7.7,11.2 4.1,8.5 8.6,8.4"/>
+        </svg>
+        -->
+      </div>
+
     </div>
-
   </div>
-
+</div>
 
   <!-- 🎥 Sección de Videos -->
   <section id="videos">

@@ -217,7 +217,23 @@ body {
     border-radius: 40px;
     letter-spacing: .02em;
 }
+.mm-tag-extra {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    z-index: 2;
 
+    -webkit-backdrop-filter: blur(6px) saturate(220%);
+    backdrop-filter: blur(6px) saturate(220%);
+
+    border: 1px solid rgb(212, 212, 212);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 6px 20px;
+    border-radius: 40px;
+    letter-spacing: .02em;
+}
 .mm-tag.hot {
     color: #fff;
     background: transparent;
@@ -237,6 +253,8 @@ body {
             #e3bace 48%,
             #a4e4ca 72%,
             #8170e6 100%) border-box;
+    -webkit-backdrop-filter: blur(6px) saturate(170%) brightness(1.08);
+      backdrop-filter: blur(6px) saturate(170%) brightness(1.08);
 
 }
 
@@ -1904,7 +1922,7 @@ body {
     .modal-cursos .modal-title {
       margin: 0;                      /* Bootstrap deja márgenes que desalinean */
       line-height: 1.2;
-      font-size: 18px;
+      font-size: 24px;
     }
     .modal-cursos .btn-close {
       flex-shrink: 0;
@@ -1941,9 +1959,9 @@ body {
     .mmplus-price {
       margin: 0 0 18px;
       padding: 14px 16px;
-      border: 1px solid #e6e5e5;
+      border: 1px solid #0026ff;
       border-radius: 16px;
-      background: #0026ff;
+      background: #000;
     }
     .mmplus-tag {
       display: inline-block;
@@ -1973,7 +1991,7 @@ body {
     .mmplus-subtitle { margin: 0 0 10px; font-size: 13px; font-weight: 700; }
     .mmplus-list {
       display: grid;
-      gap: 10px;
+      gap: 5px;
       margin: 0;
       padding: 0;
       list-style: none;
@@ -1986,54 +2004,109 @@ body {
       line-height: 1.45;
     }
     .mmplus-list i { margin-top: 3px; color: var(--crimson); }
-    .mmplus-list small { display: block; color: #8a8a8a; font-size: 11.5px; }
+    .mmplus-list small { display: block; color: #d2d0d0; font-size: 11.5px; }
 
-    /* Pie con botones */
-    .modal-cursos .mmplus-footer {
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
-      gap: 14px;
-      padding: 6px 20px 20px;
-      border-top: 0;
-    }
-    .mmplus-footer > * { margin: 0; }
+/* Pie con botones */
+.modal-cursos .mmplus-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 14px;
+  padding: 6px 20px 20px;
+  border-top: 0;
+}
 
-    .mmplus-cta {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      min-height: 48px;
-      padding: 0 22px;
-      border: 1px solid #fff;
-      border-radius: 999px;
-      color: #0b0b0b;
-      background: linear-gradient(180deg, #ffffff 0%, #d9dce1 52%, #f3f4f6 100%);
-      font-size: 13.5px;
-      font-weight: 800;
-      text-decoration: none;
-      transition: transform .2s ease;
-    }
-    .mmplus-cta:hover { color: #0b0b0b; transform: scale(1.02); }
-    .mmplus-cta i { font-size: 17px; }
+.mmplus-footer > * {
+  margin: 0;
+}
 
-    .mmplus-cta--ghost {
-      color: #fff;
-      background: transparent;
-      border-color: #656565;
-    }
-    .mmplus-cta--ghost:hover { color: #fff; border-color: #fff; }
+/* Botón */
+.mmplus-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 0 60px;
+  border: 1px solid #fff;
+  border-radius: 999px;
+  color: #0b0b0b;
+  background: linear-gradient(180deg, #ffffff 0%, #d9dce1 52%, #f3f4f6 100%);
+  font-size: 16px;
+  font-weight: 800;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
 
-    .mmplus-logo { width: 22px; height: 22px; object-fit: contain; }
+.mmplus-cta:hover {
+  color: #0b0b0b;
+  transform: scale(1.02);
+}
 
-    .mmplus-note {
-      display: block;
-      margin-top: 7px;
-      color: #8a8a8a;
-      font-size: 11px;
-      text-align: center;
-    }
+.mmplus-cta i {
+  font-size: 17px;
+  color: #25D366;
+}
+
+/* Opción Aula Virtual */
+.mmplus-opcion {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.mmplus-aula {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 10px;
+  min-height: 48px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  color: inherit;
+  background: transparent;
+  font-size: 13.5px;
+  font-weight: 800;
+  text-decoration: none;
+  transition: none;
+}
+
+.mmplus-aula:hover {
+  color: inherit;
+  background: transparent;
+  transform: none;
+}
+
+.mmplus-aula .mmplus-logo {
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  object-fit: contain;
+}
+
+.mmplus-aula-texto {
+  flex: 0 0 auto;
+  text-align: center;
+}
+
+.mmplus-aula-flecha {
+  flex: 0 0 auto;
+  transition: transform 0.2s ease;
+  font-size: 17px;
+}
+
+.mmplus-aula:hover .mmplus-aula-flecha {
+  transform: translateX(4px);
+}
+
+.mmplus-note {
+  display: block;
+  text-align: center;
+  font-size: 12px;
+}
 /* Modal de pago
 #modalPagoClases .modal-content {
     background: rgba(139, 139, 139, 0.25);
@@ -2994,6 +3067,7 @@ body {
     display: grid;
     grid-template-columns: 1fr;
     gap: 8px;
+    padding-bottom: 20px;
 }
 
 
@@ -4884,7 +4958,21 @@ html {
     color: crimson;
     font-weight: 100;
 }
-
+.app-footer .fa-codepen {
+  background: linear-gradient(
+    135deg,
+    #15b6a1 0%,
+    #0dab90 18%,
+    #48e6d0 38%,
+    #13bfae 58%,
+    #72e9d3 76%,
+    #26b4a3 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 1px 2px rgba(19, 191, 174, 0.837));
+}
 /* Acordeones simples e idénticos */
 footer .accordion-copyright,
 footer .accordion-toggle {
@@ -5050,4 +5138,18 @@ footer .panel-condiciones-servicio+.footer-divider {
     /* iconos en crimson */
     margin: 0 4px;
     font-weight: 100;
+}
+.app-footer {
+  width: 100%;
+  margin-top: auto;
+  padding: 20px 0 16px;
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: .4px;
+  color: #999;
+}
+
+.app-footer strong {
+  color: #555;
+  font-weight: 600;
 }

@@ -40,6 +40,20 @@ function closeStudentMenu() {
 // =====================
 let selectedRole = null;
 let originalCardHTML = null;
+let cardHeaderHTML = '';   // logo + Aula Virtual + burbuja (sale del HTML)
+let cardFooterHTML = '';   // marca + bandera (sale del HTML)
+
+// Escapa texto del usuario antes de ponerlo dentro de un innerHTML
+function escapeHTML(texto) {
+  return String(texto).replace(/[&<>"']/g, (c) => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+  }[c]));
+}
+
+// Dibuja una pantalla dentro de la card con el mismo encabezado y footer
+function renderCard(contenidoHTML) {
+  loginCardGlass.innerHTML = cardHeaderHTML + contenidoHTML + cardFooterHTML;
+}
 
 // =====================
 // INIT ONBOARDING
@@ -54,6 +68,8 @@ function initOnboarding() {
   if (!loginCardGlass || !btnContinuar) return;
 
   originalCardHTML = loginCardGlass.innerHTML;
+  cardHeaderHTML = loginCardGlass.querySelector('.title-wrapper')?.outerHTML || '';
+  cardFooterHTML = loginCardGlass.querySelector('.card-brand-footer')?.outerHTML || '';
   document.body.classList.add('onboarding-activo');
 
   bindOnboardingEvents();
@@ -62,12 +78,19 @@ function initOnboarding() {
 // =====================
 // SELECCIÓN DE ROL
 // =====================
-
 function bindOnboardingEvents() {
   getIconItems().forEach(icon => {
     icon.onclick = () => {
       selectedRole = icon.dataset.role;
       markSelected(icon);
+    };
+
+    // Teclado: Enter o Espacio seleccionan la opción
+    icon.onkeydown = (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        icon.click();
+      }
     };
   });
 
@@ -76,9 +99,14 @@ function bindOnboardingEvents() {
 }
 
 function markSelected(iconEl) {
-  getIconItems().forEach(it =>
-    it.querySelector('.pill')?.classList.remove('selected')
-  );
+  getIconItems().forEach(it => {
+    it.classList.remove('selected');
+    it.setAttribute('aria-checked', 'false');
+    it.querySelector('.pill')?.classList.remove('selected');
+  });
+
+  iconEl.classList.add('selected');
+  iconEl.setAttribute('aria-checked', 'true');
   iconEl.querySelector('.pill')?.classList.add('selected');
 }
 
@@ -115,7 +143,7 @@ function entrarComoVisitante() {
 }
 
 // =====================
-// PRIMER ACCESO (Crear memanejo ID)
+// PRIMER ACCESO (Quiz) / SOLICITAR memanejo ID
 // =====================
 function mostrarPortalAlumno(modo = 'quiz') {
   const solicitarId = modo === 'solicitar-id';
@@ -125,7 +153,7 @@ function mostrarPortalAlumno(modo = 'quiz') {
     : '¡Nos encanta conocerte!';
 
   const texto = solicitarId
-    ? 'Completa tus datos y te enviaremos tu <br><strong>memanejo ID</strong> al correo electrónico.'
+    ? 'Completa tus datos y te enviaremos tu <strong>memanejo ID</strong> al correo electrónico.'
     : 'Completa tus datos y haz nuestro <strong>Quiz de Nivelación gratis</strong> y conoce qué tan preparado estás para tu examen de conducción.';
 
   const textoBoton = solicitarId
@@ -133,93 +161,59 @@ function mostrarPortalAlumno(modo = 'quiz') {
     : 'Comenzar Quiz de Nivelación';
 
   const textoLegal = solicitarId
-    ? 'Usaremos tus datos para identificarte como estudiante y enviar tu <strong>memanejo ID</strong> al correo electrónico. <br>No compartimos tus datos con terceros.'
-    : 'Usaremos tus datos para registrar y enviar información relacionada con tu resultado. <br>No compartimos tus datos con terceros.';
+    ? 'Usaremos tus datos para identificarte como estudiante y enviar tu <strong>memanejo ID</strong> al correo electrónico. No compartimos tus datos con terceros.'
+    : 'Usaremos tus datos para registrar y enviar información relacionada con tu resultado. No compartimos tus datos con terceros.';
 
-  loginCardGlass.innerHTML = `
-  <div class="card-plus">
+  renderCard(`
+    <div class="card-plus">
 
-    <div class="title-wrapper portal-title">
-      <div class="card-title card-plus-title">
-        <strong>${titulo}</strong>
-      </div>
-    </div>
-
-    <div class="card-subblock portal-intro">
-      <div class="card-text card-plus-text">
-        ${texto}
-      </div>
-    </div>
-
-    <div class="portal-form">
-
-      <div class="card-field">
-        <input
-          type="text"
-          id="portalNombre"
-          class="card-input"
-          placeholder="Nombre"
-          required>
-        <span class="card-error" id="errorNombre"></span>
+      <div class="card-subblock portal-intro">
+        <h2 class="card-title card-plus-title">${titulo}</h2>
+        <p class="card-text card-plus-text">${texto}</p>
       </div>
 
-      <div class="card-field">
-        <input
-          type="text"
-          id="portalApellido"
-          class="card-input"
-          placeholder="Apellido"
-          required>
-        <span class="card-error" id="errorApellido"></span>
-      </div>
+      <form class="portal-form" id="portalForm" novalidate>
 
-      <div class="card-field">
-        <input
-          type="email"
-          id="portalEmail"
-          class="card-input"
-          placeholder="Correo electrónico"
-          required>
-        <span class="card-error" id="errorEmail"></span>
-      </div>
+        <div class="portal-row">
+          <div class="card-field">
+            <input type="text" id="portalNombre" class="card-input"
+              placeholder="Nombre" aria-label="Nombre"
+              autocomplete="given-name" required>
+            <span class="card-error" id="errorNombre"></span>
+          </div>
 
-      <button
-        id="portalIngresar"
-        class="card-btn">
-        <strong>${textoBoton}</strong>
-      </button>
+          <div class="card-field">
+            <input type="text" id="portalApellido" class="card-input"
+              placeholder="Apellido" aria-label="Apellido"
+              autocomplete="family-name" required>
+            <span class="card-error" id="errorApellido"></span>
+          </div>
+        </div>
 
-      <div class="card-sub-text">
-  ${textoLegal}
-</div>
+        <div class="card-field">
+          <input type="email" id="portalEmail" class="card-input"
+            placeholder="Correo electrónico" aria-label="Correo electrónico"
+            autocomplete="email" required>
+          <span class="card-error" id="errorEmail"></span>
+        </div>
 
-      <div
-        id="portalVolver"
-        class="card-back"
-        style="cursor:pointer;">
-        <i class="fas fa-arrow-left"></i> Volver
-      </div>
+        <button type="submit" id="portalIngresar" class="card-btn">
+          <strong>${textoBoton}</strong>
+        </button>
+
+        <div class="card-sub-text">${textoLegal}</div>
+
+        <button type="button" id="portalVolver" class="card-back">
+          <i class="fas fa-chevron-left" aria-hidden="true"></i> Volver
+        </button>
+
+      </form>
 
     </div>
+  `);
 
-  </div>
-  `;
-  document.getElementById('portalIngresar')?.addEventListener('click', () => {
-
-    if (modo === 'solicitar-id') {
-      // AQUÍ reutilizas el mismo flujo que ya tienes
-      // para guardar los datos + enviar memanejo ID
-      solicitarMemanejoId();
-      return;
-    }
-
-    // Flujo actual del Quiz
-    iniciarQuizDesdePortal();
-  });
-
-
-
-  document.getElementById('portalIngresar')?.addEventListener('click', () => {
+  document.getElementById('portalForm')?.addEventListener('submit', (e) => {
+    e.preventDefault();
 
     const inputNombre = document.getElementById('portalNombre');
     const inputApellido = document.getElementById('portalApellido');
@@ -260,6 +254,10 @@ function mostrarPortalAlumno(modo = 'quiz') {
       errorEmail.textContent = 'Ingresa tu correo electrónico.';
       inputEmail?.classList.add('input-error');
       valido = false;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      errorEmail.textContent = 'Ingresa un correo válido.';
+      inputEmail?.classList.add('input-error');
+      valido = false;
     }
 
     if (!valido) {
@@ -282,7 +280,6 @@ function mostrarPortalAlumno(modo = 'quiz') {
     // =========================
     // RAMA 2: SOLICITAR MEMANEJO ID (flujo completo, sin cambios)
     // =========================
-
     const memanejoId = generarMemanejoId(nombre, apellido);
 
     const nuevoUsuario = {
@@ -319,45 +316,52 @@ function mostrarPortalAlumno(modo = 'quiz') {
       memanejoId
     );
 
-    const correoAcceso = email;
-
-    loginCardGlass.innerHTML = `
-    <div class="card-plus">
-      <div class="card-title card-plus-title">
-        <strong>¡Bienvenido a memanejo!</strong>
-      </div>
-      <div class="card-text card-plus-text" style="margin-top:14px;">
-        Tu acceso fue creado correctamente.
-        <br><br>
-        Enviamos tu <strong>memanejo ID</strong> a:
-        <br>
-        <strong>${correoAcceso}</strong>
-        <br><br>
-        Guarda este código para ingresar a la plataforma. Estamos en fase de pruebas operativas. Entreganos tu feedback y recibe beneficios. Gracias por tu apoyo.
-      </div>
-      <button 
-      id="btnEntrarPlataforma"
-      class="card-btn card-btn-wide"
-      style="margin-top:16px;">
-       Ingresar
-      </button>
-    </div>
-    `;
-
-    document.getElementById('btnEntrarPlataforma')?.addEventListener('click', () => {
-      cerrarOnboarding();
-      const pillStudent = document.querySelector('.pill-student');
-      pillStudent?.classList.add('visible');
-      requestAnimationFrame(() => {
-        openStudentMenu();
-      });
-    });
-
+    mostrarBienvenida(email);
   });
 
   document.getElementById('portalVolver')?.addEventListener('click', restoreOnboarding);
-
 }
+
+// =====================
+// BIENVENIDA (después de solicitar el ID)
+// =====================
+function mostrarBienvenida(correoAcceso) {
+  renderCard(`
+    <div class="card-plus">
+
+      <div class="welcome-mark" aria-hidden="true">
+        <i class="fas fa-check"></i>
+      </div>
+
+      <h2 class="card-title card-plus-title">¡Bienvenido a memanejo!</h2>
+
+      <p class="card-text card-plus-text">
+        Tu acceso fue creado correctamente. Enviamos tu <strong>memanejo ID</strong> a:
+        <br><strong>${escapeHTML(correoAcceso)}</strong>
+      </p>
+
+      <p class="card-sub-text">
+        Guarda este código para ingresar a la plataforma. Estamos en fase de pruebas operativas.
+        Entréganos tu feedback y recibe beneficios. Gracias por tu apoyo.
+      </p>
+
+      <button id="btnEntrarPlataforma" class="card-btn card-btn-wide">
+        Ingresar
+      </button>
+
+    </div>
+  `);
+
+  document.getElementById('btnEntrarPlataforma')?.addEventListener('click', () => {
+    cerrarOnboarding();
+    const pillStudent = document.querySelector('.pill-student');
+    pillStudent?.classList.add('visible');
+    requestAnimationFrame(() => {
+      openStudentMenu();
+    });
+  });
+}
+
 /* ===== Generador de memanejo ID =====
 function generarMemanejoId(nombre, apellido) {
   const inicialNombre = nombre.charAt(0).toUpperCase();
@@ -368,6 +372,7 @@ function generarMemanejoId(nombre, apellido) {
 function generarMemanejoId() {
   return "2026";
 }
+
 function enviarMemanejoIdPorCorreo(nombre, email, memanejoId) {
   emailjs.send("service_ujyq6hg", "template_s6jxj1h", {
     nombre: nombre,
@@ -385,146 +390,107 @@ function enviarMemanejoIdPorCorreo(nombre, email, memanejoId) {
 // =====================
 function mostrarNuevoEstudiante() {
 
-  loginCardGlass.innerHTML = `
-  <div class="card-plus">
+  renderCard(`
+    <div class="card-plus">
 
-    <div class="title-wrapper portal-title">
-      <div class="card-title-visitante">
-        <strong>memanejo+</strong>
-      </div>
-    </div>
-
-    <div class="card-subblock portal-intro">
-      <div class="card-text">
-        Ingresa a tu cuenta estudiante con tu correo y tu <strong>memanejo ID</strong>.
-      </div>
-    </div>
-
-    <div class="portal-form">
-
-      <input 
-      type="email" 
-      id="loginEmail" 
-      class="card-input" 
-      placeholder="Correo electrónico">
-
-
-      <input 
-      type="text" 
-      id="loginId" 
-      class="card-input" 
-      placeholder="memanejo ID: 2026">
-
-
-      <button id="loginIngresar" class="card-btn">
-        <strong>Ingresar</strong>
-      </button>
-
-      <div class="card-sub-text">
-  ¿No tienes tu memanejo ID?.
-  <a
-    href="#"
-    id="solicitarMemanejoId">
-    Solicítalo aquí.
-  </a>
-</div>
-
-
-      <div id="loginVolver" class="card-back" style="cursor:pointer;">
-        <i class="fas fa-arrow-left"></i> Volver
+      <div class="card-subblock portal-intro">
+        <h2 class="card-title card-title-visitante">memanejo+</h2>
+        <p class="card-text">
+          Ingresa a tu cuenta estudiante con tu correo y tu <strong>memanejo ID</strong>.
+        </p>
       </div>
 
-    </div>
+      <form class="portal-form" id="loginForm" novalidate>
 
-  </div>
-  `;
+        <div class="card-field">
+          <input type="email" id="loginEmail" class="card-input"
+            placeholder="Correo electrónico" aria-label="Correo electrónico"
+            autocomplete="email" required>
+        </div>
+
+        <div class="card-field">
+          <input type="text" id="loginId" class="card-input"
+            placeholder="memanejo ID: 2026" aria-label="memanejo ID"
+            autocomplete="off" required>
+        </div>
+
+        <button type="submit" id="loginIngresar" class="card-btn">
+          <strong>Ingresar</strong>
+        </button>
+
+        <div class="card-sub-text">
+          ¿No tienes tu memanejo ID?
+          <a href="#" id="solicitarMemanejoId">Solicítalo aquí.</a>
+        </div>
+
+        <button type="button" id="loginVolver" class="card-back">
+          <i class="fas fa-chevron-left" aria-hidden="true"></i> Volver
+        </button>
+
+      </form>
+
+    </div>
+  `);
 
   document.getElementById('solicitarMemanejoId')?.addEventListener('click', (e) => {
     e.preventDefault();
-
     mostrarPortalAlumno('solicitar-id');
   });
-  document.getElementById('loginIngresar')
-    ?.addEventListener('click', async () => {
 
+  document.getElementById('loginForm')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-      const email = document
-        .getElementById('loginEmail')
-        ?.value.trim();
+    const email = document.getElementById('loginEmail')?.value.trim();
+    const id = document.getElementById('loginId')?.value.trim();
 
-      const id = document
-        .getElementById('loginId')
-        ?.value.trim();
+    if (!email || !id) {
+      showError("Completa todos los campos");
+      return;
+    }
 
-      if (!email || !id) {
-        showError("Completa todos los campos");
-        return;
-      }
+    // carga JSON si aún no existe
+    if (usuariosDB.length === 0) {
+      await cargarUsuarios();
+    }
 
-      // carga JSON si aún no existe
-      if (usuariosDB.length === 0) {
-        await cargarUsuarios();
-      }
-
-      const usuariosLocal =
-        JSON.parse(
-          localStorage.getItem('usuariosRegistrados') || '[]'
-        );
-
-      const todosLosUsuarios = [
-        ...usuariosDB,
-        ...usuariosLocal
-      ];
-
-
-
-      const usuario =
-        todosLosUsuarios.find(
-          u =>
-            u.email === email &&
-            String(u.memanejoId) === String(id)
-        );
-
-
-
-      if (!usuario) {
-
-        showError("Correo o código incorrecto");
-        return;
-
-      }
-
-      setSession({
-
-        nombre: usuario.nombre,
-        email: usuario.email,
-        memanejoId: usuario.memanejoId,
-        desbloqueado: usuario.desbloqueado || {}
-
-      });
-
-      cerrarOnboarding();
-
-
-      const pillStudent =
-        document.querySelector('.pill-student');
-
-      pillStudent?.classList.add('visible');
-
-      requestAnimationFrame(() => {
-        openStudentMenu();
-      });
-
-    });
-
-
-
-  document.getElementById('loginVolver')
-    ?.addEventListener(
-      'click',
-      restoreOnboarding
+    const usuariosLocal = JSON.parse(
+      localStorage.getItem('usuariosRegistrados') || '[]'
     );
 
+    const todosLosUsuarios = [
+      ...usuariosDB,
+      ...usuariosLocal
+    ];
+
+    const usuario = todosLosUsuarios.find(
+      u =>
+        u.email === email &&
+        String(u.memanejoId) === String(id)
+    );
+
+    if (!usuario) {
+      showError("Correo o código incorrecto");
+      return;
+    }
+
+    setSession({
+      nombre: usuario.nombre,
+      email: usuario.email,
+      memanejoId: usuario.memanejoId,
+      desbloqueado: usuario.desbloqueado || {}
+    });
+
+    cerrarOnboarding();
+
+    const pillStudent = document.querySelector('.pill-student');
+    pillStudent?.classList.add('visible');
+
+    requestAnimationFrame(() => {
+      openStudentMenu();
+    });
+  });
+
+  document.getElementById('loginVolver')?.addEventListener('click', restoreOnboarding);
 }
 
 reviewForm?.addEventListener('submit', (e) => {
@@ -579,6 +545,7 @@ function actualizarModoReview() {
 reviewNormalRadio?.addEventListener('change', actualizarModoReview);
 reviewAnonRadio?.addEventListener('change', actualizarModoReview);
 actualizarModoReview();
+
 // =====================
 // CONTINUAR
 // =====================
@@ -589,14 +556,12 @@ function ejecutarContinuar() {
     return;
   }
 
-
   // memanejo +
   // Ya tengo código → iniciar sesión
   if (selectedRole === 'alumno') {
     mostrarNuevoEstudiante();
     return;
   }
-
 
   // Primer acceso
   // Crear cuenta → recibir código
@@ -611,37 +576,29 @@ function ejecutarContinuar() {
 // UTILIDADES
 // =====================
 function showError(msg) {
-  const old = loginCardGlass.querySelector('.error-msg');
-  if (old) old.remove();
+  loginCardGlass.querySelector('.error-msg')?.remove();
 
   const div = document.createElement('div');
   div.className = 'error-msg';
+  div.setAttribute('role', 'alert');
   div.textContent = msg;
-  div.style.color = '#ffb4b4';
-  div.style.marginTop = '8px';
 
-  const portalForm = loginCardGlass.querySelector('.portal-form');
+  // En formularios va justo encima del botón; en la pantalla principal, bajo las opciones
+  const botonForm = loginCardGlass.querySelector('.portal-form .card-btn');
 
-  if (portalForm) {
-    const inputs = portalForm.querySelectorAll('.card-input');
-    const lastInput = inputs[inputs.length - 1];
-
-    if (lastInput) {
-      lastInput.insertAdjacentElement('afterend', div);
-    } else {
-      portalForm.appendChild(div);
-    }
+  if (botonForm) {
+    botonForm.insertAdjacentElement('beforebegin', div);
   } else {
     loginCardGlass.querySelector('.card-icons')?.after(div);
   }
 
   setTimeout(() => div.remove(), 4000);
 }
-// Click fuera 
+
+// Click fuera
 document.addEventListener('click', (e) => {
   const menu = document.querySelector('.student-menu');
   const boton = document.querySelector('.pill-student');
-
 
   if (!menu || !menu.classList.contains('show')) return;
 
