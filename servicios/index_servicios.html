@@ -55,9 +55,7 @@
 
     body {
       font-family: "Inter", sans-serif;
-
       color: var(--text);
-
       background: var(--bg);
     }
 
@@ -69,7 +67,6 @@
     .page {
       width: 100%;
       min-height: 100vh;
-
       padding: 56px 20px 30px;
     }
 
@@ -77,7 +74,6 @@
     .services-shell {
       width: 100%;
       max-width: 1180px;
-
       margin: 0 auto;
     }
 
@@ -88,32 +84,6 @@
 
     .services-header {
       margin-bottom: 38px;
-    }
-
-
-    .eyebrow {
-      display: flex;
-      align-items: center;
-
-      gap: 9px;
-
-      margin: 0 0 13px;
-
-      color: var(--blue);
-
-      font-size: 12px;
-      font-weight: 800;
-
-      letter-spacing: .12em;
-    }
-
-
-    .eyebrow::before {
-      content: "";
-      width: 26px;
-      height: 2px;
-      border-radius: 10px;
-      background: var(--blue);
     }
 
 
@@ -129,13 +99,9 @@
 
     .intro {
       max-width: 540px;
-
       margin: 18px 0 0;
-
       color: var(--muted);
-
       font-size: 15px;
-
       line-height: 1.6;
     }
 
@@ -147,24 +113,18 @@
     .services-stack {
       width: 100%;
       max-width: 430px;
-
       margin: 0 auto;
     }
 
 
     /*
-     * El alto ahora considera:
-     *
-     * 4 cabeceras visibles
-     * +
-     * contenido de la card frontal
+     * El alto considera las cabeceras visibles
+     * y el contenido de la card frontal.
      */
 
     .cards {
       position: relative;
-
       width: 100%;
-
       height: 430px;
     }
 
@@ -179,46 +139,37 @@
       right: 0;
 
       /*
-   * Cada card se hace progresivamente más angosta
-   * hacia atrás, de forma simétrica.
-   */
+       * Cada card se hace progresivamente más angosta
+       * hacia atrás, de forma simétrica.
+       */
       margin-left: calc(var(--step) * 9px);
       margin-right: calc(var(--step) * 9px);
-
       width: auto;
 
       background: var(--white);
       border: 1px solid #d2d2d2;
       border-radius: 26px;
-
-      box-shadow:
-        0 7px 22px rgba(0, 9, 104, .07);
-
+      box-shadow: 0 7px 22px rgba(0, 9, 104, .07);
       overflow: hidden;
 
       /*
-   * 0 = frente
-   * 1 = detrás
-   * 2 = detrás
-   * 3 = fondo
-   */
-      top:
-        calc(164px - (var(--step) * 55px));
+       * 0 = frente
+       * 1 = detrás
+       * 2 = detrás
+       * 3 = fondo
+       */
+      top: calc(164px - (var(--step) * 55px));
 
       /*
-   * Cada card hacia atrás aumenta
-   * progresivamente su altura.
-   */
-      min-height:
-        calc(260px + (var(--step) * 12px));
+       * Cada card hacia atrás aumenta
+       * progresivamente su altura.
+       */
+      min-height: calc(260px + (var(--step) * 12px));
 
       /*
-   * Sin scale ni translateX.
-   * El centrado lo hacen los márgenes
-   * laterales iguales.
-   */
+       * El centrado lo hacen los márgenes laterales iguales.
+       */
       transform: none;
-
       transform-origin: center bottom;
 
       transition:
@@ -228,20 +179,19 @@
         min-height .55s cubic-bezier(.22, 1, .36, 1),
         border-color .3s ease,
         box-shadow .4s ease;
-        
 
       cursor: pointer;
     }
 
 
     /*
- * Card frontal
- */
+     * Card frontal
+     */
+
     .service-card[data-front="true"] {
       min-height: 260px;
       border-color: #1738ff;
-      box-shadow:
-        0 18px 42px rgba(0, 9, 104, .14);
+      box-shadow: 0 18px 42px rgba(0, 9, 104, .14);
     }
 
 
@@ -252,13 +202,9 @@
     .service-header {
       display: flex;
       align-items: center;
-
       gap: 13px;
-
       min-height: 76px;
-
       padding: 14px 17px;
-
       cursor: pointer;
     }
 
@@ -279,9 +225,7 @@
     .service-icon img {
       width: 100%;
       height: 100%;
-
       padding: 6px;
-
       object-fit: contain;
     }
 
@@ -296,6 +240,32 @@
     }
 
 
+    /*
+     * Card seleccionada:
+     * logo arriba a la izquierda y título centrado debajo.
+     */
+
+    .service-card[data-front="true"] .service-header {
+      min-height: 0;
+      padding: 20px 17px 0;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 12px;
+    }
+
+
+    .service-card[data-front="true"] .service-icon {
+      position: static;
+      align-self: flex-start;
+    }
+
+
+    .service-card[data-front="true"] .service-title {
+      width: 100%;
+      text-align: center;
+    }
+
+
     /* =========================================================
        CONTENIDO
     ========================================================= */
@@ -304,9 +274,7 @@
       max-height: 0;
       padding: 0 22px;
       overflow: hidden;
-
       opacity: 0;
-
       transform: translateY(8px);
 
       transition:
@@ -318,13 +286,12 @@
 
 
     /*
-     * SOLAMENTE la card frontal
-     * despliega el contenido.
+     * Solamente la card frontal despliega el contenido.
      */
 
     .service-card[data-front="true"] .service-content {
       max-height: 190px;
-      padding: 35px 22px 24px;
+      padding: 12px 22px 24px;
       opacity: 1;
       transform: translateY(0);
     }
@@ -345,37 +312,74 @@
 
     .service-button {
       display: flex;
-
       align-items: center;
       justify-content: center;
-
       gap: 8px;
-
       width: fit-content;
-
       margin: 0 auto;
-
       padding: 12px 60px;
-
       color: #fff;
-
       background: var(--navy);
-
       border-radius: 999px;
       text-decoration: none;
       font-size: 13px;
       font-weight: 700;
-      transition:
-        transform .6s ease;
+      transition: transform .6s ease;
     }
 
 
     .service-button:hover {
       background: var(--blue);
-
     }
-    .service-button:hover i{
+
+
+    .service-button:hover i {
       transform: translateX(6px);
+    }
+
+
+    /* =========================================================
+       ANIMACIÓN ESCALONADA AL SELECCIONAR
+    ========================================================= */
+
+    .service-card.is-animating .service-icon,
+    .service-card.is-animating .service-title,
+    .service-card.is-animating .service-description,
+    .service-card.is-animating .service-button {
+      animation: aparecer .45s ease both;
+    }
+
+
+    .service-card.is-animating .service-icon {
+      animation-delay: 0s;
+    }
+
+
+    .service-card.is-animating .service-title {
+      animation-delay: .15s;
+    }
+
+
+    .service-card.is-animating .service-description {
+      animation-delay: .3s;
+    }
+
+
+    .service-card.is-animating .service-button {
+      animation-delay: .45s;
+    }
+
+
+    @keyframes aparecer {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
 
@@ -385,40 +389,27 @@
 
     .footer-bottom {
       width: 100%;
-
       margin-top: 32px;
-
       padding-top: 12px;
-
-      border-top:
-        1px solid rgba(0, 0, 0, .08);
-
+      border-top: 1px solid rgba(0, 0, 0, .08);
       display: flex;
-
       align-items: center;
-
       justify-content: space-between;
-
       color: #777;
-
       font-size: 11px;
     }
 
 
     .footer-brand {
       display: flex;
-
       align-items: center;
-
       gap: 5px;
     }
 
 
     .footer-brand a {
       display: flex;
-
       align-items: center;
-
       text-decoration: none;
     }
 
@@ -426,9 +417,7 @@
     .footer-brand img {
       width: 24px;
       height: 24px;
-
       object-fit: cover;
-
       border-radius: 50%;
     }
 
@@ -465,31 +454,28 @@
 
 
       .service-card {
-        top:
-          calc(210px - (var(--step) * 68px));
-
+        top: calc(210px - (var(--step) * 68px));
         border-radius: 30px;
-
-        transform:
-          scale(calc(1 - (var(--step) * .02)));
+        transform: scale(calc(1 - (var(--step) * .02)));
       }
 
 
       .service-header {
         min-height: 92px;
-
         padding: 17px 24px;
-
         gap: 16px;
+      }
+
+
+      .service-card[data-front="true"] .service-header {
+        padding: 22px 24px 0;
       }
 
 
       .service-icon {
         width: 58px;
         height: 58px;
-
         flex-basis: 58px;
-
         border-radius: 17px;
       }
 
@@ -500,22 +486,19 @@
 
 
       .service-card[data-front="true"] .service-content {
-        padding: 0 32px 32px;
+        padding: 12px 32px 32px;
       }
 
 
       .service-description {
         max-width: 390px;
-
         margin: 0 auto 22px;
-
         font-size: 14px;
       }
 
 
       .service-button {
         padding: 13px 30px;
-
         font-size: 14px;
       }
 
@@ -537,7 +520,12 @@
       .service-header {
         padding-left: 14px;
         padding-right: 14px;
+        gap: 10px;
+      }
 
+
+      .service-card[data-front="true"] .service-header {
+        padding: 16px 14px 0;
         gap: 10px;
       }
 
@@ -545,9 +533,7 @@
       .service-icon {
         width: 42px;
         height: 42px;
-
         flex-basis: 42px;
-
         border-radius: 13px;
       }
 
@@ -563,8 +549,7 @@
 
 
       .service-card {
-        top:
-          calc(124px - (var(--step) * 51px));
+        top: calc(124px - (var(--step) * 51px));
       }
 
     }
@@ -587,10 +572,6 @@
       ====================================================== -->
 
       <header class="services-header">
-
-        <p class="eyebrow">
-          memanejo.cl
-        </p>
 
 
         <h1>
@@ -623,7 +604,7 @@
           <article class="service-card">
             <div class="service-header">
               <div class="service-icon">
-                <img src="/img/logopngicon.png" alt="">
+                <img src="/aulavirtual/img/logopngwhite.png" alt="">
               </div>
 
               <h2 class="service-title">
@@ -664,7 +645,7 @@
 
               <div class="service-icon">
 
-                <img src="/img/newnewlogo.jpg" alt="">
+                <img src="/img/icon_logo.png" alt="">
 
               </div>
 
@@ -988,6 +969,11 @@
 
 
         render();
+
+        const selectedCard = cards[index];
+        selectedCard.classList.remove("is-animating");
+        void selectedCard.offsetWidth;
+        selectedCard.classList.add("is-animating");
 
       }
 

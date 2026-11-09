@@ -381,64 +381,61 @@ body.onboarding-activo {
 }
 
 
-/* ---------- Opciones ----------
-   Fila 1: ícono (izquierda) y etiqueta (derecha), en el mismo eje.
-   Fila 2: texto (izquierda) y círculo de selección (derecha).      */
+/* ---------- Opciones seleccionables ---------- */
 .card-icons {
   display: grid;
-  gap: 12px;
+  gap: 10px;
 }
 
 .icon-item {
-  position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
-  grid-template-areas:
-    "icono pill"
-    "texto selector";
-  column-gap: 14px;
-  row-gap: 10px;
+  grid-template-areas: "texto pill";
   align-items: center;
-  padding: 14px 14px;
+  column-gap: 12px;
+  padding: 16px 18px;
   background: rgba(255, 255, 255, 0.7);
   border: 1.5px solid rgba(0, 0, 0, 0.08);
-  border-radius: 22px;
+  border-radius: 20px;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
-  transition: transform 0.2s ease, background 0.2s ease,
-              border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.icon-item:hover {
-  transform: translateY(-1px);
-  background: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 10px 24px -14px rgba(0, 0, 0, 0.35);
-}
-
-.icon-item:active {
-  transform: scale(0.985);
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .icon-item > i {
-  grid-area: icono;
-  justify-self: start;
-  align-self: center;
-  font-size: 28px;
-  line-height: 1;
+  display: none;
+}
+
+.icon-item-text {
+  grid-area: texto;
+  min-width: 0;
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.45;
+  text-align: left;
+}
+
+.icon-item-text strong {
   color: var(--ink);
+  font-weight: 650;
 }
 
 .icon-item .pill {
-  padding: 4px 12px;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  white-space: nowrap;
-  color: var(--accent);
-  background: rgba(34, 97, 255, 0.1);
+  grid-area: pill;
+  justify-self: end;
+  padding: 6px 11px;
   border: 1px solid rgba(34, 97, 255, 0.25);
   border-radius: 999px;
-  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  background: rgba(34, 97, 255, 0.1);
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
 }
 
 .icon-item[data-role="new"] .pill {
@@ -447,45 +444,16 @@ body.onboarding-activo {
   border-color: rgba(22, 163, 74, 0.3);
 }
 
-.icon-item-text {
-  grid-area: texto;
-  align-self: center;
-  margin: 0;
-  font-size: 14px;
-  line-height: 1.45;
-  color: var(--muted);
+.icon-item:hover {
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 8px 22px -14px rgba(0, 0, 0, 0.35);
 }
 
-.icon-item-text strong {
-  font-weight: 650;
-  color: var(--ink);
-}
-
-/* Círculo de selección */
-.icon-item::after {
-  content: "";
-  grid-area: selector;
-  justify-self: end;
-  align-self: center;
-  width: 20px;
-  height: 20px;
-  border: 2px solid rgba(0, 0, 0, 0.2);
-  border-radius: 50%;
-  transition: border-color 0.2s ease, background 0.2s ease;
-}
-
-/* Opción seleccionada */
 .icon-item.selected,
 .icon-item[aria-checked="true"] {
   background: rgba(255, 255, 255, 0.98);
   border-color: var(--accent);
-  box-shadow: 0 0 0 4px rgba(34, 97, 255, 0.14);
-}
-
-.icon-item.selected::after,
-.icon-item[aria-checked="true"]::after {
-  border-color: var(--accent);
-  background: radial-gradient(circle, var(--accent) 0 42%, transparent 46%);
+  box-shadow: 0 0 0 3px rgba(34, 97, 255, 0.13);
 }
 
 .icon-item.selected .pill,
@@ -502,10 +470,28 @@ body.onboarding-activo {
 }
 
 .icon-item:focus-visible {
-  outline: 3px solid rgba(34, 97, 255, 0.45);
+  outline: 3px solid rgba(34, 97, 255, 0.4);
   outline-offset: 2px;
 }
 
+/* Ajuste para móvil: conserva descripción izquierda y opción derecha */
+@media (max-width: 420px) {
+  .icon-item {
+    column-gap: 8px;
+    padding: 13px 12px;
+    border-radius: 17px;
+  }
+
+  .icon-item-text {
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .icon-item .pill {
+    padding: 5px 8px;
+    font-size: 11px;
+  }
+}
 
 /* ---------- Botón principal ---------- */
 .card-btn {
@@ -624,7 +610,7 @@ body.onboarding-activo {
 
 .portal-row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 12px;
 }
 
@@ -819,12 +805,6 @@ body.onboarding-activo {
     white-space: normal;   /* en pantallas muy angostas puede partirse en 2 líneas */
   }
 
-}
-
-@media (max-width: 360px) {
-  .portal-row {
-    grid-template-columns: 1fr;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
