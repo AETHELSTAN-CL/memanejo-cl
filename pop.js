@@ -1137,7 +1137,415 @@ ${mensaje}`;
   document.getElementById('dvAgendar').addEventListener('click', () => {
     closeSheet();
   });
+/* =====================================================
+   MEMANEJO GARAGE · AGENDA VISITA TÉCNICA
+   Integración independiente para pop.js
+===================================================== */
 
+(() => {
+
+  const iniciarAgendaGarage = () => {
+
+    const form = document.getElementById("formAgendaRuta");
+
+    if (!form || form.dataset.initialized === "true") return;
+
+    form.dataset.initialized = "true";
+
+    const fechaInput = document.getElementById("agendaFecha");
+    const horaSelect = document.getElementById("agendaHora");
+    const anioSelect = document.getElementById("agendaAnio");
+
+    const sintomasInput = document.getElementById("agendaSintomas");
+    const charCount = document.getElementById("agendaCharCount");
+
+    const estado = document.getElementById("agendaEstado");
+    const submit = document.getElementById("agendaSubmit");
+
+    const modal = document.getElementById("modalAgendaRuta");
+
+    const WHATSAPP_NUMBER = "56946914558";
+
+    const ANIO_MINIMO = 2020;
+
+    const HORARIOS = [
+      "09:00", "09:30",
+      "10:00", "10:30",
+      "11:00", "11:30",
+      "12:00", "12:30",
+      "13:00", "13:30",
+      "14:00", "14:30",
+      "15:00", "15:30",
+      "16:00", "16:30",
+      "17:00", "17:30",
+      "18:00"
+    ];
+
+    /* AÑOS DEL VEHÍCULO */
+
+    const anioActual = new Date().getFullYear();
+
+    if (anioSelect) {
+
+      anioSelect.innerHTML =
+        '<option value="" disabled selected>Seleccionar año</option>';
+
+      for (let anio = anioActual; anio >= ANIO_MINIMO; anio--) {
+
+        const option = document.createElement("option");
+
+        option.value = anio;
+        option.textContent = anio;
+
+        anioSelect.appendChild(option);
+
+      }
+
+    }
+
+
+    /* FECHA MÍNIMA: 24 HORAS */
+
+    const obtenerMinimo = () =>
+      new Date(Date.now() + 24 * 60 * 60 * 1000);
+
+
+    const fechaLocal = fecha => {
+
+      const anio = fecha.getFullYear();
+      const mes = String(fecha.getMonth() + 1).padStart(2, "0");
+      const dia = String(fecha.getDate()).padStart(2, "0");
+
+      return `${anio}-${mes}-${dia}`;
+
+    };
+
+
+    const actualizarFechaMinima = () => {
+
+      if (fechaInput) {
+        fechaInput.min = fechaLocal(obtenerMinimo());
+      }
+
+    };
+
+
+    actualizarFechaMinima();
+
+
+    /* GENERAR HORARIOS */
+
+    const actualizarHorarios = () => {
+
+      if (!fechaInput || !horaSelect) return;
+
+      const fecha = fechaInput.value;
+
+      horaSelect.innerHTML =
+        '<option value="" disabled selected>Elegir horario</option>';
+
+      if (!fecha) return;
+
+      const minimo = obtenerMinimo();
+
+      HORARIOS.forEach(hora => {
+
+        const fechaHorario = new Date(`${fecha}T${hora}:00`);
+
+        const option = document.createElement("option");
+
+        option.value = hora;
+        option.textContent = hora;
+
+        if (fechaHorario.getTime() < minimo.getTime()) {
+          option.disabled = true;
+        }
+
+        horaSelect.appendChild(option);
+
+      });
+
+    };
+
+
+    if (fechaInput) {
+
+      fechaInput.addEventListener("change", () => {
+
+        actualizarFechaMinima();
+
+        if (fechaInput.value < fechaInput.min) {
+
+          fechaInput.value = "";
+
+          actualizarHorarios();
+
+          mostrarEstado(
+            "Selecciona una fecha con al menos 24 horas de anticipación.",
+            "error"
+          );
+
+          return;
+
+        }
+
+        limpiarEstado();
+
+        actualizarHorarios();
+
+      });
+
+    }
+
+
+    /* CONTADOR DE SÍNTOMAS */
+
+    if (sintomasInput && charCount) {
+
+      sintomasInput.addEventListener("input", () => {
+
+        charCount.textContent =
+          `${sintomasInput.value.length}/600`;
+
+      });
+
+    }
+
+
+    /* MENSAJES DE ESTADO */
+
+    function mostrarEstado(mensaje, tipo) {
+
+      if (!estado) return;
+
+      estado.textContent = mensaje;
+      estado.className = `agenda-status ${tipo}`;
+
+    }
+
+
+    function limpiarEstado() {
+
+      if (!estado) return;
+
+      estado.textContent = "";
+      estado.className = "agenda-status";
+
+    }
+
+
+    /* FORMATO FECHA */
+
+    const fechaLegible = fecha => {
+
+      const [anio, mes, dia] = fecha.split("-");
+
+      return `${dia}/${mes}/${anio}`;
+
+    };
+
+
+    /* ENVÍO DEL FORMULARIO */
+
+    form.addEventListener("submit", event => {
+
+      event.preventDefault();
+
+      actualizarFechaMinima();
+
+      if (!form.reportValidity()) return;
+
+      const anio = Number(anioSelect.value);
+      const anioActual = new Date().getFullYear();
+
+      if (anio < ANIO_MINIMO || anio > anioActual) {
+
+        mostrarEstado(
+          "El vehículo debe ser año 2020 o posterior.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      if (!fechaInput.value || !horaSelect.value) {
+
+        mostrarEstado(
+          "Selecciona una fecha y un horario.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      /* VALIDACIÓN 24 HORAS */
+
+      const fechaSolicitada = new Date(
+        `${fechaInput.value}T${horaSelect.value}:00`
+      );
+
+      if (fechaSolicitada.getTime() < obtenerMinimo().getTime()) {
+
+        mostrarEstado(
+          "La fecha y hora deben tener al menos 24 horas de anticipación.",
+          "error"
+        );
+
+        actualizarHorarios();
+
+        return;
+
+      }
+
+
+      /* RECOPILAR DATOS */
+
+      const obtener = id =>
+        document.getElementById(id).value.trim();
+
+
+      const datos = {
+
+        nombre: obtener("agendaNombre"),
+        correo: obtener("agendaCorreo"),
+        telefono: obtener("agendaTelefono"),
+
+        marca: obtener("agendaMarca"),
+        modelo: obtener("agendaModelo"),
+        anio: anio,
+
+        sintomas: obtener("agendaSintomas"),
+
+        fecha: fechaLegible(fechaInput.value),
+        hora: horaSelect.value
+
+      };
+
+
+      /* MENSAJE WHATSAPP */
+
+      const mensaje = `
+Hola MEMANEJO GARAGE, quiero solicitar una Visita Técnica a domicilio.
+
+━━━━━━━━━━━━━━━━
+DATOS DEL CLIENTE
+━━━━━━━━━━━━━━━━
+
+Nombre: ${datos.nombre}
+Correo: ${datos.correo}
+WhatsApp: ${datos.telefono}
+
+━━━━━━━━━━━━━━━━
+DATOS DEL VEHÍCULO
+━━━━━━━━━━━━━━━━
+
+Marca: ${datos.marca}
+Modelo: ${datos.modelo}
+Año: ${datos.anio}
+
+━━━━━━━━━━━━━━━━
+ANOMALÍAS Y SÍNTOMAS
+━━━━━━━━━━━━━━━━
+
+${datos.sintomas}
+
+━━━━━━━━━━━━━━━━
+PREFERENCIA DE AGENDA
+━━━━━━━━━━━━━━━━
+
+Fecha: ${datos.fecha}
+Horario: ${datos.hora}
+
+━━━━━━━━━━━━━━━━
+SERVICIO SOLICITADO
+━━━━━━━━━━━━━━━━
+
+Visita Técnica a domicilio.
+Valor: $34.900.
+
+Entiendo que el servicio contempla evaluación técnica inicial, prueba de ruta y orientación mecánica. No incluye reparaciones.
+
+Quedo atento/a a la coordinación y confirmación.
+
+Solicitud enviada desde memanejo.cl
+      `.trim();
+
+
+      /* ABRIR WHATSAPP */
+
+      const url =
+        `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensaje)}`;
+
+      const ventana = window.open(url, "_blank");
+
+      if (!ventana) {
+
+        mostrarEstado(
+          "No se pudo abrir WhatsApp. Revisa los permisos de ventanas emergentes.",
+          "error"
+        );
+
+        return;
+
+      }
+
+      mostrarEstado(
+        "Solicitud preparada. Envía el mensaje por WhatsApp para iniciar la coordinación.",
+        "success"
+      );
+
+    });
+
+
+    /* REINICIAR AL CERRAR */
+
+    if (modal) {
+
+      modal.addEventListener("hidden.bs.modal", () => {
+
+        form.reset();
+
+        actualizarFechaMinima();
+
+        if (horaSelect) {
+          horaSelect.innerHTML =
+            '<option value="" disabled selected>Elegir horario</option>';
+        }
+
+        if (charCount) {
+          charCount.textContent = "0/600";
+        }
+
+        limpiarEstado();
+
+      });
+
+    }
+
+  };
+
+
+  /* INICIALIZACIÓN SEGURA */
+
+  if (document.readyState === "loading") {
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      iniciarAgendaGarage,
+      { once: true }
+    );
+
+  } else {
+
+    iniciarAgendaGarage();
+
+  }
+
+})();
   // ===== Slider Mobile QA =====
   const slider = document.getElementById("sliderMobileQA");
   if (slider) {

@@ -1640,112 +1640,601 @@ body {
     }
 }
 
-/* ============================
-   MODALES RUTA Y CURSOS
-============================ */
-/* Fondo de la página detrás del modal */
-.modal-backdrop.show {
-    opacity: 1;
-    background: rgba(5, 7, 10, 0.48);
-    backdrop-filter: blur(10px) saturate(135%);
-    -webkit-backdrop-filter: blur(10px) saturate(135%);
-}
+/* =====================================================
+   MODAL CURSOS — MEMANEJO+
+   Diseño transparente tipo Glass
+===================================================== */
 
-
-.modal-content.modal-ruta,
 .modal-content.modal-cursos {
+    color: #f5f5f3;
     background: rgba(139, 139, 139, 0.25);
-    /* transparente semi */
-    backdrop-filter: blur(12px);
-    /* efecto blur */
-    -webkit-backdrop-filter: blur(12px);
-    border-radius: 20px;
+    backdrop-filter: blur(12px) saturate(150%);
+    -webkit-backdrop-filter: blur(12px) saturate(150%);
+    border: 1px solid #0026ff;
+    border-radius: 24px;
     padding: 20px;
-    color: #fff;
-    border: 1px solid #e0e0e0;
+    overflow: hidden;
 }
 
-/* Eliminar borde y fondo del dialog */
-.modal-dialog {
+/* Encabezado */
+
+.modal-cursos .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 18px 20px 8px;
+    background: transparent;
+    border: 0;
+    color: #fff;
+}
+
+.modal-cursos .modal-title {
+    margin: 0;
+    color: #fff;
+    font-size: 24px;
+    line-height: 1.2;
+}
+
+.modal-cursos .btn-close {
+    position: static;
+    flex-shrink: 0;
+    align-self: center;
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    margin: 0;
+    padding: 0;
+
+    border: 1px solid rgba(18, 18, 18, 0.469);
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.048);
+
+    backdrop-filter: blur(26px) saturate(150%);
+    -webkit-backdrop-filter: blur(26px) saturate(150%);
+
+    filter: invert(1);
+    opacity: 0.8;
+
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+}
+
+.modal-cursos .btn-close:hover {
+    opacity: 1;
+    transform: scale(1.08);
+}
+
+/* Insignia */
+
+.mmplus-badge {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 3px 10px;
+
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 999px;
+
+    color: #ddd;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    vertical-align: middle;
+}
+
+/* Cuerpo */
+
+.modal-cursos .modal-body {
+    padding: 4px 20px 14px;
+}
+
+.mmplus-intro {
+    margin: 0 0 14px;
+    color: #b9b9b5;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+/* Precio */
+
+.mmplus-price {
+    margin: 0 0 18px;
+    padding: 14px 16px;
+
+    border: 1px solid #0026ff;
+    border-radius: 16px;
+
+    background: rgba(0, 0, 0, 0.55);
+}
+
+.mmplus-tag {
+    display: inline-block;
+    margin-bottom: 8px;
+
+    color: var(--crimson);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.mmplus-price-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 10px;
+}
+
+.mmplus-now {
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.02em;
+}
+
+.mmplus-old {
+    color: #8a8a8a;
+    font-size: 15px;
+}
+
+.mmplus-period {
+    color: #b9b9b5;
+    font-size: 13px;
+}
+
+/* Lista de beneficios */
+
+.mmplus-subtitle {
+    margin: 0 0 10px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.mmplus-list {
+    display: grid;
+    gap: 5px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.mmplus-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+
+    color: #fff;
+    font-size: 13px;
+    line-height: 1.45;
+}
+
+.mmplus-list i {
+    flex-shrink: 0;
+    margin-top: 3px;
+    color: var(--crimson);
+}
+
+.mmplus-list small {
+    display: block;
+    color: #d2d0d0;
+    font-size: 11.5px;
+}
+
+/* Pie */
+
+.modal-cursos .mmplus-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+
+    padding: 6px 20px 20px;
+    border: 0;
+}
+
+.modal-cursos .mmplus-footer > * {
+    margin: 0;
+}
+
+/* Botón principal */
+
+.mmplus-cta {
     display: flex;
     align-items: center;
     justify-content: center;
-}
+    gap: 10px;
 
-/* Header */
-.modal-ruta .modal-header,
-.modal-cursos .modal-header {
-    background: transparent !important;
-    border-bottom: none;
-    color: #ffffff !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    justify-content: center;
-}
+    min-height: 48px;
+    padding: 0 60px;
 
-/* Título */
-.modal-ruta .modal-title,
-.modal-cursos .modal-title {
-    font-size: 1.25rem;
-    color: #ffffff !important;
-}
+    border: 1px solid #fff;
+    border-radius: 999px;
 
-/* Listas dentro del body */
-.modal-ruta .modal-body ul,
-.modal-cursos .modal-body ul {
-    padding-left: 0;
-    list-style: none;
-    margin-top: 1rem;
-}
+    color: #0b0b0b;
+    background: linear-gradient(
+        180deg,
+        #ffffff 0%,
+        #d9dce1 52%,
+        #f3f4f6 100%
+    );
 
-.modal-ruta .modal-body li,
-.modal-cursos .modal-body li {
-    position: relative;
-    padding-left: 1.3em;
-    margin-bottom: 0.4rem;
-    line-height: 1.4;
-    font-size: 0.95rem;
-    color: #ffffff;
-}
-
-.modal-ruta .modal-body li::before,
-.modal-cursos .modal-body li::before {
-    content: "•";
-    position: absolute;
-    left: 0;
-    color: #ededed;
-    font-weight: bold;
-    font-size: 1em;
-}
-
-/* Párrafos dentro del body */
-.modal-ruta .modal-body p,
-.modal-cursos .modal-body p {
     font-size: 16px;
-    line-height: 1.1;
+    font-weight: 800;
+    text-decoration: none;
+
+    transition: transform 0.2s ease;
+}
+
+.mmplus-cta:hover {
+    color: #0b0b0b;
+    transform: scale(1.02);
+}
+
+.mmplus-cta i {
+    color: #25D366;
+    font-size: 17px;
+}
+
+/* Opción Aula Virtual */
+
+.mmplus-opcion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.mmplus-aula {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    min-height: 48px;
+    margin-top: 20px;
+    padding: 0;
+
+    border: 0;
+    border-radius: 0;
+
+    color: inherit;
+    background: transparent;
+
+    font-size: 13.5px;
+    font-weight: 800;
+    text-decoration: none;
+
+    transition: none;
+}
+
+.mmplus-aula:hover {
+    color: inherit;
+    background: transparent;
+    transform: none;
+}
+
+.mmplus-aula .mmplus-logo {
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    object-fit: contain;
+}
+
+.mmplus-aula-texto {
+    flex: 0 0 auto;
+    text-align: center;
+}
+
+.mmplus-aula-flecha {
+    flex: 0 0 auto;
+    font-size: 17px;
+    transition: transform 0.2s ease;
+}
+
+.mmplus-aula:hover .mmplus-aula-flecha {
+    transform: translateX(4px);
+}
+
+.mmplus-note {
+    display: block;
+    text-align: center;
+    font-size: 12px;
+}
+
+/* Responsivo */
+
+@media (max-width: 768px) {
+
+    .modal-cursos {
+        max-width: 95%;
+    }
+
+    .modal-cursos .modal-title {
+        font-size: 1.09rem;
+        font-weight: bold;
+    }
+
+    .modal-cursos .modal-footer {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+}
+/* =====================================================
+   MODAL RUTA — VISITA TÉCNICA
+   Diseño Glass independiente
+===================================================== */
+
+.modal-content.modal-ruta {
+    color: #fff;
+
+    background: rgba(139, 139, 139, 0.25);
+    backdrop-filter: blur(12px) saturate(150%);
+    -webkit-backdrop-filter: blur(12px) saturate(150%);
+
+    border: 1px solid rgba(224, 224, 224, 0.65);
+    border-radius: 24px;
+
+    padding: 20px;
+    overflow: hidden;
+}
+
+/* Encabezado */
+
+/* =====================================================
+   MODAL RUTA — ENCABEZADO
+===================================================== */
+
+.modal-ruta .modal-header {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+
+    padding: 12px 10px 16px;
+
+    background: transparent;
+    border: none;
+}
+
+/* Título a la izquierda */
+
+.modal-ruta .modal-title {
+    margin: 0;
+    color: #fff;
+    font-size: 1.25rem;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+
+/* Badge a la derecha */
+
+.modal-ruta .ruta-badge {
+    margin-left: auto;
+    flex-shrink: 0;
+
+    display: inline-block;
+    padding: 4px 11px;
+
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 999px;
+
+    color: #ddd;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+}
+
+/* X independiente: posición ajustable */
+
+.modal-ruta .btn-close {
+    position: absolute;
+
+    top: -8px;       /* AJUSTAR ALTURA */
+    right: -8px;     /* AJUSTAR POSICIÓN HORIZONTAL */
+
+    z-index: 5;
+
+    display: grid;
+    place-items: center;
+
+    width: 32px;
+    height: 32px;
+    margin: 0;
+    padding: 0;
+
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 50%;
+
+    background-color: rgba(255, 255, 255, 0.08);
+
+    backdrop-filter: blur(26px) saturate(150%);
+    -webkit-backdrop-filter: blur(26px) saturate(150%);
+
+    filter: invert(1);
+    opacity: 0.85;
+
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+}
+
+.modal-ruta .btn-close:hover {
+    opacity: 1;
+    transform: scale(1.08);
+}
+
+/* Cuerpo */
+
+.modal-ruta .modal-body {
+    padding: 16px 20px 14px;
+}
+
+.modal-ruta .modal-body p {
     color: #dddbdb;
+    font-size: 16px;
+    line-height: 1.4;
 }
 
-/* Quitar la línea divisoria por defecto del footer en modales */
-.modal-footer {
-    border-top: none !important;
+/* Insignia */
+
+.ruta-badge {
+    display: inline-block;
+    padding: 4px 11px;
+
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 999px;
+
+    color: #ddd;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
 }
 
-/* Botones estilo pill */
-.modal-ruta .btn,
-.modal-cursos .btn {
-    border-radius: 36px;
-    padding: 9px 28px;
-    font-size: 0.85rem;
-    font-weight: 600;
+/* Introducción */
+
+.ruta-intro {
+    margin: 0 0 16px;
+    color: #d2d0d0;
+    font-size: 14px;
+    line-height: 1.5;
 }
 
-.modal-ruta .btn-suscribirse,
-.modal-cursos .btn-suscribirse {
+/* Precio */
+
+.ruta-price {
+    margin: 0 0 18px;
+    padding: 16px;
+
+    border: 1px solid #0026ff;
+    border-radius: 16px;
+
+    background: rgba(0, 0, 0, 0.55);
+}
+
+.ruta-tag {
+    display: inline-block;
+    margin-bottom: 8px;
+
+    color: var(--crimson);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.ruta-price-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 5px 10px;
+}
+
+.ruta-now {
+    color: #fff;
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.02em;
+}
+
+.ruta-period {
+    color: #b9b9b5;
+    font-size: 13px;
+}
+
+/* Subtítulo */
+
+.ruta-subtitle {
+    margin: 0 0 10px;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+/* Lista */
+
+.ruta-list {
+    display: grid;
+    gap: 8px;
+
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+}
+
+.ruta-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+
+    color: #fff;
+    font-size: 13px;
+    line-height: 1.45;
+}
+
+.ruta-list i {
+    flex-shrink: 0;
+    margin-top: 3px;
+    color: var(--crimson);
+}
+
+/* Servicio adicional */
+
+.ruta-extra {
+    margin-top: 18px;
+    padding: 14px 16px;
+
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+
+    background: rgba(0, 0, 0, 0.25);
+}
+
+.ruta-extra-heading {
+    margin: 0 0 6px;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.ruta-extra p {
+    margin: 0;
+    color: #d2d0d0;
+    font-size: 12px;
+    line-height: 1.45;
+}
+
+.ruta-extra-price {
+    display: block;
+    margin-top: 8px;
+    color: #fff;
+    font-size: 19px;
+    font-weight: 800;
+}
+
+/* Pie */
+
+.modal-ruta .ruta-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+}
+
+/* Botón WhatsApp */
+
+.modal-ruta .btn-suscribirse {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 9px;
-    padding: 9px 60px;
+    padding: 12px 28px;
     border: 1px solid #25d366;
     border-radius: 999px;
     color: #fff;
@@ -1753,93 +2242,808 @@ body {
     font-size: 0.9rem;
     font-weight: 700;
     text-decoration: none;
-    transition: background-color .25s ease, transform .2s ease, box-shadow .25s ease;
+    transition:
+        background-color 0.25s ease,
+        transform 0.2s ease,
+        box-shadow 0.25s ease;
 }
 
-.modal-ruta .btn-suscribirse:hover,
-.modal-cursos .btn-suscribirse:hover {
+.modal-ruta .btn-suscribirse:hover {
     transform: scale(1.04);
     border-color: #25d366;
     color: #fff;
     background-color: #117a3d;
-    box-shadow: 0 0 14px rgba(37, 211, 102, .3);
+    box-shadow: 0 0 14px rgba(37, 211, 102, 0.3);
 }
 
-.btn-suscribirse .fa-whatsapp {
+.modal-ruta .btn-suscribirse .fa-whatsapp {
     font-size: 1.15rem;
 }
 
-/* Botón WhatsApp */
-.modal-ruta .btn-success {
-    background: #fff;
-    color: #000;
-    border: 1px solid #198754;
-    transition:
-        background-color .30s ease,
-        color .30s ease,
-        border-color .30s ease,
-        box-shadow .30s ease,
-        transform .20s ease;
+/* Botón Modal Ruta — mismo diseño que Modal Cursos */
+
+.modal-ruta .ruta-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    min-height: 48px;
+    width: 100%;
+    padding: 0 24px;
+    box-sizing: border-box;
+
+    border: 1px solid #fff;
+    border-radius: 999px;
+
+    color: #0b0b0b;
+    background: linear-gradient(
+        180deg,
+        #ffffff 0%,
+        #d9dce1 52%,
+        #f3f4f6 100%
+    );
+
+    font-size: 16px;
+    font-weight: 800;
+    text-decoration: none;
+
+    transition: transform 0.2s ease;
 }
 
-.modal-ruta .btn-success:hover {
-    transform: scale(1.09);
-    border: 1px solid #198754;
+.modal-ruta .ruta-cta:hover {
+    color: #0b0b0b;
+    transform: scale(1.02);
 }
 
-.modal-ruta .btn-success:hover i {
-    transform: scale(1.25);
+.modal-ruta .ruta-cta .fa-whatsapp {
+    color: #25D366;
+    font-size: 17px;
+    flex-shrink: 0;
 }
 
-.modal-cursos .btn-success {
+.modal-ruta .ruta-cta .ruta-arrow {
+    color: #0b0b0b;
+    font-size: 14px;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+}
+
+.modal-ruta .ruta-cta:hover .ruta-arrow {
+    transform: translateX(4px);
+}
+
+/* Cierre */
+
+.modal-ruta .ruta-close {
+    margin-top: 16px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #7b8496;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+.modal-ruta .ruta-note {
+    display: block;
+    margin-top: 10px;
+    color: #9ba3b2;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.4;
+    text-align: center;
+}
+/* Adaptación móvil */
+
+@media (max-width: 576px) {
+    .modal-ruta .ruta-cta {
+        padding: 0 14px;
+        gap: 8px;
+        font-size: 14px;
+        min-height: 46px;
+    }
+
+    .modal-ruta .ruta-cta .fa-whatsapp {
+        font-size: 16px;
+    }
+
+    .modal-ruta .ruta-cta .ruta-arrow {
+        font-size: 13px;
+    }
+}
+/* Responsivo */
+
+@media (max-width: 768px) {
+
+    .modal-ruta {
+        max-width: 95%;
+    }
+
+    .modal-ruta .modal-title {
+        font-size: 1.09rem;
+        font-weight: bold;
+    }
+
+
+    .modal-ruta .btn-suscribirse {
+        width: 100%;
+    }
+
+}
+/* ==========================================
+   MODAL AGENDA RUTA
+ GLASSMORPHISM
+========================================== */
+
+.modal-agenda-dialog {
+  max-width: 510px;
+  margin: 1rem auto;
+}
+
+.modal-agenda {
+  position: relative;
+  overflow: hidden;
+  color: #f4f7ff;
+
+  background:
+    radial-gradient(
+      circle at 100% 0%,
+      rgba(45, 91, 255, .19),
+      transparent 58%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(12, 24, 62, 0.608),
+      rgba(5, 13, 40, 0.636)
+    );
+
+  border: 1px solid #0026ff;
+  border-radius: 25px;
+
+  box-shadow:
+    0 25px 80px rgba(0, 0, 0, .38),
+    inset 0 1px 0 rgba(255, 255, 255, .10);
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+
+/* ==========================================
+   AGENDA HEADER · MEMANEJO GARAGE
+========================================== */
+
+.agenda-header {
+  padding: 25px 26px 21px;
+  border-bottom: 1px solid rgba(255,255,255,.09);
+}
+
+/* Título + badge en un mismo eje */
+
+.agenda-header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.agenda-title {
+  margin: 0;
+
+  color: #f4f7ff;
+  font-size: 26px;
+  font-weight: 750;
+  letter-spacing: -1.1px;
+  white-space: nowrap;
+}
+
+.agenda-title span {
+  color: #6288ff;
+}
+
+/* BADGE GARAGE */
+
+.agenda-brand-badge {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 5px;
+  flex-shrink: 0;
+
+  padding: 7px 17px;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(76,115,255,.19),
+      rgba(76,115,255,.06)
+    );
+
+  border: 1px solid rgba(117,151,255,.30);
+  border-radius: 600px;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.10),
+    0 3px 12px rgba(36,78,210,.10);
+
+  white-space: nowrap;
+}
+
+.agenda-brand-name {
+  color: #d8e2ff;
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: -.35px;
+}
+
+.agenda-brand-badge strong {
+  color: #83a6ff;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1.1px;
+}
+
+/* DESCRIPCIÓN */
+
+.agenda-description {
+  margin: 12px 0 0;
+  max-width: 370px;
+
+  color: rgba(226,234,255,.67);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* INFORMACIÓN */
+
+.agenda-info {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  margin-top: 17px;
+  padding: 11px 13px;
+
+  background: rgba(69,112,255,.10);
+  border: 1px solid rgba(105,143,255,.17);
+  border-radius: 10px;
+
+  color: #b9cbff;
+  font-size: 11px;
+}
+
+/* MÓVIL */
+
+@media (max-width: 400px) {
+
+  .agenda-header {
+    padding: 22px 19px 18px;
+  }
+
+  .agenda-title {
+    font-size: 23px;
+  }
+
+  .agenda-brand-badge {
+    padding: 6px 11px;
+    gap: 4px;
+  }
+
+  .agenda-brand-name,
+  .agenda-brand-badge strong {
+    font-size: 10px;
+  }
+
+}
+
+
+/* BODY */
+
+.agenda-body {
+  padding: 23px 26px 20px;
+
+  max-height: 58vh;
+  overflow-y: auto;
+
+  scrollbar-width: thin;
+  scrollbar-color: rgba(130,160,255,.35) transparent;
+}
+
+.agenda-body::-webkit-scrollbar {
+  width: 5px;
+}
+
+.agenda-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.agenda-body::-webkit-scrollbar-thumb {
+  background: rgba(130,160,255,.35);
+  border-radius: 10px;
+}
+
+
+/* SECCIONES */
+
+.agenda-section {
+  margin-bottom: 27px;
+}
+
+.agenda-section-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  margin-bottom: 17px;
+}
+
+.agenda-number {
+  display: grid;
+  place-items: center;
+
+  flex-shrink: 0;
+
+  width: 32px;
+  height: 32px;
+
+  border-radius: 10px;
+
+  background: linear-gradient(
+    145deg,
+    rgba(75, 116, 255, .23),
+    rgba(75, 116, 255, .07)
+  );
+
+  border: 1px solid rgba(119,155,255,.22);
+
+  color: #a8beff;
+  font-size: 11px;
+  font-weight: 750;
+}
+
+.agenda-section-heading h6 {
+  margin: 0 0 3px;
+
+  color: #f4f7ff;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.agenda-section-heading p {
+  margin: 0;
+
+  color: rgba(218,227,255,.48);
+  font-size: 11px;
+}
+
+
+/* CAMPOS */
+
+.agenda-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px 12px;
+}
+
+.agenda-field {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.agenda-field:has(#agendaNombre),
+.agenda-field:has(#agendaCorreo),
+.agenda-field:has(#agendaTelefono),
+.agenda-field:has(#agendaSintomas) {
+  grid-column: 1 / -1;
+}
+
+.agenda-field label {
+  margin-bottom: 7px;
+
+  color: rgba(224,232,255,.78);
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.agenda-field input,
+.agenda-field select {
+  width: 100%;
+  min-width: 0;
+
+  padding: 12px 13px;
+
+  color: #f4f7ff;
+  font-family: inherit;
+  font-size: 13px;
+
+  background: rgba(255,255,255,.055);
+
+  border: 1px solid rgba(255,255,255,.11);
+  border-radius: 600px;
+
+  outline: none;
+
+  transition:
+    border-color .2s ease,
+    background .2s ease,
+    box-shadow .2s ease;
+}
+.agenda-field textarea {
+  width: 100%;
+  min-width: 0;
+
+  padding: 12px 13px;
+
+  color: #f4f7ff;
+  font-family: inherit;
+  font-size: 13px;
+
+  background: rgba(255,255,255,.055);
+
+  border: 1px solid rgba(255,255,255,.11);
+  border-radius: 10px;
+
+  outline: none;
+
+  transition:
+    border-color .2s ease,
+    background .2s ease,
+    box-shadow .2s ease;
+}
+.agenda-field input::placeholder,
+.agenda-field textarea::placeholder {
+  color: rgba(213,224,255,.34);
+}
+
+.agenda-field input:focus,
+.agenda-field select:focus,
+.agenda-field textarea:focus {
+  background: rgba(65,103,255,.09);
+
+  border-color: rgba(100,143,255,.75);
+
+  box-shadow: 0 0 0 3px rgba(64,105,255,.12);
+}
+
+.agenda-field textarea {
+  min-height: 105px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.agenda-field select {
+  cursor: pointer;
+  color-scheme: dark;
+}
+
+.agenda-field input[type="date"] {
+  color-scheme: dark;
+}
+
+
+/* CONTADOR */
+
+.agenda-counter {
+  display: flex;
+  justify-content: space-between;
+
+  margin-top: 7px;
+
+  color: rgba(210,222,255,.43);
+  font-size: 10px;
+}
+
+
+/* NOTA HORARIO */
+
+.agenda-time-note {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  margin-top: 12px;
+
+  color: #9eb7ff;
+  font-size: 11px;
+}
+
+
+/* DISCLAIMER */
+
+.agenda-disclaimer {
+  display: flex;
+  gap: 13px;
+
+  margin: 7px 0 20px;
+  padding: 16px;
+
+  background: rgba(255,255,255,.045);
+
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 14px;
+}
+
+.agenda-disclaimer-icon {
+  display: grid;
+  place-items: center;
+
+  flex-shrink: 0;
+
+  width: 34px;
+  height: 34px;
+
+  background: rgba(78,117,255,.15);
+  border-radius: 10px;
+
+  color: #9eb8ff;
+}
+
+.agenda-disclaimer strong {
+  display: block;
+  margin-bottom: 7px;
+
+  color: #dce6ff;
+  font-size: 12px;
+}
+
+.agenda-disclaimer p {
+  margin: 0 0 8px;
+
+  color: rgba(218,228,255,.59);
+  font-size: 11px;
+  line-height: 1.65;
+}
+
+.agenda-disclaimer p:last-child {
+  margin-bottom: 0;
+}
+
+.agenda-disclaimer p strong {
+  display: inline;
+  color: #c8d7ff;
+  font-size: inherit;
+}
+
+
+/* CONSENTIMIENTO */
+
+.agenda-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+
+  color: rgba(223,231,255,.69);
+  font-size: 11px;
+  line-height: 1.6;
+
+  cursor: pointer;
+}
+
+.agenda-consent input {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  margin-top: 1px;
+
+  accent-color: #4777ff;
+}
+
+
+/* ESTADO */
+
+.agenda-status {
+  display: none;
+
+  margin-top: 14px;
+  padding: 11px 13px;
+
+  border-radius: 10px;
+  font-size: 11px;
+}
+
+.agenda-status.error {
+  display: block;
+  color: #ffb5b5;
+  background: rgba(255,65,65,.10);
+  border: 1px solid rgba(255,100,100,.20);
+}
+
+.agenda-status.success {
+  display: block;
+  color: #a8f0ce;
+  background: rgba(45,200,130,.10);
+  border: 1px solid rgba(45,200,130,.20);
+}
+
+
+/* FOOTER */
+
+.agenda-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 17px 26px 20px;
+
+  background: rgba(255,255,255,.025);
+
+  border-top: 1px solid rgba(255,255,255,.09);
+}
+
+.agenda-submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    min-height: 48px;
+    width: 100%;
+    padding: 0 24px;
+    box-sizing: border-box;
+
+    border: 1px solid #fff;
+    border-radius: 999px;
+
+    color: #0b0b0b;
+    background: linear-gradient(
+        180deg,
+        #ffffff 0%,
+        #d9dce1 52%,
+        #f3f4f6 100%
+    );
+
+    font-size: 16px;
+    font-weight: 800;
+    text-decoration: none;
+
+    transition: transform 0.2s ease;
+}
+
+.agenda-submit:hover:not(:disabled) {
+    color: #0b0b0b;
+    transform: scale(1.02);
+}
+
+/* Icono WhatsApp */
+
+.agenda-submit .fa-whatsapp {
+    color: #25D366;
+    font-size: 17px;
+    flex-shrink: 0;
+}
+
+/* Flecha */
+
+.agenda-submit .fa-arrow-right {
+    color: #0b0b0b;
+    font-size: 14px;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+}
+
+.agenda-submit:hover:not(:disabled) .fa-arrow-right {
+    transform: translateX(4px);
+}
+
+/* Deshabilitado */
+
+.agenda-submit:disabled {
+    opacity: .55;
+    cursor: wait;
+    transform: none;
+}
+.agenda-footer small {
+  margin-top: 11px;
+
+  color: rgba(218,228,255,.42);
+  font-size: 10px;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.agenda-cancel {
+  margin-top: 13px;
+  padding: 3px 12px;
+
+  background: transparent;
+  border: 0;
+
+  color: rgba(218,228,255,.62);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.agenda-cancel:hover {
+  color: white;
+}
+
+
+/* MÓVILES */
+
+@media (max-width: 575px) {
+
+  .modal-agenda-dialog {
+    margin: 10px;
+    min-height: calc(100% - 20px);
+  }
+
+  .modal-agenda {
+    border-radius: 21px;
+  }
+
+  .agenda-header {
+    padding: 21px 20px 18px;
+  }
+
+  .agenda-title {
+    font-size: 26px;
+  }
+
+  .agenda-body {
+    padding: 20px;
+    max-height: 55vh;
+  }
+
+  .agenda-footer {
+    padding: 15px 20px 17px;
+  }
+
+  .agenda-fields {
+    gap: 13px 10px;
+  }
+
+}
+/* =====================================================
+   OTROS ESTILOS — COMPONENTES GENERALES
+===================================================== */
+
+/* Fondo detrás de los modales */
+
+.modal-backdrop.show {
+    opacity: 1;
+    background: rgba(5, 7, 10, 0.48);
+
+    backdrop-filter: blur(10px) saturate(135%);
+    -webkit-backdrop-filter: blur(10px) saturate(135%);
+}
+
+/* Centrado de diálogos Bootstrap */
+
+.modal-dialog {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Eliminar línea divisoria de los footers */
+
+.modal-footer {
+    border-top: none !important;
+}
+
+/* Botones generales */
+
+.btn-success {
     background: #fff;
     color: #000;
     border: 1px solid #222;
+
     transition:
-        background-color .30s ease,
-        color .30s ease,
-        border-color .30s ease,
-        box-shadow .30s ease,
-        transform .20s ease;
+        background-color 0.30s ease,
+        color 0.30s ease,
+        border-color 0.30s ease,
+        box-shadow 0.30s ease,
+        transform 0.20s ease;
 }
 
-.modal-cursos .btn-success:hover {
+.btn-success:hover {
     border-color: #0026ff !important;
     transform: scale(1.09);
-
 }
 
-/* X de cerrar en modales ruta y cursos */
-.modal-ruta .btn-close,
-.modal-cursos .btn-close {
-    position: absolute;
-    top: 14px;
-    right: 14px;
-    z-index: 2;
+/* Opciones del Aula Virtual */
 
-    display: grid;
-    place-items: center;
-    width: 32px;
-    height: 32px;
-    padding: 0;
-
-    border: 1px solid rgba(18, 18, 18, 0.469);
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.048);
-    -webkit-backdrop-filter: blur(26px) saturate(150%);
-    backdrop-filter: blur(26px) saturate(150%);
-
-    filter: invert(1);
-    opacity: 1;
-    transition: transform 0.2s ease, background-color 0.2s ease;
-}
-
-.modal-ruta .btn-close:hover,
-.modal-cursos .btn-close:hover {
-    transform: scale(1.08);
-}
-
-.aula-modal-footer>.aula-modal-opcion {
+.aula-modal-footer > .aula-modal-opcion {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1847,9 +3051,11 @@ body {
     margin: 0 !important;
 }
 
-.aula-modal-opcion>* {
+.aula-modal-opcion > * {
     margin: 0 !important;
 }
+
+/* Condiciones */
 
 .aula-modal-condiciones {
     color: rgba(255, 255, 255, 0.7);
@@ -1858,365 +3064,16 @@ body {
     text-align: center;
 }
 
+/* Imágenes dentro de footers */
+
 .modal-footer img {
-    border: 1px solid #222;
-    border-radius: 6px;
-    height: 24px;
     width: 24px;
+    height: 24px;
     margin-right: 2px;
 
+    border: 1px solid #222;
+    border-radius: 6px;
 }
-
-/* Responsivo móvil */
-@media (max-width: 768px) {
-
-    .modal-ruta,
-    .modal-cursos {
-        max-width: 95%;
-    }
-
-    .modal-ruta .modal-title,
-    .modal-cursos .modal-title {
-        font-size: 1.09rem;
-        font-weight: bold;
-    }
-
-    .modal-ruta .modal-footer,
-    .modal-cursos .modal-footer {
-        flex-direction: column;
-        gap: 1.5rem;
-    }
-
-
-}
-
-/* Alinear botones en el centro solo en escritorio */
-@media (min-width: 769px) {
-
-    .modal-cursos .modal-footer,
-    .modal-ruta .modal-footer {
-        display: flex;
-        justify-content: center;
-        /* centrado horizontal */
-        gap: 1rem;
-        /* espacio entre botones */
-    }
-}
-    .modal-cursos {
-      color: #f5f5f3;
-      background: #111;
-      border: 1px solid #656565;
-      border-radius: 24px;
-      overflow: hidden;
-    }
-
-    /* Encabezado: título y botón X en el MISMO eje horizontal */
-    .modal-cursos .modal-header {
-      display: flex;
-      align-items: center;            /* centra título y X en el mismo eje */
-      justify-content: space-between;
-      gap: 12px;
-      padding: 18px 20px 8px;
-      border-bottom: 0;
-    }
-    .modal-cursos .modal-title {
-      margin: 0;                      /* Bootstrap deja márgenes que desalinean */
-      line-height: 1.2;
-      font-size: 24px;
-    }
-    .modal-cursos .btn-close {
-      flex-shrink: 0;
-      align-self: center;
-      margin: 0;                      /* Bootstrap le pone márgenes negativos */
-      opacity: .8;
-    }
-    .modal-cursos .btn-close:hover { opacity: 1; }
-
-    .mmplus-badge {
-      display: inline-block;
-      margin-left: 8px;
-      padding: 3px 10px;
-      border: 1px solid rgba(255, 255, 255, .3);
-      border-radius: 999px;
-      color: #ddd;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: .04em;
-      vertical-align: middle;
-    }
-
-    /* Cuerpo */
-    .modal-cursos .modal-body { padding: 4px 20px 14px; }
-
-    .mmplus-intro {
-      margin: 0 0 14px;
-      color: #b9b9b5;
-      font-size: 13px;
-      line-height: 1.5;
-    }
-
-    /* Precio */
-    .mmplus-price {
-      margin: 0 0 18px;
-      padding: 14px 16px;
-      border: 1px solid #0026ff;
-      border-radius: 16px;
-      background: #000;
-    }
-    .mmplus-tag {
-      display: inline-block;
-      margin-bottom: 8px;
-      color: var(--crimson);
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-    }
-    .mmplus-price-row {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: baseline;
-      gap: 4px 10px;
-    }
-    .mmplus-now {
-      font-size: 32px;
-      font-weight: 800;
-      line-height: 1;
-      letter-spacing: -.02em;
-    }
-    .mmplus-old { color: #8a8a8a; font-size: 15px; }
-    .mmplus-period { color: #b9b9b5; font-size: 13px; }
-
-    /* Lista de beneficios */
-    .mmplus-subtitle { margin: 0 0 10px; font-size: 13px; font-weight: 700; }
-    .mmplus-list {
-      display: grid;
-      gap: 5px;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-    .mmplus-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      font-size: 13px;
-      line-height: 1.45;
-    }
-    .mmplus-list i { margin-top: 3px; color: var(--crimson); }
-    .mmplus-list small { display: block; color: #d2d0d0; font-size: 11.5px; }
-
-/* Pie con botones */
-.modal-cursos .mmplus-footer {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 14px;
-  padding: 6px 20px 20px;
-  border-top: 0;
-}
-
-.mmplus-footer > * {
-  margin: 0;
-}
-
-/* Botón */
-.mmplus-cta {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  min-height: 48px;
-  padding: 0 60px;
-  border: 1px solid #fff;
-  border-radius: 999px;
-  color: #0b0b0b;
-  background: linear-gradient(180deg, #ffffff 0%, #d9dce1 52%, #f3f4f6 100%);
-  font-size: 16px;
-  font-weight: 800;
-  text-decoration: none;
-  transition: transform 0.2s ease;
-}
-
-.mmplus-cta:hover {
-  color: #0b0b0b;
-  transform: scale(1.02);
-}
-
-.mmplus-cta i {
-  font-size: 17px;
-  color: #25D366;
-}
-
-/* Opción Aula Virtual */
-.mmplus-opcion {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-}
-
-.mmplus-aula {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 20px;
-  gap: 10px;
-  min-height: 48px;
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  color: inherit;
-  background: transparent;
-  font-size: 13.5px;
-  font-weight: 800;
-  text-decoration: none;
-  transition: none;
-}
-
-.mmplus-aula:hover {
-  color: inherit;
-  background: transparent;
-  transform: none;
-}
-
-.mmplus-aula .mmplus-logo {
-  width: 30px;
-  height: 30px;
-  border-radius: 6px;
-  object-fit: contain;
-}
-
-.mmplus-aula-texto {
-  flex: 0 0 auto;
-  text-align: center;
-}
-
-.mmplus-aula-flecha {
-  flex: 0 0 auto;
-  transition: transform 0.2s ease;
-  font-size: 17px;
-}
-
-.mmplus-aula:hover .mmplus-aula-flecha {
-  transform: translateX(4px);
-}
-
-.mmplus-note {
-  display: block;
-  text-align: center;
-  font-size: 12px;
-}
-/* Modal de pago
-#modalPagoClases .modal-content {
-    background: rgba(139, 139, 139, 0.25);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    color: #383838;
-    border-radius: 16px;
-    padding: 0;
-    position: relative;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
-}
-
-/* X de cerrar */
-#modalPagoClases .btn-close {
-    color: #fff;
-    /* blanco para que se vea sobre fondo oscuro */
-    font-size: 1rem;
-}
-
-/* Header */
-#modalPagoClases .modal-header {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 1rem 1.5rem;
-    color: #fff;
-    position: relative;
-}
-
-/* Body */
-#modalPagoClases .modal-body {
-    padding: 1rem 1.5rem;
-    font-size: 0.95rem;
-    line-height: 1.5;
-    color: #ccc;
-}
-
-#modalPagoClases .modal-header .modal-title {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 50%;
-    /* opcional: ajusta verticalmente */
-    transform: translate(-50%, -50%);
-    color: #fff;
-    margin: 0;
-    font-size: 1.25rem;
-    /* ajusta según tu gusto */
-}
-
-/* Footer */
-#modalPagoClases .modal-footer {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    display: flex;
-    justify-content: center;
-    padding: 1rem 1.5rem;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-}
-
-/* Botón WhatsApp */
-#modalPagoClases .btn-success {
-    background-color: #000;
-    color: #fff;
-    border-radius: 36px;
-    padding: 8px 22px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    min-width: 180px;
-    max-width: 320px;
-    /* límite máximo */
-    text-align: center;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    white-space: nowrap;
-
-}
-
-/* Hover botón */
-#modalPagoClases .btn-success:hover {
-    background-color: #000000;
-    border-color: #25D366;
-}
-
-/* Ícono dentro del botón */
-#modalPagoClases .btn-success i {
-    margin-right: 8px;
-    color: #25D366;
-}
-
-/* Ajuste responsivo: pantallas intermedias y móviles */
-@media (max-width: 1200px) {
-    #modalPagoClases .btn-success {
-        max-width: 220px;
-        width: 90%;
-    }
-}
-
-@media (max-width: 768px) {
-    #modalPagoClases .modal-content {
-        width: 90%;
-        margin: 0 auto;
-    }
-
-    #modalPagoClases .btn-success {
-        width: 100%;
-        max-width: none;
-    }
-}
-
 /* SLIDER PRINCIPAL MOBILE  */
 .slide-movil {
     position: relative;
